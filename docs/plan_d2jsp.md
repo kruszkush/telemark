@@ -83,5 +83,32 @@ Pierwszy pokaz po kroku 6 (Mateusza nie ma, więc całość naraz): Mateusz ocen
 ## Krytyk
 Krytyk: tak (ok. 10 plików kodu, fundament z zapisem wyników). 1. runda 14.11: `plan-critic` i `krytyk-google` (obaj: wymaga poprawek). Przyjęte: zapis przy bilecie, model bez tablic w tablicach, krótki bilet i puchar po czasie biletu, ziarno widoczne dla drugiego konta (pkt 4–5), WebKit i skoki losowe, przebieg skoku w pętli gry, ponawianie /end, 70 klatek/s, leniwy import i włączanie zmienną, klucz miesiąca, POST z hasłem, port 88xx, skocznia z biletu, klucze localStorage, wyrejestrowanie service workera. Odrzucone: „stop przy porażce kroku 1” (dowód: prompt Mateusza 14.11), „widoczność wzorem Lotnika” (powód w modelu danych), wycięcie `std`/`dev` (zostają, koszt jednego pola). Uproszczone wg krytyków: bez zapisu skoczni w dokumencie dnia i bez wersji losowania skoczni. 2. runda: tylko jeśli wykonanie zmieni sposób.
 
-## Rozliczenie
-(na koniec wykonania)
+## Rozliczenie (14.11.2026, wykonanie w jednej sesji bez Mateusza)
+
+| Próg | Wynik | Kto zdecydował o zmianie |
+|---|---|---|
+| Krok 1: 100% zgodnych skoków serwer = gra | 184/184 w Node 22/24/26, Chromium, Brave, WebKit (komputer, iPhone), Firefox | bez zmiany |
+| Kontrola czasu: klatki/70 ≤ czas od biletu + 30 s | zmienione na + 2 s: przy 30 s kontrola nic nie łapała (skok trwa 15–25 s) | ja, w kroku 2 |
+| Krok 2: próba żywego serwera | 11/11 (`lotnik/out/tm-smoke.mjs`), powtórka skoku w chmurze 12–23 ms | bez zmiany |
+| Odległość w tabelach | serwer zapisywał dokładną (72,8 m), gra pokazuje do pół metra (72,5 m); teraz serwer zapisuje jak gra, dokładną obok | ja, po zrzucie w kroku 5 |
+| Punkty z `/tm/dzien` | podawał dziesiąte części, odpowiedź po skoku całe punkty; ujednolicone | ja, w kroku 3 |
+| Krok 3–6: próbny skok w przeglądarce, tabela, ▶ | zagrany kontem próbnym, zapis, miejsce po skoku, wiersz w tabeli, ▶ odtwarza z tymi samymi punktami (dzisiejszy przez ukryte `&test` tylko na serwerze testowym) | bez zmiany |
+
+Odstępstwa od planu: puchar zwycięzcy poprzedniego okresu jako linia z większym pucharem nad tabelą, nie osobna karta `.champ` (zwycięzców jeszcze nie ma, więc nie do obejrzenia); budowanie osobnym configiem `vite.d2jsp.config.ts` zamiast `--mode d2jsp`; po skoku obraz gry mówi „kliknij: jeszcze raz”, a klik wraca do listy skoczni (tak samo w zawodach autora, zostawione).
+
+Uwagi krytyków przyjęte do planu:
+- zapis przy bilecie (skok zużyty od razu): sprawdziła się (żywy serwer: bilet bez końca daje następnemu n+1);
+- model bez tablic w tablicach: sprawdziła się (Firestore odrzuca tablicę w tablicy, pierwotny model by nie działał);
+- krótki bilet i puchar po czasie biletu: nie do oceny (pierwszy puchar po końcu tygodnia);
+- ziarno widoczne dla drugiego konta (niezweryfikowany jak gość, ▶ od jutra): nie do oceny (wdrożone, bez prób obejścia);
+- WebKit i skoki losowe w zestawie: sprawdziła się w tym sensie, że upadki i dyskwalifikacje przeszły tę samą drogą; różnic nie znalazły;
+- przebieg skoku w pętli gry (wysyłka w klatce lądowania): sprawdziła się;
+- ponawianie /end i ta sama odpowiedź: sprawdziła się (żywy serwer);
+- 70 klatek/s: sprawdziła się (kontrola czasu liczy dobrze);
+- leniwy import i włączanie zmienną: sprawdziła się (Lotnik test-ranking i test-straz bez zmian);
+- klucz miesiąca: sprawdziła się (tabela miesiąca działa);
+- POST z hasłem testerów: sprawdziła się (bez hasła 403 i formularz w grze);
+- port 88xx: sprawdziła się (CORS serwera testowego wpuszcza tylko 88xx);
+- skocznia z biletu: sprawdziła się;
+- klucze localStorage jak Lotnik: sprawdziła się (ten sam klucz `lotnik.konto`, `lotnik/konto.js:83`);
+- wyrejestrowanie service workera: nie do oceny (pod tym adresem nigdy go nie było).

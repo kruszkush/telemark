@@ -35,7 +35,12 @@ await page.locator("#telemark").scrollIntoViewIfNeeded();
 await page.screenshot({ path: join(OUT, "01-strona.png") });
 await page.locator("#telemark").screenshot({ path: join(OUT, "02-karta.png") });
 console.log("tabele:", (await page.locator("#telemark").innerText()).slice(0, 900));
-const gid = await page.locator("#telemark [data-gid]").first().getAttribute("data-gid");
+// Skok konta próbnego z d2jsp-proba.mjs (zagrany w przeglądarce), inaczej pierwszy w tabeli.
+const KONTO = "E:/Vibe coding/lotnik/out/_tm-konto-testowe.log";
+const mine = (() => { try { return JSON.parse(readFileSync(KONTO, "utf8")).nick; } catch { return null; } })();
+const row = mine ? page.locator("#tm-w tr", { hasText: mine }) : page.locator("#tm-w tr").nth(1);
+const gid = await row.locator("[data-gid]").first().getAttribute("data-gid");
+console.log("oglądany skok:", mine ?? "pierwszy", gid, await row.innerText());
 
 await page.getByRole("button", { name: "Telemark", exact: true }).click();
 const game = page.frameLocator(".tm-okno iframe");

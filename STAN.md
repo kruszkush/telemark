@@ -1,13 +1,14 @@
 # STAN: Telemark na stronie licznika d2jsp
 
-Ustalenia z Mateuszem: `docs/zasady_d2jsp.md`. Plan, przebieg skoku dnia, model danych i rozstrzygnięcia bez Mateusza: `docs/plan_d2jsp.md`. Kod autora: klon https://github.com/visvaya/telemark (`master` = autor, nasza praca na gałęzi `d2jsp`; nie pushować do autora).
+Ustalenia z Mateuszem: `docs/zasady_d2jsp.md`. Plan, przebieg skoku dnia, model danych, rozstrzygnięcia bez Mateusza i rozliczenie: `docs/plan_d2jsp.md`. Kod autora: klon https://github.com/visvaya/telemark (`master` = autor, nasza praca na gałęzi `d2jsp`; nie pushować do autora).
 
-## Stan (14.11.2026, praca w toku, sesja bez Mateusza od ok. 10:40)
-- Narzędzia: Node 26 przenośny `E:\Vibe coding\narzedzia\node26\node-v26.13.0-win-x64` (gra wymaga ≥ 26.12.1), Node 22 `narzedzia\node22\node-v22.23.4-win-x64` (jak chmura); pnpm `corepack pnpm@12.14.0`. Bash: `export PATH="/e/Vibe coding/narzedzia/node26/node-v26.13.0-win-x64:$PATH"`.
-- Krok 1 ZROBIONY (8ad67f4): `src/d2jsp/daily.ts`, `jump-check.ts`, `server-entry.ts`, budowanie `node node_modules/vite/bin/vite.js build -c vite.d2jsp-sim.config.ts` → `dist-d2jsp-sim/telemark-sim-0.25.16.mjs`. 184 próbne skoki zgodne co do bitu w Node 22/24/26, Chromium, Brave, WebKit (komputer, iPhone), Firefox 160. Testy: `vitest run src/d2jsp`, `node scripts/d2jsp-sim-node.mjs`, `playwright test -c playwright.d2jsp.config.ts`, Firefox: `node scripts/d2jsp-sim-browser.mjs "C:/Program Files/Mozilla Firefox/firefox.exe" -headless -no-remote -profile "{profile}"`.
-- Krok 2 ZROBIONY (lotnik 24fde81): `lotnik/serwer/telemark.js` (/tm/dzien, /tm/start, /tm/end, /tm/tabele, /tm/skok) w `index.js`, włączane env `TELEMARK=1`+`TELEMARK_SIM` tylko przez `deploy.sh test`; plik symulacji `lotnik/serwer/telemark/` (z telemark: `sh scripts/d2jsp-sim-do-lotnika.sh`). WDROŻONE na `lotnik-test`. Testy: `node lotnik/test-telemark.mjs` 8/8, żywy `node lotnik/out/tm-smoke.mjs` 11/11 (powtórka w chmurze 23 ms). Admin `verify` (tylko test) do kont próbnych.
-
-- Krok 3 ZROBIONY (d24edfc): `src/d2jsp/` (api, d2jsp-app, daily-screen, main, nick, text), małe wpięcia w `jump-runs.ts` (stałe ziarno, zgłoszenie lądowania) i `jump-screen.tsx` (pasek zawodów opcjonalny, własne wyjście). Budowanie `vite build -c vite.d2jsp.config.ts` → `dist-d2jsp/`. Próbny skok w ukrytej przeglądarce: `node scripts/d2jsp-proba.mjs <folder> <skocznia 0-2>` (konto próbne w `lotnik/out/_tm-konto-testowe.log`, poza repo). Znane: po skoku obraz mówi „jeszcze raz”, a kliknięcie wraca do listy skoczni (tak samo w zawodach autora).
+## Stan (14.11.2026, kroki 1–6 zrobione, wszystko tylko na teście)
+- Strona testowa: https://kruszkush.github.io/d2jsp-licznik/test/ (karta „Telemark: Skocznie dnia” pod kafelkami, przycisk Telemark otwiera grę w oknie). Serwer: trasy `/tm/*` w `lotnik-test` (włączane tylko przez `sh serwer/deploy.sh test`). Strona główna i serwer prod nietknięte.
+- Narzędzia: Node 26 `E:\Vibe coding\narzedzia\node26\node-v26.13.0-win-x64` (gra), Node 22 `narzedzia\node22\…` (jak chmura). Bash: `export PATH="/e/Vibe coding/narzedzia/node26/node-v26.13.0-win-x64:$PATH"`.
+- Publikacja na test: `sh scripts/d2jsp-publikuj.sh test` (buduje `vite.d2jsp.config.ts`, kopiuje do `d2jsp-licznik/docs/test/telemark/`, wersja strony +0.1). Plik symulacji do serwera: `sh scripts/d2jsp-sim-do-lotnika.sh`, potem deploy test w lotniku.
+- Sprawdzenia: `vitest run src/d2jsp`, `node scripts/d2jsp-sim-node.mjs`, `playwright test -c playwright.d2jsp.config.ts`, `node lotnik/test-telemark.mjs`, żywy `node lotnik/out/tm-smoke.mjs`, próbny skok `node scripts/d2jsp-proba.mjs <folder> <0-2>`, zrzuty strony `node scripts/d2jsp-strona-zrzuty.mjs <folder>`. Konto próbne: `lotnik/out/_tm-konto-testowe.log` (poza repo).
+- Znane: po skoku obraz mówi „jeszcze raz”, klik wraca do listy skoczni (jak w zawodach autora); dzisiejsze ▶ działa od jutra (sprawdzenie dziś: `telemark/index.html?ogladaj=<gid>&test`).
 
 ## Następny krok
-1. Krok 4 strona (`d2jsp/strona.js`, `scripts/d2jsp-publikuj.sh test`), 5 oglądanie (`?ogladaj=gid`), 6 całość + agent `przeglad` + raport po polsku dla Mateusza (co zobaczy, co nie wyszło, rozstrzygnięcia z planu, czas). Repo publiczne kruszkush/telemark: Mateusz nie napisał „repo tak”, więc na koniec jedno pytanie.
+1. Ocena Mateusza na stronie testowej. Prod dopiero na „daj na official”: tryb prod w `scripts/d2jsp-publikuj.sh` (docs/, serwer `lotnik` z TELEMARK w `deploy.sh prod`).
+2. Publiczne repo kruszkush/telemark (GPL-3.0) dopiero po „repo tak”.
