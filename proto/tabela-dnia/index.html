@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szkic: wyniki innych graczy</title>
+<!-- Szkic na brudno (14.11): jak pokazać, co inni skoczyli dzisiaj na każdej skoczni. Zmyślone dane, gra tego nie importuje. -->
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#000; --panel:#0c1430; --line:#2a3a6c; --muted:#8f9bc4; --white:#e8e8f0; --cyan:#5fd7ff; --accent:#f8d038; }
+  body { margin:0; background:#111; color:var(--white); font-family:"Silkscreen", monospace; }
+  .wrap { display:flex; gap:24px; padding:16px; justify-content:center; flex-wrap:wrap; }
+  .screen { background:var(--bg); width:820px; padding:20px 28px; box-sizing:border-box; }
+  .label { font-family:Arial, sans-serif; color:#fff; font-size:22px; margin:0 0 10px; }
+  h1 { color:var(--accent); font-size:30px; margin:0 0 6px; text-shadow:2px 2px 0 #6a3c00; font-weight:400; }
+  .tabs { display:flex; justify-content:center; gap:18px; margin:6px 0 8px; font-size:15px; }
+  .tabs span { color:var(--muted); padding:2px 8px; border-bottom:2px solid transparent; }
+  .tabs span.on { color:var(--white); border-bottom-color:var(--accent); }
+  table { border-collapse:collapse; margin:0 auto; font-size:13px; }
+  caption { font-size:16px; margin-bottom:6px; }
+  th, td { padding:5px 8px; text-align:left; font-weight:400; vertical-align:top; }
+  thead th { color:var(--muted); border-bottom:2px solid var(--line); font-size:11px; }
+  tbody tr { border-bottom:1px solid var(--line); }
+  td.n, th.n { text-align:right; }
+  .pl { color:var(--muted); }
+  .me td, .me th { background:var(--panel); }
+  .me .who { color:var(--cyan); }
+  .av { display:inline-block; width:18px; height:18px; border-radius:50%; background:var(--line); color:var(--muted); text-align:center; line-height:19px; font-size:10px; margin-right:6px; vertical-align:middle; }
+  .sub { display:block; color:var(--muted); font-size:10px; margin-top:2px; }
+  .full { color:var(--muted); }
+  .card { border:2px solid var(--accent); margin:10px auto 0; padding:10px 14px; width:560px; }
+  .card h2 { font-size:15px; margin:0 0 6px; font-weight:400; }
+  .card .row { display:grid; grid-template-columns:120px 1fr 90px; gap:6px; font-size:12px; padding:4px 0; border-bottom:1px solid var(--line); }
+  .card .row:last-child { border:0; }
+  .hint { color:var(--muted); font-size:11px; text-align:center; margin-top:8px; }
+  .hills { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; opacity:.35; }
+  .hills div { border:2px solid var(--line); height:70px; font-size:11px; padding:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Wersja A: w małej tabeli przełącznik Tydzień / Dzisiaj; „Dzisiaj” ma kolumnę na każdą skocznię. -->
+<div>
+<p class="label">A. Przełącznik „Dzisiaj”: każda skocznia w kolumnie</p>
+<div class="screen">
+  <h1>SKOCZNIE DNIA</h1>
+  <div class="tabs"><span>TYDZIEŃ 46.</span><span class="on">DZISIAJ</span></div>
+  <table>
+    <thead><tr><th class="pl">#</th><th>GRACZ</th><th class="n">MAŁA K70</th><th class="n">ŚREDNIA K135</th><th class="n">MAMUCIA K265</th><th class="n">DZIEŃ</th></tr></thead>
+    <tbody>
+      <tr><td class="pl">1.</td><th><span class="av">K</span><span class="who">KUPCIA</span></th>
+        <td class="n">78,0 m · 62,4<span class="sub">skoki 10/10</span></td>
+        <td class="n">141,5 m · 71,0<span class="sub">skoki 6/10</span></td>
+        <td class="n">248,0 m · 80,5<span class="sub">skoki 3/10</span></td>
+        <td class="n">214,0</td></tr>
+      <tr><td class="pl">2.</td><th><span class="av">M</span><span class="who">MATEUSZ</span></th>
+        <td class="n">74,5 m · 58,1<span class="sub">skoki 4/10</span></td>
+        <td class="n">130,0 m · 60,2<span class="sub">skoki 10/10</span></td>
+        <td class="n full">–<span class="sub">skoki 0/10</span></td>
+        <td class="n">118,3</td></tr>
+      <tr class="me"><td class="pl">3.</td><th><span class="av">S</span><span class="who">SKOCZEKBCF7</span></th>
+        <td class="n">37,5 m · 5,0<span class="sub">skoki 3/10</span></td>
+        <td class="n">49,5 m · 0,0<span class="sub">skoki 2/10</span></td>
+        <td class="n">105,5 m · 0,0<span class="sub">skoki 2/10</span></td>
+        <td class="n">5,0</td></tr>
+    </tbody>
+  </table>
+  <p class="hint">W komórce: najdłuższy skok dzisiaj i punkty z 2 najlepszych skoków na tej skoczni; pod spodem ile skoków z 10.</p>
+  <div class="hills"><div>MAŁA (karta)</div><div>ŚREDNIA (karta)</div><div>MAMUCIA (karta)</div></div>
+</div>
+</div>
+
+<!-- Wersja B: tabela tygodnia jak teraz, klik w gracza otwiera kartkę z jego dniem. -->
+<div>
+<p class="label">B. Tabela tygodnia jak teraz, klik w gracza: jego dzień</p>
+<div class="screen">
+  <h1>SKOCZNIE DNIA</h1>
+  <table>
+    <caption>TYDZIEŃ 46.</caption>
+    <thead><tr><th class="pl">#</th><th>GRACZ</th><th class="n">DNI</th><th class="n">PUNKTY</th></tr></thead>
+    <tbody>
+      <tr style="outline:2px solid var(--accent)"><td class="pl">1.</td><th><span class="av">K</span><span class="who">KUPCIA</span></th><td class="n">4</td><td class="n">780,5</td></tr>
+      <tr><td class="pl">2.</td><th><span class="av">M</span><span class="who">MATEUSZ</span></th><td class="n">3</td><td class="n">512,0</td></tr>
+      <tr class="me"><td class="pl">6.</td><th><span class="av">S</span><span class="who">SKOCZEKBCF7</span></th><td class="n">1</td><td class="n">5,0</td></tr>
+    </tbody>
+  </table>
+  <div class="card">
+    <h2>KUPCIA, DZISIAJ: 214,0 PKT, SKOKI 19 Z 30</h2>
+    <div class="row"><span>MAŁA K70</span><span>78,0 m (35,1) i 76,5 m (27,3)</span><span>10 z 10</span></div>
+    <div class="row"><span>ŚREDNIA K135</span><span>141,5 m (40,0) i 133,0 m (31,0)</span><span>6 z 10</span></div>
+    <div class="row"><span>MAMUCIA K265</span><span>248,0 m (80,5)</span><span>3 z 10</span></div>
+    <div class="row"><span>TYDZIEŃ</span><span>najlepszy dzień: 231,5 (śr.)</span><span>▶ skok</span></div>
+  </div>
+  <p class="hint">Kartka znika po kliknięciu obok; ▶ odtwarza najlepszy skok (dzisiejsze od jutra).</p>
+</div>
+</div>
+
+</div>
+</body>
+</html>
