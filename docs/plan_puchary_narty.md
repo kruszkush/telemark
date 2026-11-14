@@ -40,9 +40,10 @@ Pierwszy pokaz po kroku 4: Mateusz ocenia narty na stronie testowej; jeszcze zep
 ## Rozliczenie (14.11)
 | próg | wynik | kto zdecydował o zmianie |
 |---|---|---|
-| korona siedzi na nartach | próby 0/A/B/C, wybrana B (obręcz na nartach) | ja, do oceny Mateusza |
-| płomień jak przy kielichu | próby P1, P2 (płomień nad dziobami) wiszą oddzielnie; zostaje płomień z kielicha bez zmian | ja, do oceny Mateusza |
+| korona siedzi na nartach | próby 0/A/B/C; ja wybrałem B, Mateusz A (na tarczy), test 21.2 | Mateusz |
+| płomień jak przy kielichu | próby P1, P2 (płomień nad dziobami) wiszą oddzielnie; zostaje płomień z kielicha bez zmian | Mateusz przyjął („spoko”) |
 | narty przy nicku, płonące z iskrami | 30 ikon, 4 płonące w `?tmdemo&demo`, iskry w klatkach co ok. 0,06 s | — |
 | telefon bez przewijania w bok | szerokość 390 px | — |
 | bez błędów strony | brak, lokalnie i na żywo (21.1-test) | — |
 Krytyk i furtki: nie uruchamiane (plan bez nich). Agent sposob: znany dobry; jego ryzyko (płomień nad nartami) sprawdzone na arkuszu.
+Przegląd (14.11): iskry brały 4 pierwsze płonące ikony strony, także poza ekranem, więc narty nad rankingiem zabierały iskry pucharom niżej; poprawione na 4 widoczne (21.2), pod kartą Telemarka iskier w locie 7 → 16 (`proto/puchary-telemark/zrzuty-strona-iskry.log`). Ikony nart w wynikach końcowych stoją w kolumnie przy punktach, w wyścigach przy nicku (do oceny Mateusza).
