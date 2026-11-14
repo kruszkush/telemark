@@ -55,6 +55,12 @@ await new Promise((ok) => server.listen(8801, ok));
 const konto = await account();
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+// Przeglądarka bez okna i tak zamyka prawdziwy kursor komputera w swoim prostokącie, gdy gra przejmuje myszkę
+// (Mateusz 14.11: myszka działała tylko w lewym górnym rogu ekranu); jak w e2e/support/fixtures.ts strona odmawia.
+await page.addInitScript(() => {
+  Element.prototype.requestPointerLock = () =>
+    Promise.reject(new DOMException("The mouse is not captured in local tests", "NotSupportedError"));
+});
 const errors = [];
 page.on("pageerror", (e) => errors.push(String(e)));
 page.on("console", (m) => m.type() === "error" && errors.push(m.text()));

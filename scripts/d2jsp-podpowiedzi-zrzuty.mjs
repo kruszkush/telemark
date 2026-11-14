@@ -32,6 +32,12 @@ async function touch(ctx, page, points, ms) {
 async function run(name, viewport, mobile) {
   const ctx = await browser.newContext({ viewport, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
   await ctx.addInitScript((h) => localStorage.setItem("lotnik.haslo", h), HASLO);
+  // Przeglądarka bez okna i tak zamyka prawdziwy kursor komputera w swoim prostokącie, gdy gra przejmuje myszkę
+  // (Mateusz 14.11: myszka działała tylko w lewym górnym rogu ekranu); jak w e2e/support/fixtures.ts strona odmawia.
+  await ctx.addInitScript(() => {
+    Element.prototype.requestPointerLock = () =>
+      Promise.reject(new DOMException("The mouse is not captured in local tests", "NotSupportedError"));
+  });
   const page = await ctx.newPage();
   page.on("pageerror", (e) => errors.push(name + ": " + String(e)));
   await page.goto("http://localhost:8801/");
