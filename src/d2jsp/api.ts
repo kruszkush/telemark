@@ -21,6 +21,8 @@ export interface Konto {
   nick: string;
   verified: boolean;
   uid: string | null;
+  /** Kod weryfikacji LOT-xxxx konta niezweryfikowanego (lotnik/serwer/konta.js: pub); null po weryfikacji. */
+  kod?: string | null;
 }
 export interface Session {
   token: string;
@@ -135,13 +137,42 @@ export async function post<T>(path: string, body: object, ms = 10_000): Promise<
   }
 }
 
-/** Logowanie kontem Lotnika; zapisuje sesję tak jak Lotnik (wspólna dla obu gier). */
-export async function login(nick: string, password: string): Promise<string | null> {
-  const r = await post<{ token: string; konto: Konto }>("/login", { nick, password });
-  if (!r.ok) return r.j.error ?? D2_TEXT.loginFailed;
+/**
+ * Logowanie albo założenie konta Lotnika (te same trasy co lotnik/konto.js); zapisuje sesję tak jak Lotnik
+ * (wspólna dla obu gier). Zwraca błąd do pokazania albo null.
+ */
+async function enter(path: "/login" | "/register", nick: string, password: string): Promise<string | null> {
+  const r = await post<{ token: string; konto: Konto }>(path, { nick, password });
+  if (!r.ok || typeof r.j.token !== "string") return r.j.error ?? D2_TEXT.loginFailed;
   write(ACCOUNT_KEY, JSON.stringify({ token: r.j.token, konto: r.j.konto }));
   return null;
 }
+export const login = (nick: string, password: string) => enter("/login", nick, password);
+export const register = (nick: string, password: string) => enter("/register", nick, password);
+
+/** Temat licznika na forum, w którym nowy post z kodem weryfikuje konto (lotnik/konto.js: VERIFY_URL). */
+export const VERIFY_URL = "https://forums.d2jsp.org/topic.php?t=110398796&f=230&v=1";
+
+/**
+ * Stan weryfikacji na tym urządzeniu, ten sam klucz co w Lotniku (lotnik/konto.js: verGet): seen = widziane
+ * niezweryfikowane, at = kiedy kliknięto „Zweryfikuj” (0 = jeszcze nie), ok = pokazano „zweryfikowane”.
+ */
+export interface VerifyState {
+  seen?: boolean;
+  at?: number;
+  ok?: boolean;
+}
+const verifyKey = (id: string) => PREFIX + "lotnik.wer." + id;
+export function verifyState(id: string): VerifyState {
+  try {
+    // Zapis tej gry albo Lotnika, w tym samym kształcie.
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+    return (JSON.parse(read(verifyKey(id)) ?? "null") as VerifyState | null) ?? {};
+  } catch {
+    return {};
+  }
+}
+export const setVerifyState = (id: string, v: VerifyState): void => write(verifyKey(id), JSON.stringify(v));
 export async function logout(): Promise<void> {
   const s = session();
   write(ACCOUNT_KEY, null);

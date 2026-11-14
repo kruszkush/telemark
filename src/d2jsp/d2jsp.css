@@ -217,3 +217,67 @@
     order: -1;
   }
 }
+.d2-login-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+/* Ramka weryfikacji konta (verify-box.tsx), jak w Lotniku: czerwony kod w przerywanej ramce, klik kopiuje. */
+.d2-verify {
+  max-width: 30rem;
+  margin: 0.5rem 0 1rem;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid #f87171;
+  text-align: center;
+}
+.d2-verify-ok {
+  border-color: #7fff7f;
+}
+.d2-verify-head {
+  margin: 0.25rem 0;
+  color: #f87171;
+  font-weight: bold;
+}
+.d2-verify-wait {
+  margin: 0.25rem 0;
+  color: #ffb000;
+  font-weight: bold;
+}
+.d2-verify-code {
+  display: block;
+  margin: 0.5rem auto 0;
+  padding: 0.4rem 1rem;
+  border: 2px dashed #f87171;
+  background: none;
+  color: #fecaca;
+  font: inherit;
+  font-size: clamp(18px, 5vw, 26px);
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+.d2-verify-hint {
+  margin-top: 0.15rem;
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+.d2-verify-chip {
+  padding: 0 0.4rem;
+  border: 2px dashed #f87171;
+  background: none;
+  color: #fecaca;
+  font: inherit;
+  cursor: pointer;
+}
+.d2-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #93c5fd;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.d2-verify .pixel-button {
+  display: block;
+  margin: 0.25rem auto;
+}

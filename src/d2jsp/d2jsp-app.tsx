@@ -14,9 +14,11 @@ import {
   login,
   logout,
   onSaved,
+  register,
   resendPending,
   savedJump,
   sendJump,
+  session,
   startJump,
   today,
   watchJump,
@@ -296,6 +298,12 @@ export function D2jspApp() {
         if (err === null) day.reload();
         return err;
       }}
+      onRegister={async (n, p) => {
+        const err = await register(n, p);
+        if (err === null) day.reload();
+        return err;
+      }}
+      account={session()?.konto ?? null}
       onLogout={() => void logout().then(day.reload)}
       onJump={start.onJump}
       onTrial={start.onTrial}

@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { UI_TEXT } from "../text/ui-text";
 import { useEntryFocus } from "../ui/use-entry-focus";
-import { SERVER_TEST, setTesterPassword, type DayState } from "./api";
+import { SERVER_TEST, setTesterPassword, type DayState, type Konto } from "./api";
+import { VerifiedOnce, VerifyBox } from "./verify-box";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import { nextHill } from "./next-hill";
 import { WeekTable } from "./week-table";
@@ -26,6 +27,9 @@ interface Props {
   starting: boolean;
   onReload: () => void;
   onLogin: (nick: string, password: string) => Promise<string | null>;
+  onRegister: (nick: string, password: string) => Promise<string | null>;
+  /** Konto zapisane na tym urządzeniu (z kodem weryfikacji, którego dzień z serwera nie podaje); null bez konta. */
+  account: Konto | null;
   onLogout: () => void;
   onJump: (grupa: number) => void;
   onTrial: (grupa: number) => void;
@@ -33,24 +37,31 @@ interface Props {
   focusOnEntry: boolean;
 }
 
-function LoginForm({ onLogin }: { onLogin: Props["onLogin"] }) {
+/** Nick i hasło z dwoma przyciskami, jak w Lotniku (lotnik/konto.js: showForm): „Załóż konto” i „Zaloguj”. */
+function LoginForm({ onLogin, onRegister }: Pick<Props, "onLogin" | "onRegister">) {
   const [nick, setNick] = useState("");
   const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState<"login" | "register" | null>(null);
   const [error, setError] = useState("");
-  const submit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    if (busy || nick.trim() === "" || password === "") return;
-    setBusy(true);
+  const send = (kind: "login" | "register") => {
+    if (busy !== null || nick.trim() === "" || password === "") return;
+    setBusy(kind);
     setError("");
-    void onLogin(nick.trim(), password).then((err) => {
-      setBusy(false);
+    void (kind === "login" ? onLogin : onRegister)(nick.trim(), password).then((err) => {
+      setBusy(null);
       if (err !== null) setError(err);
     });
   };
   return (
-    <form className="d2-login" onSubmit={submit}>
+    <form
+      className="d2-login"
+      onSubmit={(e) => {
+        e.preventDefault();
+        send("login");
+      }}
+    >
       <h2 className="hill-section-title">{T.loginTitle}</h2>
+      <p className="note">{T.loginHint}</p>
       <label>
         {T.nick}
         <input value={nick} onChange={(e) => setNick(e.target.value)} autoComplete="username" maxLength={40} />
@@ -65,9 +76,14 @@ function LoginForm({ onLogin }: { onLogin: Props["onLogin"] }) {
           maxLength={200}
         />
       </label>
-      <button type="submit" className="pixel-button" disabled={busy}>
-        {busy ? T.loggingIn : T.login}
-      </button>
+      <div className="d2-login-buttons">
+        <button type="submit" className="pixel-button" disabled={busy !== null}>
+          {busy === "login" ? T.loggingIn : T.login}
+        </button>
+        <button type="button" className="pixel-button" disabled={busy !== null} onClick={() => send("register")}>
+          {busy === "register" ? T.registering : T.register}
+        </button>
+      </div>
       {error && (
         <p className="note d2-warn" role="alert">
           {error}
@@ -159,6 +175,42 @@ function DayFooter({ day }: { day: NonNullable<Props["day"]> }) {
   );
 }
 
+/**
+ * Konto pod tabelą: gość bez konta loguje się albo zakłada konto, niezweryfikowane konto weryfikuje się tu (nie w
+ * Lotniku), a po weryfikacji raz widać potwierdzenie.
+ */
+function AccountPart({
+  day,
+  account,
+  onLogin,
+  onRegister,
+  onLogout,
+}: Pick<Props, "account" | "onLogin" | "onRegister" | "onLogout"> & { day: DayState }) {
+  if (day.gosc === undefined) {
+    return day.konto?.verified === true && account ? <VerifiedOnce id={account.id} /> : null;
+  }
+  // Kod jest tylko w koncie zapisanym na urządzeniu; czy konto już zweryfikowane, mówi dzień z serwera.
+  const kod = account?.kod;
+  const unverified =
+    day.konto?.verified === false && account && typeof kod === "string" && kod !== "" ? { ...account, kod } : null;
+  return (
+    <>
+      {unverified ? <VerifyBox konto={unverified} /> : <p className="note d2-warn">{day.gosc}</p>}
+      {day.konto ? (
+        <p className="note d2-account">
+          {T.loggedAs(day.konto.nick)}
+          <button type="button" className="pixel-button d2-small" onClick={onLogout}>
+            {T.logout}
+          </button>
+        </p>
+      ) : (
+        <LoginForm onLogin={onLogin} onRegister={onRegister} />
+      )}
+      {!unverified && <p className="note">{T.guestNote}</p>}
+    </>
+  );
+}
+
 /** Ekran trybu d2jsp: konto, trzy skocznie dnia ze skokami gracza i wynik dnia. */
 export function DailyScreen(props: Props) {
   const { day } = props;
@@ -203,19 +255,7 @@ export function DailyScreen(props: Props) {
       {day === null && props.loadError === null && <p className="note">{T.loading}</p>}
       {day !== null && (
         <>
-          {guest && (
-            <>
-              <p className="note d2-warn">{day.gosc}</p>
-              {day.konto ? (
-                <button type="button" className="pixel-button d2-small" onClick={props.onLogout}>
-                  {T.logout}
-                </button>
-              ) : (
-                <LoginForm onLogin={props.onLogin} />
-              )}
-              <p className="note">{T.guestNote}</p>
-            </>
-          )}
+          <AccountPart {...props} day={day} />
           <Hills
             day={day}
             starting={props.starting || props.versionMismatch}
