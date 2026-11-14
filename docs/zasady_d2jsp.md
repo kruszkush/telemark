@@ -18,6 +18,7 @@ Jedyne miejsce tych ustaleń (14.11.2026). Plan wykonania: `docs/plan_d2jsp.md`.
 - Na skoczni liczą się 2 najlepsze skoki z 10, dodane (jak dwie serie). Wynik dnia = suma z 3 skoczni.
 - Tydzień: suma 5 najlepszych dni gracza. Miesiąc: suma 20 najlepszych dni. Obie tabele rosną na bieżąco (po 3 dniach są zliczone 3 dni).
 - Na stronie: bieżący tydzień, bieżący miesiąc, poprzedni tydzień i poprzedni miesiąc ze zwycięzcą. Zwycięzca tygodnia i miesiąca dostaje puchar (pokazać tak, jak Lotnik pokazuje swoje; sprawdzone 14.11: Lotnik pucharów nie pokazuje, więc użyte puchary strony licznika, plan pkt 8, do oceny Mateusza). Osobnej tabeli dnia na stronie nie ma.
+- W grze (Mateusz 14.11): mała tabela tygodnia na górze, na środku ekranu skoczni dnia (5 najlepszych i gracz pod spodem); ekran dnia ma się mieścić w oknie bez przewijania. Przy nickach awatary z forum, wszędzie w tabelach (jak w rankingach strony), bez awatara pierwsza litera.
 - W grze po każdym skoku: dzisiejsze miejsce na tej skoczni.
 
 ## Oglądanie skoków i zabezpieczenie

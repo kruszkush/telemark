@@ -41,6 +41,13 @@ const server = createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" }).end(page);
 });
 server.listen(8897, () => {
-  child = spawn(browser, [...flags.map((f) => f.replace("{profile}", profile)), "http://127.0.0.1:8897/"], { stdio: "ignore" });
+  child = spawn(browser, [...flags.map((f) => f.replace("{profile}", profile)), "http://127.0.0.1:8897/"], {
+    stdio: "ignore",
+  });
 });
-setTimeout(() => { console.log("brak wyniku po 90 s"); child?.kill(); server.close(); process.exitCode = 2; }, 90_000).unref();
+setTimeout(() => {
+  console.log("brak wyniku po 90 s");
+  child?.kill();
+  server.close();
+  process.exitCode = 2;
+}, 90_000).unref();

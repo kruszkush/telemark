@@ -13,11 +13,11 @@ function d2jspPage(): Plugin {
       order: "pre",
       handler: (html) =>
         html
-        .replace(/\s*<!-- Marks the page[\s\S]*?-->\s*<meta name="telemark-offline"[^>]*>/, "")
-        .replace(/\s*<link rel="manifest"[^>]*>/, "")
-        .replace(/\s*<link rel="(?:icon|apple-touch-icon)"[^>]*>/g, "")
-        .replace('href="/">wczytaj', 'href="./">wczytaj')
-        .replace('src="/src/main.tsx"', 'src="/src/d2jsp/main.tsx"'),
+          .replace(/\s*<!-- Marks the page[\s\S]*?-->\s*<meta name="telemark-offline"[^>]*>/, "")
+          .replace(/\s*<link rel="manifest"[^>]*>/, "")
+          .replace(/\s*<link rel="(?:icon|apple-touch-icon)"[^>]*>/g, "")
+          .replace('href="/">wczytaj', 'href="./">wczytaj')
+          .replace('src="/src/main.tsx"', 'src="/src/d2jsp/main.tsx"'),
     },
   };
 }

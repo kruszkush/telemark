@@ -37,7 +37,13 @@ await page.locator("#telemark").screenshot({ path: join(OUT, "02-karta.png") });
 console.log("tabele:", (await page.locator("#telemark").innerText()).slice(0, 900));
 // Skok konta próbnego z d2jsp-proba.mjs (zagrany w przeglądarce), inaczej pierwszy w tabeli.
 const KONTO = "E:/Vibe coding/lotnik/out/_tm-konto-testowe.log";
-const mine = (() => { try { return JSON.parse(readFileSync(KONTO, "utf8")).nick; } catch { return null; } })();
+const mine = (() => {
+  try {
+    return JSON.parse(readFileSync(KONTO, "utf8")).nick;
+  } catch {
+    return null;
+  }
+})();
 const row = mine ? page.locator("#tm-w tr", { hasText: mine }) : page.locator("#tm-w tr").nth(1);
 const gid = await row.locator("[data-gid]").first().getAttribute("data-gid");
 console.log("oglądany skok:", mine ?? "pierwszy", gid, await row.innerText());
@@ -49,13 +55,22 @@ await page.waitForTimeout(2500);
 await page.screenshot({ path: join(OUT, "03-okno-gry.png") });
 await page.getByRole("button", { name: "Zamknij Telemark" }).click();
 await page.waitForTimeout(500);
-console.log("po zamknięciu okno ukryte:", await page.locator(".tm-okno").isHidden(), "strona widoczna:", await page.locator("h1").isVisible());
+console.log(
+  "po zamknięciu okno ukryte:",
+  await page.locator(".tm-okno").isHidden(),
+  "strona widoczna:",
+  await page.locator("h1").isVisible(),
+);
 
 if (gid) {
   // Dzisiejszy skok (przycisk ▶ na stronie czeka do jutra): ta sama gra z ?ogladaj= i &test.
   await page.goto(URL0 + "telemark/index.html?ogladaj=" + gid + "&test", { waitUntil: "domcontentloaded" });
   await page.locator("canvas").waitFor({ timeout: 30000 });
-  for (const [i, ms] of [[4, 2500], [5, 6000], [6, 6000]]) {
+  for (const [i, ms] of [
+    [4, 2500],
+    [5, 6000],
+    [6, 6000],
+  ]) {
     await page.waitForTimeout(ms);
     await page.screenshot({ path: join(OUT, `0${i}-ogladanie.png`) });
   }

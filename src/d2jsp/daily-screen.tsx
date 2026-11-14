@@ -162,7 +162,7 @@ export function DailyScreen(props: Props) {
           </p>
         )}
       </header>
-      <WeekTable me={guest ? null : (day?.konto?.nick ?? null)} />
+      <WeekTable me={guest ? null : (day?.konto?.nick ?? null)} version={(day?.uzyte ?? []).join()} />
       {props.needsTesterPassword && SERVER_TEST && <TesterPassword onSaved={props.onReload} />}
       {props.notes.map((n) => (
         <p key={n.text} className={n.warn === true ? "note d2-warn" : "note d2-result"} role="status">
@@ -194,7 +194,12 @@ export function DailyScreen(props: Props) {
               <p className="note">{T.guestNote}</p>
             </>
           )}
-          <Hills day={day} starting={props.starting || props.versionMismatch} onJump={props.onJump} onTrial={props.onTrial} />
+          <Hills
+            day={day}
+            starting={props.starting || props.versionMismatch}
+            onJump={props.onJump}
+            onTrial={props.onTrial}
+          />
           {!guest && <p className="d2-total">{T.dayTotal(day.wynik ?? 0)}</p>}
         </>
       )}

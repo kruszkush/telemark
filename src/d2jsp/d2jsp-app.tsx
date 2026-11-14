@@ -111,7 +111,10 @@ function useWatchOnOpen(show: (s: Screen) => void, nextKey: () => number, onErro
         onError(r.j.error ?? T.watchError);
         return;
       }
-      const source = { ...recordingSource({ seed: r.j.seed, inputs, newRecord: false }), jumperName: jumperNick(r.j.nick) };
+      const source = {
+        ...recordingSource({ seed: r.j.seed, inputs, newRecord: false }),
+        jumperName: jumperNick(r.j.nick),
+      };
       show({ kind: "watch", hill, source, nick: r.j.nick, key: nextKey() });
     });
   }, [show, nextKey, onError]);
@@ -131,7 +134,16 @@ interface JumpProps {
 }
 
 /** Skok dnia, skok na próbę albo oglądany skok: ekran skoku gry w trybie zawodów (bez powtórzenia skoku). */
-function DailyJump({ screen, save: { save, update }, nick, onSettings, back, focusOnEntry, onSent, onTrialResult }: JumpProps) {
+function DailyJump({
+  screen,
+  save: { save, update },
+  nick,
+  onSettings,
+  back,
+  focusOnEntry,
+  onSent,
+  onTrialResult,
+}: JumpProps) {
   const { hill } = screen;
   const ticket = screen.kind === "jump" ? screen.ticket : null;
   const name = nick ?? UI_TEXT.hud.playerName;
@@ -264,7 +276,9 @@ export function D2jspApp() {
   }
   if (screen.kind === "about") return <AboutScreen onBack={back} focusOnEntry={navigated} extra={T.aboutFork} />;
   if (screen.kind === "howto") {
-    return <HowToScreen tilt={settings.leanControl === "tilt" && tiltSupported()} onBack={back} focusOnEntry={navigated} />;
+    return (
+      <HowToScreen tilt={settings.leanControl === "tilt" && tiltSupported()} onBack={back} focusOnEntry={navigated} />
+    );
   }
   return (
     <DailyScreen

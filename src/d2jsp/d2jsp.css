@@ -96,7 +96,8 @@
 .d2-hills {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  align-items: start;
+  /* Karty w rzędzie równej wysokości, przycisk zawsze na dole (Mateusz 14.11: pierwsza była większa). */
+  align-items: stretch;
   gap: 12px 18px;
 }
 .d2-hill {
@@ -123,6 +124,10 @@
 .d2-best {
   color: var(--tone-white);
 }
+.d2-hill .pixel-button,
+.d2-hill > .note:last-child {
+  margin-top: auto;
+}
 .d2-hill .pixel-button {
   margin-left: -14px;
   font-size: clamp(16px, 4.2vw, 22px);
@@ -148,4 +153,19 @@
     float: right;
     margin-left: 18px;
   }
+}
+
+/* Awatar z forum przy nicku w tabeli (jak .rav w rankingach strony licznika); bez obrazka pierwsza litera. */
+.d2-av {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.45em;
+  font-size: 0.9em;
+  color: var(--muted);
+  background: var(--line) center / cover;
 }

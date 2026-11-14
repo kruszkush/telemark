@@ -52,8 +52,20 @@ export const D2_TEXT = {
   tableCaption: (k: "w" | "m", key: string) => {
     const w = /^w(\d{4})-(\d{2})$/.exec(key);
     if (k === "w") return w ? `Tydzień ${Number(w[2])}.` : "Tydzień";
-    const MONTHS = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
-      "Październik", "Listopad", "Grudzień"];
+    const MONTHS = [
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień",
+    ];
     const m = /^m(\d{4})-(\d{2})$/.exec(key);
     return (m ? MONTHS[Number(m[2]) - 1] : undefined) ?? "Miesiąc";
   },
@@ -68,7 +80,7 @@ export const D2_TEXT = {
       text: "Przeróbka Telemarka do skoczni dnia na stronie licznika d2jsp: kruszkush. Kod przeróbki, też na licencji GPL-3.0-or-later: github.com/kruszkush/telemark.",
     },
   ],
-  watchTitle:(nick: string, day: string) => `Skok: ${nick}, ${day}`,
+  watchTitle: (nick: string, day: string) => `Skok: ${nick}, ${day}`,
   watchError: "Nie udało się wczytać skoku.",
   watchBack: "Zamknij",
   points: pts,

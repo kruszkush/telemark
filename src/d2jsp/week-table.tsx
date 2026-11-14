@@ -1,6 +1,33 @@
 import { useEffect, useState } from "react";
 import { D2_TEXT as T } from "../text/d2jsp-text";
-import { tables, type TablePeriod } from "./api";
+import { tables, type TablePeriod, type TableRow } from "./api";
+
+/**
+ * Awatary z forum, które trzyma strona licznika (d2jsp/strona.js wystawia `tmAvatars` na oknie strony); gra poza
+ * stroną albo gracz bez awatara: kółko z pierwszą literą nicku, jak w rankingach strony.
+ */
+function avatarOf(uid: string | null): string | null {
+  if (uid === null) return null;
+  try {
+    const all: unknown = Reflect.get(window.parent, "tmAvatars");
+    const map: unknown = typeof all === "function" ? Reflect.apply(all, undefined, []) : null;
+    const url: unknown = typeof map === "object" && map !== null ? Reflect.get(map, uid) : null;
+    return typeof url === "string" && url !== "" ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+function Avatar({ row }: { row: TableRow }) {
+  const url = avatarOf(row.uid);
+  return url === null ? (
+    <span className="d2-av" aria-hidden="true">
+      {row.nick.charAt(0).toUpperCase()}
+    </span>
+  ) : (
+    <span className="d2-av" aria-hidden="true" style={{ backgroundImage: `url("${url.replace(/["\\]/g, "")}")` }} />
+  );
+}
 
 /** Tyle wierszy pokazuje mała tabela na ekranie dnia; gracz spoza nich dochodzi pod spodem. */
 const TOP = 5;
@@ -34,6 +61,7 @@ function Period({ period, me, top }: { period: TablePeriod; me: string | null; t
           <tr key={r.nick} className={r === mine ? "contest-row contest-player" : "contest-row"}>
             <td className="contest-place">{`${r.place}.`}</td>
             <th scope="row" className="contest-name">
+              <Avatar row={r} />
               <span className="contest-who">{r.nick}</span>
             </th>
             <td className="contest-total">{T.points(r.suma)}</td>
@@ -46,9 +74,10 @@ function Period({ period, me, top }: { period: TablePeriod; me: string | null; t
 
 /**
  * Mała tabela tygodnia na górze ekranu dnia, w stylu tabel zawodów autora (contest-table); miesiąc jest na stronie.
- * Odświeżana przy każdym wejściu na ekran dnia. Arkusz prób: test-results/d2jsp-tabela (14.11, wybrana próba A).
+ * Pobierana przy wejściu na ekran dnia i po każdym skoku zapisanym przez serwer (zmienia się `version`; serwer trzyma
+ * tabelę do 60 s, ale zapis skoku ją czyści). Arkusz prób: test-results/d2jsp-tabela (14.11, wybrana próba A).
  */
-export function WeekTable({ me }: { me: string | null }) {
+export function WeekTable({ me, version }: { me: string | null; version: string }) {
   const [periods, setPeriods] = useState<TablePeriod[] | null>(null);
   useEffect(() => {
     let live = true;
@@ -58,7 +87,9 @@ export function WeekTable({ me }: { me: string | null }) {
     return () => {
       live = false;
     };
-  }, []);
+    // `version` (liczby skoków gracza) nie wchodzi do zapytania: tylko mówi, kiedy pobrać tabelę jeszcze raz.
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
+  }, [version]);
   if (periods === null) return null;
   const week = periods.find((p) => p.k === "w");
   return <section className="d2-tables">{week && <Period period={week} me={me} top={TOP} />}</section>;

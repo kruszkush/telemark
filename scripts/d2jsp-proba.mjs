@@ -108,7 +108,9 @@ const click = async (button) => {
 const box = await page.locator("canvas").boundingBox();
 await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
 await page.mouse.down();
-await page.waitForFunction((t) => document.querySelector("p[aria-live]")?.textContent === t, STARTED, { timeout: 20000 });
+await page.waitForFunction((t) => document.querySelector("p[aria-live]")?.textContent === t, STARTED, {
+  timeout: 20000,
+});
 await page.mouse.up();
 const t0 = Date.now();
 const takeoff = (await probeUntil("edge", 4.5)).frame;
@@ -119,13 +121,18 @@ if (takeoff !== null) {
   await page.waitForTimeout(400);
   await shot("05-lot");
   // Na większych skoczniach lot jest dłuższy: przygotowanie lądowania dopiero LAND razy K metrów za progiem (w poziomie).
-  const landing = LAND > 0 ? (await probeUntil("edge", -LAND * K)).frame : (await probeUntil("frame", takeoff + 41)).frame;
+  const landing =
+    LAND > 0 ? (await probeUntil("edge", -LAND * K)).frame : (await probeUntil("frame", takeoff + 41)).frame;
   if (landing !== null) {
     await click("right");
     if ((await probeUntil("frame", landing + 7)).frame !== null) await click("left");
   }
 }
-await page.waitForFunction(() => /^(Lądowanie|Upadek)|^Dyskwalifikacja/.test(document.querySelector("p[aria-live]")?.textContent ?? ""), null, { timeout: 60000 });
+await page.waitForFunction(
+  () => /^(Lądowanie|Upadek)|^Dyskwalifikacja/.test(document.querySelector("p[aria-live]")?.textContent ?? ""),
+  null,
+  { timeout: 60000 },
+);
 log("ogłoszenie:", await page.locator("p[aria-live]").textContent());
 await page.waitForTimeout(3000);
 await shot("06-po-ladowaniu");

@@ -6,7 +6,7 @@
 
 import { D2_TEXT } from "../text/d2jsp-text";
 
-const PROD_PAGE =location.hostname === "kruszkush.github.io" && !location.pathname.includes("/test/");
+const PROD_PAGE = location.hostname === "kruszkush.github.io" && !location.pathname.includes("/test/");
 export const SERVER_TEST = !PROD_PAGE;
 const API = "https://us-east1-rich-chimera-344319.cloudfunctions.net/" + (SERVER_TEST ? "lotnik-test" : "lotnik");
 const PREFIX = SERVER_TEST ? "" : "p.";
@@ -205,7 +205,13 @@ async function sendOne(gid: string, p: Pending, attempt = 0): Promise<void> {
 
 /** Skok po lądowaniu: do kolejki i do serwera (ponawiane przy błędzie sieci, też po ponownym otwarciu gry). */
 export function sendJump(ticket: Ticket, inputs: string, wynik: { p: number; m: number }): void {
-  const p: Pending = { bilet: ticket.bilet, inputs, wynik, dev: navigator.userAgent.slice(0, 200), until: Date.now() + PENDING_MS };
+  const p: Pending = {
+    bilet: ticket.bilet,
+    inputs,
+    wynik,
+    dev: navigator.userAgent.slice(0, 200),
+    until: Date.now() + PENDING_MS,
+  };
   pendingSet(ticket.gid, p);
   void sendOne(ticket.gid, p);
 }
@@ -216,6 +222,8 @@ export function resendPending(): void {
 
 export interface TableRow {
   nick: string;
+  /** Numer konta d2jsp (konto zweryfikowane i połączone z forum), klucz awatara. */
+  uid: string | null;
   suma: number;
   dni: number;
   place: number;

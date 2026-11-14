@@ -11,7 +11,7 @@ interface Props {
   extra?: readonly { title: string; text: string }[];
 }
 
-const NO_EXTRA: Props["extra"] = [];
+const NO_EXTRA: NonNullable<Props["extra"]> = [];
 
 /** What the game is, whose game it follows and who made both, opened from the main menu. */
 export function AboutScreen({ onBack, focusOnEntry, extra = NO_EXTRA }: Props) {
@@ -23,7 +23,7 @@ export function AboutScreen({ onBack, focusOnEntry, extra = NO_EXTRA }: Props) {
         {UI_TEXT.about.title}
       </h1>
       <dl className="how-to">
-        {[...UI_TEXT.about.sections, ...(extra ?? [])].map((section) => (
+        {[...UI_TEXT.about.sections, ...extra].map((section) => (
           <div key={section.title} className="how-to-step">
             <dt>{section.title}</dt>
             <dd>{typeset(section.text)}</dd>

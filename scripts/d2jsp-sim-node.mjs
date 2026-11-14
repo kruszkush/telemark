@@ -18,5 +18,7 @@ for (const j of set) {
     if (bad <= 5) console.log("RÓŻNICA", j.hillId, j.seed, JSON.stringify(got), "gra:", JSON.stringify(j.atTouchdown));
   }
 }
-console.log(`Node ${process.version}, ${file}: ${set.length - bad}/${set.length} zgodnych, najdłuższy skok ${worst.toFixed(1)} ms`);
+console.log(
+  `Node ${process.version}, ${file}: ${set.length - bad}/${set.length} zgodnych, najdłuższy skok ${worst.toFixed(1)} ms`,
+);
 process.exit(bad ? 1 : 0);
