@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Szkic: korona na rocznych nartach</title>
+<!-- Próby (plan docs/plan_puchary_narty.md, krok 1): gdzie siedzi korona rocznych nart. Wzór: kielich roku strony (cupY,
+     przepisany 1:1) i narty B ze szkicu index.html. Płonące przez fireCup strony (przepisane 1:1). Gra tego nie importuje. -->
+<style>
+  :root { --bg:#141413; --card:#1f1f1d; --ink:#ecebe6; --mute:#9a9892; --line:#34332f; --gold:#c9961a; --gold2:#f3d46b; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui, Segoe UI, Arial, sans-serif; }
+  main { padding:20px 28px; display:grid; grid-template-columns:repeat(6, 1fr); gap:14px; width:1860px; }
+  figure { margin:0; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 8px; text-align:center; font-size:15px; color:var(--mute); }
+  figure b { display:block; color:var(--ink); font-size:17px; margin-bottom:8px; }
+  svg.l { width:150px; height:150px; display:block; margin:0 auto; }
+  svg.m { width:44px; height:44px; display:block; margin:10px auto; }
+  .s { font-size:15px; color:var(--ink); margin-top:4px; }
+  .cup { width:1em; height:1em; vertical-align:-.12em; display:inline-block; }
+  .cup.fire { width:1em; height:1.22em; vertical-align:-.2em; overflow:visible; }
+  .cup.fire .fl { transform-origin:32px 12px; animation:flick .4s ease-in-out infinite alternate; }
+  @keyframes flick { from { transform:scale(.9,.84) skewX(-3deg); } to { transform:scale(1.06,1.1) skewX(3deg); } }
+  svg.l.fire, svg.m.fire { overflow:visible; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gold2)"/><stop offset="1" stop-color="var(--gold)"/></linearGradient>
+    <linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9b8ff"/><stop offset="1" stop-color="#7b3fd1"/></linearGradient>
+    <linearGradient id="gy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6fbff"/><stop offset=".5" stop-color="#7fd9f0"/><stop offset="1" stop-color="#2a8fb8"/></linearGradient>
+    <symbol id="cupY" viewBox="0 0 64 64">
+      <path d="M20 2l4 6 8-6 8 6 4-6 2 9H18z" fill="#f3c93a"/>
+      <path d="M16 11h32v12c0 10-7 16-16 16S16 33 16 23z" fill="url(#gy)"/>
+      <path d="M16 14H7c0 11 5 16 11 17M48 14h9c0 11-5 16-11 17" fill="none" stroke="#2a8fb8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 38h8l2 8H26z" fill="#2a8fb8"/>
+      <path d="M17 46h30l3 11H14z" fill="url(#gy)"/>
+      <path d="M32 16l6 7-6 9-6-9z" fill="#fff" fill-opacity=".85"/>
+    </symbol>
+    <g id="skis">
+      <g transform="rotate(-24 32 30)"><rect x="28.5" y="4" width="7" height="46" rx="3.5"/><path d="M28.5 8c0-5 3-7 7-7v7z"/></g>
+      <g transform="rotate(24 32 30)"><rect x="28.5" y="4" width="7" height="46" rx="3.5"/><path d="M35.5 8c0-5-3-7-7-7v7z"/></g>
+    </g>
+    <symbol id="nartyW" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gg)" stroke="var(--gold)" stroke-width="1.5"/>
+      <rect x="18" y="49" width="28" height="8" rx="2" fill="url(#gg)"/>
+    </symbol>
+    <symbol id="nartyM" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gm)" stroke="#7b3fd1" stroke-width="1.5"/>
+      <circle cx="32" cy="29" r="7.5" fill="#7b3fd1"/>
+      <path d="M32 23.5l1.7 3.4 3.8.6-2.8 2.7.7 3.8-3.4-1.8-3.4 1.8.7-3.8-2.8-2.7 3.8-.6z" fill="#fff"/>
+      <path d="M16 49h32l3 8H13z" fill="url(#gm)"/>
+    </symbol>
+    <!-- 0: szkic B (korona nad dziobami nart) -->
+    <symbol id="nartyY0" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gy)" stroke="#2a8fb8" stroke-width="1.5" transform="translate(0 3)"/>
+      <path d="M23 1l3 5 6-4 6 4 3-5 1 8H22z" fill="#f3c93a"/>
+      <circle cx="32" cy="32" r="7" fill="#2a8fb8"/><path d="M32 27l4 5-4 6-4-6z" fill="#fff"/>
+      <path d="M15 50h34l3 8H12z" fill="url(#gy)"/>
+    </symbol>
+    <!-- A: korona siedzi na tarczy w skrzyżowaniu nart -->
+    <symbol id="nartyYA" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gy)" stroke="#2a8fb8" stroke-width="1.5" transform="translate(0 3)"/>
+      <circle cx="32" cy="34" r="7" fill="#2a8fb8"/><path d="M32 29.5l3.5 4.5-3.5 5-3.5-5z" fill="#fff"/>
+      <path d="M24 20l3.5 4.5 4.5-4 4.5 4 3.5-4.5 1 8H23z" fill="#f3c93a" stroke="#a87a10" stroke-width=".8" stroke-linejoin="round"/>
+      <path d="M15 50h34l3 8H12z" fill="url(#gy)"/>
+    </symbol>
+    <!-- B: korona nasunięta na narty jak obręcz (narty przechodzą przez nią) -->
+    <symbol id="nartyYB" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gy)" stroke="#2a8fb8" stroke-width="1.5" transform="translate(0 3)"/>
+      <path d="M19 9l4.5 5.5 8.5-6 8.5 6 4.5-5.5 1.5 11H17.5z" fill="#f3c93a" stroke="#a87a10" stroke-width=".8" stroke-linejoin="round"/>
+      <circle cx="32" cy="34" r="6.5" fill="#2a8fb8"/><path d="M32 29.5l3.5 4.5-3.5 5-3.5-5z" fill="#fff"/>
+      <path d="M15 50h34l3 8H12z" fill="url(#gy)"/>
+    </symbol>
+    <!-- C: korona na podstawie, przed nartami -->
+    <symbol id="nartyYC" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gy)" stroke="#2a8fb8" stroke-width="1.5" transform="translate(0 -2)"/>
+      <circle cx="32" cy="28" r="7" fill="#2a8fb8"/><path d="M32 23.5l3.5 4.5-3.5 5-3.5-5z" fill="#fff"/>
+      <path d="M15 50h34l3 8H12z" fill="url(#gy)"/>
+      <path d="M22 41l4 5 6-4.5 6 4.5 4-5 1 9H21z" fill="#f3c93a" stroke="#a87a10" stroke-width=".8" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+<main id="m"></main>
+<script>
+// fireCup przepisane 1:1 ze strony (d2jsp-licznik/docs/test/index.html)
+const fireCup = (cls, sym, a, b, c) => `<svg class="cup fire ${cls}" viewBox="0 -14 64 78"><g class="fl"><path d="M32 -12c5 8 13 12 13 23a13 13 0 0 1-26 0c0-7 4-10 5-16 2 5 4 6 5 8 1-5 1-9 3-15z" fill="${a}"/><path d="M32 0c3 5 8 8 8 14a8 8 0 0 1-16 0c0-4 2-7 4-10 1 2 2 3 3 4z" fill="${b}"/><path d="M32 8c2 3 4 4 4 7a4 4 0 0 1-8 0c0-2 1-4 2-5z" fill="${c}"/></g><use href="#${sym}"/></svg>`;
+const FM = (s) => fireCup('fm', s, '#7b3fd1', '#b98cff', '#f0e2ff'), FW = (s) => fireCup('fw', s, '#c9961a', '#f3c93a', '#fff3b8');
+const ic = (id, cls) => `<svg class="${cls}"><use href="#${id}"/></svg>`;
+const big = (html, cls) => html.replace('class="cup fire', `class="${cls} fire`);
+const items = [
+  ["kielich roku (wzór)", "cupY"], ["0: szkic B", "nartyY0"], ["A: korona na tarczy", "nartyYA"],
+  ["B: korona jak obręcz", "nartyYB"], ["C: korona na podstawie", "nartyYC"],
+];
+document.getElementById("m").innerHTML = items.map(([t, id]) =>
+  `<figure><b>${t}</b>${ic(id, "l")}${ic(id, "m")}<div class="s">Kryste_Panie ${ic(id, "cup")}${ic("cup", "cup")}</div></figure>`).join("") +
+  `<figure><b>płonące (narty)</b>${big(FM("nartyM"), "l")}<div class="s">${big(FW("nartyW"), "m")}</div><div class="s">Nick ${FM("nartyM")}${FW("nartyW")}${ic("nartyW", "cup")}</div></figure>` +
+  // Próby płomienia nad nartami: P1 płomień wyżej (nad dziobami), P2 płomień mniejszy i wyżej.
+  [["P1: płomień nad dziobami", "translate(0 -9)", "0 -23 64 87"], ["P2: mniejszy, nad dziobami", "translate(32 -2) scale(.72) translate(-32 -12)", "0 -16 64 80"]].map(([t, tr, vb]) => {
+    const f = (cls, s, a, b, c) => fireCup(cls, s, a, b, c).replace('viewBox="0 -14 64 78"', `viewBox="${vb}"`).replace('<g class="fl">', `<g transform="${tr}"><g class="fl">`).replace('</g><use', '</g></g><use');
+    const fm = f('fm', 'nartyM', '#7b3fd1', '#b98cff', '#f0e2ff'), fw = f('fw', 'nartyW', '#c9961a', '#f3c93a', '#fff3b8');
+    return `<figure><b>${t}</b>${big(fm, "l")}<div class="s">${big(fw, "m")}</div><div class="s">Nick ${fm}${fw}${ic("nartyW", "cup")}</div></figure>`;
+  }).join("");
+</script>
+</body>
+</html>
