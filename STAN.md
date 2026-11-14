@@ -11,5 +11,5 @@ Ustalenia z Mateuszem: `docs/zasady_d2jsp.md`. Plan, przebieg skoku dnia, model 
 - Znane: po skoku obraz mówi „jeszcze raz”, klik wraca do listy skoczni (jak w zawodach autora); dzisiejsze ▶ działa od jutra (sprawdzenie dziś: `telemark/index.html?ogladaj=<gid>&test`).
 
 ## Następny krok
-1. Czeka na ocenę Mateusza na teście (14.11): podpowiedzi w lewym dolnym rogu i belka bez limitu (wiatr stoi, bez dyskwalifikacji; ustalenia w `docs/zasady_d2jsp.md`). Zrzuty: `node test-results/d2jsp-podpowiedzi/zrzuty.mjs` (czeka 20 s na belce). Skrypt nie umie ruszyć skoczka samym dotknięciem pola L na telefonie (tak samo przed zmianą; prawdziwy telefon działał). Prod dopiero na „daj na official”: tryb prod w `scripts/d2jsp-publikuj.sh` (docs/, serwer `lotnik` z TELEMARK w `deploy.sh prod`).
+1. Czeka na ocenę Mateusza na teście (14.11): podpowiedzi w lewym dolnym rogu i belka bez limitu (wiatr stoi, bez dyskwalifikacji; ustalenia w `docs/zasady_d2jsp.md`). Zrzuty: `node scripts/d2jsp-podpowiedzi-zrzuty.mjs` (czeka 20 s na belce). Skrypt nie umie ruszyć skoczka samym dotknięciem pola L na telefonie (tak samo przed zmianą; prawdziwy telefon działał). Prod dopiero na „daj na official”: tryb prod w `scripts/d2jsp-publikuj.sh` (docs/, serwer `lotnik` z TELEMARK w `deploy.sh prod`).
 2. Po każdym commicie: `git push moje d2jsp`.
