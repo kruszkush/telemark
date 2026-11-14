@@ -162,13 +162,21 @@ function drawNeededToLead(fb: FrameBuffer, m: JumpViewModel): void {
   drawText(fb, Math.max(TITLE_AT_PX.x, m.titleInsetPx ?? 0), NEEDED_TOP_PX, text, { ramp: NEEDED_INK });
 }
 
-/** Draws one frame of the jump at the logical resolution. */
-export function drawJumpView(fb: FrameBuffer, m: JumpViewModel): void {
+/**
+ * Draws one frame of the jump at the logical resolution. Returns the lines the page shows over the picture in
+ * plain text (the hints on the gate with m.hintsBeforeStart); empty when the picture holds all its text.
+ */
+export function drawJumpView(fb: FrameBuffer, m: JumpViewModel): readonly string[] {
   const scenery = m.scenery ?? DAY_SCENERY;
-  withLook({ lighting: scenery.lighting, fog: scenery.fog }, () => drawScene(fb, m, scenery));
+  return withLook({ lighting: scenery.lighting, fog: scenery.fog }, () => drawScene(fb, m, scenery));
 }
 
-function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): void {
+/** The bottom edge of the page's hint lines, in picture rows from the top: as far over the bar as the drawn ones. */
+export function pageHintsBottomPx(): number {
+  return VIEW_HEIGHT_PX - BAR_HEIGHT_PX - PROMPT_BOTTOM_GAP_PX;
+}
+
+function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonly string[] {
   const night = scenery.lighting === "night";
   // Fog hides the stars and the moon.
   const clearNight = night && !scenery.fog;
@@ -229,13 +237,14 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): void {
   const finished = s.logic.finished;
   const notesShown = notesShownBy(s.logic, m.frame);
   const lines = prompt(m, nextJumpAllowed(s.logic, m.frame));
-  {
-    // At the bottom of the picture, above the bar: the jumper is always in its upper part, and three lines in
-    // the middle of the sky covered him. The d2jsp page tells all of them on the gate, in the bottom left corner
-    // lined up with the hill's name (Mateusz 14.11); the game's own jumps keep them centred.
+  // At the bottom of the picture, above the bar: the jumper is always in its upper part, and three lines in
+  // the middle of the sky covered him. The d2jsp page tells all of them on the gate in plain page text over the
+  // bottom left corner (Mateusz 14.11: the picture's letters were too big there), so they are not drawn here.
+  const pageLines = m.hintsBeforeStart === true ? lines : [];
+  if (m.hintsBeforeStart !== true) {
     const firstLineY = groundBottom - PROMPT_BOTTOM_GAP_PX - lines.length * PROMPT_LINE_PX;
     lines.forEach((line, i) => {
-      const x = m.hintsBeforeStart === true ? TITLE_AT_PX.x : Math.round((fb.width - textWidth(line)) / 2);
+      const x = Math.round((fb.width - textWidth(line)) / 2);
       drawText(fb, x, firstLineY + i * PROMPT_LINE_PX, line, color("white"), color("black"));
     });
   }
@@ -243,4 +252,5 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): void {
   if (finished && s.logic.distanceM > 0) drawNotes(fb, s, m.frame);
   if (m.newRecord === true && finished) drawNewRecord(fb, m, s.logic.distanceM, m.frame - s.logic.landedFrame);
   drawBar(fb, m, groundBottom, notesShown);
+  return pageLines;
 }

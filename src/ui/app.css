@@ -843,6 +843,24 @@ h2 {
   position: relative;
 }
 
+/*
+ * Hints on the gate on the d2jsp page (page-hints.ts places it over the picture's bottom left corner): a plain
+ * readable font instead of the picture's big letters (Mateusz 14.11), in sentence case.
+ */
+.page-hints {
+  position: absolute;
+  max-width: calc(100% - 2 * var(--overlay-gap));
+  pointer-events: none;
+  color: #fff;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  font-size: max(13px, calc(var(--picture-px, 4px) * 5));
+  font-weight: 600;
+  line-height: 1.3;
+  text-shadow:
+    1px 1px 0 #000,
+    0 0 4px #000;
+}
+
 /* What became of a jump kept with the S key, over the top of the picture area for a few seconds. */
 .keep-note {
   position: absolute;

@@ -332,6 +332,7 @@ export function JumpScreen(props: Props) {
     stageRef,
     canvasRef,
     diagnosticsRef,
+    hintsRef,
     controls: loop,
   } = useJumpLoop({
     hill,
@@ -387,6 +388,7 @@ export function JumpScreen(props: Props) {
           role="img"
           aria-label={JUMP_TEXT.canvas(UI_TEXT.hillLabel(hill.name, hill.kPointM), props.contest !== undefined)}
         />
+        <div className="page-hints" ref={hintsRef} hidden />
         {!menu.menuOpen && <KeepNote text={keepLast.keepNote} />}
         {cpu && contestNext && !menu.menuOpen && <SkipButton onSkip={contestNext} touch={touch} />}
         {props.diagnostics && <pre className="jump-diagnostics" aria-hidden="true" ref={diagnosticsRef} />}

@@ -222,6 +222,18 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+/* „Mam kod od admina” / „Wróć”: link pod przyciskami, jak lt-acc-link w Lotniku. */
+.d2-link {
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.8;
+}
 /* Ramka weryfikacji konta (verify-box.tsx), jak w Lotniku: czerwony kod w przerywanej ramce, klik kopiuje. */
 .d2-verify {
   max-width: 30rem;

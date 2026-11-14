@@ -25,6 +25,14 @@ export const D2_TEXT = {
   loggingIn: "Logowanie…",
   register: "Załóż konto",
   registering: "Zakładanie konta…",
+  // Kod od admina jak w Lotniku (lotnik/konto.js: showForm z withCode).
+  haveCode: "Mam kod od admina",
+  codeBack: "Wróć",
+  codeHint: "Kod od admina: wpisz nick, kod i nowe hasło. Hasło zmieni się też w Lotniku.",
+  code: "Kod od admina",
+  newPassword: "Nowe hasło (min. 6 znaków)",
+  setPassword: "Ustaw hasło",
+  settingPassword: "Ustawianie hasła…",
   loginHint:
     "Konto Lotnika działa też tutaj. Nie masz go? Wpisz nick taki sam jak na d2jsp i hasło (min. 6 znaków), potem „Załóż konto”.",
   // Weryfikacja konta jak w Lotniku (lotnik/konto.js: showAccount).

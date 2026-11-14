@@ -14,6 +14,7 @@ import {
   login,
   logout,
   onSaved,
+  redeem,
   register,
   resendPending,
   savedJump,
@@ -300,6 +301,11 @@ export function D2jspApp() {
       }}
       onRegister={async (n, p) => {
         const err = await register(n, p);
+        if (err === null) day.reload();
+        return err;
+      }}
+      onRedeem={async (n, c, p) => {
+        const err = await redeem(n, c, p);
         if (err === null) day.reload();
         return err;
       }}

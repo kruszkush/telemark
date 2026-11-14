@@ -141,14 +141,22 @@ export async function post<T>(path: string, body: object, ms = 10_000): Promise<
  * Logowanie albo założenie konta Lotnika (te same trasy co lotnik/konto.js); zapisuje sesję tak jak Lotnik
  * (wspólna dla obu gier). Zwraca błąd do pokazania albo null.
  */
-async function enter(path: "/login" | "/register", nick: string, password: string): Promise<string | null> {
-  const r = await post<{ token: string; konto: Konto }>(path, { nick, password });
+async function enter(
+  path: "/login" | "/register" | "/redeem",
+  nick: string,
+  password: string,
+  code?: string,
+): Promise<string | null> {
+  const body = code === undefined ? { nick, password } : { nick, password, code };
+  const r = await post<{ token: string; konto: Konto }>(path, body);
   if (!r.ok || typeof r.j.token !== "string") return r.j.error ?? D2_TEXT.loginFailed;
   write(ACCOUNT_KEY, JSON.stringify({ token: r.j.token, konto: r.j.konto }));
   return null;
 }
 export const login = (nick: string, password: string) => enter("/login", nick, password);
 export const register = (nick: string, password: string) => enter("/register", nick, password);
+/** Kod od admina (lotnik/serwer/konta.js: redeem): nowe hasło konta, inne urządzenia wylogowane, tu zalogowany. */
+export const redeem = (nick: string, code: string, password: string) => enter("/redeem", nick, password, code);
 
 /** Temat licznika na forum, w którym nowy post z kodem weryfikuje konto (lotnik/konto.js: VERIFY_URL). */
 export const VERIFY_URL = "https://forums.d2jsp.org/topic.php?t=110398796&f=230&v=1";

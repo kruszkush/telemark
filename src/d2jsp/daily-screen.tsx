@@ -28,6 +28,7 @@ interface Props {
   onReload: () => void;
   onLogin: (nick: string, password: string) => Promise<string | null>;
   onRegister: (nick: string, password: string) => Promise<string | null>;
+  onRedeem: (nick: string, code: string, password: string) => Promise<string | null>;
   /** Konto zapisane na tym urządzeniu (z kodem weryfikacji, którego dzień z serwera nie podaje); null bez konta. */
   account: Konto | null;
   onLogout: () => void;
@@ -37,17 +38,25 @@ interface Props {
   focusOnEntry: boolean;
 }
 
-/** Nick i hasło z dwoma przyciskami, jak w Lotniku (lotnik/konto.js: showForm): „Załóż konto” i „Zaloguj”. */
-function LoginForm({ onLogin, onRegister }: Pick<Props, "onLogin" | "onRegister">) {
+/**
+ * Nick i hasło z dwoma przyciskami, jak w Lotniku (lotnik/konto.js: showForm): „Załóż konto” i „Zaloguj”; pod nimi
+ * „Mam kod od admina” przełącza na nick, kod i nowe hasło z „Ustaw hasło”.
+ */
+function LoginForm({ onLogin, onRegister, onRedeem }: Pick<Props, "onLogin" | "onRegister" | "onRedeem">) {
   const [nick, setNick] = useState("");
   const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState<"login" | "register" | null>(null);
+  const [code, setCode] = useState("");
+  const [withCode, setWithCode] = useState(false);
+  const [busy, setBusy] = useState<"login" | "register" | "redeem" | null>(null);
   const [error, setError] = useState("");
-  const send = (kind: "login" | "register") => {
-    if (busy !== null || nick.trim() === "" || password === "") return;
+  const send = (kind: "login" | "register" | "redeem") => {
+    if (busy !== null || nick.trim() === "" || password === "" || (kind === "redeem" && code.trim() === "")) return;
     setBusy(kind);
     setError("");
-    void (kind === "login" ? onLogin : onRegister)(nick.trim(), password).then((err) => {
+    const n = nick.trim();
+    const call =
+      kind === "redeem" ? onRedeem(n, code.trim(), password) : (kind === "login" ? onLogin : onRegister)(n, password);
+    void call.then((err) => {
       setBusy(null);
       if (err !== null) setError(err);
     });
@@ -57,33 +66,64 @@ function LoginForm({ onLogin, onRegister }: Pick<Props, "onLogin" | "onRegister"
       className="d2-login"
       onSubmit={(e) => {
         e.preventDefault();
-        send("login");
+        send(withCode ? "redeem" : "login");
       }}
     >
       <h2 className="hill-section-title">{T.loginTitle}</h2>
-      <p className="note">{T.loginHint}</p>
+      <p className="note">{withCode ? T.codeHint : T.loginHint}</p>
       <label>
         {T.nick}
         <input value={nick} onChange={(e) => setNick(e.target.value)} autoComplete="username" maxLength={20} />
       </label>
+      {withCode && (
+        <label>
+          {T.code}
+          <input
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="XXXX-XXXX"
+            autoComplete="off"
+            maxLength={12}
+          />
+        </label>
+      )}
       <label>
-        {T.password}
+        {withCode ? T.newPassword : T.password}
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
+          autoComplete={withCode ? "new-password" : "current-password"}
           maxLength={200}
         />
       </label>
       <div className="d2-login-buttons">
-        <button type="submit" className="pixel-button" disabled={busy !== null}>
-          {busy === "login" ? T.loggingIn : T.login}
-        </button>
-        <button type="button" className="pixel-button" disabled={busy !== null} onClick={() => send("register")}>
-          {busy === "register" ? T.registering : T.register}
-        </button>
+        {withCode ? (
+          <button type="submit" className="pixel-button" disabled={busy !== null}>
+            {busy === "redeem" ? T.settingPassword : T.setPassword}
+          </button>
+        ) : (
+          <>
+            <button type="submit" className="pixel-button" disabled={busy !== null}>
+              {busy === "login" ? T.loggingIn : T.login}
+            </button>
+            <button type="button" className="pixel-button" disabled={busy !== null} onClick={() => send("register")}>
+              {busy === "register" ? T.registering : T.register}
+            </button>
+          </>
+        )}
       </div>
+      <button
+        type="button"
+        className="d2-link"
+        disabled={busy !== null}
+        onClick={() => {
+          setWithCode(!withCode);
+          setError("");
+        }}
+      >
+        {withCode ? T.codeBack : T.haveCode}
+      </button>
       {error && (
         <p className="note d2-warn" role="alert">
           {error}
@@ -184,8 +224,9 @@ function AccountPart({
   account,
   onLogin,
   onRegister,
+  onRedeem,
   onLogout,
-}: Pick<Props, "account" | "onLogin" | "onRegister" | "onLogout"> & { day: DayState }) {
+}: Pick<Props, "account" | "onLogin" | "onRegister" | "onRedeem" | "onLogout"> & { day: DayState }) {
   if (day.gosc === undefined) {
     return day.konto?.verified === true && account ? <VerifiedOnce id={account.id} /> : null;
   }
@@ -204,7 +245,7 @@ function AccountPart({
           </button>
         </p>
       ) : (
-        <LoginForm onLogin={onLogin} onRegister={onRegister} />
+        <LoginForm onLogin={onLogin} onRegister={onRegister} onRedeem={onRedeem} />
       )}
       {!unverified && <p className="note">{T.guestNote}</p>}
     </>

@@ -22,6 +22,7 @@ import {
   type RunSwitch,
 } from "./jump-runs";
 import { createJumpSounds } from "./jump-sounds";
+import { pageHintsUpdater } from "./page-hints";
 import type { TiltReading } from "./use-steering";
 
 interface JumpLoopOptions extends RunContext {
@@ -56,9 +57,9 @@ const lookOf = (runs: Pick<RunSwitch, "jumperName" | "scenery">, live: LiveProps
 });
 
 /** Draws a frame of the jump into the picture, as the player has the screen set up. */
-function drawFrame(picture: JumpPicture, hill: HillChoice, live: LiveProps, v: FrameView): void {
+function drawFrame(picture: JumpPicture, hill: HillChoice, live: LiveProps, v: FrameView): readonly string[] {
   const best = live.record;
-  drawJumpView(picture.fb, {
+  return drawJumpView(picture.fb, {
     profile: hill.profile,
     kPointM: hill.kPointM,
     look: hill.look,
@@ -125,6 +126,7 @@ export function useJumpLoop(options: JumpLoopOptions) {
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const diagnosticsRef = useRef<HTMLPreElement>(null);
+  const hintsRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<JumpLoopControls>(NO_CONTROLS);
   /** For the screen: always the same object, acting on the loop that runs at the time. */
   const [controls] = useState<JumpLoopControls>(() => ({
@@ -158,6 +160,8 @@ export function useJumpLoop(options: JumpLoopOptions) {
           overlay.dataset["stats"] = JSON.stringify(stats);
         })
       : null;
+    const hintsBox = hintsRef.current;
+    const showHints = hintsBox ? pageHintsUpdater(hintsBox, canvas) : null;
     const sounds = createJumpSounds(() => o().soundRef.current);
     const lock = watchPointerLock(canvas, input, () => o().openMenu());
     const runs = createRunSwitch(hill, o, sounds, lock.release);
@@ -221,8 +225,9 @@ export function useJumpLoop(options: JumpLoopOptions) {
       sounds.play(jump.state, clock, newRecord, paused || document.hidden);
       meter?.drawBegin();
       const v = { jump, newRecord, previousRecordM, ghost, over, clock, title, replay: view, ...lookOf(runs, live) };
-      drawFrame(picture, hill, live, v);
+      const pageLines = drawFrame(picture, hill, live, v);
       ctx.putImageData(picture.image, 0, 0);
+      showHints?.(pageLines);
       meter?.frameEnd(now, plan, paused);
       if (!firstFrameMarked) {
         firstFrameMarked = true;
@@ -243,5 +248,5 @@ export function useJumpLoop(options: JumpLoopOptions) {
     };
   }, [hill]);
 
-  return { stageRef, canvasRef, diagnosticsRef, controls };
+  return { stageRef, canvasRef, diagnosticsRef, hintsRef, controls };
 }

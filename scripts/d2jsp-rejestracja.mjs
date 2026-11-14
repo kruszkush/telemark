@@ -37,14 +37,23 @@ const errors = [];
 async function run(name, viewport, mobile) {
   const ctx = await browser.newContext({ viewport, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
   await ctx.addInitScript((h) => localStorage.setItem("lotnik.haslo", h), HASLO);
+  // Strona odmawia przejęcia myszki (spis sposobów S3, jak d2jsp-podpowiedzi-zrzuty.mjs): inaczej kursor Mateusza
+  // zostaje zamknięty w rogu ekranu.
+  await ctx.addInitScript(() => {
+    Element.prototype.requestPointerLock = () =>
+      Promise.reject(new DOMException("The mouse is not captured in local tests", "NotSupportedError"));
+  });
   // Temat forum z „Zweryfikuj” otwiera się w nowej karcie; tu wystarczy wiedzieć, że się otworzył.
   const opened = [];
   const page = await ctx.newPage();
   ctx.on("page", (p) => {
-    void p.waitForURL(/./, { timeout: 5000 }).catch(() => {}).then(() => {
-      opened.push(p.url());
-      return p.close();
-    });
+    void p
+      .waitForURL(/./, { timeout: 5000 })
+      .catch(() => {})
+      .then(() => {
+        opened.push(p.url());
+        return p.close();
+      });
   });
   page.on("pageerror", (e) => errors.push(name + ": " + String(e)));
   await page.goto("http://localhost:8801/");
@@ -66,7 +75,13 @@ await m.page.getByRole("button", { name: "Zweryfikuj" }).click();
 await m.page.getByText("Weryfikacja w toku").waitFor({ timeout: 5000 });
 await m.page.waitForTimeout(500);
 console.log("otwarte karty:", m.opened);
-console.log("komunikat:", await m.page.locator(".d2-verify [role=status]").textContent().catch(() => "brak"));
+console.log(
+  "komunikat:",
+  await m.page
+    .locator(".d2-verify [role=status]")
+    .textContent()
+    .catch(() => "brak"),
+);
 await m.page.screenshot({ path: join(OUT, "mysz-3-w-toku.png"), fullPage: true });
 await m.page.reload();
 await m.page.getByText("Weryfikacja w toku").waitFor({ timeout: 20000 });
@@ -87,6 +102,50 @@ await m.page.reload();
 await m.page.getByRole("heading", { name: "Skocznie dnia" }).waitFor();
 await m.page.waitForTimeout(3000);
 console.log("potwierdzenie po 2. odświeżeniu:", await m.page.getByText("Konto zweryfikowane").count());
+
+// Kod od admina (jak scripts/lotnik-admin.mjs code): wylogowanie, „Mam kod od admina”, nowe hasło, potem logowanie nim.
+const c = await fetch(API + "/admin", {
+  method: "POST",
+  headers: { "Content-Type": "application/json", Origin: "http://localhost:8801", "X-Lotnik-Haslo": HASLO },
+  body: JSON.stringify({ secret: adminSecret(SECRET), action: "code", nick: id }),
+});
+const kodAdmina = (await c.json()).kod;
+console.log("kod od admina:", c.status, kodAdmina ? "jest" : "brak");
+const nowe = "Nw" + crypto.randomBytes(8).toString("hex");
+appendFileSync(
+  LOG,
+  JSON.stringify({ nick, password: nowe, kiedy: new Date().toISOString(), po: "kod od admina" }) + "\n",
+);
+await m.page.getByRole("button", { name: "Wyloguj" }).click();
+await m.page.getByRole("button", { name: "Mam kod od admina" }).click();
+await m.page.getByLabel("Nick").fill(nick);
+await m.page.getByLabel("Kod od admina").fill(kodAdmina);
+await m.page.getByLabel("Nowe hasło").fill(nowe);
+await m.page.screenshot({ path: join(OUT, "mysz-5-kod-od-admina.png"), fullPage: true });
+await m.page.getByRole("button", { name: "Ustaw hasło" }).click();
+await m.page.getByText(`Skaczesz jako ${nick}.`).waitFor({ timeout: 20000 });
+await m.page.screenshot({ path: join(OUT, "mysz-6-po-kodzie.png"), fullPage: true });
+console.log("po kodzie zalogowany:", nick);
+// Stare hasło już nie działa, nowe tak (to samo konto Lotnika).
+const sprawdz = async (haslo) =>
+  (
+    await fetch(API + "/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "http://localhost:8801", "X-Lotnik-Haslo": HASLO },
+      body: JSON.stringify({ nick, password: haslo }),
+    })
+  ).status;
+console.log("logowanie starym hasłem:", await sprawdz(password), "nowym:", await sprawdz(nowe));
+// Zły kod: komunikat w formularzu.
+await m.page.getByRole("button", { name: "Wyloguj" }).click();
+await m.page.getByRole("button", { name: "Mam kod od admina" }).click();
+await m.page.getByLabel("Nick").fill(nick);
+await m.page.getByLabel("Kod od admina").fill("AAAA-AAAA");
+await m.page.getByLabel("Nowe hasło").fill(nowe);
+await m.page.getByRole("button", { name: "Ustaw hasło" }).click();
+await m.page.getByRole("alert").waitFor({ timeout: 20000 });
+console.log("zły kod, komunikat:", await m.page.getByRole("alert").textContent());
+await m.page.screenshot({ path: join(OUT, "mysz-7-zly-kod.png"), fullPage: true });
 await m.ctx.close();
 
 // Telefon: sam formularz (bez nowego konta).
