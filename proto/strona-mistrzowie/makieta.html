@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mistrzowie Telemarka</title>
+<style>
+/* Kolory i karty jak na stronie licznika (d2jsp-licznik/docs/test/index.html), ciemny wygląd. */
+:root{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#9a9892;--line:#33322f;--acc:#e0764f;--bar:#a9573a;
+ --gold:#e6b93a;--year:#5fd0e6;--month:#b98cff}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.note{max-width:1180px;margin:0 auto;padding:16px 16px 0;color:var(--mute);font-size:14px}
+.note b{color:var(--ink)}
+.variant{max-width:1180px;margin:0 auto;padding:16px}
+.variant>h1{font-size:22px;margin:24px 0 12px;color:var(--acc)}
+.page{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;border:1px dashed #444;border-radius:12px;padding:20px}
+h2{font-size:24px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px;font-size:13px}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:999px}
+button.on,.play{background:var(--acc);border-color:var(--acc);color:#fff}
+.range{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.tile b{display:block;font-size:22px}.tile span{color:var(--mute);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h3{margin:0;font-size:15px}
+.tm-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tm-head .rules{color:var(--mute);font-size:12px;flex:1 1 260px}
+.champs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.ch{border-radius:10px;padding:10px 12px;border:1px solid var(--line);background:linear-gradient(160deg,var(--tint) 0%,transparent 70%)}
+.ch.y{--c:var(--year);--tint:rgba(95,208,230,.14)}.ch.m{--c:var(--month);--tint:rgba(185,140,255,.16)}.ch.w{--c:var(--gold);--tint:rgba(230,185,58,.16)}
+.ch .lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);font-weight:700}
+.ch .per{font-size:11px;color:var(--mute)}
+.ch .who{display:flex;align-items:center;gap:8px;margin:6px 0 2px;font-weight:700;font-size:17px}
+.ch .pts{font-size:12px;color:var(--mute)}
+.ch .none{font-style:italic;color:var(--mute);font-size:15px;margin:6px 0 2px}
+.ch ol{margin:6px 0 0;padding:6px 0 0;border-top:1px solid var(--line);list-style:none;font-size:12px}
+.ch li{display:flex;justify-content:space-between;color:var(--mute)}
+.ch li b{color:var(--ink);font-weight:500}
+.av{width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:12px;background:#3a3a36;color:#ddd;border:2px solid var(--c);flex:none}
+.cup{width:22px;height:22px;flex:none}
+.lead{font-size:11px;color:var(--mute);margin-top:4px}
+.lead b{color:var(--ink);font-weight:500}
+/* Wersja B: jeden pasek z trzema mistrzami */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);margin-top:10px;border-top:1px solid var(--line)}
+.strip .ch{border:0;border-radius:0;background:none;padding:8px 10px}
+.strip .ch+.ch{border-left:1px solid var(--line)}
+.strip .who{font-size:15px;margin:2px 0 0}
+.gone{border:1px dashed #6b3a2a;border-radius:12px;padding:10px 14px;color:#c9876b;font-size:13px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:5px 4px;border-bottom:1px solid var(--line)}th.n{text-align:right}th{color:var(--mute);font-weight:500;font-size:12px}
+td.n{text-align:right}
+.side .card{min-height:90px;color:var(--mute);font-size:12px}
+.side .big{height:200px;border-radius:12px;margin-bottom:14px;display:grid;place-items:center;font-size:12px;color:var(--mute)}
+@media (max-width:900px){.page{grid-template-columns:1fr}.champs,.strip{grid-template-columns:1fr}.strip .ch+.ch{border-left:0;border-top:1px solid var(--line)}.tiles{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<p class="note"><b>Makieta strony licznika z mistrzami Telemarka.</b> Dane są przykładowe. Lewa kolumna to góra strony od wejścia; prawa kolumna (duże karty mistrzów postów, wyścigi, historia) zostaje bez zmian, tu tylko zarysowana. W obu wersjach wykres „Posty co godzinę” znika, więc ranking postów wchodzi wyżej.</p>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="cup" viewBox="0 0 24 24"><path fill="currentColor" d="M6 3h12v3h3v2a5 5 0 0 1-4.6 5A6 6 0 0 1 13 16.9V19h3v2H8v-2h3v-2.1A6 6 0 0 1 7.6 13 5 5 0 0 1 3 8V6h3V3Zm0 5H5a3 3 0 0 0 1.4 2.5A6 6 0 0 1 6 9V8Zm12 0v1a6 6 0 0 1-.4 1.5A3 3 0 0 0 19 8h-1Z"/></symbol>
+</defs></svg>
+
+<!-- ===================== WERSJA A ===================== -->
+<section class="variant">
+<h1>A. Trzy karty mistrzów w karcie Telemarka (z czołówką)</h1>
+<div class="page">
+ <div>
+  <h2>Licznik postów — d2jsp Polska</h2>
+  <p class="sub">Sekcja f=230 · dane od 21.09.2026 · aktualizacja 14.11.2026, 14:15</p>
+  <div class="range"><button class="on">24 h</button><button>7 dni</button><button>30 dni</button><button>1 rok</button><button>Całość</button></div>
+  <div class="tiles"><div class="tile"><b>479</b><span>postów</span></div><div class="tile"><b>18</b><span>piszących</span></div><div class="tile"><b>46</b><span>tematów</span></div><div class="tile"><b>479</b><span>postów dziennie</span></div></div>
+
+  <div class="card">
+   <div class="tm-head"><h3>Telemark: Skocznie dnia</h3><button class="play">Telemark</button>
+    <span class="rules">3 nowe skocznie dziennie, 10 skoków na każdej, ten sam wiatr dla wszystkich.</span></div>
+   <div class="champs">
+    <div class="ch y"><div class="lab">Mistrz roku 2026</div><div class="per">przyznanie 31.12</div>
+     <div class="none">jeszcze nieznany</div>
+     <ol><li><b>1. Kryste_Panie</b>9 412,0</li><li><b>2. BrakNicku</b>8 970,5</li><li><b>3. ripsi</b>6 115,5</li></ol></div>
+    <div class="ch m"><div class="lab">Mistrz miesiąca</div><div class="per">Październik 2026</div>
+     <div class="who"><span class="av">P</span>Pozdrawiam</div><div class="pts">7 830,5 pkt · 20 najlepszych dni</div>
+     <ol><li><b>2. Kryste_Panie</b>7 611,0</li><li><b>3. BrakNicku</b>6 902,5</li></ol></div>
+    <div class="ch w"><div class="lab">Mistrz tygodnia</div><div class="per">Listopad · tydzień 2</div>
+     <div class="who"><span class="av">K</span>Kryste_Panie</div><div class="pts">2 034,5 pkt · 5 najlepszych dni</div>
+     <ol><li><b>2. BrakNicku</b>1 987,0</li><li><b>3. fafniro</b>1 540,5</li></ol></div>
+   </div>
+   <p class="lead">Teraz prowadzi: tydzień <b>BrakNicku</b> 1 204,5 · miesiąc <b>Kryste_Panie</b> 4 377,0 · ▶ przy nicku odtwarza najlepszy skok</p>
+  </div>
+
+  <div class="gone">Tu był wykres „Posty co godzinę” (usunięty albo wyłączony).</div>
+
+  <div class="card"><h3>Ranking</h3>
+   <table><tr><th>#</th><th>Użytkownik</th><th class="n">Posty</th><th class="n">Tematy</th></tr>
+   <tr><td>1</td><td>BrakNicku</td><td class="n">160</td><td class="n">43</td></tr>
+   <tr><td>2</td><td>Kryste_Panie</td><td class="n">133</td><td class="n">28</td></tr>
+   <tr><td>3</td><td>ripsi</td><td class="n">62</td><td class="n">24</td></tr>
+   <tr><td>4</td><td>kondes</td><td class="n">25</td><td class="n">8</td></tr></table></div>
+ </div>
+ <div class="side">
+  <div class="big" style="background:linear-gradient(160deg,#1f4a55,#1e1e1c)">Mistrz roku (posty)</div>
+  <div class="big" style="background:linear-gradient(160deg,#3d2a5c,#1e1e1c)">Mistrz miesiąca (posty)</div>
+  <div class="card">Wyścig · Listopad</div>
+  <div class="big" style="background:linear-gradient(160deg,#4d3d15,#1e1e1c)">Mistrz tygodnia (posty)</div>
+ </div>
+</div>
+</section>
+
+<!-- ===================== WERSJA B ===================== -->
+<section class="variant">
+<h1>B. Jeden niski pasek z trzema mistrzami (najmniej miejsca)</h1>
+<div class="page">
+ <div>
+  <h2>Licznik postów — d2jsp Polska</h2>
+  <p class="sub">Sekcja f=230 · dane od 21.09.2026 · aktualizacja 14.11.2026, 14:15</p>
+  <div class="range"><button class="on">24 h</button><button>7 dni</button><button>30 dni</button><button>1 rok</button><button>Całość</button></div>
+  <div class="tiles"><div class="tile"><b>479</b><span>postów</span></div><div class="tile"><b>18</b><span>piszących</span></div><div class="tile"><b>46</b><span>tematów</span></div><div class="tile"><b>479</b><span>postów dziennie</span></div></div>
+
+  <div class="card">
+   <div class="tm-head"><h3>Telemark: Skocznie dnia</h3><button class="play">Telemark</button>
+    <span class="rules">3 nowe skocznie dziennie, ten sam wiatr dla wszystkich.</span></div>
+   <div class="strip">
+    <div class="ch y"><div class="lab"><svg class="cup" style="color:var(--year);width:14px;height:14px;vertical-align:-2px"><use href="#cup"/></svg> Mistrz roku 2026</div>
+     <div class="who" style="font-style:italic;color:var(--mute);font-weight:400">jeszcze nieznany</div><div class="pts">prowadzi Kryste_Panie</div></div>
+    <div class="ch m"><div class="lab"><svg class="cup" style="color:var(--month);width:14px;height:14px;vertical-align:-2px"><use href="#cup"/></svg> Mistrz miesiąca</div>
+     <div class="who"><span class="av">P</span>Pozdrawiam</div><div class="pts">Październik · 7 830,5 pkt</div></div>
+    <div class="ch w"><div class="lab"><svg class="cup" style="color:var(--gold);width:14px;height:14px;vertical-align:-2px"><use href="#cup"/></svg> Mistrz tygodnia</div>
+     <div class="who"><span class="av">K</span>Kryste_Panie</div><div class="pts">Listopad, tydz. 2 · 2 034,5 pkt</div></div>
+   </div>
+  </div>
+
+  <div class="gone">Tu był wykres „Posty co godzinę” (usunięty albo wyłączony).</div>
+
+  <div class="card"><h3>Ranking</h3>
+   <table><tr><th>#</th><th>Użytkownik</th><th class="n">Posty</th><th class="n">Tematy</th></tr>
+   <tr><td>1</td><td>BrakNicku</td><td class="n">160</td><td class="n">43</td></tr>
+   <tr><td>2</td><td>Kryste_Panie</td><td class="n">133</td><td class="n">28</td></tr>
+   <tr><td>3</td><td>ripsi</td><td class="n">62</td><td class="n">24</td></tr>
+   <tr><td>4</td><td>kondes</td><td class="n">25</td><td class="n">8</td></tr></table></div>
+ </div>
+ <div class="side">
+  <div class="big" style="background:linear-gradient(160deg,#1f4a55,#1e1e1c)">Mistrz roku (posty)</div>
+  <div class="big" style="background:linear-gradient(160deg,#3d2a5c,#1e1e1c)">Mistrz miesiąca (posty)</div>
+  <div class="card">Wyścig · Listopad</div>
+  <div class="big" style="background:linear-gradient(160deg,#4d3d15,#1e1e1c)">Mistrz tygodnia (posty)</div>
+ </div>
+</div>
+</section>
+</body>
+</html>
