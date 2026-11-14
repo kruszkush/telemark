@@ -243,3 +243,43 @@ describe("the own hills' jump view tests", () => {
     expect(files.toSorted()).toEqual(expected.toSorted());
   });
 });
+
+describe("prompts told before the start (the d2jsp page)", () => {
+  it(
+    "tell every hint on the gate and none from the start until the notes are up",
+    () => {
+      const hill = OWN_HILLS[0];
+      if (!hill) throw new Error("no hill");
+      let jump = startTrainingJump(hill, 12345);
+      const bot = makeBot(
+        hill.profile,
+        { startFrame: 70, takeoffLeadM: 3, landingHeightM: 2.5, leanPattern: () => 0 },
+        () => jump.state,
+      );
+      const model = { profile: hill.profile, kPointM: hill.kPointM, hillName: hill.name, playerName: "GRACZ 1" };
+      const onGate = new Set<string>();
+      const afterStart = new Set<string>();
+      for (let f = 0; f < 3000 && !isJumpOver(jump); f++) {
+        jump = stepTrainingJump(jump, bot(jump.state.logic.frame + 1));
+        const frame = presentationFrame(jump);
+        const notesShown = notesShownBy(jump.state.logic, frame);
+        if (notesShown) break;
+        const m = {
+          ...model,
+          state: jump.state,
+          controls: "mouse" as const,
+          frame,
+          over: false,
+          hintsBeforeStart: true,
+        };
+        const lines = prompt(m, false).join(" / ");
+        (jump.state.logic.phase === PHASE.gate ? onGate : afterStart).add(lines);
+      }
+      expect([...onGate]).toEqual([
+        "LEWY PRZYCISK: START / OBA PRZYCISKI NA PROGU / MYSZ: POCHYLENIE / PRZYCISK TUŻ NAD ZIEMIĄ: TELEMARK / SZYBKO DRUGI PRZYCISK: WĄSKI TELEMARK / OBA NARAZ: NA DWIE NOGI",
+      ]);
+      expect([...afterStart]).toEqual([""]);
+    },
+    WHOLE_JUMP_TIMEOUT_MS,
+  );
+});

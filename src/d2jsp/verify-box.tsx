@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import { VERIFY_URL, setVerifyState, verifyState, type Konto } from "./api";
 
@@ -34,11 +34,11 @@ function copyText(text: string): boolean {
  * z podpowiedzią. Stan kliknięcia jest wspólny z Lotnikiem (ten sam klucz w pamięci przeglądarki).
  */
 export function VerifyBox({ konto }: { konto: Konto & { kod: string } }) {
-  const [state, setState] = useState(() => {
-    const v = verifyState(konto.id);
-    if (v.seen !== true) setVerifyState(konto.id, { seen: true, at: 0 });
-    return v;
-  });
+  const [state, setState] = useState(() => verifyState(konto.id));
+  // „Widziane niezweryfikowane”: po weryfikacji to urządzenie raz pokaże potwierdzenie.
+  useEffect(() => {
+    if (verifyState(konto.id).seen !== true) setVerifyState(konto.id, { seen: true, at: 0 });
+  }, [konto.id]);
   const [message, setMessage] = useState("");
   // Chwila pokazania ramki: podpowiedź po 6 godzinach zmienia się przy następnym wejściu na stronę.
   const [shownAt] = useState(() => Date.now());
@@ -105,10 +105,12 @@ export function VerifyBox({ konto }: { konto: Konto & { kod: string } }) {
 export function VerifiedOnce({ id }: { id: string }) {
   const [show] = useState(() => {
     const v = verifyState(id);
-    if (v.seen !== true || v.ok === true) return false;
-    setVerifyState(id, { ...v, ok: true });
-    return true;
+    return v.seen === true && v.ok !== true;
   });
+  // Zapis po pokazaniu, nie w trakcie liczenia widoku (StrictMode liczy go dwa razy).
+  useEffect(() => {
+    if (show) setVerifyState(id, { ...verifyState(id), ok: true });
+  }, [id, show]);
   if (!show) return null;
   return (
     <section className="d2-verify d2-verify-ok" role="status">

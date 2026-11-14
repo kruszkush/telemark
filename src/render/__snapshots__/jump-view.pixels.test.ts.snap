@@ -3,42 +3,42 @@
 exports[`jump view pixels > jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 256 px, mouse": "ba794475",
-    "day, clear, 356 px, touch": "ed498985",
-    "day, clear, 480 px, tilt": "111ab0f0",
-    "day, clear, fog, 256 px, touch": "d75a282d",
-    "day, clear, fog, 356 px, tilt": "a3c5a4ac",
-    "day, clear, fog, 480 px, mouse": "12c291de",
-    "day, snow, 256 px, tilt": "cbf8f26b",
-    "day, snow, 356 px, mouse": "8bd97e83",
-    "day, snow, 480 px, touch": "8b5302d8",
-    "day, snow, fog, 256 px, mouse": "2590c603",
-    "day, snow, fog, 356 px, touch": "3b9ac10c",
-    "day, snow, fog, 480 px, tilt": "2f597554",
-    "dusk, clear, 256 px, touch": "44cf582c",
-    "dusk, clear, 356 px, tilt": "b89fa9e5",
-    "dusk, clear, 480 px, mouse": "ea01960d",
-    "dusk, clear, fog, 256 px, tilt": "132a12b6",
-    "dusk, clear, fog, 356 px, mouse": "2578b453",
-    "dusk, clear, fog, 480 px, touch": "42cb1a13",
-    "dusk, snow, 256 px, mouse": "ef047453",
-    "dusk, snow, 356 px, touch": "8246b563",
-    "dusk, snow, 480 px, tilt": "201dd4ee",
-    "dusk, snow, fog, 256 px, touch": "8ae5a50e",
-    "dusk, snow, fog, 356 px, tilt": "4c865edc",
-    "dusk, snow, fog, 480 px, mouse": "fc024142",
-    "night, clear, 256 px, tilt": "5f4ae1b4",
-    "night, clear, 356 px, mouse": "de542901",
-    "night, clear, 480 px, touch": "a740a8cb",
-    "night, clear, fog, 256 px, mouse": "ab07c13d",
-    "night, clear, fog, 356 px, touch": "9eebdcc7",
-    "night, clear, fog, 480 px, tilt": "e6a39bd7",
-    "night, snow, 256 px, touch": "80527340",
-    "night, snow, 356 px, tilt": "a111434f",
-    "night, snow, 480 px, mouse": "2da854c9",
-    "night, snow, fog, 256 px, tilt": "69ff08f",
-    "night, snow, fog, 356 px, mouse": "bcc78cc5",
-    "night, snow, fog, 480 px, touch": "5f4df2fb",
+    "day, clear, 256 px, mouse": "917f1dd",
+    "day, clear, 356 px, touch": "d7d00241",
+    "day, clear, 480 px, tilt": "72a6f9b4",
+    "day, clear, fog, 256 px, touch": "6f23999d",
+    "day, clear, fog, 356 px, tilt": "46de3528",
+    "day, clear, fog, 480 px, mouse": "a2c104a",
+    "day, snow, 256 px, tilt": "d5f8b10f",
+    "day, snow, 356 px, mouse": "cdec10b",
+    "day, snow, 480 px, touch": "6b97d60c",
+    "day, snow, fog, 256 px, mouse": "56d2e3f7",
+    "day, snow, fog, 356 px, touch": "42ffc3f8",
+    "day, snow, fog, 480 px, tilt": "6b7dda4c",
+    "dusk, clear, 256 px, touch": "14ee3920",
+    "dusk, clear, 356 px, tilt": "3bf07671",
+    "dusk, clear, 480 px, mouse": "69d708fd",
+    "dusk, clear, fog, 256 px, tilt": "a8640a2a",
+    "dusk, clear, fog, 356 px, mouse": "8ba998af",
+    "dusk, clear, fog, 480 px, touch": "b1d3c463",
+    "dusk, snow, 256 px, mouse": "f3f9afa3",
+    "dusk, snow, 356 px, touch": "b3a360eb",
+    "dusk, snow, 480 px, tilt": "1451e96",
+    "dusk, snow, fog, 256 px, touch": "adc3d82a",
+    "dusk, snow, fog, 356 px, tilt": "421ce3e4",
+    "dusk, snow, fog, 480 px, mouse": "f2bb68ce",
+    "night, clear, 256 px, tilt": "cafbb830",
+    "night, clear, 356 px, mouse": "db2ac191",
+    "night, clear, 480 px, touch": "976b202f",
+    "night, clear, fog, 256 px, mouse": "8503a561",
+    "night, clear, fog, 356 px, touch": "8ae9f837",
+    "night, clear, fog, 480 px, tilt": "f2d42c1f",
+    "night, snow, 256 px, touch": "d964e7d0",
+    "night, snow, 356 px, tilt": "d0395ed7",
+    "night, snow, 480 px, mouse": "d1bdbedd",
+    "night, snow, fog, 256 px, tilt": "7e798073",
+    "night, snow, fog, 356 px, mouse": "2f8e48e1",
+    "night, snow, fog, 480 px, touch": "6e318db7",
   },
   "distance shown, notes appearing": {
     "day, clear, 256 px, mouse": "7accdf17",
@@ -79,80 +79,80 @@ exports[`jump view pixels > jump with a telemark landing 1`] = `
     "night, snow, fog, 480 px, touch": "8273f2d7",
   },
   "flight": {
-    "day, clear, 256 px, mouse": "f2c1c990",
-    "day, clear, 356 px, touch": "de60f35f",
-    "day, clear, 480 px, tilt": "2c5f390a",
-    "day, clear, fog, 256 px, touch": "56993ed9",
-    "day, clear, fog, 356 px, tilt": "94aa80f8",
-    "day, clear, fog, 480 px, mouse": "ecd0faec",
-    "day, snow, 256 px, tilt": "4d6b6ed0",
-    "day, snow, 356 px, mouse": "707dffe4",
-    "day, snow, 480 px, touch": "67627531",
-    "day, snow, fog, 256 px, mouse": "f2f3adb0",
-    "day, snow, fog, 356 px, touch": "26cc7daf",
-    "day, snow, fog, 480 px, tilt": "4ba30293",
-    "dusk, clear, 256 px, touch": "8b421f09",
-    "dusk, clear, 356 px, tilt": "e835fe66",
-    "dusk, clear, 480 px, mouse": "c8594565",
-    "dusk, clear, fog, 256 px, tilt": "2a4474cb",
-    "dusk, clear, fog, 356 px, mouse": "7b15e17a",
-    "dusk, clear, fog, 480 px, touch": "e8d8ae2b",
-    "dusk, snow, 256 px, mouse": "f0777a7f",
-    "dusk, snow, 356 px, touch": "8ca57ce7",
-    "dusk, snow, 480 px, tilt": "7dc6972b",
-    "dusk, snow, fog, 256 px, touch": "7188ae42",
-    "dusk, snow, fog, 356 px, tilt": "99a8ec1",
-    "dusk, snow, fog, 480 px, mouse": "4ec7b6cf",
-    "night, clear, 256 px, tilt": "2dd80041",
-    "night, clear, 356 px, mouse": "f0f48ba5",
-    "night, clear, 480 px, touch": "8d5ae140",
-    "night, clear, fog, 256 px, mouse": "2bc9e4bf",
-    "night, clear, fog, 356 px, touch": "2332de8a",
-    "night, clear, fog, 480 px, tilt": "f4e6fd68",
-    "night, snow, 256 px, touch": "95b4f345",
-    "night, snow, 356 px, tilt": "a2f851e4",
-    "night, snow, 480 px, mouse": "74af2b14",
-    "night, snow, fog, 256 px, tilt": "90e5e38d",
-    "night, snow, fog, 356 px, mouse": "790f523a",
-    "night, snow, fog, 480 px, touch": "dd09b959",
+    "day, clear, 256 px, mouse": "aac388a4",
+    "day, clear, 356 px, touch": "aa8f9a63",
+    "day, clear, 480 px, tilt": "dce8e1e",
+    "day, clear, fog, 256 px, touch": "121eed15",
+    "day, clear, fog, 356 px, tilt": "ee8c9e44",
+    "day, clear, fog, 480 px, mouse": "d5989168",
+    "day, snow, 256 px, tilt": "2a318b78",
+    "day, snow, 356 px, mouse": "2020d814",
+    "day, snow, 480 px, touch": "ee60fab9",
+    "day, snow, fog, 256 px, mouse": "d0519754",
+    "day, snow, fog, 356 px, touch": "a8935967",
+    "day, snow, fog, 480 px, tilt": "1c67a71b",
+    "dusk, clear, 256 px, touch": "d28145ed",
+    "dusk, clear, 356 px, tilt": "5032b920",
+    "dusk, clear, 480 px, mouse": "82dece39",
+    "dusk, clear, fog, 256 px, tilt": "d91dfe8f",
+    "dusk, clear, fog, 356 px, mouse": "e9e64896",
+    "dusk, clear, fog, 480 px, touch": "f6d89361",
+    "dusk, snow, 256 px, mouse": "164a6308",
+    "dusk, snow, 356 px, touch": "fd50a933",
+    "dusk, snow, 480 px, tilt": "bc11e8bd",
+    "dusk, snow, fog, 256 px, touch": "37a7c271",
+    "dusk, snow, fog, 356 px, tilt": "24242c58",
+    "dusk, snow, fog, 480 px, mouse": "b04b5d3b",
+    "night, clear, 256 px, tilt": "37326459",
+    "night, clear, 356 px, mouse": "55916cf1",
+    "night, clear, 480 px, touch": "fefed920",
+    "night, clear, fog, 256 px, mouse": "84c960ab",
+    "night, clear, fog, 356 px, touch": "54ea552a",
+    "night, clear, fog, 480 px, tilt": "cfbf4434",
+    "night, snow, 256 px, touch": "891216f1",
+    "night, snow, 356 px, tilt": "e4d999d4",
+    "night, snow, 480 px, mouse": "d129058c",
+    "night, snow, fog, 256 px, tilt": "2306a78d",
+    "night, snow, fog, 356 px, mouse": "ffad5c96",
+    "night, snow, fog, 480 px, touch": "c5daa1a9",
   },
   "inrun": {
-    "day, clear, 256 px, mouse": "c2b697ba",
-    "day, clear, 356 px, touch": "5dc0524a",
-    "day, clear, 480 px, tilt": "5d9aeba4",
-    "day, clear, fog, 256 px, touch": "9340777",
-    "day, clear, fog, 356 px, tilt": "b82faf79",
-    "day, clear, fog, 480 px, mouse": "e310b140",
-    "day, snow, 256 px, tilt": "557d0286",
-    "day, snow, 356 px, mouse": "b2da282c",
-    "day, snow, 480 px, touch": "c175f61a",
-    "day, snow, fog, 256 px, mouse": "914d4800",
-    "day, snow, fog, 356 px, touch": "fbc54256",
-    "day, snow, fog, 480 px, tilt": "3816f569",
-    "dusk, clear, 256 px, touch": "295b52f5",
-    "dusk, clear, 356 px, tilt": "44e34924",
-    "dusk, clear, 480 px, mouse": "57808f22",
-    "dusk, clear, fog, 256 px, tilt": "94184833",
-    "dusk, clear, fog, 356 px, mouse": "6dc1ab9d",
-    "dusk, clear, fog, 480 px, touch": "ccdbcfbd",
-    "dusk, snow, 256 px, mouse": "15b7cd9e",
-    "dusk, snow, 356 px, touch": "39c2c543",
-    "dusk, snow, 480 px, tilt": "5baab6b7",
-    "dusk, snow, fog, 256 px, touch": "7f3df510",
-    "dusk, snow, fog, 356 px, tilt": "70019720",
-    "dusk, snow, fog, 480 px, mouse": "e60d15fe",
-    "night, clear, 256 px, tilt": "cfcee5ce",
-    "night, clear, 356 px, mouse": "ac181865",
-    "night, clear, 480 px, touch": "a16d5983",
-    "night, clear, fog, 256 px, mouse": "bc0b242e",
-    "night, clear, fog, 356 px, touch": "eef826e0",
-    "night, clear, fog, 480 px, tilt": "2150c36a",
-    "night, snow, 256 px, touch": "fa3662ac",
-    "night, snow, 356 px, tilt": "54e9508f",
-    "night, snow, 480 px, mouse": "f70d5eaa",
-    "night, snow, fog, 256 px, tilt": "703c462f",
-    "night, snow, fog, 356 px, mouse": "8ce86fd4",
-    "night, snow, fog, 480 px, touch": "c82a5b29",
+    "day, clear, 256 px, mouse": "d92e1206",
+    "day, clear, 356 px, touch": "14ff7cb2",
+    "day, clear, 480 px, tilt": "3d625318",
+    "day, clear, fog, 256 px, touch": "ab8e4b03",
+    "day, clear, fog, 356 px, tilt": "87878d95",
+    "day, clear, fog, 480 px, mouse": "216d330c",
+    "day, snow, 256 px, tilt": "ee3b64a2",
+    "day, snow, 356 px, mouse": "b4236484",
+    "day, snow, 480 px, touch": "e6db3e7e",
+    "day, snow, fog, 256 px, mouse": "67f19dac",
+    "day, snow, fog, 356 px, touch": "ceec5bd2",
+    "day, snow, fog, 480 px, tilt": "7ac6b329",
+    "dusk, clear, 256 px, touch": "ade36911",
+    "dusk, clear, 356 px, tilt": "6857a1bc",
+    "dusk, clear, 480 px, mouse": "e7146d5e",
+    "dusk, clear, fog, 256 px, tilt": "3cc740e3",
+    "dusk, clear, fog, 356 px, mouse": "17cf8b01",
+    "dusk, clear, fog, 480 px, touch": "63cba1ed",
+    "dusk, snow, 256 px, mouse": "85358086",
+    "dusk, snow, 356 px, touch": "c945b793",
+    "dusk, snow, 480 px, tilt": "df5b99b3",
+    "dusk, snow, fog, 256 px, touch": "63c718d4",
+    "dusk, snow, fog, 356 px, tilt": "80f035c8",
+    "dusk, snow, fog, 480 px, mouse": "afd3e97a",
+    "night, clear, 256 px, tilt": "ddb63c1e",
+    "night, clear, 356 px, mouse": "43dbbca4",
+    "night, clear, 480 px, touch": "b357f80c",
+    "night, clear, fog, 256 px, mouse": "f845c588",
+    "night, clear, fog, 356 px, touch": "66ebce9d",
+    "night, clear, fog, 480 px, tilt": "9bc8bd7d",
+    "night, snow, 256 px, touch": "6e96444b",
+    "night, snow, 356 px, tilt": "8c1c8800",
+    "night, snow, 480 px, mouse": "62430d2",
+    "night, snow, fog, 256 px, tilt": "ab86d58e",
+    "night, snow, fog, 356 px, mouse": "4b1e58b7",
+    "night, snow, fog, 480 px, touch": "34552f5d",
   },
   "landing": {
     "day, clear, 256 px, mouse": "167a0f51",
@@ -307,42 +307,42 @@ exports[`jump view pixels > jump with a telemark landing 1`] = `
     "night, snow, fog, 480 px, touch": "b934ed4d",
   },
   "start gate, half a second in": {
-    "day, clear, 256 px, mouse": "c8f04aa0",
-    "day, clear, 356 px, touch": "3b9281a5",
-    "day, clear, 480 px, tilt": "43748a3d",
-    "day, clear, fog, 256 px, touch": "b92289f3",
-    "day, clear, fog, 356 px, tilt": "9651f2b6",
-    "day, clear, fog, 480 px, mouse": "8ac7f07b",
-    "day, snow, 256 px, tilt": "1c3e1999",
-    "day, snow, 356 px, mouse": "2882465",
-    "day, snow, 480 px, touch": "7578fe97",
-    "day, snow, fog, 256 px, mouse": "1acb7dc6",
-    "day, snow, fog, 356 px, touch": "b25e239c",
-    "day, snow, fog, 480 px, tilt": "5636c5c5",
-    "dusk, clear, 256 px, touch": "8d5e4733",
-    "dusk, clear, 356 px, tilt": "782f4566",
-    "dusk, clear, 480 px, mouse": "52d1202e",
-    "dusk, clear, fog, 256 px, tilt": "ac304a92",
-    "dusk, clear, fog, 356 px, mouse": "808f2e4",
-    "dusk, clear, fog, 480 px, touch": "d71355d0",
-    "dusk, snow, 256 px, mouse": "c1aff859",
-    "dusk, snow, 356 px, touch": "fab0aa0b",
-    "dusk, snow, 480 px, tilt": "f108406c",
-    "dusk, snow, fog, 256 px, touch": "b2c62d36",
-    "dusk, snow, fog, 356 px, tilt": "bbfb46a4",
-    "dusk, snow, fog, 480 px, mouse": "bba86ccb",
-    "night, clear, 256 px, tilt": "11a42ab6",
-    "night, clear, 356 px, mouse": "b1cf8148",
-    "night, clear, 480 px, touch": "c487e106",
-    "night, clear, fog, 256 px, mouse": "80525af5",
-    "night, clear, fog, 356 px, touch": "4ef59cfb",
-    "night, clear, fog, 480 px, tilt": "46d12f8b",
-    "night, snow, 256 px, touch": "d62487f9",
-    "night, snow, 356 px, tilt": "2f1939cf",
-    "night, snow, 480 px, mouse": "89876144",
-    "night, snow, fog, 256 px, tilt": "be2166f9",
-    "night, snow, fog, 356 px, mouse": "63cdf174",
-    "night, snow, fog, 480 px, touch": "5e70d344",
+    "day, clear, 256 px, mouse": "4d143c68",
+    "day, clear, 356 px, touch": "f3366afd",
+    "day, clear, 480 px, tilt": "a49438a1",
+    "day, clear, fog, 256 px, touch": "68954163",
+    "day, clear, fog, 356 px, tilt": "3707654e",
+    "day, clear, fog, 480 px, mouse": "3e08e8d3",
+    "day, snow, 256 px, tilt": "4dccc395",
+    "day, snow, 356 px, mouse": "8893c0a5",
+    "day, snow, 480 px, touch": "433857db",
+    "day, snow, fog, 256 px, mouse": "7300440e",
+    "day, snow, fog, 356 px, touch": "3634f08",
+    "day, snow, fog, 480 px, tilt": "a493db0d",
+    "dusk, clear, 256 px, touch": "f713f963",
+    "dusk, clear, 356 px, tilt": "9fe549ca",
+    "dusk, clear, 480 px, mouse": "e8984967",
+    "dusk, clear, fog, 256 px, tilt": "7bf5fb12",
+    "dusk, clear, fog, 356 px, mouse": "61ba41e7",
+    "dusk, clear, fog, 480 px, touch": "25f75249",
+    "dusk, snow, 256 px, mouse": "b7dbb4ed",
+    "dusk, snow, 356 px, touch": "a94a5296",
+    "dusk, snow, 480 px, tilt": "95b776ab",
+    "dusk, snow, fog, 256 px, touch": "5a9b2af6",
+    "dusk, snow, fog, 356 px, tilt": "f5163106",
+    "dusk, snow, fog, 480 px, mouse": "dffc01b2",
+    "night, clear, 256 px, tilt": "72983d42",
+    "night, clear, 356 px, mouse": "68432aa0",
+    "night, clear, 480 px, touch": "bbd16b62",
+    "night, clear, fog, 256 px, mouse": "95f55f5d",
+    "night, clear, fog, 356 px, touch": "e7e5588b",
+    "night, clear, fog, 480 px, tilt": "dfcb2fff",
+    "night, snow, 256 px, touch": "94683f19",
+    "night, snow, 356 px, tilt": "c696796f",
+    "night, snow, 480 px, mouse": "daac721c",
+    "night, snow, fog, 256 px, tilt": "56d53c1",
+    "night, snow, fog, 356 px, mouse": "a6f6ee64",
+    "night, snow, fog, 480 px, touch": "422baabc",
   },
   "takeoff": {
     "day, clear, 256 px, mouse": "e94023f4",
@@ -383,42 +383,42 @@ exports[`jump view pixels > jump with a telemark landing 1`] = `
     "night, snow, fog, 480 px, touch": "35d1a3c5",
   },
   "waiting on the start gate": {
-    "day, clear, 256 px, mouse": "ecf1c20c",
-    "day, clear, 356 px, touch": "da40dce5",
-    "day, clear, 480 px, tilt": "41fe78bd",
-    "day, clear, fog, 256 px, touch": "fd30af87",
-    "day, clear, fog, 356 px, tilt": "31d42f92",
-    "day, clear, fog, 480 px, mouse": "4c3133ff",
-    "day, snow, 256 px, tilt": "bfb46362",
-    "day, snow, 356 px, mouse": "74534848",
-    "day, snow, 480 px, touch": "9fdaf716",
-    "day, snow, fog, 256 px, mouse": "f2677321",
-    "day, snow, fog, 356 px, touch": "3016194e",
-    "day, snow, fog, 480 px, tilt": "573eb913",
-    "dusk, clear, 256 px, touch": "c5db2a17",
-    "dusk, clear, 356 px, tilt": "2379e4a6",
-    "dusk, clear, 480 px, mouse": "a3b6f29e",
-    "dusk, clear, fog, 256 px, tilt": "88414dde",
-    "dusk, clear, fog, 356 px, mouse": "330518b4",
-    "dusk, clear, fog, 480 px, touch": "fa2aa690",
-    "dusk, snow, 256 px, mouse": "7aeabba0",
-    "dusk, snow, 356 px, touch": "9c01b5f3",
-    "dusk, snow, 480 px, tilt": "20dcc22a",
-    "dusk, snow, fog, 256 px, touch": "30943690",
-    "dusk, snow, fog, 356 px, tilt": "e25985b5",
-    "dusk, snow, fog, 480 px, mouse": "618956b0",
-    "night, clear, 256 px, tilt": "837c0262",
-    "night, clear, 356 px, mouse": "2315c94c",
-    "night, clear, 480 px, touch": "b42e2496",
-    "night, clear, fog, 256 px, mouse": "3ae704f9",
-    "night, clear, fog, 356 px, touch": "4ce25e3f",
-    "night, clear, fog, 480 px, tilt": "52ab53b7",
-    "night, snow, 256 px, touch": "1c0a2144",
-    "night, snow, 356 px, tilt": "5b2f87a",
-    "night, snow, 480 px, mouse": "70497733",
-    "night, snow, fog, 256 px, tilt": "7408bfeb",
-    "night, snow, fog, 356 px, mouse": "db4fe49d",
-    "night, snow, fog, 480 px, touch": "51a19707",
+    "day, clear, 256 px, mouse": "d16cd524",
+    "day, clear, 356 px, touch": "21f2893d",
+    "day, clear, 480 px, tilt": "f5246921",
+    "day, clear, fog, 256 px, touch": "5d486057",
+    "day, clear, fog, 356 px, tilt": "11db5d9a",
+    "day, clear, fog, 480 px, mouse": "fc44f137",
+    "day, snow, 256 px, tilt": "d2015fc2",
+    "day, snow, 356 px, mouse": "2e0659fc",
+    "day, snow, 480 px, touch": "7d852d26",
+    "day, snow, fog, 256 px, mouse": "285a10cd",
+    "day, snow, fog, 356 px, touch": "6853c9da",
+    "day, snow, fog, 480 px, tilt": "b551c03f",
+    "dusk, clear, 256 px, touch": "48127be7",
+    "dusk, clear, 356 px, tilt": "9781c58a",
+    "dusk, clear, 480 px, mouse": "7aa5797",
+    "dusk, clear, fog, 256 px, tilt": "dc33092e",
+    "dusk, clear, fog, 356 px, mouse": "1052e557",
+    "dusk, clear, fog, 480 px, touch": "bca60609",
+    "dusk, snow, 256 px, mouse": "f34b6ac",
+    "dusk, snow, 356 px, touch": "77b3e4a",
+    "dusk, snow, 480 px, tilt": "45dfabf8",
+    "dusk, snow, fog, 256 px, touch": "49064c4c",
+    "dusk, snow, fog, 356 px, tilt": "79366a53",
+    "dusk, snow, fog, 480 px, mouse": "d1a4b750",
+    "night, clear, 256 px, tilt": "2f2db3b6",
+    "night, clear, 356 px, mouse": "8c8394",
+    "night, clear, 480 px, touch": "55c2d2f2",
+    "night, clear, fog, 256 px, mouse": "f5f44201",
+    "night, clear, fog, 356 px, touch": "c254824f",
+    "night, clear, fog, 480 px, tilt": "f91e3be3",
+    "night, snow, 256 px, touch": "63b6191c",
+    "night, snow, 356 px, tilt": "64f0d4ae",
+    "night, snow, 480 px, mouse": "8d8d141b",
+    "night, snow, fog, 256 px, tilt": "b8c7e467",
+    "night, snow, fog, 356 px, mouse": "1a69cc85",
+    "night, snow, fog, 480 px, touch": "c53321b",
   },
 }
 `;
@@ -464,42 +464,42 @@ exports[`jump view pixels > jump without a landing 1`] = `
     "night, snow, fog, 480 px, touch": "171d4c09",
   },
   "lying after the fall, notes shown": {
-    "day, clear, 256 px, mouse": "6cec4b6c",
-    "day, clear, 356 px, touch": "6d228fc",
-    "day, clear, 480 px, tilt": "5e760f13",
-    "day, clear, fog, 256 px, touch": "7d43554",
-    "day, clear, fog, 356 px, tilt": "bff1e169",
-    "day, clear, fog, 480 px, mouse": "824f5616",
-    "day, snow, 256 px, tilt": "390b0c4",
-    "day, snow, 356 px, mouse": "2fedd41",
-    "day, snow, 480 px, touch": "c30e454e",
-    "day, snow, fog, 256 px, mouse": "9b5ebd47",
-    "day, snow, fog, 356 px, touch": "4510bd28",
-    "day, snow, fog, 480 px, tilt": "7091fb9c",
-    "dusk, clear, 256 px, touch": "ad2b1671",
-    "dusk, clear, 356 px, tilt": "1a7de024",
-    "dusk, clear, 480 px, mouse": "de920bfa",
-    "dusk, clear, fog, 256 px, tilt": "25d9cc86",
-    "dusk, clear, fog, 356 px, mouse": "2d010eec",
-    "dusk, clear, fog, 480 px, touch": "f8470c7f",
-    "dusk, snow, 256 px, mouse": "7a5faf59",
-    "dusk, snow, 356 px, touch": "276e87db",
-    "dusk, snow, 480 px, tilt": "75029e53",
-    "dusk, snow, fog, 256 px, touch": "257ec7de",
-    "dusk, snow, fog, 356 px, tilt": "9ca61659",
-    "dusk, snow, fog, 480 px, mouse": "1feec0c2",
-    "night, clear, 256 px, tilt": "78055fc1",
-    "night, clear, 356 px, mouse": "a734866c",
-    "night, clear, 480 px, touch": "75f1655d",
-    "night, clear, fog, 256 px, mouse": "e31147ce",
-    "night, clear, fog, 356 px, touch": "d45263a7",
-    "night, clear, fog, 480 px, tilt": "e04d5b07",
-    "night, snow, 256 px, touch": "4b72c12a",
-    "night, snow, 356 px, tilt": "ae896d8d",
-    "night, snow, 480 px, mouse": "2322fafb",
-    "night, snow, fog, 256 px, tilt": "a11a96f4",
-    "night, snow, fog, 356 px, mouse": "6607b919",
-    "night, snow, fog, 480 px, touch": "f6864fab",
+    "day, clear, 256 px, mouse": "911eec7c",
+    "day, clear, 356 px, touch": "7c85d260",
+    "day, clear, 480 px, tilt": "c20d895b",
+    "day, clear, fog, 256 px, touch": "6f2ec8e8",
+    "day, clear, fog, 356 px, tilt": "d6505cf1",
+    "day, clear, fog, 480 px, mouse": "b9821e16",
+    "day, snow, 256 px, tilt": "49495454",
+    "day, snow, 356 px, mouse": "3764b1c1",
+    "day, snow, 480 px, touch": "11c5f906",
+    "day, snow, fog, 256 px, mouse": "eb9f744f",
+    "day, snow, fog, 356 px, touch": "8cc8690c",
+    "day, snow, fog, 480 px, tilt": "a45d1eb8",
+    "dusk, clear, 256 px, touch": "dd748755",
+    "dusk, clear, 356 px, tilt": "83b0ce0c",
+    "dusk, clear, 480 px, mouse": "ab0310a2",
+    "dusk, clear, fog, 256 px, tilt": "88780252",
+    "dusk, clear, fog, 356 px, mouse": "2b2f57c8",
+    "dusk, clear, fog, 480 px, touch": "b62566ff",
+    "dusk, snow, 256 px, mouse": "e6fe4a9d",
+    "dusk, snow, 356 px, touch": "cc32947b",
+    "dusk, snow, 480 px, tilt": "4ce2392f",
+    "dusk, snow, fog, 256 px, touch": "bb69eaae",
+    "dusk, snow, fog, 356 px, tilt": "c4b4c1ed",
+    "dusk, snow, fog, 480 px, mouse": "d9f2e416",
+    "night, clear, 256 px, tilt": "a8ffb289",
+    "night, clear, 356 px, mouse": "a8b3e888",
+    "night, clear, 480 px, touch": "3ca7dbfd",
+    "night, clear, fog, 256 px, mouse": "a600cd8e",
+    "night, clear, fog, 356 px, touch": "cb7eb093",
+    "night, clear, fog, 480 px, tilt": "7d7cfc4b",
+    "night, snow, 256 px, touch": "58c4880a",
+    "night, snow, 356 px, tilt": "b5161d95",
+    "night, snow, 480 px, mouse": "6a2b115b",
+    "night, snow, fog, 256 px, tilt": "b66b7b6c",
+    "night, snow, fog, 356 px, mouse": "845e1e71",
+    "night, snow, fog, 480 px, touch": "36e73623",
   },
   "sliding after the fall": {
     "day, clear, 256 px, mouse": "7c13f892",
@@ -551,47 +551,47 @@ exports[`jump view pixels > outfit preview 1`] = `
 }
 `;
 
-exports[`jump view pixels > scenery is drawn without the optional parts of the model 1`] = `"28c82bff"`;
+exports[`jump view pixels > scenery is drawn without the optional parts of the model 1`] = `"64d8408f"`;
 
 exports[`jump view pixels > start never pressed 1`] = `
 {
   "disqualification": {
-    "day, clear, 256 px, mouse": "497c4fc0",
-    "day, clear, 356 px, touch": "fad0a149",
-    "day, clear, 480 px, tilt": "ce20b4d9",
-    "day, clear, fog, 256 px, touch": "52244453",
-    "day, clear, fog, 356 px, tilt": "54e5cea",
-    "day, clear, fog, 480 px, mouse": "37d7e1c7",
-    "day, snow, 256 px, tilt": "3390717d",
-    "day, snow, 356 px, mouse": "28587a27",
-    "day, snow, 480 px, touch": "71b90490",
-    "day, snow, fog, 256 px, mouse": "3f332855",
-    "day, snow, fog, 356 px, touch": "272f8c09",
-    "day, snow, fog, 480 px, tilt": "4480ad92",
-    "dusk, clear, 256 px, touch": "45c587e3",
-    "dusk, clear, 356 px, tilt": "5912705a",
-    "dusk, clear, 480 px, mouse": "27eef936",
-    "dusk, clear, fog, 256 px, tilt": "d1acf122",
-    "dusk, clear, fog, 356 px, mouse": "8950930",
-    "dusk, clear, fog, 480 px, touch": "24c9f288",
-    "dusk, snow, 256 px, mouse": "916e28a1",
-    "dusk, snow, 356 px, touch": "15c60ffe",
-    "dusk, snow, 480 px, tilt": "c8b6782f",
-    "dusk, snow, fog, 256 px, touch": "85f9168d",
-    "dusk, snow, fog, 356 px, tilt": "565b1552",
-    "dusk, snow, fog, 480 px, mouse": "77f60736",
-    "night, clear, 256 px, tilt": "e4df870a",
-    "night, clear, 356 px, mouse": "2a69fec4",
-    "night, clear, 480 px, touch": "ebf73042",
-    "night, clear, fog, 256 px, mouse": "f57a5de1",
-    "night, clear, fog, 356 px, touch": "b002629f",
-    "night, clear, fog, 480 px, tilt": "c2076907",
-    "night, snow, 256 px, touch": "c0ffdb89",
-    "night, snow, 356 px, tilt": "1e310b10",
-    "night, snow, 480 px, mouse": "335deca2",
-    "night, snow, fog, 256 px, tilt": "84f796fc",
-    "night, snow, fog, 356 px, mouse": "2ad55000",
-    "night, snow, fog, 480 px, touch": "9216f5ac",
+    "day, clear, 256 px, mouse": "d3d44428",
+    "day, clear, 356 px, touch": "9483e7c1",
+    "day, clear, 480 px, tilt": "eb855c45",
+    "day, clear, fog, 256 px, touch": "1b773003",
+    "day, clear, fog, 356 px, tilt": "83336b12",
+    "day, clear, fog, 480 px, mouse": "c2b70e5f",
+    "day, snow, 256 px, tilt": "47f7161",
+    "day, snow, 356 px, mouse": "ee371b3f",
+    "day, snow, 480 px, touch": "f2523690",
+    "day, snow, fog, 256 px, mouse": "1f16f5c9",
+    "day, snow, fog, 356 px, touch": "34f77f1d",
+    "day, snow, fog, 480 px, tilt": "625a58de",
+    "dusk, clear, 256 px, touch": "c2c0f53",
+    "dusk, clear, 356 px, tilt": "3c40c236",
+    "dusk, clear, 480 px, mouse": "a8c0adc7",
+    "dusk, clear, fog, 256 px, tilt": "5036ed32",
+    "dusk, clear, fog, 356 px, mouse": "a1ef352b",
+    "dusk, clear, fog, 480 px, touch": "f70cfc99",
+    "dusk, snow, 256 px, mouse": "e02054a5",
+    "dusk, snow, 356 px, touch": "21b9e097",
+    "dusk, snow, 480 px, tilt": "6834bb99",
+    "dusk, snow, fog, 256 px, touch": "1a861d0d",
+    "dusk, snow, fog, 356 px, tilt": "6e0a5a78",
+    "dusk, snow, fog, 480 px, mouse": "bbf715b1",
+    "night, clear, 256 px, tilt": "9229d75e",
+    "night, clear, 356 px, mouse": "8ac6270c",
+    "night, clear, 480 px, touch": "33ccacc6",
+    "night, clear, fog, 256 px, mouse": "1ff47289",
+    "night, clear, fog, 356 px, touch": "4c0cef2f",
+    "night, clear, fog, 480 px, tilt": "7751b1e3",
+    "night, snow, 256 px, touch": "d4fc8da9",
+    "night, snow, 356 px, tilt": "47aa2048",
+    "night, snow, 480 px, mouse": "b50f951e",
+    "night, snow, fog, 256 px, tilt": "750ab1cc",
+    "night, snow, fog, 356 px, mouse": "206d27a0",
+    "night, snow, fog, 480 px, touch": "9398cab4",
   },
 }
 `;
@@ -599,9 +599,9 @@ exports[`jump view pixels > start never pressed 1`] = `
 exports[`jump view pixels of every own hill > own-14: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "2f6594b3",
-    "dusk, clear, 356 px, mouse": "7b183ef5",
-    "night, clear, 356 px, mouse": "796717d4",
+    "day, clear, 356 px, mouse": "e888cd87",
+    "dusk, clear, 356 px, mouse": "d0f1d7d1",
+    "night, clear, 356 px, mouse": "38cd5ee8",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "34bd221b",
@@ -609,14 +609,14 @@ exports[`jump view pixels of every own hill > own-14: jump with a telemark landi
     "night, clear, 356 px, mouse": "8555bebe",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "b255f679",
-    "dusk, clear, 356 px, mouse": "58cec6a5",
-    "night, clear, 356 px, mouse": "f15e5831",
+    "day, clear, 356 px, mouse": "bebbf205",
+    "dusk, clear, 356 px, mouse": "1c60a3b9",
+    "night, clear, 356 px, mouse": "751924c5",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "a12fa014",
-    "dusk, clear, 356 px, mouse": "e9664a98",
-    "night, clear, 356 px, mouse": "365ec643",
+    "day, clear, 356 px, mouse": "eda4a67c",
+    "dusk, clear, 356 px, mouse": "ae1f68f0",
+    "night, clear, 356 px, mouse": "27c5231e",
   },
   "landing": {
     "day, clear, 356 px, mouse": "54f8a68b",
@@ -639,9 +639,9 @@ exports[`jump view pixels of every own hill > own-14: jump with a telemark landi
     "night, clear, 356 px, mouse": "f06f6941",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "f25faf0c",
-    "dusk, clear, 356 px, mouse": "adb5fadd",
-    "night, clear, 356 px, mouse": "290fa286",
+    "day, clear, 356 px, mouse": "be20ebf4",
+    "dusk, clear, 356 px, mouse": "1b3bdd7d",
+    "night, clear, 356 px, mouse": "3772ed24",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "2e65b6fe",
@@ -649,9 +649,9 @@ exports[`jump view pixels of every own hill > own-14: jump with a telemark landi
     "night, clear, 356 px, mouse": "3167c514",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "499c1d80",
-    "dusk, clear, 356 px, mouse": "e58d400d",
-    "night, clear, 356 px, mouse": "c5570d02",
+    "day, clear, 356 px, mouse": "7dbc1f68",
+    "dusk, clear, 356 px, mouse": "439c05ed",
+    "night, clear, 356 px, mouse": "5ce16b18",
   },
 }
 `;
@@ -659,9 +659,9 @@ exports[`jump view pixels of every own hill > own-14: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-15: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "1dab81a4",
-    "dusk, clear, 356 px, mouse": "83cb999d",
-    "night, clear, 356 px, mouse": "b3c5a7c7",
+    "day, clear, 356 px, mouse": "2c7c50",
+    "dusk, clear, 356 px, mouse": "8ac44485",
+    "night, clear, 356 px, mouse": "4e0e18a7",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "e77992f7",
@@ -669,14 +669,14 @@ exports[`jump view pixels of every own hill > own-15: jump with a telemark landi
     "night, clear, 356 px, mouse": "a40067ea",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "7a2276c1",
-    "dusk, clear, 356 px, mouse": "9e208d8a",
-    "night, clear, 356 px, mouse": "a0b90039",
+    "day, clear, 356 px, mouse": "6e8ab1d",
+    "dusk, clear, 356 px, mouse": "a43bb103",
+    "night, clear, 356 px, mouse": "35fa519d",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "84cf2dcf",
-    "dusk, clear, 356 px, mouse": "e1775ba0",
-    "night, clear, 356 px, mouse": "4414c178",
+    "day, clear, 356 px, mouse": "e9e91c7",
+    "dusk, clear, 356 px, mouse": "2ea3a3f4",
+    "night, clear, 356 px, mouse": "93e9e1ed",
   },
   "landing": {
     "day, clear, 356 px, mouse": "c5555d8c",
@@ -699,9 +699,9 @@ exports[`jump view pixels of every own hill > own-15: jump with a telemark landi
     "night, clear, 356 px, mouse": "ddb385a8",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "ec696f5a",
-    "dusk, clear, 356 px, mouse": "88b93213",
-    "night, clear, 356 px, mouse": "16e6e051",
+    "day, clear, 356 px, mouse": "82aa2e56",
+    "dusk, clear, 356 px, mouse": "945d232f",
+    "night, clear, 356 px, mouse": "64052bee",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "1c79f5ec",
@@ -709,9 +709,9 @@ exports[`jump view pixels of every own hill > own-15: jump with a telemark landi
     "night, clear, 356 px, mouse": "cf9c3cef",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "969925da",
-    "dusk, clear, 356 px, mouse": "bb39bf2b",
-    "night, clear, 356 px, mouse": "434e1ef1",
+    "day, clear, 356 px, mouse": "9543e7d6",
+    "dusk, clear, 356 px, mouse": "90098ca7",
+    "night, clear, 356 px, mouse": "2df2b0e",
   },
 }
 `;
@@ -719,9 +719,9 @@ exports[`jump view pixels of every own hill > own-15: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-16: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "f311b691",
-    "dusk, clear, 356 px, mouse": "7c4458f8",
-    "night, clear, 356 px, mouse": "b68ac89",
+    "day, clear, 356 px, mouse": "f5c791b9",
+    "dusk, clear, 356 px, mouse": "3abeefac",
+    "night, clear, 356 px, mouse": "c4b5340d",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "f83bd0a3",
@@ -729,14 +729,14 @@ exports[`jump view pixels of every own hill > own-16: jump with a telemark landi
     "night, clear, 356 px, mouse": "648e76f4",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "39b21b06",
-    "dusk, clear, 356 px, mouse": "58f3d4b4",
-    "night, clear, 356 px, mouse": "b4cb0f2c",
+    "day, clear, 356 px, mouse": "ffc07da6",
+    "dusk, clear, 356 px, mouse": "78da91c9",
+    "night, clear, 356 px, mouse": "acdfaacc",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "5e74de3",
-    "dusk, clear, 356 px, mouse": "97eb8615",
-    "night, clear, 356 px, mouse": "9789a82f",
+    "day, clear, 356 px, mouse": "1dc77e43",
+    "dusk, clear, 356 px, mouse": "ae3b2565",
+    "night, clear, 356 px, mouse": "3b6e524a",
   },
   "landing": {
     "day, clear, 356 px, mouse": "7f3f2810",
@@ -759,9 +759,9 @@ exports[`jump view pixels of every own hill > own-16: jump with a telemark landi
     "night, clear, 356 px, mouse": "32797ef9",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "a5379c17",
-    "dusk, clear, 356 px, mouse": "9b95571c",
-    "night, clear, 356 px, mouse": "7ecc7c3d",
+    "day, clear, 356 px, mouse": "421d0313",
+    "dusk, clear, 356 px, mouse": "73be867c",
+    "night, clear, 356 px, mouse": "f775b4d",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "cf09194b",
@@ -769,9 +769,9 @@ exports[`jump view pixels of every own hill > own-16: jump with a telemark landi
     "night, clear, 356 px, mouse": "d9dca961",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "cec53663",
-    "dusk, clear, 356 px, mouse": "f548b468",
-    "night, clear, 356 px, mouse": "b3d056fd",
+    "day, clear, 356 px, mouse": "8afe9487",
+    "dusk, clear, 356 px, mouse": "f8b6fb70",
+    "night, clear, 356 px, mouse": "abfc880d",
   },
 }
 `;
@@ -779,9 +779,9 @@ exports[`jump view pixels of every own hill > own-16: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-17: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "6b1461e2",
-    "dusk, clear, 356 px, mouse": "7c679947",
-    "night, clear, 356 px, mouse": "97d5418d",
+    "day, clear, 356 px, mouse": "3693f19e",
+    "dusk, clear, 356 px, mouse": "4aabb033",
+    "night, clear, 356 px, mouse": "a0017a35",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "e19446e9",
@@ -789,14 +789,14 @@ exports[`jump view pixels of every own hill > own-17: jump with a telemark landi
     "night, clear, 356 px, mouse": "be4898e2",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "4d6aede3",
-    "dusk, clear, 356 px, mouse": "7c4d6c62",
-    "night, clear, 356 px, mouse": "c367027a",
+    "day, clear, 356 px, mouse": "315bfc37",
+    "dusk, clear, 356 px, mouse": "9bbb8810",
+    "night, clear, 356 px, mouse": "1664f0a6",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "2ff2e633",
-    "dusk, clear, 356 px, mouse": "bc55c038",
-    "night, clear, 356 px, mouse": "3338dc59",
+    "day, clear, 356 px, mouse": "f16d2417",
+    "dusk, clear, 356 px, mouse": "4c6211c0",
+    "night, clear, 356 px, mouse": "88555c83",
   },
   "landing": {
     "day, clear, 356 px, mouse": "5fa70293",
@@ -819,9 +819,9 @@ exports[`jump view pixels of every own hill > own-17: jump with a telemark landi
     "night, clear, 356 px, mouse": "902d6c0f",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "161a28e0",
-    "dusk, clear, 356 px, mouse": "72a3de7",
-    "night, clear, 356 px, mouse": "56e5bca5",
+    "day, clear, 356 px, mouse": "6add9380",
+    "dusk, clear, 356 px, mouse": "69b392d4",
+    "night, clear, 356 px, mouse": "200be6e2",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "cd7fb798",
@@ -829,9 +829,9 @@ exports[`jump view pixels of every own hill > own-17: jump with a telemark landi
     "night, clear, 356 px, mouse": "7478fd75",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "b1e5b240",
-    "dusk, clear, 356 px, mouse": "def62c0b",
-    "night, clear, 356 px, mouse": "40237999",
+    "day, clear, 356 px, mouse": "81c06b20",
+    "dusk, clear, 356 px, mouse": "9c1fc670",
+    "night, clear, 356 px, mouse": "79e72d66",
   },
 }
 `;
@@ -839,9 +839,9 @@ exports[`jump view pixels of every own hill > own-17: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-18: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "cace7997",
-    "dusk, clear, 356 px, mouse": "8489f880",
-    "night, clear, 356 px, mouse": "78e32870",
+    "day, clear, 356 px, mouse": "e14f522f",
+    "dusk, clear, 356 px, mouse": "9c650cb8",
+    "night, clear, 356 px, mouse": "47a91590",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "54ba357d",
@@ -849,14 +849,14 @@ exports[`jump view pixels of every own hill > own-18: jump with a telemark landi
     "night, clear, 356 px, mouse": "355ee2ec",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "fc273435",
-    "dusk, clear, 356 px, mouse": "39fe2768",
-    "night, clear, 356 px, mouse": "d0201379",
+    "day, clear, 356 px, mouse": "56249991",
+    "dusk, clear, 356 px, mouse": "ba2106f2",
+    "night, clear, 356 px, mouse": "91b1ab19",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "74429809",
-    "dusk, clear, 356 px, mouse": "aa4627c4",
-    "night, clear, 356 px, mouse": "9d733f08",
+    "day, clear, 356 px, mouse": "292755a9",
+    "dusk, clear, 356 px, mouse": "7bfbed40",
+    "night, clear, 356 px, mouse": "7d78ea60",
   },
   "landing": {
     "day, clear, 356 px, mouse": "a2714512",
@@ -879,9 +879,9 @@ exports[`jump view pixels of every own hill > own-18: jump with a telemark landi
     "night, clear, 356 px, mouse": "60e42495",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "9ff2d888",
-    "dusk, clear, 356 px, mouse": "537ca9c2",
-    "night, clear, 356 px, mouse": "449bf196",
+    "day, clear, 356 px, mouse": "45de9ecc",
+    "dusk, clear, 356 px, mouse": "44e36463",
+    "night, clear, 356 px, mouse": "2addfd86",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "3edc8059",
@@ -889,9 +889,9 @@ exports[`jump view pixels of every own hill > own-18: jump with a telemark landi
     "night, clear, 356 px, mouse": "8e02ad40",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "22265e38",
-    "dusk, clear, 356 px, mouse": "41605dae",
-    "night, clear, 356 px, mouse": "6d45eb4e",
+    "day, clear, 356 px, mouse": "51f798fc",
+    "dusk, clear, 356 px, mouse": "40ac1c1f",
+    "night, clear, 356 px, mouse": "22bd897e",
   },
 }
 `;
@@ -899,9 +899,9 @@ exports[`jump view pixels of every own hill > own-18: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-19: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "d34fa71f",
-    "dusk, clear, 356 px, mouse": "80221750",
-    "night, clear, 356 px, mouse": "4fbb024e",
+    "day, clear, 356 px, mouse": "bfa601cf",
+    "dusk, clear, 356 px, mouse": "a3c1a6c4",
+    "night, clear, 356 px, mouse": "f2ad21e2",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "3e26fe48",
@@ -909,14 +909,14 @@ exports[`jump view pixels of every own hill > own-19: jump with a telemark landi
     "night, clear, 356 px, mouse": "14f004b0",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "26249053",
-    "dusk, clear, 356 px, mouse": "e6045ee6",
-    "night, clear, 356 px, mouse": "c5e43f68",
+    "day, clear, 356 px, mouse": "9d41f1bf",
+    "dusk, clear, 356 px, mouse": "f1c1beb1",
+    "night, clear, 356 px, mouse": "ba0f08c",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "73903dd8",
-    "dusk, clear, 356 px, mouse": "7dc6975",
-    "night, clear, 356 px, mouse": "481bc632",
+    "day, clear, 356 px, mouse": "9c67ed24",
+    "dusk, clear, 356 px, mouse": "8a1d7b42",
+    "night, clear, 356 px, mouse": "c9c1a715",
   },
   "landing": {
     "day, clear, 356 px, mouse": "9ee5b1f1",
@@ -939,9 +939,9 @@ exports[`jump view pixels of every own hill > own-19: jump with a telemark landi
     "night, clear, 356 px, mouse": "51cec994",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "823a166",
-    "dusk, clear, 356 px, mouse": "d7d0535a",
-    "night, clear, 356 px, mouse": "3f3e9ee3",
+    "day, clear, 356 px, mouse": "e12dc3da",
+    "dusk, clear, 356 px, mouse": "c21f4e9a",
+    "night, clear, 356 px, mouse": "ab38c853",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "1f631db3",
@@ -949,9 +949,9 @@ exports[`jump view pixels of every own hill > own-19: jump with a telemark landi
     "night, clear, 356 px, mouse": "edc3f1b0",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "d087c901",
-    "dusk, clear, 356 px, mouse": "417ddea",
-    "night, clear, 356 px, mouse": "8675b5eb",
+    "day, clear, 356 px, mouse": "526ba7a5",
+    "dusk, clear, 356 px, mouse": "87c8062a",
+    "night, clear, 356 px, mouse": "ef14cb8b",
   },
 }
 `;
@@ -959,9 +959,9 @@ exports[`jump view pixels of every own hill > own-19: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-20: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "5890a684",
-    "dusk, clear, 356 px, mouse": "f0d6e165",
-    "night, clear, 356 px, mouse": "f26f49ea",
+    "day, clear, 356 px, mouse": "6ba09844",
+    "dusk, clear, 356 px, mouse": "eac94925",
+    "night, clear, 356 px, mouse": "ea14e6c2",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "759e4004",
@@ -969,14 +969,14 @@ exports[`jump view pixels of every own hill > own-20: jump with a telemark landi
     "night, clear, 356 px, mouse": "52fe7fbf",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "c47bcd34",
-    "dusk, clear, 356 px, mouse": "ab0ea39c",
-    "night, clear, 356 px, mouse": "61b3b663",
+    "day, clear, 356 px, mouse": "a5c09010",
+    "dusk, clear, 356 px, mouse": "74d8b2a4",
+    "night, clear, 356 px, mouse": "2ca9fb4b",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "f038c657",
-    "dusk, clear, 356 px, mouse": "6b456958",
-    "night, clear, 356 px, mouse": "565cc491",
+    "day, clear, 356 px, mouse": "a432bf9f",
+    "dusk, clear, 356 px, mouse": "dd464f4",
+    "night, clear, 356 px, mouse": "85b66196",
   },
   "landing": {
     "day, clear, 356 px, mouse": "347a5306",
@@ -999,9 +999,9 @@ exports[`jump view pixels of every own hill > own-20: jump with a telemark landi
     "night, clear, 356 px, mouse": "8109795d",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "424bc6fc",
-    "dusk, clear, 356 px, mouse": "4873e5a8",
-    "night, clear, 356 px, mouse": "25c65dde",
+    "day, clear, 356 px, mouse": "f2c7c4fc",
+    "dusk, clear, 356 px, mouse": "7691ba2c",
+    "night, clear, 356 px, mouse": "121567ca",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "d91b2573",
@@ -1009,9 +1009,9 @@ exports[`jump view pixels of every own hill > own-20: jump with a telemark landi
     "night, clear, 356 px, mouse": "e44deef9",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "c60c89b0",
-    "dusk, clear, 356 px, mouse": "3e25457c",
-    "night, clear, 356 px, mouse": "af810eea",
+    "day, clear, 356 px, mouse": "35b8d0b0",
+    "dusk, clear, 356 px, mouse": "b4f03378",
+    "night, clear, 356 px, mouse": "e251184e",
   },
 }
 `;
@@ -1019,9 +1019,9 @@ exports[`jump view pixels of every own hill > own-20: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-21: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "ecfa7ba6",
-    "dusk, clear, 356 px, mouse": "352fad4a",
-    "night, clear, 356 px, mouse": "8130b854",
+    "day, clear, 356 px, mouse": "93d35a82",
+    "dusk, clear, 356 px, mouse": "4382c006",
+    "night, clear, 356 px, mouse": "113a0e0",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "d917029e",
@@ -1029,14 +1029,14 @@ exports[`jump view pixels of every own hill > own-21: jump with a telemark landi
     "night, clear, 356 px, mouse": "5800cd4c",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "70af8ce4",
-    "dusk, clear, 356 px, mouse": "6998c4c7",
-    "night, clear, 356 px, mouse": "8bfc0760",
+    "day, clear, 356 px, mouse": "5c9261a8",
+    "dusk, clear, 356 px, mouse": "ef954d16",
+    "night, clear, 356 px, mouse": "62131560",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "8f581aa9",
-    "dusk, clear, 356 px, mouse": "25745bbb",
-    "night, clear, 356 px, mouse": "457b8ef7",
+    "day, clear, 356 px, mouse": "3a982685",
+    "dusk, clear, 356 px, mouse": "f12e7bf7",
+    "night, clear, 356 px, mouse": "df545b7f",
   },
   "landing": {
     "day, clear, 356 px, mouse": "6c87121d",
@@ -1059,9 +1059,9 @@ exports[`jump view pixels of every own hill > own-21: jump with a telemark landi
     "night, clear, 356 px, mouse": "7ae5a781",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "dfbc1d4e",
-    "dusk, clear, 356 px, mouse": "4788ef88",
-    "night, clear, 356 px, mouse": "2cf85872",
+    "day, clear, 356 px, mouse": "bca4efe2",
+    "dusk, clear, 356 px, mouse": "31b87b30",
+    "night, clear, 356 px, mouse": "4e48072a",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "513a5785",
@@ -1069,9 +1069,9 @@ exports[`jump view pixels of every own hill > own-21: jump with a telemark landi
     "night, clear, 356 px, mouse": "70117664",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "f898acec",
-    "dusk, clear, 356 px, mouse": "12ad7def",
-    "night, clear, 356 px, mouse": "c1e12a6e",
+    "day, clear, 356 px, mouse": "f07c38a0",
+    "dusk, clear, 356 px, mouse": "5641fe6f",
+    "night, clear, 356 px, mouse": "3f8602a6",
   },
 }
 `;
@@ -1079,9 +1079,9 @@ exports[`jump view pixels of every own hill > own-21: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-22: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "663f9f54",
-    "dusk, clear, 356 px, mouse": "1cef7035",
-    "night, clear, 356 px, mouse": "cef8b938",
+    "day, clear, 356 px, mouse": "ee352d7c",
+    "dusk, clear, 356 px, mouse": "b5324d4d",
+    "night, clear, 356 px, mouse": "9912f490",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "bc712fdb",
@@ -1089,14 +1089,14 @@ exports[`jump view pixels of every own hill > own-22: jump with a telemark landi
     "night, clear, 356 px, mouse": "aebdebae",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "4c862e0e",
-    "dusk, clear, 356 px, mouse": "e2d4859e",
-    "night, clear, 356 px, mouse": "df227ab7",
+    "day, clear, 356 px, mouse": "9e66469a",
+    "dusk, clear, 356 px, mouse": "f32fd726",
+    "night, clear, 356 px, mouse": "c86e1d3f",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "79634c3b",
-    "dusk, clear, 356 px, mouse": "175e6afc",
-    "night, clear, 356 px, mouse": "871b4193",
+    "day, clear, 356 px, mouse": "89a0115b",
+    "dusk, clear, 356 px, mouse": "42df7092",
+    "night, clear, 356 px, mouse": "7a7fbb6b",
   },
   "landing": {
     "day, clear, 356 px, mouse": "764f2384",
@@ -1119,9 +1119,9 @@ exports[`jump view pixels of every own hill > own-22: jump with a telemark landi
     "night, clear, 356 px, mouse": "e6f0cde4",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "f345236d",
-    "dusk, clear, 356 px, mouse": "d496072c",
-    "night, clear, 356 px, mouse": "cd3e43c0",
+    "day, clear, 356 px, mouse": "bb9e6c9d",
+    "dusk, clear, 356 px, mouse": "a25b3140",
+    "night, clear, 356 px, mouse": "39fa4f50",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "acebaece",
@@ -1129,9 +1129,9 @@ exports[`jump view pixels of every own hill > own-22: jump with a telemark landi
     "night, clear, 356 px, mouse": "f8016cb",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "47dd780d",
-    "dusk, clear, 356 px, mouse": "954d9e40",
-    "night, clear, 356 px, mouse": "5b5bc0fc",
+    "day, clear, 356 px, mouse": "342769bd",
+    "dusk, clear, 356 px, mouse": "e62ef60c",
+    "night, clear, 356 px, mouse": "7903c99c",
   },
 }
 `;
@@ -1139,9 +1139,9 @@ exports[`jump view pixels of every own hill > own-22: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-23: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "8922832e",
-    "dusk, clear, 356 px, mouse": "ca95de0e",
-    "night, clear, 356 px, mouse": "4fc8a099",
+    "day, clear, 356 px, mouse": "94a43372",
+    "dusk, clear, 356 px, mouse": "9b32331a",
+    "night, clear, 356 px, mouse": "5e30156d",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "e4b08403",
@@ -1149,14 +1149,14 @@ exports[`jump view pixels of every own hill > own-23: jump with a telemark landi
     "night, clear, 356 px, mouse": "56470bf8",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "2100fb67",
-    "dusk, clear, 356 px, mouse": "62230407",
-    "night, clear, 356 px, mouse": "299bac76",
+    "day, clear, 356 px, mouse": "f26e1edb",
+    "dusk, clear, 356 px, mouse": "5d609240",
+    "night, clear, 356 px, mouse": "3faf4ec6",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "9592d433",
-    "dusk, clear, 356 px, mouse": "80cb11de",
-    "night, clear, 356 px, mouse": "811df6c7",
+    "day, clear, 356 px, mouse": "e2819c9b",
+    "dusk, clear, 356 px, mouse": "12a9bc06",
+    "night, clear, 356 px, mouse": "d47e1df1",
   },
   "landing": {
     "day, clear, 356 px, mouse": "31f549e2",
@@ -1179,9 +1179,9 @@ exports[`jump view pixels of every own hill > own-23: jump with a telemark landi
     "night, clear, 356 px, mouse": "167c2371",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "517b8d6f",
-    "dusk, clear, 356 px, mouse": "a92d6bd6",
-    "night, clear, 356 px, mouse": "6d53c7b7",
+    "day, clear, 356 px, mouse": "413a46b",
+    "dusk, clear, 356 px, mouse": "a911ae8e",
+    "night, clear, 356 px, mouse": "919bdef7",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "4bca20c6",
@@ -1189,9 +1189,9 @@ exports[`jump view pixels of every own hill > own-23: jump with a telemark landi
     "night, clear, 356 px, mouse": "f58dc06c",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "12b70947",
-    "dusk, clear, 356 px, mouse": "c08811f2",
-    "night, clear, 356 px, mouse": "ccaa0153",
+    "day, clear, 356 px, mouse": "c886fbe3",
+    "dusk, clear, 356 px, mouse": "215fa5ba",
+    "night, clear, 356 px, mouse": "9d236863",
   },
 }
 `;
@@ -1199,9 +1199,9 @@ exports[`jump view pixels of every own hill > own-23: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-24: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "a2538770",
-    "dusk, clear, 356 px, mouse": "7eaa5b70",
-    "night, clear, 356 px, mouse": "2c5c4e33",
+    "day, clear, 356 px, mouse": "324f4594",
+    "dusk, clear, 356 px, mouse": "695e00a4",
+    "night, clear, 356 px, mouse": "17bed10f",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "e9107bb8",
@@ -1209,14 +1209,14 @@ exports[`jump view pixels of every own hill > own-24: jump with a telemark landi
     "night, clear, 356 px, mouse": "29594e1",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "6fa48c15",
-    "dusk, clear, 356 px, mouse": "912c06fa",
-    "night, clear, 356 px, mouse": "f9a042b7",
+    "day, clear, 356 px, mouse": "a48218d5",
+    "dusk, clear, 356 px, mouse": "c70bfa58",
+    "night, clear, 356 px, mouse": "aeb20343",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "906872b3",
-    "dusk, clear, 356 px, mouse": "59f4da37",
-    "night, clear, 356 px, mouse": "50aeefcb",
+    "day, clear, 356 px, mouse": "7497b507",
+    "dusk, clear, 356 px, mouse": "d6bab05c",
+    "night, clear, 356 px, mouse": "deb92892",
   },
   "landing": {
     "day, clear, 356 px, mouse": "dd8d64b5",
@@ -1239,9 +1239,9 @@ exports[`jump view pixels of every own hill > own-24: jump with a telemark landi
     "night, clear, 356 px, mouse": "b1be361f",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "a4ba790a",
-    "dusk, clear, 356 px, mouse": "590280e6",
-    "night, clear, 356 px, mouse": "409f1831",
+    "day, clear, 356 px, mouse": "6a55df8e",
+    "dusk, clear, 356 px, mouse": "d4cfb336",
+    "night, clear, 356 px, mouse": "a9be835d",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "c1843a94",
@@ -1249,9 +1249,9 @@ exports[`jump view pixels of every own hill > own-24: jump with a telemark landi
     "night, clear, 356 px, mouse": "c8cc9a71",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "85f23ac2",
-    "dusk, clear, 356 px, mouse": "52c4ded2",
-    "night, clear, 356 px, mouse": "73f4b589",
+    "day, clear, 356 px, mouse": "460acbd6",
+    "dusk, clear, 356 px, mouse": "48a633e2",
+    "night, clear, 356 px, mouse": "7566ccf5",
   },
 }
 `;
@@ -1259,9 +1259,9 @@ exports[`jump view pixels of every own hill > own-24: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-25: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "7094677b",
-    "dusk, clear, 356 px, mouse": "4df9d002",
-    "night, clear, 356 px, mouse": "2a85af31",
+    "day, clear, 356 px, mouse": "9a21480f",
+    "dusk, clear, 356 px, mouse": "d8dd23d6",
+    "night, clear, 356 px, mouse": "99925ad9",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "7c986a86",
@@ -1269,14 +1269,14 @@ exports[`jump view pixels of every own hill > own-25: jump with a telemark landi
     "night, clear, 356 px, mouse": "69275685",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "2a7de137",
-    "dusk, clear, 356 px, mouse": "b888ee4d",
-    "night, clear, 356 px, mouse": "72494078",
+    "day, clear, 356 px, mouse": "188fe80f",
+    "dusk, clear, 356 px, mouse": "5d4a0549",
+    "night, clear, 356 px, mouse": "61e98f24",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "4bb242b8",
-    "dusk, clear, 356 px, mouse": "c291cfe2",
-    "night, clear, 356 px, mouse": "9982d43e",
+    "day, clear, 356 px, mouse": "81c6a784",
+    "dusk, clear, 356 px, mouse": "120218cf",
+    "night, clear, 356 px, mouse": "ba7f7b44",
   },
   "landing": {
     "day, clear, 356 px, mouse": "f5aee729",
@@ -1299,9 +1299,9 @@ exports[`jump view pixels of every own hill > own-25: jump with a telemark landi
     "night, clear, 356 px, mouse": "5d56d674",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "b02a6bb1",
-    "dusk, clear, 356 px, mouse": "af14a548",
-    "night, clear, 356 px, mouse": "beb5e05d",
+    "day, clear, 356 px, mouse": "26e1b6a9",
+    "dusk, clear, 356 px, mouse": "22c8403c",
+    "night, clear, 356 px, mouse": "f538a74d",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "4e011d66",
@@ -1309,9 +1309,9 @@ exports[`jump view pixels of every own hill > own-25: jump with a telemark landi
     "night, clear, 356 px, mouse": "c8414258",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "2ac3aa36",
-    "dusk, clear, 356 px, mouse": "692b3559",
-    "night, clear, 356 px, mouse": "5a778fe1",
+    "day, clear, 356 px, mouse": "e0143756",
+    "dusk, clear, 356 px, mouse": "7394bddd",
+    "night, clear, 356 px, mouse": "bc31fd81",
   },
 }
 `;
@@ -1319,9 +1319,9 @@ exports[`jump view pixels of every own hill > own-25: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-26: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "3a66b6fc",
-    "dusk, clear, 356 px, mouse": "2a0c8f12",
-    "night, clear, 356 px, mouse": "ad8ebb3a",
+    "day, clear, 356 px, mouse": "92c8fa9c",
+    "dusk, clear, 356 px, mouse": "ab7b602",
+    "night, clear, 356 px, mouse": "6989cd2",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "7e9dd0cf",
@@ -1329,14 +1329,14 @@ exports[`jump view pixels of every own hill > own-26: jump with a telemark landi
     "night, clear, 356 px, mouse": "40ecf4f0",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "696e4d7a",
-    "dusk, clear, 356 px, mouse": "2123719e",
-    "night, clear, 356 px, mouse": "81fdce7a",
+    "day, clear, 356 px, mouse": "90642156",
+    "dusk, clear, 356 px, mouse": "2e571b72",
+    "night, clear, 356 px, mouse": "6817cf12",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "c46a5111",
-    "dusk, clear, 356 px, mouse": "5c661a9c",
-    "night, clear, 356 px, mouse": "9a26531e",
+    "day, clear, 356 px, mouse": "a71f91b9",
+    "dusk, clear, 356 px, mouse": "897c6158",
+    "night, clear, 356 px, mouse": "dcb4cef2",
   },
   "landing": {
     "day, clear, 356 px, mouse": "8b290c4b",
@@ -1359,9 +1359,9 @@ exports[`jump view pixels of every own hill > own-26: jump with a telemark landi
     "night, clear, 356 px, mouse": "7bc1631f",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "8d81b998",
-    "dusk, clear, 356 px, mouse": "f5924fc",
-    "night, clear, 356 px, mouse": "c9491261",
+    "day, clear, 356 px, mouse": "11b53288",
+    "dusk, clear, 356 px, mouse": "fa073c20",
+    "night, clear, 356 px, mouse": "84dabb51",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "f25318a0",
@@ -1369,9 +1369,9 @@ exports[`jump view pixels of every own hill > own-26: jump with a telemark landi
     "night, clear, 356 px, mouse": "a7647106",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "4b01726c",
-    "dusk, clear, 356 px, mouse": "6a0485c0",
-    "night, clear, 356 px, mouse": "7002f37d",
+    "day, clear, 356 px, mouse": "c91e9d5c",
+    "dusk, clear, 356 px, mouse": "aadc870c",
+    "night, clear, 356 px, mouse": "3ee8603d",
   },
 }
 `;
@@ -1379,9 +1379,9 @@ exports[`jump view pixels of every own hill > own-26: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-27: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "5a1f2124",
-    "dusk, clear, 356 px, mouse": "2f256cb3",
-    "night, clear, 356 px, mouse": "79fe0019",
+    "day, clear, 356 px, mouse": "27ca1970",
+    "dusk, clear, 356 px, mouse": "36a1d483",
+    "night, clear, 356 px, mouse": "6e9d7ae5",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "31bdb8c",
@@ -1389,14 +1389,14 @@ exports[`jump view pixels of every own hill > own-27: jump with a telemark landi
     "night, clear, 356 px, mouse": "a466fe50",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "8b36fdb3",
-    "dusk, clear, 356 px, mouse": "4c9cd699",
-    "night, clear, 356 px, mouse": "85c10a72",
+    "day, clear, 356 px, mouse": "5fe82d17",
+    "dusk, clear, 356 px, mouse": "4cfeadaf",
+    "night, clear, 356 px, mouse": "4e35d726",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "5373fb98",
-    "dusk, clear, 356 px, mouse": "c0abc644",
-    "night, clear, 356 px, mouse": "bea7947f",
+    "day, clear, 356 px, mouse": "b62ba6a8",
+    "dusk, clear, 356 px, mouse": "806b5be5",
+    "night, clear, 356 px, mouse": "d1c609d0",
   },
   "landing": {
     "day, clear, 356 px, mouse": "e21a4d72",
@@ -1419,9 +1419,9 @@ exports[`jump view pixels of every own hill > own-27: jump with a telemark landi
     "night, clear, 356 px, mouse": "cd2ca1d2",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "27380c63",
-    "dusk, clear, 356 px, mouse": "5405be12",
-    "night, clear, 356 px, mouse": "525092ad",
+    "day, clear, 356 px, mouse": "14807ef3",
+    "dusk, clear, 356 px, mouse": "8b06948e",
+    "night, clear, 356 px, mouse": "56733e5",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "b0eb4f3d",
@@ -1429,9 +1429,9 @@ exports[`jump view pixels of every own hill > own-27: jump with a telemark landi
     "night, clear, 356 px, mouse": "e9fda3e4",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "944e88b3",
-    "dusk, clear, 356 px, mouse": "f552722a",
-    "night, clear, 356 px, mouse": "37095ac5",
+    "day, clear, 356 px, mouse": "abd7b0a3",
+    "dusk, clear, 356 px, mouse": "8010d0b6",
+    "night, clear, 356 px, mouse": "1e02afcd",
   },
 }
 `;
@@ -1439,9 +1439,9 @@ exports[`jump view pixels of every own hill > own-27: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-28: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "f6cc16fc",
-    "dusk, clear, 356 px, mouse": "daa9e283",
-    "night, clear, 356 px, mouse": "31c698a6",
+    "day, clear, 356 px, mouse": "7651e540",
+    "dusk, clear, 356 px, mouse": "b613f2f7",
+    "night, clear, 356 px, mouse": "28617786",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "6168a1ed",
@@ -1449,14 +1449,14 @@ exports[`jump view pixels of every own hill > own-28: jump with a telemark landi
     "night, clear, 356 px, mouse": "38365ef8",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "b32d5d1d",
-    "dusk, clear, 356 px, mouse": "f78d115c",
-    "night, clear, 356 px, mouse": "6b30d991",
+    "day, clear, 356 px, mouse": "5017701",
+    "dusk, clear, 356 px, mouse": "9ea8b978",
+    "night, clear, 356 px, mouse": "b78866a5",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "a0c7a740",
-    "dusk, clear, 356 px, mouse": "2286d11a",
-    "night, clear, 356 px, mouse": "6cb827d3",
+    "day, clear, 356 px, mouse": "bf944460",
+    "dusk, clear, 356 px, mouse": "4df8a58e",
+    "night, clear, 356 px, mouse": "9e633de5",
   },
   "landing": {
     "day, clear, 356 px, mouse": "335914d",
@@ -1479,9 +1479,9 @@ exports[`jump view pixels of every own hill > own-28: jump with a telemark landi
     "night, clear, 356 px, mouse": "49ebaa7b",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "34d2bfc8",
-    "dusk, clear, 356 px, mouse": "28e36030",
-    "night, clear, 356 px, mouse": "66512435",
+    "day, clear, 356 px, mouse": "83c3384",
+    "dusk, clear, 356 px, mouse": "816a0d0c",
+    "night, clear, 356 px, mouse": "20019f41",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "485f3fbf",
@@ -1489,9 +1489,9 @@ exports[`jump view pixels of every own hill > own-28: jump with a telemark landi
     "night, clear, 356 px, mouse": "e8acd297",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "aac3ffcc",
-    "dusk, clear, 356 px, mouse": "baf2ec7c",
-    "night, clear, 356 px, mouse": "9874418d",
+    "day, clear, 356 px, mouse": "f5054260",
+    "dusk, clear, 356 px, mouse": "35cceb30",
+    "night, clear, 356 px, mouse": "7e768749",
   },
 }
 `;
@@ -1499,9 +1499,9 @@ exports[`jump view pixels of every own hill > own-28: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-29: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "e2763d8a",
-    "dusk, clear, 356 px, mouse": "48fb384c",
-    "night, clear, 356 px, mouse": "bf6b2ca8",
+    "day, clear, 356 px, mouse": "caa6d64a",
+    "dusk, clear, 356 px, mouse": "83a19848",
+    "night, clear, 356 px, mouse": "773f05ac",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "4938d430",
@@ -1509,14 +1509,14 @@ exports[`jump view pixels of every own hill > own-29: jump with a telemark landi
     "night, clear, 356 px, mouse": "a85ee1c5",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "276cae0a",
-    "dusk, clear, 356 px, mouse": "c380f3a9",
-    "night, clear, 356 px, mouse": "4b28d7b4",
+    "day, clear, 356 px, mouse": "37a294fe",
+    "dusk, clear, 356 px, mouse": "1199710d",
+    "night, clear, 356 px, mouse": "77503234",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "69d34df7",
-    "dusk, clear, 356 px, mouse": "c1a59c48",
-    "night, clear, 356 px, mouse": "e5c78e64",
+    "day, clear, 356 px, mouse": "6bc830db",
+    "dusk, clear, 356 px, mouse": "d7489de4",
+    "night, clear, 356 px, mouse": "d89f9009",
   },
   "landing": {
     "day, clear, 356 px, mouse": "5d1c7b99",
@@ -1539,9 +1539,9 @@ exports[`jump view pixels of every own hill > own-29: jump with a telemark landi
     "night, clear, 356 px, mouse": "4559011f",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "c52d7b34",
-    "dusk, clear, 356 px, mouse": "df1eebd2",
-    "night, clear, 356 px, mouse": "a44762cc",
+    "day, clear, 356 px, mouse": "428461b4",
+    "dusk, clear, 356 px, mouse": "f960c52a",
+    "night, clear, 356 px, mouse": "86c5ab94",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "913592f9",
@@ -1549,9 +1549,9 @@ exports[`jump view pixels of every own hill > own-29: jump with a telemark landi
     "night, clear, 356 px, mouse": "dc860bf4",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "bc28fc68",
-    "dusk, clear, 356 px, mouse": "155f3c86",
-    "night, clear, 356 px, mouse": "50eb5ef4",
+    "day, clear, 356 px, mouse": "61540dd8",
+    "dusk, clear, 356 px, mouse": "1d22eece",
+    "night, clear, 356 px, mouse": "90172ebc",
   },
 }
 `;
@@ -1559,9 +1559,9 @@ exports[`jump view pixels of every own hill > own-29: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-30: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "8e353b69",
-    "dusk, clear, 356 px, mouse": "c09bed32",
-    "night, clear, 356 px, mouse": "94d7b084",
+    "day, clear, 356 px, mouse": "51b4a4c1",
+    "dusk, clear, 356 px, mouse": "d3b8a786",
+    "night, clear, 356 px, mouse": "e0069820",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "8b3629db",
@@ -1569,14 +1569,14 @@ exports[`jump view pixels of every own hill > own-30: jump with a telemark landi
     "night, clear, 356 px, mouse": "a738f1d4",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "d888b00c",
-    "dusk, clear, 356 px, mouse": "8fdae7d0",
-    "night, clear, 356 px, mouse": "d358824b",
+    "day, clear, 356 px, mouse": "89c1bc4",
+    "dusk, clear, 356 px, mouse": "70c429fe",
+    "night, clear, 356 px, mouse": "d8be6f3f",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "6af59342",
-    "dusk, clear, 356 px, mouse": "31355c64",
-    "night, clear, 356 px, mouse": "c95621d6",
+    "day, clear, 356 px, mouse": "76310ffa",
+    "dusk, clear, 356 px, mouse": "7f2538e7",
+    "night, clear, 356 px, mouse": "be4d492d",
   },
   "landing": {
     "day, clear, 356 px, mouse": "55c4eeda",
@@ -1599,9 +1599,9 @@ exports[`jump view pixels of every own hill > own-30: jump with a telemark landi
     "night, clear, 356 px, mouse": "27b71d31",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "d921b563",
-    "dusk, clear, 356 px, mouse": "7835b9a7",
-    "night, clear, 356 px, mouse": "55396b1b",
+    "day, clear, 356 px, mouse": "f9cdab97",
+    "dusk, clear, 356 px, mouse": "1913ab7b",
+    "night, clear, 356 px, mouse": "73afc353",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "5718cd0",
@@ -1609,9 +1609,9 @@ exports[`jump view pixels of every own hill > own-30: jump with a telemark landi
     "night, clear, 356 px, mouse": "b06d5e5e",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "ce5c3ebd",
-    "dusk, clear, 356 px, mouse": "e9e893e1",
-    "night, clear, 356 px, mouse": "6f8e15d7",
+    "day, clear, 356 px, mouse": "d155ebe9",
+    "dusk, clear, 356 px, mouse": "c53f2eb5",
+    "night, clear, 356 px, mouse": "9ff419af",
   },
 }
 `;
@@ -1619,9 +1619,9 @@ exports[`jump view pixels of every own hill > own-30: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-31: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "508f0841",
-    "dusk, clear, 356 px, mouse": "c2090987",
-    "night, clear, 356 px, mouse": "75c47032",
+    "day, clear, 356 px, mouse": "9e7f1789",
+    "dusk, clear, 356 px, mouse": "c42e1c0f",
+    "night, clear, 356 px, mouse": "b7afead2",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "bf3b3bab",
@@ -1629,14 +1629,14 @@ exports[`jump view pixels of every own hill > own-31: jump with a telemark landi
     "night, clear, 356 px, mouse": "8f4964d2",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "6f30f28b",
-    "dusk, clear, 356 px, mouse": "4e87e6b5",
-    "night, clear, 356 px, mouse": "6f49e8f3",
+    "day, clear, 356 px, mouse": "2499dfb3",
+    "dusk, clear, 356 px, mouse": "c2c5fbf4",
+    "night, clear, 356 px, mouse": "118152af",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "7ee55a",
-    "dusk, clear, 356 px, mouse": "c1dff100",
-    "night, clear, 356 px, mouse": "16753814",
+    "day, clear, 356 px, mouse": "9ab30c4a",
+    "dusk, clear, 356 px, mouse": "903e9e23",
+    "night, clear, 356 px, mouse": "6c9976f8",
   },
   "landing": {
     "day, clear, 356 px, mouse": "6638b8d3",
@@ -1659,9 +1659,9 @@ exports[`jump view pixels of every own hill > own-31: jump with a telemark landi
     "night, clear, 356 px, mouse": "e0a2bd92",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "236f8006",
-    "dusk, clear, 356 px, mouse": "9fc4a377",
-    "night, clear, 356 px, mouse": "a811d7d9",
+    "day, clear, 356 px, mouse": "6b929f1e",
+    "dusk, clear, 356 px, mouse": "cf5d56f",
+    "night, clear, 356 px, mouse": "eccbc1d1",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "8141bf80",
@@ -1669,9 +1669,9 @@ exports[`jump view pixels of every own hill > own-31: jump with a telemark landi
     "night, clear, 356 px, mouse": "fb811132",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "d456faaa",
-    "dusk, clear, 356 px, mouse": "92228083",
-    "night, clear, 356 px, mouse": "501e6cdd",
+    "day, clear, 356 px, mouse": "465d60b2",
+    "dusk, clear, 356 px, mouse": "fca5450b",
+    "night, clear, 356 px, mouse": "40a6b2d5",
   },
 }
 `;
@@ -1679,9 +1679,9 @@ exports[`jump view pixels of every own hill > own-31: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-32: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "d67e3c4d",
-    "dusk, clear, 356 px, mouse": "c8c1434b",
-    "night, clear, 356 px, mouse": "d75837a4",
+    "day, clear, 356 px, mouse": "6832bccd",
+    "dusk, clear, 356 px, mouse": "a40c40a3",
+    "night, clear, 356 px, mouse": "7b4648d8",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "6795fee",
@@ -1689,14 +1689,14 @@ exports[`jump view pixels of every own hill > own-32: jump with a telemark landi
     "night, clear, 356 px, mouse": "9f85176f",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "5257fb04",
-    "dusk, clear, 356 px, mouse": "d6d29c43",
-    "night, clear, 356 px, mouse": "1da9ebd0",
+    "day, clear, 356 px, mouse": "d6001a0",
+    "dusk, clear, 356 px, mouse": "e805d4df",
+    "night, clear, 356 px, mouse": "7b76da90",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "80e2c52d",
-    "dusk, clear, 356 px, mouse": "b9430e34",
-    "night, clear, 356 px, mouse": "4929036c",
+    "day, clear, 356 px, mouse": "46f2c7c5",
+    "dusk, clear, 356 px, mouse": "c25a9bd4",
+    "night, clear, 356 px, mouse": "d398fee7",
   },
   "landing": {
     "day, clear, 356 px, mouse": "39319b23",
@@ -1719,9 +1719,9 @@ exports[`jump view pixels of every own hill > own-32: jump with a telemark landi
     "night, clear, 356 px, mouse": "33d3855b",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "7dfa067c",
-    "dusk, clear, 356 px, mouse": "412aaeef",
-    "night, clear, 356 px, mouse": "fe6ccc54",
+    "day, clear, 356 px, mouse": "bf85ea54",
+    "dusk, clear, 356 px, mouse": "696d432b",
+    "night, clear, 356 px, mouse": "b085a5d8",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "8dae03c7",
@@ -1729,9 +1729,9 @@ exports[`jump view pixels of every own hill > own-32: jump with a telemark landi
     "night, clear, 356 px, mouse": "3cfff089",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "ca5f25b8",
-    "dusk, clear, 356 px, mouse": "c54ad53",
-    "night, clear, 356 px, mouse": "baf20990",
+    "day, clear, 356 px, mouse": "99644a20",
+    "dusk, clear, 356 px, mouse": "5731c9d7",
+    "night, clear, 356 px, mouse": "20745c9c",
   },
 }
 `;
@@ -1739,9 +1739,9 @@ exports[`jump view pixels of every own hill > own-32: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-33: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "5948825",
-    "dusk, clear, 356 px, mouse": "2c625164",
-    "night, clear, 356 px, mouse": "184d07a2",
+    "day, clear, 356 px, mouse": "f6293fd9",
+    "dusk, clear, 356 px, mouse": "20616080",
+    "night, clear, 356 px, mouse": "cf5009da",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "a3fe0438",
@@ -1749,14 +1749,14 @@ exports[`jump view pixels of every own hill > own-33: jump with a telemark landi
     "night, clear, 356 px, mouse": "6fecc58a",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "45bb6e62",
-    "dusk, clear, 356 px, mouse": "f1c06742",
-    "night, clear, 356 px, mouse": "50878d6b",
+    "day, clear, 356 px, mouse": "21efd876",
+    "dusk, clear, 356 px, mouse": "ae85aae",
+    "night, clear, 356 px, mouse": "5f0bc01f",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "c79b056",
-    "dusk, clear, 356 px, mouse": "68d69fb9",
-    "night, clear, 356 px, mouse": "c5d2b550",
+    "day, clear, 356 px, mouse": "97ab112a",
+    "dusk, clear, 356 px, mouse": "7102bfe9",
+    "night, clear, 356 px, mouse": "98ad944",
   },
   "landing": {
     "day, clear, 356 px, mouse": "ff63b587",
@@ -1779,9 +1779,9 @@ exports[`jump view pixels of every own hill > own-33: jump with a telemark landi
     "night, clear, 356 px, mouse": "48d4c84d",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "c66dc14a",
-    "dusk, clear, 356 px, mouse": "63275312",
-    "night, clear, 356 px, mouse": "dfb68eb9",
+    "day, clear, 356 px, mouse": "e63f4582",
+    "dusk, clear, 356 px, mouse": "47d2374e",
+    "night, clear, 356 px, mouse": "bf42b0f9",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "fba58fee",
@@ -1789,9 +1789,9 @@ exports[`jump view pixels of every own hill > own-33: jump with a telemark landi
     "night, clear, 356 px, mouse": "c1729658",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "5cd88736",
-    "dusk, clear, 356 px, mouse": "2f7cb412",
-    "night, clear, 356 px, mouse": "a3c5bdd9",
+    "day, clear, 356 px, mouse": "e143254e",
+    "dusk, clear, 356 px, mouse": "1427984e",
+    "night, clear, 356 px, mouse": "7e943e59",
   },
 }
 `;
@@ -1799,9 +1799,9 @@ exports[`jump view pixels of every own hill > own-33: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-34: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "15d245a5",
-    "dusk, clear, 356 px, mouse": "c0903e1c",
-    "night, clear, 356 px, mouse": "3e57e82c",
+    "day, clear, 356 px, mouse": "69cbe005",
+    "dusk, clear, 356 px, mouse": "d68e3e18",
+    "night, clear, 356 px, mouse": "e0d98db0",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "e373a474",
@@ -1809,14 +1809,14 @@ exports[`jump view pixels of every own hill > own-34: jump with a telemark landi
     "night, clear, 356 px, mouse": "7c49f7d4",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "178d0893",
-    "dusk, clear, 356 px, mouse": "29149dec",
-    "night, clear, 356 px, mouse": "7f225898",
+    "day, clear, 356 px, mouse": "a35a5ab7",
+    "dusk, clear, 356 px, mouse": "793fa630",
+    "night, clear, 356 px, mouse": "e22a6d28",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "61834cc3",
-    "dusk, clear, 356 px, mouse": "c6d7965e",
-    "night, clear, 356 px, mouse": "1c6a7010",
+    "day, clear, 356 px, mouse": "37d2d907",
+    "dusk, clear, 356 px, mouse": "91d3e576",
+    "night, clear, 356 px, mouse": "c1d6e1bc",
   },
   "landing": {
     "day, clear, 356 px, mouse": "479fd5e3",
@@ -1839,9 +1839,9 @@ exports[`jump view pixels of every own hill > own-34: jump with a telemark landi
     "night, clear, 356 px, mouse": "f0e9c9e",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "9c60c787",
-    "dusk, clear, 356 px, mouse": "4c41cf4b",
-    "night, clear, 356 px, mouse": "292e9bcc",
+    "day, clear, 356 px, mouse": "2287cf17",
+    "dusk, clear, 356 px, mouse": "5477553",
+    "night, clear, 356 px, mouse": "efee5bc4",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "ed865f0c",
@@ -1849,9 +1849,9 @@ exports[`jump view pixels of every own hill > own-34: jump with a telemark landi
     "night, clear, 356 px, mouse": "c550ad5e",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "fa8de685",
-    "dusk, clear, 356 px, mouse": "98e4f7a0",
-    "night, clear, 356 px, mouse": "cb06e02c",
+    "day, clear, 356 px, mouse": "6ea9c375",
+    "dusk, clear, 356 px, mouse": "16b40038",
+    "night, clear, 356 px, mouse": "ffb3dfe4",
   },
 }
 `;
@@ -1859,9 +1859,9 @@ exports[`jump view pixels of every own hill > own-34: jump with a telemark landi
 exports[`jump view pixels of every own hill > own-35: jump with a telemark landing 1`] = `
 {
   "after the jump, notes shown": {
-    "day, clear, 356 px, mouse": "bf5b996",
-    "dusk, clear, 356 px, mouse": "5d2b6f39",
-    "night, clear, 356 px, mouse": "8cbe449c",
+    "day, clear, 356 px, mouse": "3385867a",
+    "dusk, clear, 356 px, mouse": "9a053041",
+    "night, clear, 356 px, mouse": "38d3ea2c",
   },
   "distance shown, notes appearing": {
     "day, clear, 356 px, mouse": "c65dbc2d",
@@ -1869,14 +1869,14 @@ exports[`jump view pixels of every own hill > own-35: jump with a telemark landi
     "night, clear, 356 px, mouse": "5890a8cc",
   },
   "flight": {
-    "day, clear, 356 px, mouse": "8e758720",
-    "dusk, clear, 356 px, mouse": "fa9f81a1",
-    "night, clear, 356 px, mouse": "becbcee3",
+    "day, clear, 356 px, mouse": "df55a370",
+    "dusk, clear, 356 px, mouse": "fff54f11",
+    "night, clear, 356 px, mouse": "d8389813",
   },
   "inrun": {
-    "day, clear, 356 px, mouse": "cba325b2",
-    "dusk, clear, 356 px, mouse": "244a5780",
-    "night, clear, 356 px, mouse": "3f82fc92",
+    "day, clear, 356 px, mouse": "d038e7da",
+    "dusk, clear, 356 px, mouse": "c6772368",
+    "night, clear, 356 px, mouse": "1490cb9e",
   },
   "landing": {
     "day, clear, 356 px, mouse": "1a69f00c",
@@ -1899,9 +1899,9 @@ exports[`jump view pixels of every own hill > own-35: jump with a telemark landi
     "night, clear, 356 px, mouse": "878f43a",
   },
   "start gate, half a second in": {
-    "day, clear, 356 px, mouse": "593ac034",
-    "dusk, clear, 356 px, mouse": "89993732",
-    "night, clear, 356 px, mouse": "d269fd15",
+    "day, clear, 356 px, mouse": "69cfb854",
+    "dusk, clear, 356 px, mouse": "3b61f65e",
+    "night, clear, 356 px, mouse": "8c1b69e9",
   },
   "takeoff": {
     "day, clear, 356 px, mouse": "22b2df5b",
@@ -1909,9 +1909,9 @@ exports[`jump view pixels of every own hill > own-35: jump with a telemark landi
     "night, clear, 356 px, mouse": "44980eb6",
   },
   "waiting on the start gate": {
-    "day, clear, 356 px, mouse": "8863a500",
-    "dusk, clear, 356 px, mouse": "6e7fc8c6",
-    "night, clear, 356 px, mouse": "13f264cd",
+    "day, clear, 356 px, mouse": "d4314750",
+    "dusk, clear, 356 px, mouse": "9d2ffba",
+    "night, clear, 356 px, mouse": "d47680b1",
   },
 }
 `;

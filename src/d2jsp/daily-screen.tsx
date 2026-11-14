@@ -64,7 +64,7 @@ function LoginForm({ onLogin, onRegister }: Pick<Props, "onLogin" | "onRegister"
       <p className="note">{T.loginHint}</p>
       <label>
         {T.nick}
-        <input value={nick} onChange={(e) => setNick(e.target.value)} autoComplete="username" maxLength={40} />
+        <input value={nick} onChange={(e) => setNick(e.target.value)} autoComplete="username" maxLength={20} />
       </label>
       <label>
         {T.password}
