@@ -17,7 +17,7 @@ export const HILL_GROUPS: readonly { name: string; ids: readonly string[] }[] = 
  */
 export const TRAINING_HILL_ID = "own-24";
 
-const WARSAW =new Intl.DateTimeFormat("en-CA", {
+const WARSAW = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Warsaw",
   year: "numeric",
   month: "2-digit",
