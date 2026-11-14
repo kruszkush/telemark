@@ -10,6 +10,7 @@ Jedyne miejsce tych ustaleń (14.11.2026). Plan wykonania: `docs/plan_d2jsp.md`.
 - Logowanie kontem Lotnika (nick + hasło, to samo konto). Zalogowany w Lotniku na tej stronie jest od razu zalogowany w Telemarku. Nick gracza widać jako nazwisko skoczka przy skoku i w wynikach.
 
 ## Skocznie i skoki
+- Dzień gry od północy do północy czasu polskiego (Mateusz 14.11: „może się kończyć o północy”; odrzucone: 21:00 jak licznik postów). O północy nowe skocznie i nowy wynik dnia; tydzień, miesiąc i rok też kończą się o północy.
 - Codziennie 3 losowe skocznie: mała (K50–K95, 7 skoczni), średnia (K100–K170, 8), mamucia (K185–K300, 8); tylko wbudowane skocznie gry.
 - Zalogowany: 10 skoków na skoczni dziennie (30 razem). Każdy z 10 skoków ma inny wiatr, ale ten sam dla wszystkich (np. 4. skok na mamuciej ma dziś u każdego ten sam wiatr).
 - Kolejność skoczni automatyczna (Mateusz 14.11): 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa; gracz nie wybiera skoczni. Po 6 skokach wynik dnia jest już pełny (2 najlepsze z każdej skoczni), więc nowy gracz nie zmarnuje skoków na jednej skoczni.
