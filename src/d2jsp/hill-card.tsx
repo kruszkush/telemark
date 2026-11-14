@@ -25,6 +25,10 @@ export function recordFor(list: readonly (HillRecord | null)[] | undefined, g: n
   return r !== null && r.hill === hillId ? r : null;
 }
 
+/**
+ * Wiersz rekordu w równych kolumnach (Mateusz 14.11: „gryzie się”): opis, awatar, nick skracany kropkami w obu
+ * wierszach jednakowo, metry i data zawsze w tym samym miejscu (rekord dnia ma pustą kolumnę daty).
+ */
 function Record({ label, rec, withDate }: { label: string; rec: HillRecord | null; withDate: boolean }) {
   return (
     <div className="d2-rec">
@@ -32,11 +36,12 @@ function Record({ label, rec, withDate }: { label: string; rec: HillRecord | nul
       {rec === null ? (
         <span className="d2-rec-none">{T.recordNone}</span>
       ) : (
-        <span className="d2-rec-who">
+        <>
           <Avatar row={rec} />
-          <span className="d2-rec-nick">{rec.nick}</span> <b>{T.metersUnit(rec.m)}</b>
-          {withDate && <small>{` ${T.shortDate(rec.day)}`}</small>}
-        </span>
+          <span className="d2-rec-nick">{rec.nick}</span>
+          <b className="d2-rec-m">{T.metersUnit(rec.m)}</b>
+          <small className="d2-rec-date">{withDate ? T.shortDate(rec.day) : ""}</small>
+        </>
       )}
     </div>
   );

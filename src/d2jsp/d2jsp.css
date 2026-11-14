@@ -184,55 +184,52 @@
 }
 .d2-recs {
   align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  row-gap: 5px;
   padding: 2px 0 8px;
   border-bottom: 1px solid var(--line);
   font-size: clamp(12px, 3vw, 13px);
 }
+/*
+ * Oba wiersze rekordu w tych samych kolumnach (Mateusz 14.11): opis | awatar | nick (skracany kropkami) | metry do
+ * prawej | data (przy rekordzie dnia pusta). Metry i data stoją jedne pod drugimi niezależnie od długości nicku.
+ */
+.d2-recs {
+  display: grid;
+  grid-template-columns: max-content auto minmax(0, 1fr) max-content max-content;
+  align-items: center;
+  column-gap: 0.45em;
+  white-space: nowrap;
+}
+/* Wiersz rekordu nie ma własnego pudełka: jego części idą wprost do wspólnej siatki obu wierszy. */
 .d2-rec {
-  display: flex;
-  align-items: baseline;
-  min-width: 0;
+  display: contents;
 }
 .d2-rec-label {
-  flex: none;
-  width: 10.5em;
   font-size: 0.8em;
-  white-space: nowrap;
   color: var(--muted);
 }
-/* Długi nick skraca się kropkami; metry i data zostają całe. */
-.d2-rec-who {
-  display: flex;
-  align-items: baseline;
-  gap: 0 0.5em;
-  min-width: 0;
-  white-space: nowrap;
-}
-.d2-rec-who .d2-av {
-  flex: none;
+.d2-rec .d2-av {
   margin-right: 0;
-  align-self: center;
 }
 .d2-rec-nick {
-  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.d2-rec-who b {
-  flex: none;
+.d2-rec-m {
+  text-align: right;
   font-weight: inherit;
   color: var(--accent);
 }
-.d2-rec-who small {
-  flex: none;
+.d2-rec-date {
+  text-align: right;
 }
-.d2-rec-who small,
+.d2-rec-date,
 .d2-rec-none {
   font-size: 0.85em;
   color: var(--muted);
+}
+.d2-rec-none {
+  grid-column: 2 / -1;
 }
 .d2-legend {
   align-self: stretch;
