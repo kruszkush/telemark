@@ -29,6 +29,7 @@ import {
 import { DailyScreen, type DayNote } from "./daily-screen";
 import { PlayerScreen } from "./player-screen";
 import { ownHill } from "./jump-check";
+import { TRAINING_HILL_ID } from "./daily";
 import { jumperNick } from "./nick";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 
@@ -261,9 +262,9 @@ function useStartJump(
       show({ kind: "jump", hill, ticket: r.j, key: nextKey() });
     });
   };
-  const onTrial = (grupa: number) => {
-    const id = day.day?.hills[grupa]?.id;
-    const hill = id === undefined ? undefined : ownHill(id);
+  /** Skok bez biletu (próba gościa na skoczni dnia albo trening zalogowanego): losowy wiatr, bez zapisu. */
+  const onTrial = (hillId: string) => {
+    const hill = ownHill(hillId);
     if (!hill) return;
     setNotes([]);
     show({ kind: "jump", hill, ticket: null, key: nextKey() });
@@ -321,7 +322,9 @@ export function D2jspApp() {
         back={from ? () => show(from) : back}
         focusOnEntry={navigated}
         onSent={expect}
-        onTrialResult={(m, p) => setNotes([{ text: T.trialResult(m, p) }])}
+        onTrialResult={(m, p) =>
+          setNotes([{ text: (screen.hill.id === TRAINING_HILL_ID ? T.trainingResult : T.trialResult)(m, p) }])
+        }
       />
     );
   }

@@ -136,6 +136,35 @@
   margin-left: -14px;
   font-size: clamp(16px, 4.2vw, 22px);
 }
+/*
+ * Wynik dnia i obok trening (wygląd wymyślony, bez wzoru): nazwa skoczni jak na kartach, dopisek szarym, mały
+ * przycisk jak „Wyloguj”; jeden wiersz, żeby ekran dnia mieścił się w oknie.
+ */
+.d2-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 1.5rem;
+}
+.d2-train {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 0.75rem;
+}
+.d2-train .hill-section-title {
+  margin: 0;
+  font-size: clamp(13px, 3.4vw, 16px);
+  color: var(--tone-white);
+}
+.d2-train .note {
+  margin: 0;
+  font-size: clamp(13px, 3.4vw, 15px);
+}
+.d2-train .d2-small {
+  margin-left: 0;
+}
 .d2-fine {
   max-width: none;
   font-size: clamp(11px, 3vw, 13px);

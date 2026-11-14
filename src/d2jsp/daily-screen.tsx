@@ -5,6 +5,8 @@ import { SERVER_TEST, setTesterPassword, type DayState, type Konto } from "./api
 import { VerifiedOnce, VerifyBox } from "./verify-box";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import { nextHill } from "./next-hill";
+import { TRAINING_HILL_ID } from "./daily";
+import { ownHill } from "./jump-check";
 import { WeekTable } from "./week-table";
 
 /** Co widać pod nagłówkiem po ostatnim skoku albo przy błędzie. */
@@ -33,7 +35,8 @@ interface Props {
   account: Konto | null;
   onLogout: () => void;
   onJump: (grupa: number) => void;
-  onTrial: (grupa: number) => void;
+  /** Skok bez zapisu na podanej skoczni: próba gościa na skoczni dnia albo trening zalogowanego. */
+  onTrial: (hillId: string) => void;
   onOpen: (kind: "settings" | "howto" | "about") => void;
   focusOnEntry: boolean;
 }
@@ -187,7 +190,7 @@ function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJ
               </ul>
             )}
             {guest ? (
-              <button type="button" className="pixel-button" disabled={starting} onClick={() => onTrial(g)}>
+              <button type="button" className="pixel-button" disabled={starting} onClick={() => onTrial(hill.id)}>
                 {T.trial}
               </button>
             ) : g === next ? (
@@ -204,13 +207,42 @@ function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJ
   );
 }
 
-/** Koniec dnia (po wszystkich skokach) i wynik dnia zalogowanego gracza. */
-function DayFooter({ day }: { day: NonNullable<Props["day"]> }) {
+/**
+ * Skocznia treningowa zalogowanego (Mateusz 14.11): jedna stała, bez limitu i bez zapisu. W wierszu wyniku dnia, bo
+ * osobny wiersz wypychał ekran dnia poza okno (mysz 1650×800).
+ */
+function Training({ starting, onTrial }: Pick<Props, "starting" | "onTrial">) {
+  const hill = ownHill(TRAINING_HILL_ID);
+  if (!hill) return null;
+  return (
+    <section className="d2-train" aria-labelledby="d2-train">
+      <h2 className="hill-section-title" id="d2-train">
+        {`${T.trainingTitle}: ${UI_TEXT.hillLabel(hill.name, hill.kPointM)}`}
+      </h2>
+      <span className="note">{T.trainingNote}</span>
+      <button
+        type="button"
+        className="pixel-button d2-small"
+        disabled={starting}
+        onClick={() => onTrial(hill.id)}
+        aria-label={T.training}
+      >
+        {T.trainingShort}
+      </button>
+    </section>
+  );
+}
+
+/** Koniec dnia (po wszystkich skokach), wynik dnia zalogowanego gracza i obok trening. */
+function DayFooter({ day, children }: { day: NonNullable<Props["day"]>; children: React.ReactNode }) {
   const done = nextHill(day.uzyte ?? [], day.hills.length, day.limit) === null;
   return (
     <>
       {done && <p className="note d2-result">{T.dayDone}</p>}
-      <p className="d2-total">{T.dayTotal(day.wynik ?? 0)}</p>
+      <div className="d2-foot">
+        <p className="d2-total">{T.dayTotal(day.wynik ?? 0)}</p>
+        {children}
+      </div>
     </>
   );
 }
@@ -303,7 +335,11 @@ export function DailyScreen(props: Props) {
             onJump={props.onJump}
             onTrial={props.onTrial}
           />
-          {!guest && <DayFooter day={day} />}
+          {!guest && (
+            <DayFooter day={day}>
+              <Training starting={props.starting || props.versionMismatch} onTrial={props.onTrial} />
+            </DayFooter>
+          )}
         </>
       )}
       <p className="note d2-fine">

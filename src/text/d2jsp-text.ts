@@ -94,6 +94,11 @@ export const D2_TEXT = {
   differs: (game: number, server: number) =>
     `Uwaga: gra policzyła ${pts(game)} pkt, serwer ${pts(server)} pkt. Liczy się wynik serwera.`,
   trialResult: (m: number, p: number) => `Skok na próbę: ${meters(m)} m, ${pts(p)} pkt (bez zapisu).`,
+  trainingTitle: "Trening",
+  trainingNote: "bez limitu i bez zapisu",
+  training: "Skacz na treningu",
+  trainingShort: "Skacz",
+  trainingResult: (m: number, p: number) => `Skok treningowy: ${meters(m)} m, ${pts(p)} pkt (bez zapisu).`,
   tableCaption: (k: "w" | "m", key: string) => {
     const w = /^w(\d{4})-(\d{2})$/.exec(key);
     if (k === "w") return w ? `Tydzień ${Number(w[2])}.` : "Tydzień";

@@ -11,7 +11,13 @@ export const HILL_GROUPS: readonly { name: string; ids: readonly string[] }[] = 
   { name: "mamucia", ids: ["own-28", "own-29", "own-30", "own-31", "own-32", "own-33", "own-34", "own-35"] },
 ];
 
-const WARSAW = new Intl.DateTimeFormat("en-CA", {
+/**
+ * Skocznia treningowa zalogowanego (Mateusz 14.11): stała, ze środka średnich (Jodłowa K135, środek K100–K170),
+ * bez limitu i bez zapisu, losowy wiatr jak skok na próbę gościa.
+ */
+export const TRAINING_HILL_ID = "own-24";
+
+const WARSAW =new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Warsaw",
   year: "numeric",
   month: "2-digit",
