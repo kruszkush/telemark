@@ -240,8 +240,10 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonl
   // At the bottom of the picture, above the bar: the jumper is always in its upper part, and three lines in
   // the middle of the sky covered him. The d2jsp page tells all of them on the gate in plain page text over the
   // bottom left corner (Mateusz 14.11: the picture's letters were too big there), so they are not drawn here.
-  const pageLines = m.hintsBeforeStart === true ? lines : [];
-  if (m.hintsBeforeStart !== true) {
+  // After the jump and in a replay its lines (keys, the replay's name) stay drawn in the picture.
+  const onGate = m.hintsBeforeStart === true && m.replay === undefined && s.logic.phase === PHASE.gate;
+  const pageLines = onGate ? lines : [];
+  if (!onGate) {
     const firstLineY = groundBottom - PROMPT_BOTTOM_GAP_PX - lines.length * PROMPT_LINE_PX;
     lines.forEach((line, i) => {
       const x = Math.round((fb.width - textWidth(line)) / 2);

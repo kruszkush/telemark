@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wskazówki w grupach</title>
+<style>
+  :root { --bg: #111; --fg: #eee; --gold: #f2c230; }
+  body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg); font: 16px "Segoe UI", system-ui, Arial, sans-serif; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lead { margin: 0 0 20px; color: #bbb; max-width: 70ch; }
+  h2 { font-size: 20px; margin: 28px 0 8px; }
+  h2 small { font-weight: 400; color: #bbb; font-size: 15px; }
+  /* Kadr gry 1920x1080, skalowany do szerokości strony. */
+  .frame { position: relative; width: min(100%, 1600px); aspect-ratio: 16 / 9; container-type: inline-size;
+    background: url("zrzuty/fullhd-0-bez.png") center / cover no-repeat; image-rendering: pixelated; }
+  /* Wielkości liczone od kadru 1920: 1cqw = 19,2 px gry. Tekst jak w grze teraz (ok. 27 px na 1080). */
+  .hints { position: absolute; left: 0.75cqw; bottom: 7.4cqw; display: flex; gap: 0.7cqw;
+    font-size: 1.35cqw; line-height: 1.3; font-weight: 600; color: #fff; }
+  .box { background: rgb(8 10 30 / 72%); border: 0.12cqw solid rgb(255 255 255 / 35%); padding: 0.5cqw 0.8cqw 0.6cqw; }
+  .box h3 { margin: 0 0 0.25cqw; font-size: 1.05cqw; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+  .col { flex-direction: column; align-items: stretch; }
+  .bare { text-shadow: 1px 1px 0 #000, 0 0 4px #000; }
+  .bare h3 { margin: 0 0 0.2cqw; font-size: 1.05cqw; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+  .bare .grp + .grp { margin-left: 2cqw; }
+  .key { color: var(--gold); }
+</style>
+</head>
+<body>
+<h1>Wskazówki na belce w grupach (szybka makieta)</h1>
+<p class="lead">Tło to prawdziwy zrzut belki z gry (ekran 1920×1080), napisy są dorysowane. Wielkość liter jak w wersji 19.6 na teście. Trzy sposoby podziału. Na telefonie te same grupy, tylko z nazwami pól L i P.</p>
+
+<h2>A. Dwa kwadraciki jeden nad drugim <small>Start i lot, pod spodem Lądowanie</small></h2>
+<div class="frame"><div class="hints col">
+  <div class="box"><h3>Start i lot</h3>
+    <div>Lewy przycisk: start</div><div>Oba przyciski na progu: wybicie</div><div>Mysz: pochylenie</div></div>
+  <div class="box"><h3>Lądowanie</h3>
+    <div>Przycisk tuż nad ziemią: telemark</div><div>Szybko drugi przycisk: wąski telemark</div><div>Oba naraz: na dwie nogi</div></div>
+</div></div>
+
+<h2>B. Trzy kwadraciki w rzędzie <small>Start, Lot, Lądowanie, po kolei jak w skoku</small></h2>
+<div class="frame"><div class="hints">
+  <div class="box"><h3>Start</h3><div>Lewy przycisk: start</div><div>Oba przyciski na progu</div></div>
+  <div class="box"><h3>Lot</h3><div>Mysz: pochylenie</div></div>
+  <div class="box"><h3>Lądowanie</h3>
+    <div>Przycisk tuż nad ziemią: telemark</div><div>Szybko drugi przycisk: wąski</div><div>Oba naraz: na dwie nogi</div></div>
+</div></div>
+
+<h2>C. Dwie grupy obok siebie bez ramek <small>tylko żółte nagłówki, tekst z cieniem jak teraz</small></h2>
+<div class="frame"><div class="hints bare">
+  <div class="grp"><h3>Start i lot</h3>
+    <div>Lewy przycisk: start</div><div>Oba przyciski na progu: wybicie</div><div>Mysz: pochylenie</div></div>
+  <div class="grp"><h3>Lądowanie</h3>
+    <div>Przycisk tuż nad ziemią: telemark</div><div>Szybko drugi przycisk: wąski telemark</div><div>Oba naraz: na dwie nogi</div></div>
+</div></div>
+
+<h2>Dla porównania: wersja 19.6 na teście</h2>
+<div class="frame" style="background-image:url('zrzuty/fullhd-1-zwykla.png')"></div>
+</body>
+</html>

@@ -860,6 +860,9 @@ h2 {
     1px 1px 0 #000,
     0 0 4px #000;
 }
+.game.menu-open .page-hints {
+  display: none;
+}
 
 /* What became of a jump kept with the S key, over the top of the picture area for a few seconds. */
 .keep-note {

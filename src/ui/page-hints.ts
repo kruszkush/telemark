@@ -14,7 +14,8 @@ export function pageHintsUpdater(element: HTMLElement, canvas: HTMLCanvasElement
     const scale = canvas.clientHeight / VIEW_HEIGHT_PX;
     const left = canvas.offsetLeft + TITLE_AT_PX.x * scale;
     const bottomOfLines = canvas.offsetTop + pageHintsBottomPx() * scale;
-    const parentHeight = box.offsetParent instanceof HTMLElement ? box.offsetParent.clientHeight : 0;
+    // The stage holds both the picture and this element (a hidden element has no offsetParent).
+    const parentHeight = box.parentElement?.clientHeight ?? 0;
     const key = `${lines.join("\n")}|${Math.round(left)}|${Math.round(parentHeight - bottomOfLines)}|${scale}`;
     if (key === shown) return;
     shown = key;

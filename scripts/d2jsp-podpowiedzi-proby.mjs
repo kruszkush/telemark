@@ -21,6 +21,8 @@ const server = createServer((req, res) => {
 await new Promise((ok) => server.listen(8801, ok));
 
 const PROBY = {
+  // Tło do makiet: belka bez wskazówek.
+  "0-bez": ".page-hints{display:none}",
   "1-zwykla": "/* bez zmian */",
   "2-mniejsza": ".page-hints{font-size:max(12px,calc(var(--picture-px) * 4))}",
   "3-na-tle": ".page-hints{background:rgb(0 0 0 / 55%);padding:0.2em 0.5em;text-shadow:none;font-weight:400}",

@@ -282,4 +282,27 @@ describe("prompts told before the start (the d2jsp page)", () => {
     },
     WHOLE_JUMP_TIMEOUT_MS,
   );
+
+  it("leave the gate's hints to the page and keep every other line in the picture", () => {
+    const hill = OWN_HILLS[0];
+    if (!hill) throw new Error("no hill");
+    const jump = startTrainingJump(hill, 12345);
+    const fb = new FrameBuffer(viewWidthFor(16, 9), VIEW_HEIGHT_PX);
+    const base = {
+      profile: hill.profile,
+      kPointM: hill.kPointM,
+      hillName: hill.name,
+      playerName: "GRACZ 1",
+      state: jump.state,
+      controls: "mouse" as const,
+      frame: 0,
+      over: false,
+    };
+    // The game's own jumps draw their prompts in the picture, as before.
+    expect(drawJumpView(fb, base)).toEqual([]);
+    expect(drawJumpView(fb, { ...base, hintsBeforeStart: true })).toHaveLength(6);
+    // A replay's name stays in the picture on the d2jsp page too.
+    const replay = { speedLabel: "1×", paused: false, menuAtEnd: false };
+    expect(drawJumpView(fb, { ...base, hintsBeforeStart: true, replay })).toEqual([]);
+  });
 });
