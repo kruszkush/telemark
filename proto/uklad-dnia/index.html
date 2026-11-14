@@ -42,17 +42,16 @@
   .dots { display:inline-flex; gap:4px; }
   .dots i { width:9px; height:9px; border:2px solid var(--muted); display:inline-block; }
   .dots i.u { background:var(--muted); }
-  .jump { display:grid; grid-template-columns:150px 1fr 74px; align-items:center; gap:10px; font-size:13px; }
+  .jump { display:flex; justify-content:space-between; align-items:baseline; font-size:13px; }
   .jump .m { font-size:15px; }
-  .jump .p { text-align:right; color:var(--muted); font-size:12px; }
+  .jump .p { color:var(--muted); font-size:12px; }
   .jump.fell .m::after { content:" upadek"; color:var(--warn); font-size:10px; }
-  /* Wiersz nad skokami: po lewej czyje skoki, nad kreską (kolumna paska, 80% jego szerokości) lider dnia. */
-  .legend { font-size:10px; color:var(--muted); margin-bottom:8px; }
-  .bar .lead { position:absolute; bottom:calc(100% + 6px); transform:translateX(-50%); font-size:10px; color:var(--accent); white-space:nowrap; }
-  .bar { position:relative; height:10px; background:#10183a; border:1px solid var(--line); }
-  .bar .f { position:absolute; left:0; top:0; bottom:0; background:var(--cyan); }
-  .jump.fell .bar .f { background:#4a7f99; }
-  .bar .k { position:absolute; top:-5px; bottom:-5px; width:2px; background:var(--accent); }
+  /* Rekordy pod nazwą skoczni: dnia i wszech czasów, z awatarem przy nicku (jak w tabeli). */
+  .recs { display:flex; flex-direction:column; gap:5px; font-size:12px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .recs .rl { display:inline-block; width:128px; color:var(--muted); font-size:10px; }
+  .recs b { font-weight:400; color:var(--accent); }
+  .recs small { color:var(--muted); font-size:10px; }
+  .legend { font-size:10px; color:var(--muted); display:flex; justify-content:space-between; align-items:center; margin-top:2px; }
   .sum { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); border-top:1px solid var(--line); padding-top:6px; }
   .sum b { color:var(--white); font-weight:400; font-size:14px; }
   .go { color:var(--accent); font-size:21px; text-shadow:2px 2px 0 #6a3c00; margin-top:2px; }
@@ -83,7 +82,7 @@
 </head>
 <body>
 
-<div class="label">A2: kreska to najlepszy dzisiejszy skok na skoczni <small>okno 1650×800; najlepsze skoki dnia zmyślone, na przykład</small></div>
+<div class="label">A: rekord dnia i rekord skoczni przy każdej skoczni <small>okno 1650×800; rekordy zmyślone, na przykład</small></div>
 <div class="win A A2"><div class="scr">
   <div class="head">
     <h1>Telemark<span class="date">sobota 14.11</span></h1>
@@ -111,23 +110,24 @@ const ROWS = [
   [2, "TMsmokee80096", "120,5", "–", "–", "3/30", "120,5"],
   [7, "Skoczekbcf7", "23,5", "0,0", "0,0", "10/30", "23,5", true],
 ];
-// Najlepszy dzisiejszy skok na skoczni (do A2): zmyślony przykład, w grze przyszedłby z serwera.
-const BEST = [{ m: 68.5, who: "Kupcia" }, { m: 131.0, who: "Kupcia" }, { m: 236.5, who: "Kupcia" }];
+// Rekord dnia i rekord skoczni (wszystkie dni) w metrach: zmyślony przykład, w grze przyszedłby z serwera.
+const REC = [
+  { day: { m: 68.5, who: "Kupcia" }, all: { m: 74.0, who: "Pozdrawiam", date: "2.11" } },
+  { day: { m: 131.0, who: "Kupcia" }, all: { m: 142.5, who: "Kupcia", date: "8.11" } },
+  { day: { m: 236.5, who: "Kupcia" }, all: { m: 268.0, who: "Lotnik77", date: "30.10" } },
+];
 const f = (x) => x.toFixed(1).replace(".", ",");
-const SCALE = 1.25; // pasek do 1,25 × kreski
-// Kreska: A1 punkt K skoczni, A2 najlepszy dzisiejszy skok na skoczni.
-const mark = (h, g, best) => (best ? BEST[g].m : h.k);
-const jump = (h, g, j, best) => `<div class="jump${j.fell ? " fell" : ""}"><span class="m">${f(j.m)} m</span>
-  <span class="bar"><span class="f" style="width:${Math.min(100, (j.m / (mark(h, g, best) * SCALE)) * 100)}%"></span>
-  <span class="k" style="left:${100 / SCALE}%"></span>${j === h.jumps[0] ? lead(g) : ""}</span><span class="p">${f(j.p)} pkt</span></div>`;
-// Nad skokami: czyje to skoki, a nad kreską pierwszego paska: kto skoczył najdalej dziś i ile.
+const av = (who) => `<span class="av">${who[0]}</span>`;
+const records = (g) => `<div class="recs">
+  <div><span class="rl">Rekord dnia</span>${av(REC[g].day.who)}${REC[g].day.who} <b>${f(REC[g].day.m)} m</b></div>
+  <div><span class="rl">Rekord skoczni</span>${av(REC[g].all.who)}${REC[g].all.who} <b>${f(REC[g].all.m)} m</b> <small>${REC[g].all.date}</small></div></div>`;
+const jump = (j) => `<div class="jump${j.fell ? " fell" : ""}"><span class="m">${f(j.m)} m</span><span class="p">${f(j.p)} pkt</span></div>`;
 const legend = () => `<div class="legend">Twoje 2 najlepsze skoki</div>`;
-const lead = (g) => `<span class="lead" style="left:${100 / SCALE}%">${BEST[g].who} ${f(BEST[g].m)} m</span>`;
 const dots = (n) => `<span class="dots" title="${n} z 10 skoków">${Array.from({ length: 10 }, (_, i) => `<i class="${i < n ? "u" : ""}"></i>`).join("")}</span>`;
-function card(h, g, best) {
-  const title = `<h3><span>${h.g}: ${h.name} K${h.k}</span>${dots(h.used)}</h3>`;
+function card(h, g) {
+  const title = `<h3><span>${h.g}: ${h.name} K${h.k}</span></h3>${records(g)}`;
   const js = h.jumps.length
-    ? legend() + h.jumps.map((j) => jump(h, g, j, best)).join("")
+    ? `<div class="legend">Twoje 2 najlepsze skoki ${dots(h.used)}</div>` + h.jumps.map((j) => jump(j)).join("")
     : `<span class="empty">Jeszcze bez skoku.</span>`;
   const sum = `<div class="sum"><span>Razem (2 najlepsze)</span><b>${f(h.sum)} pkt</b></div>`;
   const go = h.next ? `<span class="go">Skacz (skok ${h.used + 1} z 10)</span>` : "";
@@ -141,9 +141,8 @@ function table(cols) {
 }
 const foot = `<span class="total">Wynik dnia: 23,5 pkt</span><span class="train">Trening: Jodłowa K135 <span class="note">bez limitu i bez zapisu</span><span class="go">Skacz</span></span>`;
 document.querySelectorAll(".A").forEach((w) => {
-  const best = w.classList.contains("A2");
   w.querySelector("[data-table]").innerHTML = table(true);
-  w.querySelector("[data-cards]").innerHTML = HILLS.map((h, g) => card(h, g, best)).join("");
+  w.querySelector("[data-cards]").innerHTML = HILLS.map((h, g) => card(h, g)).join("");
 });
 document.querySelectorAll("[data-foot]").forEach((e) => (e.innerHTML = foot));
 </script>
