@@ -1,7 +1,4 @@
 /* Ekran „Skocznie dnia” (daily-screen.tsx); reszta wyglądu z app.css gry. */
-.d2-hill {
-  margin: 0.5rem 0 1rem;
-}
 .d2-warn {
   color: #ffb000;
 }
@@ -9,8 +6,8 @@
   color: #7fff7f;
 }
 .d2-total {
-  font-size: 1.25rem;
-  margin: 1rem 0 0.25rem;
+  margin: 0;
+  font-size: clamp(15px, 3.6vw, 20px);
 }
 .d2-login {
   display: flex;
@@ -33,10 +30,105 @@
 }
 .d2-small {
   margin-left: 0.5rem;
+  min-height: 0;
+  padding: 2px 8px;
+  font-size: clamp(14px, 3.6vw, 18px);
 }
 .d2-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
+  justify-content: center;
+  gap: 0 0.5rem;
+}
+.d2-buttons .pixel-button {
+  font-size: clamp(15px, 3.8vw, 20px);
+}
+
+/* Mała tabela tygodnia (week-table.tsx) na górze, na środku, w wyglądzie tabel zawodów (.contest-table w app.css). */
+.d2-tables {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 2rem;
+}
+.d2-table {
+  width: auto;
+  min-width: min(100%, 17rem);
+  font-size: clamp(11px, 2.4vw, 14px);
+}
+.d2-table caption {
+  margin-bottom: 6px;
+  text-align: center;
+}
+.d2-table th,
+.d2-table td {
+  padding-block: 4px;
+}
+.d2-table .contest-name {
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+ * Całość ekranu dnia ma się mieścić w oknie gry na stronie bez przewijania (Mateusz 14.11: „zajmuje za dużo
+ * miejsca”): mniejsze odstępy niż na ekranach autora, skocznie obok siebie jak siatka skoczni (.hill-grid w app.css).
+ */
+.screen.d2-day {
+  max-width: 1200px;
+  padding-top: calc(clamp(12px, 3vw, 28px) + var(--safe-top));
+  padding-bottom: calc(clamp(12px, 3vw, 28px) + var(--safe-bottom));
+  gap: clamp(10px, 2vw, 18px);
+}
+.d2-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 1.5rem;
+}
+.d2-account {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.d2-hills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  align-items: start;
+  gap: 12px 18px;
+}
+.d2-hill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+}
+.d2-hill .hill-section-title {
+  margin: 0;
+  font-size: clamp(13px, 3.4vw, 16px);
+  color: var(--tone-white);
+}
+.d2-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(13px, 3.4vw, 15px);
+  line-height: 1.6;
+  color: var(--muted);
+}
+.d2-best {
+  color: var(--tone-white);
+}
+.d2-hill .pixel-button {
+  margin-left: -14px;
+  font-size: clamp(16px, 4.2vw, 22px);
+}
+.d2-fine {
+  max-width: none;
+  font-size: clamp(11px, 3vw, 13px);
+  line-height: 1.6;
 }

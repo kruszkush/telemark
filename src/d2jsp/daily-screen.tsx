@@ -3,6 +3,7 @@ import { UI_TEXT } from "../text/ui-text";
 import { useEntryFocus } from "../ui/use-entry-focus";
 import { SERVER_TEST, setTesterPassword, type DayState } from "./api";
 import { D2_TEXT as T } from "../text/d2jsp-text";
+import { WeekTable } from "./week-table";
 
 /** Co widać pod nagłówkiem po ostatnim skoku albo przy błędzie. */
 export interface DayNote {
@@ -101,7 +102,7 @@ function TesterPassword({ onSaved }: { onSaved: () => void }) {
 function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJump" | "onTrial"> & { day: DayState }) {
   const guest = day.gosc !== undefined;
   return (
-    <>
+    <div className="d2-hills">
       {day.hills.map((hill, g) => {
         const used = day.uzyte?.[g] ?? 0;
         const best = day.najlepsze?.[g] ?? [];
@@ -111,10 +112,16 @@ function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJ
               {`${T.groups[g] ?? ""}: ${UI_TEXT.hillLabel(hill.name, hill.kPointM)}`}
             </h2>
             {!guest && (
-              <p className="note">
-                {`${T.used(used, day.limit)}. ${T.best(best)}`}
-                {best.length > 0 && ` ${T.hillSum(day.sumy?.[g] ?? 0)}.`}
-              </p>
+              <ul className="d2-lines">
+                <li>{T.used(used, day.limit)}</li>
+                {best.length === 0 && <li>{T.noJumpYet}</li>}
+                {best.map((j) => (
+                  <li key={j.gid} className="d2-best">
+                    {T.bestJump(j)}
+                  </li>
+                ))}
+                {best.length > 0 && <li>{T.hillSum(day.sumy?.[g] ?? 0)}</li>}
+              </ul>
             )}
             {guest ? (
               <button type="button" className="pixel-button" disabled={starting} onClick={() => onTrial(g)}>
@@ -130,7 +137,7 @@ function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJ
           </section>
         );
       })}
-    </>
+    </div>
   );
 }
 
@@ -142,10 +149,20 @@ export function DailyScreen(props: Props) {
   const guest = day?.gosc !== undefined;
   return (
     <main className="screen d2-day">
-      <h1 className="screen-title" tabIndex={-1} ref={headingRef}>
-        {T.title}
-      </h1>
-      <p className="note">{T.rules}</p>
+      <header className="d2-head">
+        <h1 className="screen-title" tabIndex={-1} ref={headingRef}>
+          {T.title}
+        </h1>
+        {day?.konto && !guest && (
+          <p className="note d2-account">
+            {T.loggedAs(day.konto.nick)}
+            <button type="button" className="pixel-button d2-small" onClick={props.onLogout}>
+              {T.logout}
+            </button>
+          </p>
+        )}
+      </header>
+      <WeekTable me={guest ? null : (day?.konto?.nick ?? null)} />
       {props.needsTesterPassword && SERVER_TEST && <TesterPassword onSaved={props.onReload} />}
       {props.notes.map((n) => (
         <p key={n.text} className={n.warn === true ? "note d2-warn" : "note d2-result"} role="status">
@@ -164,14 +181,6 @@ export function DailyScreen(props: Props) {
       {day === null && props.loadError === null && <p className="note">{T.loading}</p>}
       {day !== null && (
         <>
-          {day.konto && !guest && (
-            <p className="note">
-              {T.loggedAs(day.konto.nick)}{" "}
-              <button type="button" className="pixel-button d2-small" onClick={props.onLogout}>
-                {T.logout}
-              </button>
-            </p>
-          )}
           {guest && (
             <>
               <p className="note d2-warn">{day.gosc}</p>
@@ -187,9 +196,11 @@ export function DailyScreen(props: Props) {
           )}
           <Hills day={day} starting={props.starting || props.versionMismatch} onJump={props.onJump} onTrial={props.onTrial} />
           {!guest && <p className="d2-total">{T.dayTotal(day.wynik ?? 0)}</p>}
-          {!guest && <p className="note">{T.usedNote}</p>}
         </>
       )}
+      <p className="note d2-fine">
+        {T.rules} {!guest && T.usedNote}
+      </p>
       <div className="d2-buttons">
         <button type="button" className="pixel-button" onClick={() => props.onOpen("settings")}>
           {T.settings}

@@ -214,6 +214,20 @@ export function resendPending(): void {
   for (const [gid, p] of Object.entries(pendingAll())) void sendOne(gid, p);
 }
 
+export interface TableRow {
+  nick: string;
+  suma: number;
+  dni: number;
+  place: number;
+}
+export interface TablePeriod {
+  k: "w" | "m";
+  key: string;
+  rows: TableRow[];
+}
+/** Tabele tygodnia i miesiąca (te same co na stronie licznika, d2jsp/strona.js). */
+export const tables = () => post<{ day: string; okresy: TablePeriod[] }>("/tm/tabele", {});
+
 export interface Watched {
   gid: string;
   hill: HillInfo;

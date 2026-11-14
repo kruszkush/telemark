@@ -28,12 +28,9 @@ export const D2_TEXT = {
   testerNeeded: "Serwer testowy wymaga hasła testerów.",
   guestNote: "Bez konta skaczesz na losowym wietrze, a skoki nie trafiają do tabel.",
   used: (n: number, limit: number) => `Skoki: ${n} z ${limit}`,
-  best: (list: readonly { m: number; p: number; fell?: boolean }[]) =>
-    list.length === 0
-      ? "Jeszcze bez skoku."
-      : "Najlepsze: " +
-        list.map((j) => `${meters(j.m)} m (${pts(j.p)} pkt)${j.fell === true ? ", upadek" : ""}`).join(" i ") +
-        ".",
+  noJumpYet: "Jeszcze bez skoku.",
+  bestJump: (j: { m: number; p: number; fell?: boolean }) =>
+    `${meters(j.m)} m, ${pts(j.p)} pkt${j.fell === true ? ", upadek" : ""}`,
   hillSum: (p: number) => `Razem na skoczni: ${pts(p)} pkt`,
   jump: (n: number, limit: number) => `Skacz (skok ${n} z ${limit})`,
   allUsed: "Wszystkie skoki na dziś wykorzystane.",
@@ -52,7 +49,20 @@ export const D2_TEXT = {
   differs: (game: number, server: number) =>
     `Uwaga: gra policzyła ${pts(game)} pkt, serwer ${pts(server)} pkt. Liczy się wynik serwera.`,
   trialResult: (m: number, p: number) => `Skok na próbę: ${meters(m)} m, ${pts(p)} pkt (bez zapisu).`,
-  watchTitle: (nick: string, day: string) => `Skok: ${nick}, ${day}`,
+  tableCaption: (k: "w" | "m", key: string) => {
+    const w = /^w(\d{4})-(\d{2})$/.exec(key);
+    if (k === "w") return w ? `Tydzień ${Number(w[2])}.` : "Tydzień";
+    const MONTHS = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
+      "Październik", "Listopad", "Grudzień"];
+    const m = /^m(\d{4})-(\d{2})$/.exec(key);
+    return (m ? MONTHS[Number(m[2]) - 1] : undefined) ?? "Miesiąc";
+  },
+  tablePlace: "#",
+  tablePlaceLong: "Miejsce",
+  tableName: "Gracz",
+  tablePoints: "Punkty",
+  tableEmpty: "Jeszcze nikt nie skakał.",
+  watchTitle:(nick: string, day: string) => `Skok: ${nick}, ${day}`,
   watchError: "Nie udało się wczytać skoku.",
   watchBack: "Zamknij",
   points: pts,
