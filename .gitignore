@@ -34,3 +34,7 @@ e2e/.pwa-releases/
 # Mutation testing
 .stryker-tmp/
 reports/
+
+# Plik symulacji dla serwera d2jsp i wersja gry na stronę licznika
+dist-d2jsp-sim/
+dist-d2jsp/
