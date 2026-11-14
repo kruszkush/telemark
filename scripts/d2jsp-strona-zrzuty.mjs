@@ -48,7 +48,7 @@ const row = mine ? page.locator("#tm-w tr", { hasText: mine }) : page.locator("#
 const gid = await row.locator("[data-gid]").first().getAttribute("data-gid");
 console.log("oglądany skok:", mine ?? "pierwszy", gid, await row.innerText());
 
-await page.getByRole("button", { name: "Telemark", exact: true }).click();
+await page.getByRole("button", { name: "Telemark – zagraj", exact: true }).click();
 const game = page.frameLocator(".tm-okno iframe");
 await game.getByRole("heading", { name: "Skocznie dnia" }).waitFor({ timeout: 30000 });
 await page.waitForTimeout(2500);
@@ -81,7 +81,7 @@ await phone.goto(URL0 + "?t=" + Date.now(), { waitUntil: "domcontentloaded" });
 await phone.locator("#telemark table, #telemark .tm-empty").first().waitFor({ timeout: 30000 });
 await phone.locator("#telemark").scrollIntoViewIfNeeded();
 await phone.screenshot({ path: join(OUT, "07-telefon-karta.png") });
-await phone.getByRole("button", { name: "Telemark", exact: true }).click();
+await phone.getByRole("button", { name: "Telemark – zagraj", exact: true }).click();
 await phone.frameLocator(".tm-okno iframe").getByRole("heading", { name: "Skocznie dnia" }).waitFor({ timeout: 30000 });
 await phone.waitForTimeout(2000);
 await phone.screenshot({ path: join(OUT, "08-telefon-okno.png") });
