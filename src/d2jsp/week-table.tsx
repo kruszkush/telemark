@@ -61,8 +61,11 @@ function Period({ period, me, top }: { period: TablePeriod; me: string | null; t
           <tr key={r.nick} className={r === mine ? "contest-row contest-player" : "contest-row"}>
             <td className="contest-place">{`${r.place}.`}</td>
             <th scope="row" className="contest-name">
-              <Avatar row={r} />
-              <span className="contest-who">{r.nick}</span>
+              {/* Awatar w nazwie, jak flaga w tabelach zawodów autora (.contest-who .flag-icon). */}
+              <span className="contest-who">
+                <Avatar row={r} />
+                {r.nick}
+              </span>
             </th>
             <td className="contest-total">{T.points(r.suma)}</td>
           </tr>
