@@ -47,3 +47,4 @@ Pierwszy pokaz po kroku 4: Mateusz ocenia narty na stronie testowej; jeszcze zep
 | bez błędów strony | brak, lokalnie i na żywo (21.1-test) | — |
 Krytyk i furtki: nie uruchamiane (plan bez nich). Agent sposob: znany dobry; jego ryzyko (płomień nad nartami) sprawdzone na arkuszu.
 Przegląd (14.11): iskry brały 4 pierwsze płonące ikony strony, także poza ekranem, więc narty nad rankingiem zabierały iskry pucharom niżej; poprawione na 4 widoczne (21.2), pod kartą Telemarka iskier w locie 7 → 16 (`proto/puchary-telemark/zrzuty-strona-iskry.log`). Ikony nart w wynikach końcowych stoją w kolumnie przy punktach, w wyścigach przy nicku (do oceny Mateusza).
+Zmiana Mateusza (14.11, test 21.3): narty przy nicku stoją w rankingu postów za pucharami (nickBadges), nie w wynikach i wyścigach Telemarka; ranking rysuje się ponownie po odczycie tytułów Telemarka. Punkt „Czego ten plan nie robi: nart w rankingu postów” zastąpiony.
