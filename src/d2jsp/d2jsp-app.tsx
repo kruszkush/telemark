@@ -155,7 +155,7 @@ function DailyJump({ screen, save: { save, update }, nick, onSettings, back, foc
       if (ticket) {
         onSent(ticket.gid, L.points, ticket.grupa);
         sendJump(ticket, encodeInputs(inputs), { p: L.points, m: L.distanceM });
-      } else if (screen.kind === "jump") onTrialResult(L.distanceM, Math.max(0, L.points));
+      } else if (screen.kind === "jump") onTrialResult(L.distanceHalfM, Math.max(0, L.points));
     },
   };
   return (
