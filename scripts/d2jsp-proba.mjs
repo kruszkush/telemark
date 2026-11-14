@@ -82,7 +82,7 @@ await page.getByRole("button", { name: "Zaloguj" }).click();
 await page.getByText(`Skaczesz jako ${konto.nick}.`).waitFor({ timeout: 15000 });
 await shot("03-zalogowany");
 
-K = Number(/K(\d+)/.exec(await page.locator(".d2-hill h2").nth(GROUP).textContent())[1]);
+K = Number(/K(\d+)/.exec(await page.locator(".d2-hill h3").nth(GROUP).textContent())[1]);
 const jumpButton = page.locator(".d2-hill").nth(GROUP).getByRole("button");
 log("przycisk:", await jumpButton.textContent());
 await jumpButton.click();
