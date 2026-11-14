@@ -23,9 +23,10 @@ await new Promise((ok) => server.listen(8801, ok));
 const PROBY = {
   // Tło do makiet: belka bez wskazówek.
   "0-bez": ".page-hints{display:none}",
-  "1-zwykla": "/* bez zmian */",
-  "2-mniejsza": ".page-hints{font-size:max(12px,calc(var(--picture-px) * 4))}",
-  "3-na-tle": ".page-hints{background:rgb(0 0 0 / 55%);padding:0.2em 0.5em;text-shadow:none;font-weight:400}",
+  // Grupy w okienkach (Mateusz 14.11: wersja A makiety, okienka przezroczyste); 2 i 3 to słabsze i mocniejsze tło.
+  "1-grupy": "/* bez zmian */",
+  "2-slabsze-tlo": ".page-hints section{background:rgb(8 10 30 / 14%)}",
+  "3-mocniejsze-tlo": ".page-hints section{background:rgb(8 10 30 / 45%)}",
 };
 const browser = await chromium.launch();
 const errors = [];
@@ -40,13 +41,25 @@ async function run(name, viewport, mobile) {
   const page = await ctx.newPage();
   page.on("pageerror", (e) => errors.push(name + ": " + String(e)));
   await page.goto("http://localhost:8801/");
-  await page.getByRole("button", { name: "Skacz na próbę" }).first().click({ timeout: 30000 });
-  await page.locator(".page-hints div").first().waitFor({ timeout: 10000 });
-  // Telefon pyta najpierw o przechylanie; „Nie, palcem” i powrót do gry.
+  const trial = page.getByRole("button", { name: "Skacz na próbę" }).first();
+  if (
+    !(await trial.waitFor({ timeout: 30000 }).then(
+      () => true,
+      () => false,
+    ))
+  ) {
+    await page.screenshot({ path: join(OUT, `${name}-blad-brak-skoczni.png`), fullPage: true });
+    throw new Error(name + ": brak „Skacz na próbę” (zrzut " + name + "-blad-brak-skoczni.png)");
+  }
+  await trial.click();
+  await page.locator("canvas").waitFor();
+  await page.waitForTimeout(1000);
+  // Telefon pyta najpierw o przechylanie (menu otwarte, wskazówki schowane); „Nie, palcem” i powrót do gry.
   const palcem = page.getByRole("button", { name: /palcem/i });
   if (await palcem.isVisible().catch(() => false)) await palcem.click();
   const wroc = page.getByRole("button", { name: /wróć do gry/i });
   if (await wroc.isVisible().catch(() => false)) await wroc.click();
+  await page.locator(".page-hints div").first().waitFor({ timeout: 10000 });
   await page.waitForTimeout(1500);
   for (const [proba, css] of Object.entries(PROBY)) {
     const tag = await page.addStyleTag({ content: css });
@@ -57,9 +70,15 @@ async function run(name, viewport, mobile) {
   console.log(name, "linie:", await page.locator(".page-hints div").allTextContents());
   await ctx.close();
 }
-await run("mysz", { width: 1650, height: 800 }, false);
-await run("fullhd", { width: 1920, height: 1080 }, false);
-await run("telefon", { width: 844, height: 390 }, true);
+// TYLKO=telefon (albo mysz, fullhd): jeden rozmiar, gdy serwer testowy przy kilku naraz zwleka z dniem.
+const RUNS = [
+  ["mysz", { width: 1650, height: 800 }, false],
+  ["fullhd", { width: 1920, height: 1080 }, false],
+  ["telefon", { width: 844, height: 390 }, true],
+];
+for (const [name, viewport, mobile] of RUNS) {
+  if (!process.env.TYLKO || process.env.TYLKO === name) await run(name, viewport, mobile);
+}
 console.log("błędy:", errors.length ? errors : "brak");
 await browser.close();
 server.close();

@@ -7,6 +7,7 @@ import { tiltStep } from "../game/tilt-input";
 import type { TrainingJump } from "../game/training-session";
 import type { JumpSimState } from "../sim/jump-sim";
 import { VIEW_HEIGHT_PX, drawJumpView, viewWidthFor, type Scenery } from "../render/jump-view";
+import type { HintGroup } from "../render/jump-view-hud";
 import { UI_TEXT } from "../text/ui-text";
 import { createJumpDiagnostics } from "./jump-diagnostics";
 import { jumpProbePublisher } from "./jump-probe";
@@ -57,7 +58,7 @@ const lookOf = (runs: Pick<RunSwitch, "jumperName" | "scenery">, live: LiveProps
 });
 
 /** Draws a frame of the jump into the picture, as the player has the screen set up. */
-function drawFrame(picture: JumpPicture, hill: HillChoice, live: LiveProps, v: FrameView): readonly string[] {
+function drawFrame(picture: JumpPicture, hill: HillChoice, live: LiveProps, v: FrameView): readonly HintGroup[] {
   const best = live.record;
   return drawJumpView(picture.fb, {
     profile: hill.profile,
@@ -225,9 +226,9 @@ export function useJumpLoop(options: JumpLoopOptions) {
       sounds.play(jump.state, clock, newRecord, paused || document.hidden);
       meter?.drawBegin();
       const v = { jump, newRecord, previousRecordM, ghost, over, clock, title, replay: view, ...lookOf(runs, live) };
-      const pageLines = drawFrame(picture, hill, live, v);
+      const pageHints = drawFrame(picture, hill, live, v);
       ctx.putImageData(picture.image, 0, 0);
-      showHints?.(pageLines);
+      showHints?.(pageHints);
       meter?.frameEnd(now, plan, paused);
       if (!firstFrameMarked) {
         firstFrameMarked = true;

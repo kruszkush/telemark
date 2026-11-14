@@ -6,7 +6,16 @@ import { formatDecimal } from "../text/decimal";
 import type { JumpSimState } from "../sim/jump-sim";
 import { FrameBuffer } from "./frame-buffer";
 import { drawSnowfall } from "./jump-view-snowfall";
-import { BAR_HEIGHT_PX, drawBar, drawNotes, drawStartLight, drawWindBox, prompt } from "./jump-view-hud";
+import {
+  BAR_HEIGHT_PX,
+  drawBar,
+  drawNotes,
+  drawStartLight,
+  drawWindBox,
+  gateHintGroups,
+  prompt,
+  type HintGroup,
+} from "./jump-view-hud";
 import { drawGhost } from "./jump-view-ghost";
 import { drawHillScene, jumperInPicture } from "./jump-view-scene";
 import { DEFAULT_HILL_LOOK, type HillLook } from "./hill-look";
@@ -163,10 +172,10 @@ function drawNeededToLead(fb: FrameBuffer, m: JumpViewModel): void {
 }
 
 /**
- * Draws one frame of the jump at the logical resolution. Returns the lines the page shows over the picture in
- * plain text (the hints on the gate with m.hintsBeforeStart); empty when the picture holds all its text.
+ * Draws one frame of the jump at the logical resolution. Returns the groups of lines the page shows over the
+ * picture in plain text (the hints on the gate with m.hintsBeforeStart); empty when the picture holds all its text.
  */
-export function drawJumpView(fb: FrameBuffer, m: JumpViewModel): readonly string[] {
+export function drawJumpView(fb: FrameBuffer, m: JumpViewModel): readonly HintGroup[] {
   const scenery = m.scenery ?? DAY_SCENERY;
   return withLook({ lighting: scenery.lighting, fog: scenery.fog }, () => drawScene(fb, m, scenery));
 }
@@ -176,7 +185,7 @@ export function pageHintsBottomPx(): number {
   return VIEW_HEIGHT_PX - BAR_HEIGHT_PX - PROMPT_BOTTOM_GAP_PX;
 }
 
-function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonly string[] {
+function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonly HintGroup[] {
   const night = scenery.lighting === "night";
   // Fog hides the stars and the moon.
   const clearNight = night && !scenery.fog;
@@ -242,7 +251,7 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonl
   // bottom left corner (Mateusz 14.11: the picture's letters were too big there), so they are not drawn here.
   // After the jump and in a replay its lines (keys, the replay's name) stay drawn in the picture.
   const onGate = m.hintsBeforeStart === true && m.replay === undefined && s.logic.phase === PHASE.gate;
-  const pageLines = onGate ? lines : [];
+  const pageGroups = onGate ? gateHintGroups(m.controls) : [];
   if (!onGate) {
     const firstLineY = groundBottom - PROMPT_BOTTOM_GAP_PX - lines.length * PROMPT_LINE_PX;
     lines.forEach((line, i) => {
@@ -254,5 +263,5 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonl
   if (finished && s.logic.distanceM > 0) drawNotes(fb, s, m.frame);
   if (m.newRecord === true && finished) drawNewRecord(fb, m, s.logic.distanceM, m.frame - s.logic.landedFrame);
   drawBar(fb, m, groundBottom, notesShown);
-  return pageLines;
+  return pageGroups;
 }

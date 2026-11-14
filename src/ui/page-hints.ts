@@ -1,37 +1,51 @@
 import { TITLE_AT_PX, VIEW_HEIGHT_PX, pageHintsBottomPx } from "../render/jump-view";
+import type { HintGroup } from "../render/jump-view-hud";
 
 /**
- * Shows the lines the picture leaves to the page (the hints on the gate on the d2jsp page, Mateusz 14.11: in a
- * plain readable font, not the picture's big letters) over the picture's bottom left corner, lined up with the
- * hill's name and as far over the bar as the drawn lines. Returns what to call after each frame; it touches the
- * page only when the lines or the picture's place change.
+ * Shows the hints the picture leaves to the page (the d2jsp page on the gate, Mateusz 14.11: a plain readable
+ * font, not the picture's big letters; two groups, start and flight above the landing, in see-through boxes)
+ * over the picture's bottom left corner, lined up with the hill's name and as far over the bar as the drawn
+ * lines. Returns what to call after each frame; it touches the page only when the hints or the picture's place
+ * change.
  */
-export function pageHintsUpdater(element: HTMLElement, canvas: HTMLCanvasElement): (lines: readonly string[]) => void {
+export function pageHintsUpdater(
+  element: HTMLElement,
+  canvas: HTMLCanvasElement,
+): (groups: readonly HintGroup[]) => void {
   // The updater owns this element from now on: the screen only places it.
   const box = element;
   let shown = "";
-  return (lines) => {
+  return (groups) => {
     const scale = canvas.clientHeight / VIEW_HEIGHT_PX;
-    const left = canvas.offsetLeft + TITLE_AT_PX.x * scale;
-    const bottomOfLines = canvas.offsetTop + pageHintsBottomPx() * scale;
+    const left = Math.round(canvas.offsetLeft + TITLE_AT_PX.x * scale);
     // The stage holds both the picture and this element (a hidden element has no offsetParent).
     const parentHeight = box.parentElement?.clientHeight ?? 0;
-    const key = `${lines.join("\n")}|${Math.round(left)}|${Math.round(parentHeight - bottomOfLines)}|${scale}`;
+    const bottom = Math.round(parentHeight - (canvas.offsetTop + pageHintsBottomPx() * scale));
+    const key = `${JSON.stringify(groups)}|${left}|${bottom}|${scale}`;
     if (key === shown) return;
     shown = key;
-    box.hidden = lines.length === 0;
-    box.style.left = `${Math.round(left)}px`;
-    box.style.bottom = `${Math.round(parentHeight - bottomOfLines)}px`;
+    box.hidden = groups.length === 0;
+    box.style.left = `${left}px`;
+    box.style.bottom = `${bottom}px`;
     // The size follows the picture, as its own letters do (CSS: --picture-px, one pixel of the picture).
     box.style.setProperty("--picture-px", `${scale}px`);
-    box.replaceChildren(
-      ...lines.map((line) => {
-        const row = document.createElement("div");
-        row.textContent = sentenceCase(line);
-        return row;
-      }),
-    );
+    box.replaceChildren(...groups.map(groupElement));
   };
+}
+
+function groupElement(group: HintGroup): HTMLElement {
+  const section = document.createElement("section");
+  const title = document.createElement("h3");
+  title.textContent = sentenceCase(group.title);
+  section.append(
+    title,
+    ...group.lines.map((line) => {
+      const row = document.createElement("div");
+      row.textContent = sentenceCase(line);
+      return row;
+    }),
+  );
+  return section;
 }
 
 /**

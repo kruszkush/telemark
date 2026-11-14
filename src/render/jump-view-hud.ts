@@ -225,6 +225,24 @@ interface Prompts {
 
 const PROMPTS: Readonly<Record<ControlScheme, Prompts>> = UI_TEXT.hud.prompts;
 
+/** A group of hints with its name, as the page shows them over the picture. */
+export interface HintGroup {
+  title: string;
+  lines: readonly string[];
+}
+
+/**
+ * Every hint of the jump, told on the gate (the d2jsp page, Mateusz 14.11): from the jumper's start through the
+ * flight, then the landing, which holds half of them.
+ */
+export function gateHintGroups(controls: ControlScheme): readonly HintGroup[] {
+  const text = PROMPTS[controls];
+  return [
+    { title: UI_TEXT.hud.gateGroups.startAndFlight, lines: [text.start, text.takeoff, text.lean] },
+    { title: UI_TEXT.hud.gateGroups.landing, lines: [text.telemark, text.width, text.twoFeet] },
+  ];
+}
+
 export function prompt(m: JumpViewModel, nextJumpAllowed: boolean): readonly string[] {
   const text = PROMPTS[m.controls];
   if (m.replay) {
@@ -242,7 +260,7 @@ export function prompt(m: JumpViewModel, nextJumpAllowed: boolean): readonly str
   // stands still the jump can be watched again and kept (keys P and S, or the menu).
   if (nextJumpAllowed) return m.over ? [text.nextJump, text.replayReady] : [text.nextJump];
   if (m.hintsBeforeStart === true) {
-    return phase === PHASE.gate ? [text.start, text.takeoff, text.lean, text.telemark, text.width, text.twoFeet] : [];
+    return phase === PHASE.gate ? gateHintGroups(m.controls).flatMap((g) => g.lines) : [];
   }
   if (phase === PHASE.gate) return [text.start];
   if (phase === PHASE.inrun || phase === PHASE.crouch) return [text.takeoff];

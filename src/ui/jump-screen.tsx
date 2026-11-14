@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useMemo, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 import type { ContestJumpHud } from "../game/competition-board";
 import type { HillChoice } from "../game/hill-choice";
 import { pickScenery } from "../game/scenery";
@@ -313,6 +313,31 @@ function gameClass(c: { touch: boolean; controls: string; menuOpen: boolean; rep
   return classes.filter(Boolean).join(" ");
 }
 
+/**
+ * The area of the picture: the picture the loop draws into, the hints the d2jsp page writes over its corner on
+ * the gate (page-hints.ts), what the screen lays over it, and the measurements when asked for.
+ */
+function JumpStage({
+  refs: { stageRef, canvasRef, hintsRef, diagnosticsRef },
+  label,
+  diagnostics,
+  children,
+}: {
+  refs: Omit<ReturnType<typeof useJumpLoop>, "controls">;
+  label: string;
+  diagnostics: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div className="game-stage" ref={stageRef}>
+      <canvas ref={canvasRef} tabIndex={-1} role="img" aria-label={label} />
+      <div className="page-hints" ref={hintsRef} hidden />
+      {children}
+      {diagnostics && <pre className="jump-diagnostics" aria-hidden="true" ref={diagnosticsRef} />}
+    </div>
+  );
+}
+
 /** The training on one hill: the picture of the jump, the touch zones on a phone, and the menu. */
 export function JumpScreen(props: Props) {
   const { hill, onSettings } = props;
@@ -328,13 +353,7 @@ export function JumpScreen(props: Props) {
   const soundRef = useSoundEngine(settings.sound);
   const look = useVisitScenery(settings.scenery, settings.weather);
   const ghost = props.recordGhost;
-  const {
-    stageRef,
-    canvasRef,
-    diagnosticsRef,
-    hintsRef,
-    controls: loop,
-  } = useJumpLoop({
+  const { controls: loop, ...stageRefs } = useJumpLoop({
     hill,
     live: {
       onFinished: props.onFinished,
@@ -362,7 +381,7 @@ export function JumpScreen(props: Props) {
     onReplayChange: setReplay,
     initialReplay: cpu ?? props.openingReplay,
   });
-  useEntryFocus(canvasRef, props.focusOnEntry);
+  useEntryFocus(stageRefs.canvasRef, props.focusOnEntry);
   useNowPlaying(UI_TEXT.hillLabel(hill.name, hill.kPointM));
   const keepLast = useKeepLastJump(loop, props.onKeepJump);
   // A computer jumper's competition jump is shown as a jump, without the slider of a replay.
@@ -381,18 +400,14 @@ export function JumpScreen(props: Props) {
       >
         <PauseSign touch={touch} />
       </button>
-      <div className="game-stage" ref={stageRef}>
-        <canvas
-          ref={canvasRef}
-          tabIndex={-1}
-          role="img"
-          aria-label={JUMP_TEXT.canvas(UI_TEXT.hillLabel(hill.name, hill.kPointM), props.contest !== undefined)}
-        />
-        <div className="page-hints" ref={hintsRef} hidden />
+      <JumpStage
+        refs={stageRefs}
+        label={JUMP_TEXT.canvas(UI_TEXT.hillLabel(hill.name, hill.kPointM), props.contest !== undefined)}
+        diagnostics={props.diagnostics}
+      >
         {!menu.menuOpen && <KeepNote text={keepLast.keepNote} />}
         {cpu && contestNext && !menu.menuOpen && <SkipButton onSkip={contestNext} touch={touch} />}
-        {props.diagnostics && <pre className="jump-diagnostics" aria-hidden="true" ref={diagnosticsRef} />}
-      </div>
+      </JumpStage>
       {bar && <ReplayBar position={loop.replayPosition} onSeek={loop.seekReplay} />}
       <div className="game-toolbar">
         <JumpMenu

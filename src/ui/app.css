@@ -845,10 +845,15 @@ h2 {
 
 /*
  * Hints on the gate on the d2jsp page (page-hints.ts places it over the picture's bottom left corner): a plain
- * readable font instead of the picture's big letters (Mateusz 14.11), in sentence case.
+ * readable font instead of the picture's big letters (Mateusz 14.11), in sentence case; two groups (start and
+ * flight, landing) one over the other in see-through boxes of one width, so they do not draw the eye.
  */
 .page-hints {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--picture-px, 4px) * 1.2);
+  width: max-content;
   max-width: calc(100% - 2 * var(--overlay-gap));
   pointer-events: none;
   color: #fff;
@@ -859,6 +864,21 @@ h2 {
   text-shadow:
     1px 1px 0 #000,
     0 0 4px #000;
+}
+.page-hints[hidden] {
+  display: none;
+}
+.page-hints section {
+  padding: 0.25em 0.6em 0.3em;
+  background: rgb(8 10 30 / 28%);
+  border-radius: 3px;
+}
+.page-hints h3 {
+  margin: 0 0 0.1em;
+  color: #f2c230;
+  font-size: 0.78em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .game.menu-open .page-hints {
   display: none;

@@ -749,6 +749,8 @@ export const UI_TEXT = {
       landing: "LĄDOWANIE",
       outrun: "WYBIEG",
     },
+    /** The hints told on the gate (the d2jsp page) in two groups: half of them are about the landing. */
+    gateGroups: { startAndFlight: "START I LOT", landing: "LĄDOWANIE" },
     prompts: {
       mouse: {
         replay: "KLIKNIJ: PAUZA   ESC: MENU",

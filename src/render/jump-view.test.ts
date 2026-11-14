@@ -300,7 +300,11 @@ describe("prompts told before the start (the d2jsp page)", () => {
     };
     // The game's own jumps draw their prompts in the picture, as before.
     expect(drawJumpView(fb, base)).toEqual([]);
-    expect(drawJumpView(fb, { ...base, hintsBeforeStart: true })).toHaveLength(6);
+    const groups = drawJumpView(fb, { ...base, hintsBeforeStart: true });
+    expect(groups.map((g) => [g.title, g.lines.length])).toEqual([
+      ["START I LOT", 3],
+      ["LĄDOWANIE", 3],
+    ]);
     // A replay's name stays in the picture on the d2jsp page too.
     const replay = { speedLabel: "1×", paused: false, menuAtEnd: false };
     expect(drawJumpView(fb, { ...base, hintsBeforeStart: true, replay })).toEqual([]);
