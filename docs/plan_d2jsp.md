@@ -1,75 +1,87 @@
 # Plan: Telemark na stronie licznika d2jsp
 
-Ustalenia z Mateuszem (zatwierdzone, nie planuję ich od nowa): `docs/zasady_d2jsp.md`. Stan: `STAN.md`. Plan pisany 14.11.2026, wykonanie w tej samej sesji bez Mateusza (decyzje własne w sekcji „Rozstrzygnięte bez Mateusza”).
+Ustalenia z Mateuszem (zatwierdzone, nie planuję ich od nowa): `docs/zasady_d2jsp.md`. Stan: `STAN.md`. Plan 14.11.2026, po 1. rundzie krytyków; wykonanie w tej samej sesji bez Mateusza (decyzje własne w sekcji „Rozstrzygnięte bez Mateusza”).
 
 ## Cel (co zobaczy gracz)
-Na stronie testowej licznika (https://kruszkush.github.io/d2jsp-licznik/test/) jest przycisk „Telemark”. Klik otwiera grę w dużym oknie na wierzchu strony, krzyżyk wraca na stronę. W menu gry są tylko „Skocznie dnia” i ustawienia. Gracz zalogowany w Lotniku jest od razu zalogowany w Telemarku (inaczej loguje się nickiem i hasłem konta Lotnika albo skacze jako gość). Widzi trzy dzisiejsze skocznie (małą, średnią, mamucią), na każdej 10 skoków z wiatrem wspólnym dla wszystkich; po każdym skoku widzi swoje dzisiejsze miejsce na tej skoczni, a jego nick jest nazwiskiem skoczka. Na stronie pod przyciskiem są tabele: bieżący tydzień, bieżący miesiąc, poprzedni tydzień i poprzedni miesiąc ze zwycięzcą i pucharem; przy każdym wpisie przycisk ▶ odtwarza najlepszy skok gracza.
+Na stronie testowej licznika (https://kruszkush.github.io/d2jsp-licznik/test/) jest przycisk „Telemark”. Klik otwiera grę w dużym oknie na wierzchu strony, krzyżyk wraca na stronę. W menu gry są tylko „Skocznie dnia” i ustawienia. Gracz zalogowany w Lotniku jest od razu zalogowany w Telemarku (inaczej loguje się nickiem i hasłem konta Lotnika albo skacze jako gość). Widzi trzy dzisiejsze skocznie (małą, średnią, mamucią), na każdej 10 skoków z wiatrem wspólnym dla wszystkich; po każdym skoku widzi swoje dzisiejsze miejsce na tej skoczni, a jego nick jest nazwiskiem skoczka. Na stronie pod przyciskiem są tabele: bieżący tydzień, bieżący miesiąc, poprzedni tydzień i poprzedni miesiąc ze zwycięzcą i pucharem; przy wpisie przycisk ▶ odtwarza najlepszy skok gracza w tym okresie.
 
 ## Czego ten plan nie robi
 - Nie wdraża na prod (serwer `lotnik`, strona główna licznika): tylko na słowa „daj na official”.
-- Nie dodaje zabezpieczeń poza jednym: serwer sam odtwarza skok z ruchów. Bez straży, alarmów na Discord i wstrzymywania rekordów (Lotnik je ma, tu świadomie nie).
-- Nie zmienia fizyki, skoczni ani punktacji autora. Nie dodaje tabeli dnia na stronie.
-- Nie usuwa kodu treningu, powtórek, zawodów i instalacji; tylko chowa je w menu wersji d2jsp.
+- Nie dodaje zabezpieczeń poza jednym: serwer sam odtwarza skok z ruchów. Bez straży, alarmów na Discord i wstrzymywania rekordów.
+- Nie zmienia fizyki, skoczni ani punktacji autora. Bez tabeli dnia na stronie.
+- Nie usuwa kodu treningu, powtórek, zawodów i instalacji; chowa je w menu wersji d2jsp.
 - Nie przenosi nowości autora (gałąź d2jsp zostaje na wersji 0.25.16).
 - Nie zakłada publicznego repozytorium bez słów Mateusza „repo tak”.
 
 ## Wzorzec
-1. Sposób: sprawdzenie wyniku przez serwer z odtworzenia (gracz wysyła ruchy, serwer liczy skok tą samą fizyką co przeglądarka; podpisany bilet z ziarnem przed skokiem, kontrola czasu po). Działający kod u nas: serwer Lotnika (`lotnik/serwer/index.js` /start i /end, `lotnik/docs/gra.md` „Serwer testowy”). Biorę go w całości: bilet HMAC (`tokMake`/`tokRead`), CORS, hasło testerów, limity IP, konta i sesje (`konta.js` `sessionOf`), klucze okresów (`ranking.js` `periodKeys`), okno nagrań na stronie (`nakladka.js` `.lotnik-nagr`). W spisie sposobów nie ma tego rodzaju problemu: nowy wiersz W1 „wynik gry sprawdzany przez serwer” ze stanem „działa (Lotnik)”.
+1. Sposób: wynik sprawdzany przez serwer z odtworzenia (spis sposobów W1, działa w Lotniku): podpisany bilet HMAC z ziarnem przed skokiem, po skoku ruchy gracza, serwer liczy skok tą samą fizyką co gra (plik JS zbudowany z kodu gry), kontrola czasu od biletu, bilet raz. Kod biorę z Lotnika: `lotnik/serwer/index.js` (`tokMake`/`tokRead`, CORS, hasło testerów, limity IP, ponowienie /end po zgubionej odpowiedzi), `konta.js` (`sessionOf`), `ranking.js` (`periodKeys` + dopisany klucz miesiąca), okno nagrań `lotnik/nakladka.js` (`.lotnik-nagr`), kolejka /end w localStorage (`nakladka.js` PENDING_KEY). Porównanie fizyki między silnikami: test autora `e2e/sim-engines.spec.ts` + `e2e/sim-harness` (rozszerzam, nie piszę od nowa).
 2. Moduły (każdy z jedną odpowiedzialnością):
-   - `telemark/src/d2jsp/daily.ts`: skocznie dnia z daty (te same w grze i na serwerze), dzień w czasie polskim, grupy skoczni.
-   - `telemark/src/d2jsp/jump-check.ts`: wynik skoku z (skocznia, ziarno, ruchy) tą samą drogą co trening w grze (`startTrainingJump` + `stepTrainingJump`).
-   - `telemark/src/d2jsp/server-entry.ts` + `vite.d2jsp-sim.config.ts`: jeden plik JS dla serwera (Node 22).
-   - `telemark/src/d2jsp/api.ts`: rozmowa gry z serwerem i konto (localStorage Lotnika).
-   - `telemark/src/d2jsp/daily-screen.tsx` (+ zmiany w `app.tsx`, `menu-screen.tsx`, `jump-screen.tsx`): ekran skoczni dnia, logowanie, skok dnia, miejsce po skoku, oglądanie skoku z `?ogladaj=`.
-   - `lotnik/serwer/telemark.js`: trasy `/tm/*` (bilet, zapis i limity, tabele, skok do obejrzenia); `lotnik/serwer/deploy.sh` kopiuje plik symulacji.
-   - `telemark/d2jsp/strona.js` + `telemark/scripts/d2jsp-publikuj.sh`: przycisk, okno gry i tabele na stronie licznika; publikacja na /test/.
+   - `src/d2jsp/daily.ts`: dzień w czasie polskim, grupy skoczni, skocznie dnia z daty (gość i podgląd; zalogowany dostaje skocznie z serwera, który liczy je tym samym kodem).
+   - `src/d2jsp/jump-check.ts`: wynik skoku z (skocznia, ziarno, ruchy) tą samą drogą co trening (`startTrainingJump` z `presentation = true` + `stepTrainingJump`), wynik w klatce lądowania (`logic.finished`), jak `jump-round.ts:60`.
+   - `src/d2jsp/server-entry.ts` + `vite.d2jsp-sim.config.ts`: jeden plik ES dla serwera (Node 22), nazwany wersją gry.
+   - `src/d2jsp/api.ts`: rozmowa z serwerem, konto i hasło testerów z localStorage Lotnika (test: `lotnik.konto`, `lotnik.haslo`; prod: przedrostek `p.`; format `{token, konto}` jak `lotnik/konto.js:53`), kolejka nie wysłanych skoków.
+   - `src/d2jsp/daily-screen.tsx` + małe zmiany w `app.tsx`, `menu-screen.tsx`, `jump-runs.ts`/`jump-screen.tsx`: ekran dnia, logowanie, skok dnia, miejsce po skoku, oglądanie `?ogladaj=`.
+   - `lotnik/serwer/telemark.js`: trasy `/tm/dzien`, `/tm/start`, `/tm/end`, `/tm/tabele`, `/tm/skok`; leniwy import pliku symulacji; włączone zmienną `TELEMARK=1` tylko w `deploy.sh test`.
+   - `d2jsp/strona.js` + `scripts/d2jsp-publikuj.sh`: przycisk, okno gry, tabele, puchary, ▶ na stronie licznika; publikacja na /test/.
 3. Mapa objaw → moduł:
-   - zła skocznia dnia, inna w grze i na serwerze → `daily.ts`;
-   - serwer liczy inny wynik niż gra → `jump-check.ts` (albo budowanie pliku symulacji);
-   - skok nie zapisany, limit 10 źle liczony, zły wynik dnia, tygodnia albo miesiąca → `serwer/telemark.js`;
-   - gra nie widzi konta, nick nie jako skoczek, brak miejsca po skoku → `api.ts` / `daily-screen.tsx`;
-   - zła tabela, brak pucharu, ▶ nie działa, okno gry źle na stronie → `strona.js` (dane: `serwer/telemark.js`).
+   - zła skocznia dnia → `daily.ts`;
+   - serwer liczy inny wynik niż gra → `jump-check.ts` (albo budowanie pliku);
+   - skok nie zapisany, limit 10, zły wynik dnia, tygodnia, miesiąca, puchar → `serwer/telemark.js`;
+   - gra nie widzi konta, zgubiony skok przy złym internecie → `api.ts`;
+   - nick nie jako skoczek, brak miejsca po skoku, restart w trybie dnia → `daily-screen.tsx` / zmiany w pętli skoków;
+   - zła tabela na stronie, ▶, okno gry → `strona.js`.
 4. Sposób: znany dobry, działający u nas w Lotniku (agent sposob, 14.11). Niesprawdzone przez niego: czy Node 22 liczy jak przeglądarka (krok 1).
 
-## Model danych (Firestore, przyrostek `_test` na teście)
-- `tm_skoki/{gid}`: konto, nick, dzień, skocznia (grupa 0–2, id), numer skoku 1–10, ziarno, ruchy (tekst gry `2:…`), metry, punkty (dziesiąte części, liczba całkowita), upadek, czasy biletu i końca, IP (skrót). Bez biletu = nie ma skoku.
-- `tm_dni/{d2026-11-14}/gracze/{konto}`: użyte skoki [3], dwa najlepsze skoki na skoczni [3][2] {p, gid, m}, suma skoczni [3], wynik dnia.
-- `tm_okresy/{w2026-46 | m2026-11}/gracze/{konto}`: wyniki dni w okresie {dzień: wynik}, suma 5 (tydzień) albo 20 (miesiąc) najlepszych, najlepszy skok okresu (do ▶).
-- `tm_puchary/{w2026-46 | m2026-11}`: zwycięzca zamkniętego okresu (zapis przy pierwszym odczycie po końcu okresu).
-- Furtki (plan-furtki 14.11, wszystkie wpuszczone, bo tanie teraz): pole `sim` (wersja gry, np. 0.25.16) w bilecie, skoku i odpowiedzi do oglądania, plik symulacji na serwerze nazwany wersją, stare zostają; pole `dev` (przeglądarka i system); tryb `std` w id dokumentów (`tm_dni/std_d…`, `tm_okresy/std_w…`, `tm_puchary/std_w…`) i w bilecie; ziarno = HMAC(sekret, `tm1|tryb|dzień|skocznia|n`); skocznie dnia zapisane w dokumencie dnia przy pierwszym skoku, losowanie skoczni z wersją („od dnia X sposób Y”), serwer wybiera skocznię sam; puchar jako zamrożone podium (10 pierwszych z remisami, `zwyciezcy: [konto]`); okresy z jednej listy `OKRESY = [{w, 5 dni}, {m, 20 dni}]`; `tm_skoki` trzymane w całości, bez kasowania.
-- Wszystko w jednej transakcji `/tm/end`. Widoczność (tylko zweryfikowani, bez banów) liczona przy odczycie z kont Lotnika (późna weryfikacja działa bez przeliczania).
+## Przebieg skoku dnia (gra i serwer)
+1. Ekran dnia (zalogowany, zweryfikowany): `/tm/dzien` daje skocznie, użyte skoki i najlepsze dwa na każdej; przycisk „Skacz (n/10)” przy skoczni.
+2. Klik „Skacz”: `/tm/start` w transakcji podbija `uzyte` tej skoczni (odmowa przy 10) i daje bilet {gid, tryb `std`, dzień, grupa, id skoczni, n, ziarno, `sim`, czas}. Dopiero z biletem gra otwiera skok z tym ziarnem (do tego czasu „Pobieram wiatr…”; bez odpowiedzi: komunikat i powrót, skok nie przepada, jeśli bilet nie przyszedł).
+3. W trybie dnia nie ma „od nowa”, ducha rekordu ani nowego skoku kliknięciem: po skoku klik wraca na ekran dnia (mechanizm `contestNext` z `jump-runs.ts`). Przerwany skok (zamknięcie okna, wyjście do menu) przepada: bilet wydany, wynik 0.
+4. W klatce lądowania (wynik ustalony, `jump-round.ts:60`) gra wkłada skok do kolejki w localStorage i wysyła `/tm/end` {bilet, ruchy, urządzenie}; przy błędzie sieci ponawia (też po ponownym otwarciu gry). Serwer odtwarza, sprawdza czas (klatki/70 ≤ czas od biletu + 30 s; bilet ważny 10 min), zapisuje w jednej transakcji i odsyła wynik, miejsce dziś na tej skoczni i sumy. Drugi /end z tym samym biletem i tymi samymi ruchami dostaje tę samą odpowiedź (Lotnik `index.js:320`).
+5. Gra pokazuje wynik z serwera; inny niż w grze → ostrzeżenie „serwer policzył inaczej” i zapis w dzienniku odrzuceń.
+6. Gość i konto niezweryfikowane: losowy wiatr, bez serwera, bez zapisu, napis o tym na ekranie dnia.
+
+## Model danych (Firestore, przyrostek `_test` na teście; bez kasowania)
+- `tm_skoki/{gid}`: tryb, konto, nick, dzień, grupa, id skoczni, n, ziarno, `sim`, `dev`, ruchy (tekst gry `2:…`), metry, punkty (dziesiąte części, liczba całkowita, ujemne → 0), upadek, czasy, IP (skrót), `koniec` (bez = bilet bez skoku).
+- `tm_dni/std_{d2026-11-14}/gracze/{konto}`: `u0,u1,u2` (użyte), `b0,b1,b2` (lista do 2 map {p, gid, m}), `s0,s1,s2` (suma dwóch najlepszych), `wynik` (suma s0+s1+s2), nick.
+- `tm_okresy/std_{w2026-46 | m2026-11}/gracze/{konto}`: `dni` {dzień: wynik}, `suma` (5 albo 20 najlepszych dni, lista `OKRESY`), `best` {p, gid, m, hill} (do ▶), nick.
+- `tm_puchary/std_{w… | m…}`: podium (10 pierwszych z remisami) i `zwyciezcy: [konto]`, zapis `create` przy pierwszym odczycie po końcu okresu + 15 min (bilet 10 min).
+- Okres skoku = dzień biletu (`g.t`), nie końca.
+- Widoczność (tylko zweryfikowani, bez bana) liczona przy odczycie z kont Lotnika (pamięć instancji 60 s). Powód odejścia od wzoru Lotnika (pole tylko u widocznych + `syncAcc`): gracze nie przechodzą z niezweryfikowanych, bo niezweryfikowani nic nie zapisują, więc filtr dotyczy tylko banów i usuniętych kont; kilkadziesiąt dokumentów na tabelę.
 
 ## Rozstrzygnięte bez Mateusza (do raportu)
-1. Serwer: trasy Telemarku w serwerze Lotnika (`lotnik-test`), nie osobna funkcja: te same konta, sesje, hasło testerów, wdrożenie jednym skryptem.
-2. Wiatr skoku nr n: ziarno = HMAC(sekret, dzień|skocznia|n). To samo dla wszystkich, ale nieznane przed skokiem (nie da się ćwiczyć jutrzejszych wiatrów). Skocznie dnia z jawnej daty (nic nie szkodzi, że znane wcześniej; działa też bez serwera dla gościa).
-3. Skok jest zużyty w chwili wyjścia na belkę (bilet): przerwany albo zamknięty skok przepada, ten sam wiatr nie wraca. Bilet ważny 2 godziny; skok należy do dnia biletu.
-4. Ujemne punkty (dyskwalifikacja na mamucie) liczą się jako 0.
-5. Gość: losowy wiatr, bez serwera, bez zapisu, gra pokazuje „Gość, wyniki się nie zapisują”.
-6. Na stronie testowej gra wymaga hasła testerów jak Lotnik (bierze zapisane przez Lotnika; bez niego gra pyta o nie albo działa jako gość).
-7. Puchar: Lotnik nie pokazuje zwycięzców ani pucharów (sprawdzone: `lotnik/ranking.js`, `nakladka.js`, brak). Biorę puchar strony licznika (`d2jsp-licznik/docs/index.html` `cupSvg`, karta `.champ`): karta zwycięzcy poprzedniego tygodnia i miesiąca z dużym pucharem, małe puchary przy nicku w tabelach za wygrane okresy.
-8. Pamięć podręczna aplikacji gry autora (service worker) wyłączona w wersji d2jsp (w okienku na stronie dawałaby stare wersje).
-9. Tabele odświeżane z pamięci serwera co 60 s (koszt bazy); miejsce po skoku liczone świeżo.
+1. Serwer: trasy Telemarku w serwerze Lotnika (`lotnik-test`), leniwy import, włączone zmienną tylko na teście (późniejsze wdrożenie Lotnika na prod ich nie włączy).
+2. Wiatr skoku n: ziarno = HMAC(sekret, `tm1|std|dzień|grupa|n`), to samo dla wszystkich, nieznane przed wydaniem biletu.
+3. Skok zużyty w chwili wydania biletu (przerwany przepada).
+4. Konto niezweryfikowane skacze jak gość (losowy wiatr, bez zapisu): inaczej darmowe drugie konto pozwalałoby poznać dzisiejsze wiatry przed skokiem.
+5. ▶ przy skoku z bieżącego dnia działa dopiero po końcu dnia (ten sam powód). Znane ograniczenie: zweryfikowany kolega może podać ziarno; zostaje, bo wspólny wiatr to decyzja Mateusza.
+6. Ujemne punkty (dyskwalifikacja na mamucie) liczą się jako 0.
+7. Na stronie testowej gra wymaga hasła testerów jak Lotnik (bierze zapisane przez Lotnika; bez niego gra pyta).
+8. Puchar: Lotnik nie pokazuje zwycięzców ani pucharów (sprawdzone w `lotnik/ranking.js`, `nakladka.js`: brak). Biorę puchar strony licznika (`d2jsp-licznik/docs/test/index.html` `cupSvg`, karta `.champ`): karta zwycięzcy poprzedniego tygodnia i miesiąca z dużym pucharem, małe puchary przy nicku w tabelach.
+9. Service worker autora wyłączony w wersji d2jsp i jawnie wyrejestrowany (`unregister`).
+10. Tabele z pamięci serwera 60 s; miejsce po skoku liczone świeżo z dokumentów dnia.
+11. Gdy krok 1 nie wyjdzie: wg promptu Mateusza 14.11 („zapisz dlaczego i zrób resztę bez tego zabezpieczenia”) serwer przyjmie wynik z gry, a raport powie to na początku (odrzucona uwaga obu krytyków, dowód: prompt).
 
 ## Kroki
-1. **Najbardziej ryzykowne**: plik symulacji dla serwera. `daily.ts`, `jump-check.ts`, `server-entry.ts`, config budowania; skrypt porównania: 60 skoków automatycznego skoczka (CPU pilot gry) na wszystkich 23 skoczniach, wynik z kodu źródłowego w przeglądarce (Chromium i Firefox przez Playwright, strona z Vite) i z pliku JS w Node 22 (przenośny, jak w chmurze) i Node 26. Sprawdzenie: identyczne metry, punkty i upadek w 100% skoków. Nie wyjdzie → zapis dlaczego, reszta bez zabezpieczenia (serwer wierzy w wynik z gry).
-2. Serwer: `lotnik/serwer/telemark.js` + wpięcie w `index.js` + kopia pliku w `deploy.sh`; test lokalny `lotnik/test-telemark.mjs` (funkcje liczące: 2 najlepsze, suma dnia, 5 z tygodnia, 20 z miesiąca, limit 10, klucze okresów) i wdrożenie `sh serwer/deploy.sh test`; próba żywego serwera skryptem (logowanie konta testowego, bilet, skok automatu, zapis, 11. skok odrzucony, podrobiony wynik odrzucony).
-3. Gra: tryb d2jsp (`import.meta.env` z budowania `--mode d2jsp`), menu tylko „Skocznie dnia” i ustawienia, bez service workera; `api.ts` (konto z localStorage Lotnika, logowanie, hasło testerów); ekran skoczni dnia; skok dnia z biletem i zapisem; nick jako skoczek; miejsce po skoku; gość. Sprawdzenie: testy gry (`pnpm test` dla zmienionych plików i typy), zrzuty ekranu dnia i skoku.
-4. Strona: `d2jsp/strona.js` (przycisk, okno, tabele, puchary, ▶), `scripts/d2jsp-publikuj.sh test`. Sprawdzenie: zrzuty strony 2560×1440 i telefon, klik w przycisk.
-5. Oglądanie: gra z `?ogladaj=gid` odtwarza skok (ekran powtórki autora), ▶ w tabeli otwiera je w oknie. Sprawdzenie: zrzut odtworzonego skoku z tabeli, ten sam wynik na końcu.
-6. Całość na żywo: próbny skok zalogowanym kontem testowym zagrany w przeglądarce, zapisany do tabeli, widoczny na stronie, obejrzany z ▶. Agent `przeglad`.
+1. **Najbardziej ryzykowne**: plik symulacji dla serwera. `daily.ts`, `jump-check.ts`, `server-entry.ts`, config budowania; zestaw skoków: na każdej z 23 skoczni po kilka skoków automatu (CPU pilot gry) i skoki z losowymi ruchami (upadki, dyskwalifikacje), razem ≥ 150; wyniki z Node 22 z pliku serwera zapisane do pliku; nowy test e2e obok `sim-engines.spec.ts`: ten sam plik w Chromium, Firefox i WebKit daje te same metry, punkty i upadek; plus ten sam zestaw z kodu źródłowego w Node 26 (vitest). Sprawdzenie: 100% zgodnych.
+2. Serwer: `lotnik/serwer/telemark.js`, wpięcie w `index.js`, `deploy.sh` (kopiuje pliki `serwer/telemark/*.mjs`, brak = ostrzeżenie), test `lotnik/test-telemark.mjs` (2 najlepsze, wynik dnia, 5 z tygodnia, 20 z miesiąca, klucze okresów z miesiącem, puchar z remisem), wdrożenie `sh serwer/deploy.sh test`, próba żywego serwera skryptem: dwa konta testowe dostają ten sam wiatr w skoku n; bilet bez /end, potem następny ma n+1; 11. odmowa; ponowiony /end ta sama odpowiedź; podrobione ruchy i za szybki koniec odrzucone; czas powtórki w chmurze.
+3. Gra: tryb d2jsp (`vite build --mode d2jsp`, base `./`), menu, `api.ts`, ekran dnia, skok dnia wg „Przebiegu”, nick jako skoczek (litery spoza czcionki gry zamienione), miejsce po skoku, gość. Sprawdzenie: typy, testy zmienionych plików, zrzuty ekranu dnia i skoku (lokalnie na porcie 88xx, CORS serwera testowego).
+4. Strona: `d2jsp/strona.js`, `scripts/d2jsp-publikuj.sh test` (kopia `dist` do `docs/test/telemark/`, znacznik skryptu raz). Okno: iframe z fokusem po otwarciu, ✕ zamyka, Escape należy do gry; strona pod spodem schowana jak `body.lt-nagr-on`. Sprawdzenie: zrzuty 2560×1440 i telefonu, klik w przycisk.
+5. Oglądanie: gra z `?ogladaj=gid` odtwarza skok ekranem powtórki autora; ▶ w tabeli otwiera to w oknie. Sprawdzenie: zrzut odtworzonego skoku, wynik na końcu taki jak w tabeli.
+6. Całość na żywo: próbny skok zagrany w przeglądarce kontem testowym, zapis, tabela na stronie, ▶ (dla testu wpis z poprzedniego dnia albo przełącznik testu). Agent `przeglad`.
 
-Pierwszy pokaz po kroku 6 (Mateusza nie ma, więc całość naraz): Mateusz ocenia okno gry na stronie, skocznie dnia i tabele; jeszcze zepsute: zależnie od wyników kroków.
+Pierwszy pokaz po kroku 6 (Mateusza nie ma, więc całość naraz): Mateusz ocenia okno gry na stronie, skocznie dnia i tabele.
 
 ## Odrzucone drogi i ryzyka
-- Osobna funkcja `telemark-test`: czysta, ale dubluje konta, hasło i wdrażanie; odrzucone.
-- Serwer wierzy w odległość z gry: odrzucone przez Mateusza (jedno zabezpieczenie).
-- TypeScript prosto na serwerze: serwer to Node 22, gra wymaga Node 26 do budowania; idzie gotowy plik JS.
-- Ryzyko: inna liczba w Node i przeglądarce (np. Safari, inne funkcje matematyczne). Gra ma własną matematykę (`src/sim/deterministic-math.ts`), autor obiecuje ten sam wynik na każdym urządzeniu; krok 1 to mierzy. Safari na iPhonie nie sprawdzę (brak urządzenia); jeśli kiedyś da inny wynik, serwer odrzuci skok z komunikatem i zapisem w dzienniku odrzuceń.
-- Ryzyko: Firestore koszt (bezpiecznik 1 GBP). Tabele z pamięci 60 s, zapis 1 transakcja na skok.
-- Ryzyko: gra w ramce (iframe) i blokada myszy (pointer lock) albo pełny ekran; sprawdzi krok 3/4 (`allow="fullscreen; pointer-lock"`).
+- Osobna funkcja `telemark-test`: dubluje konta, hasło i wdrażanie; odrzucone. Koszt wspólnej: kolejka z Lotnikiem (max 4 instancje, 1 zapytanie naraz), wdrożenie testu Telemarku wdraża też bieżący Lotnik (jego repo jest czyste).
+- Liczenie tabel z `tm_skoki` przy każdym odczycie zamiast zbiorczych dokumentów: tysiące odczytów na tabelę; odrzucone.
+- Gra wpięta prosto w stronę licznika zamiast ramki: React i style gry mieszałyby się ze stroną; odrzucone.
+- Serwer wierzy w odległość z gry: tylko jako wyjście awaryjne z punktu 11.
+- Ryzyko: inny wynik w Safari na prawdziwym iPhonie (WebKit z Playwrighta jest najbliżej, ale to nie to samo). Wtedy serwer odrzuci skok z komunikatem i zapisem w dzienniku.
+- Ryzyko: koszt Firestore (bezpiecznik 1 GBP): 1 transakcja na start i na koniec skoku, tabele z pamięci 60 s.
+- Ryzyko: blokada myszy w ramce; sprawdzi krok 4.
 
 ## Krytyk
-Krytyk: tak (ok. 10 plików kodu, fundament z zapisem wyników). 1. runda: `plan-critic` i `krytyk-google` równocześnie, przed nimi `plan-furtki`.
+Krytyk: tak (ok. 10 plików kodu, fundament z zapisem wyników). 1. runda 14.11: `plan-critic` i `krytyk-google` (obaj: wymaga poprawek). Przyjęte: zapis przy bilecie, model bez tablic w tablicach, krótki bilet i puchar po czasie biletu, ziarno widoczne dla drugiego konta (pkt 4–5), WebKit i skoki losowe, przebieg skoku w pętli gry, ponawianie /end, 70 klatek/s, leniwy import i włączanie zmienną, klucz miesiąca, POST z hasłem, port 88xx, skocznia z biletu, klucze localStorage, wyrejestrowanie service workera. Odrzucone: „stop przy porażce kroku 1” (dowód: prompt Mateusza 14.11), „widoczność wzorem Lotnika” (powód w modelu danych), wycięcie `std`/`dev` (zostają, koszt jednego pola). Uproszczone wg krytyków: bez zapisu skoczni w dokumencie dnia i bez wersji losowania skoczni. 2. runda: tylko jeśli wykonanie zmieni sposób.
 
 ## Rozliczenie
 (na koniec wykonania)
