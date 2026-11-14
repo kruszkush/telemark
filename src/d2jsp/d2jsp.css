@@ -132,3 +132,20 @@
   font-size: clamp(11px, 3vw, 13px);
   line-height: 1.6;
 }
+
+/*
+ * Niskie, szerokie okno (telefon trzymany poziomo): tabela po prawej, żeby wynik skoku i skocznie były widać od
+ * razu, bez przewijania pod tabelę.
+ */
+@media (max-height: 560px) and (min-width: 640px) {
+  .screen.d2-day {
+    display: block;
+  }
+  .screen.d2-day > * {
+    margin-bottom: 10px;
+  }
+  .screen.d2-day > .d2-tables {
+    float: right;
+    margin-left: 18px;
+  }
+}
