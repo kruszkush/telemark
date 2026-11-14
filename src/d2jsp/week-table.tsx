@@ -137,7 +137,7 @@ function Today({ rows, me, jumps }: { rows: readonly TodayRow[]; me: string | nu
             <Name row={r} />
             {T.groups.map((g, i) => (
               <td key={g} className="contest-total d2-hcol">
-                {T.points(r.sumy[i] ?? 0)}
+                {(r.uzyte?.[i] ?? 1) === 0 ? T.noJumps : T.points(r.sumy[i] ?? 0)}
               </td>
             ))}
             <td className="contest-total">{T.jumpsOf(r.skoki, jumps)}</td>

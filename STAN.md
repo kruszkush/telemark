@@ -7,9 +7,9 @@ Ustalenia z Mateuszem: `docs/zasady_d2jsp.md`. Plan, przebieg skoku dnia, model 
 - Narzędzia: Node 26 `E:\Vibe coding\narzedzia\node26\node-v26.13.0-win-x64` (gra), Node 22 `narzedzia\node22\…` (jak chmura). Bash: `export PATH="/e/Vibe coding/narzedzia/node26/node-v26.13.0-win-x64:$PATH"`.
 - Publikacja na test: `sh scripts/d2jsp-publikuj.sh test` (buduje `vite.d2jsp.config.ts`, kopiuje do `d2jsp-licznik/docs/test/telemark/`, wersja strony +0.1). Plik symulacji do serwera: `sh scripts/d2jsp-sim-do-lotnika.sh`, potem deploy test w lotniku.
 - Sprawdzenia: `vitest run src/d2jsp`, `node scripts/d2jsp-sim-node.mjs`, `playwright test -c playwright.d2jsp.config.ts`, `node lotnik/test-telemark.mjs`, żywy `node lotnik/out/tm-smoke.mjs`, próbny skok `node scripts/d2jsp-proba.mjs <folder> <0-2>`, zrzuty strony `node scripts/d2jsp-strona-zrzuty.mjs <folder>`. Konto próbne: `lotnik/out/_tm-konto-testowe.log` (poza repo).
-- Ekran dnia w grze (14.11): mała tabela tygodnia na górze (5 najlepszych + gracz), skocznie w kartach obok siebie, mieści się w oknie na komputerze; na niskim ekranie tabela po prawej. Arkusz prób: `test-results/d2jsp-tabela/`. Telefon: skok dotykiem sprawdzony pionowo i poziomo na stronie testowej.
+- Ekran dnia w grze (14.11): tabela Dzisiaj/Tydzień na górze, kolejka skoczni 2-2-2, awatary z forum; ustalenia w `docs/zasady_d2jsp.md`, kolejka w planie (dopisek 14.11). Arkusz prób: `test-results/d2jsp-tabela/`. Telefon: skok dotykiem sprawdzony pionowo i poziomo na stronie testowej.
 - Znane: po skoku obraz mówi „jeszcze raz”, klik wraca do listy skoczni (jak w zawodach autora); dzisiejsze ▶ działa od jutra (sprawdzenie dziś: `telemark/index.html?ogladaj=<gid>&test`).
 
 ## Następny krok
-1. Ocena Mateusza na stronie testowej (tabela w grze, układ ekranu dnia). Prod dopiero na „daj na official”: tryb prod w `scripts/d2jsp-publikuj.sh` (docs/, serwer `lotnik` z TELEMARK w `deploy.sh prod`).
+1. Czeka na Mateusza: teksty podpowiedzi przed skokiem (propozycja: 4 linijki na belce w lewym dolnym rogu, w locie nic). Potem ocena na teście. Prod dopiero na „daj na official”: tryb prod w `scripts/d2jsp-publikuj.sh` (docs/, serwer `lotnik` z TELEMARK w `deploy.sh prod`).
 2. Po każdym commicie: `git push moje d2jsp`.

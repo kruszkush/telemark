@@ -148,6 +148,17 @@ function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJ
   );
 }
 
+/** Koniec dnia (po wszystkich skokach) i wynik dnia zalogowanego gracza. */
+function DayFooter({ day }: { day: NonNullable<Props["day"]> }) {
+  const done = nextHill(day.uzyte ?? [], day.hills.length, day.limit) === null;
+  return (
+    <>
+      {done && <p className="note d2-result">{T.dayDone}</p>}
+      <p className="d2-total">{T.dayTotal(day.wynik ?? 0)}</p>
+    </>
+  );
+}
+
 /** Ekran trybu d2jsp: konto, trzy skocznie dnia ze skokami gracza i wynik dnia. */
 export function DailyScreen(props: Props) {
   const { day } = props;
@@ -211,7 +222,7 @@ export function DailyScreen(props: Props) {
             onJump={props.onJump}
             onTrial={props.onTrial}
           />
-          {!guest && <p className="d2-total">{T.dayTotal(day.wynik ?? 0)}</p>}
+          {!guest && <DayFooter day={day} />}
         </>
       )}
       <p className="note d2-fine">

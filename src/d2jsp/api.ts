@@ -238,6 +238,8 @@ export interface TodayRow {
   nick: string;
   uid: string | null;
   sumy: number[];
+  /** Skoki na każdej skoczni; brak u starszego serwera. */
+  uzyte?: number[];
   skoki: number;
   wynik: number;
   place: number;

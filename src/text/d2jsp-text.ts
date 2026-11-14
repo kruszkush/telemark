@@ -6,7 +6,7 @@ const meters = (m: number) => m.toFixed(1).replace(".", ",");
 export const D2_TEXT = {
   title: "Skocznie dnia",
   rules:
-    "Codziennie 3 nowe skocznie. Na każdej 10 skoków, każdy na innym wietrze, ale tym samym dla wszystkich. Liczą się 2 najlepsze skoki ze skoczni, wynik dnia to suma z trzech skoczni.",
+    "Codziennie 3 nowe skocznie. Na każdej 10 skoków, każdy na innym wietrze, ale tym samym dla wszystkich. Gra sama wybiera skocznię: po 2 skoki na każdej, po kolei. Liczą się 2 najlepsze skoki ze skoczni, wynik dnia to suma z trzech skoczni.",
   groups: ["Mała", "Średnia", "Mamucia"] as const,
   loading: "Wczytywanie skoczni dnia…",
   offline: "Brak połączenia z serwerem. Spróbuj za chwilę.",
@@ -74,6 +74,8 @@ export const D2_TEXT = {
   tableName: "Gracz",
   tablePoints: "Punkty",
   tableEmpty: "Jeszcze nikt nie skakał.",
+  noJumps: "–",
+  dayDone: "Wszystkie skoki na dziś wykorzystane. Nowe skocznie jutro.",
   tablesLabel: "Tabele",
   tabToday: "Dzisiaj",
   tableDays: "Dni",
