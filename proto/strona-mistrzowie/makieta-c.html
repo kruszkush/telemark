@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kolumna Telemarka</title>
+<style>
+/* Kolory, karty, puchary i wyścig jak na stronie licznika (d2jsp-licznik/docs/test/index.html), ciemny wygląd. */
+:root{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#9a9892;--line:#33322f;--acc:#e0764f;
+ --gold:#e6b93a;--gold2:#ffe38a;--silver:#b8bdc2;--bronze:#cf8a55;--year:#5fd0e6;--month:#b98cff}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.note{max-width:1240px;margin:0 auto;padding:16px 16px 0;color:var(--mute);font-size:14px}.note b{color:var(--ink)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.page{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px}
+h2{font-size:24px;margin:0 0 4px}.sub{color:var(--mute);margin:0 0 16px;font-size:13px}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:999px}
+button.on,.play{background:var(--acc);border-color:var(--acc);color:#fff}
+.range{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}.tile b{display:block;font-size:22px}.tile span{color:var(--mute);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h3{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.cup{width:1em;height:1em;vertical-align:-.12em;display:inline-block}
+/* Telemark */
+.tm{border-color:#4a3a2c}
+.tm-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tm-head h3{margin:0;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink)}
+.tm-head .rules{color:var(--mute);font-size:12px;flex:1 1 240px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.champ{border-radius:10px;padding:10px 12px;border:1px solid var(--line);background:linear-gradient(170deg,var(--tint) 0%,transparent 75%);text-align:center}
+.champ.y{--c:var(--year);--tint:rgba(63,176,216,.18)}.champ.m{--c:var(--month);--tint:rgba(155,93,229,.2)}.champ.w{--c:var(--gold);--tint:rgba(201,150,26,.2)}
+.champ .big{width:44px;height:44px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+.champ .lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);font-weight:700}
+.champ .per{font-size:11px;color:var(--mute)}
+.champ .who{display:flex;align-items:center;justify-content:center;gap:7px;margin:4px 0 0;font-weight:700;font-size:17px}
+.champ .none{font-style:italic;color:var(--mute);margin:4px 0 0}
+.champ .pts{font-size:11px;color:var(--mute)}
+.champ ol{margin:8px 0 0;padding:6px 0 0;border-top:1px dashed var(--line);list-style:none;font-size:12px;text-align:left}
+.champ ol .h{color:var(--mute);text-align:center;font-size:11px;margin-bottom:2px}
+.champ li{display:flex;justify-content:space-between}
+.champ li span{color:var(--mute);font-variant-numeric:tabular-nums}
+.av{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-size:11px;background:#3a3a36;color:#ddd;border:2px solid var(--c);flex:none}
+.races{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.racebox{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.racebox h4{margin:0 0 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.race{margin:0;padding:0}
+.race li{list-style:none;display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line);font-size:13px}
+.race li:last-child{border:0}
+.pos{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;flex:none;background:#444}
+.p1{background:var(--gold)}.p2{background:var(--silver)}.p3{background:var(--bronze)}
+.grow{flex:1;min-width:0}.grow .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.track{height:4px;border-radius:2px;background:var(--line);margin-top:3px}.track i{display:block;height:100%;border-radius:2px;background:var(--c)}
+.racebox.y{--c:#3fb0d8}.racebox.m{--c:#9b5de5}.racebox.w{--c:var(--gold)}
+.race .v{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.end{font-size:11px;color:var(--mute);margin-top:4px}
+.play-s{font-size:11px;color:var(--acc)}
+.me{margin-top:10px;font-size:13px;color:var(--mute);border-top:1px solid var(--line);padding-top:8px}.me b{color:var(--ink)}
+.gone{border:1px dashed #6b3a2a;border-radius:12px;padding:8px 14px;color:#c9876b;font-size:13px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:5px 4px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:500;font-size:12px}td.n,th.n{text-align:right}
+.side .big{height:230px;border-radius:12px;margin-bottom:14px;display:grid;place-items:center;font-size:12px;color:var(--mute)}
+.side .card{min-height:120px;color:var(--mute);font-size:12px}
+@media (max-width:900px){.page{grid-template-columns:1fr}.cols,.races{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gold2)"/><stop offset="1" stop-color="var(--gold)"/></linearGradient>
+    <symbol id="cup" viewBox="0 0 64 64">
+      <path d="M18 8h28v14c0 9-6 16-14 16S18 31 18 22z" fill="url(#gg)"/>
+      <path d="M18 12H9c0 10 5 15 11 16M46 12h9c0 10-5 15-11 16" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 37h8l2 10H26z" fill="var(--gold)"/>
+      <rect x="20" y="47" width="24" height="8" rx="2" fill="url(#gg)"/>
+      <path d="M25 13c0 6 1 11 4 15" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9b8ff"/><stop offset="1" stop-color="#7b3fd1"/></linearGradient>
+    <linearGradient id="gy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6fbff"/><stop offset=".5" stop-color="#7fd9f0"/><stop offset="1" stop-color="#2a8fb8"/></linearGradient>
+    <symbol id="cupM" viewBox="0 0 64 64">
+      <path d="M17 6h30v15c0 10-7 17-15 17S17 31 17 21z" fill="url(#gm)"/>
+      <path d="M17 10H8c0 11 5 16 11 17M47 10h9c0 11-5 16-11 17" fill="none" stroke="#7b3fd1" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 37h8l2 9H26z" fill="#7b3fd1"/>
+      <path d="M18 46h28l3 10H15z" fill="url(#gm)"/>
+      <path d="M32 13l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z" fill="#fff" fill-opacity=".9"/>
+    </symbol>
+    <symbol id="cupY" viewBox="0 0 64 64">
+      <path d="M20 2l4 6 8-6 8 6 4-6 2 9H18z" fill="#f3c93a"/>
+      <path d="M16 11h32v12c0 10-7 16-16 16S16 33 16 23z" fill="url(#gy)"/>
+      <path d="M16 14H7c0 11 5 16 11 17M48 14h9c0 11-5 16-11 17" fill="none" stroke="#2a8fb8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 38h8l2 8H26z" fill="#2a8fb8"/>
+      <path d="M17 46h30l3 11H14z" fill="url(#gy)"/>
+      <path d="M32 16l6 7-6 9-6-9z" fill="#fff" fill-opacity=".85"/>
+    </symbol>
+  </defs>
+</svg>
+
+<p class="note"><b>Wersja C: osobna kolumna Telemarka po lewej.</b> Dane są przykładowe. Puchary i paski wyścigu są te same co na stronie dla postów. Prawa kolumna (mistrzowie postów, wyścigi, historia, galeria sław) zostaje bez zmian, tu tylko zarysowana; do galerii sław dochodzą tytuły z Telemarka. Wykres „Posty co godzinę” znika.</p>
+<div class="wrap"><div class="page">
+ <div>
+  <h2>Licznik postów — d2jsp Polska</h2>
+  <p class="sub">Sekcja f=230 · dane od 21.09.2026 · aktualizacja 14.11.2026, 14:15</p>
+  <div class="range"><button class="on">24 h</button><button>7 dni</button><button>30 dni</button><button>1 rok</button><button>Całość</button></div>
+  <div class="tiles"><div class="tile"><b>479</b><span>postów</span></div><div class="tile"><b>18</b><span>piszących</span></div><div class="tile"><b>46</b><span>tematów</span></div><div class="tile"><b>479</b><span>postów dziennie</span></div></div>
+
+  <div class="card tm">
+   <div class="tm-head"><h3>Telemark: Skocznie dnia</h3><button class="play">Telemark</button>
+    <span class="rules">3 nowe skocznie dziennie, ten sam wiatr dla wszystkich. Tydzień: 5 najlepszych dni, miesiąc: 20, rok: 200.</span></div>
+
+   <div class="cols">
+    <div class="champ y"><svg class="big"><use href="#cupY"/></svg><div class="lab">Mistrz roku 2026</div><div class="per">przyznanie 31.12</div>
+     <div class="none">jeszcze nieznany</div>
+     <ol><li class="h">na czele</li><li>1. Kryste_Panie<span>9 412,0</span></li><li>2. BrakNicku<span>8 970,5</span></li><li>3. ripsi<span>6 115,5</span></li><li>4. fafniro<span>5 020,0</span></li><li>5. kondes<span>3 904,5</span></li></ol></div>
+    <div class="champ m"><svg class="big"><use href="#cupM"/></svg><div class="lab">Mistrz miesiąca</div><div class="per">Październik 2026</div>
+     <div class="who"><span class="av">P</span>Pozdrawiam</div><div class="pts">7 830,5 pkt · <span class="play-s">▶ najlepszy skok</span></div>
+     <ol><li class="h">wyniki końcowe</li><li>1. Pozdrawiam<span>7 830,5</span></li><li>2. Kryste_Panie<span>7 611,0</span></li><li>3. BrakNicku<span>6 902,5</span></li><li>4. ripsi<span>4 210,0</span></li><li>5. cbx1992<span>2 877,5</span></li></ol></div>
+    <div class="champ w"><svg class="big"><use href="#cup"/></svg><div class="lab">Mistrz tygodnia</div><div class="per">Listopad · tydzień 2</div>
+     <div class="who"><span class="av">K</span>Kryste_Panie</div><div class="pts">2 034,5 pkt · <span class="play-s">▶ najlepszy skok</span></div>
+     <ol><li class="h">wyniki końcowe</li><li>1. Kryste_Panie<span>2 034,5</span></li><li>2. BrakNicku<span>1 987,0</span></li><li>3. fafniro<span>1 540,5</span></li><li>4. Pozdrawiam<span>1 322,0</span></li><li>5. ripsi<span>1 101,5</span></li></ol></div>
+   </div>
+
+   <div class="races">
+    <div class="racebox y"><h4>Wyścig · rok 2026</h4><ul class="race">
+     <li><span class="pos p1">1</span><div class="grow"><div class="nm">Kryste_Panie</div><div class="track"><i style="width:100%"></i></div></div><span class="v">9 412</span></li>
+     <li><span class="pos p2">2</span><div class="grow"><div class="nm">BrakNicku</div><div class="track"><i style="width:95%"></i></div></div><span class="v">8 971</span></li>
+     <li><span class="pos p3">3</span><div class="grow"><div class="nm">ripsi</div><div class="track"><i style="width:65%"></i></div></div><span class="v">6 116</span></li></ul>
+     <div class="end">Koniec: 31.12 (za 47 d)</div></div>
+    <div class="racebox m"><h4>Wyścig · Listopad</h4><ul class="race">
+     <li><span class="pos p1">1</span><div class="grow"><div class="nm">Kryste_Panie</div><div class="track"><i style="width:100%"></i></div></div><span class="v">4 377</span></li>
+     <li><span class="pos p2">2</span><div class="grow"><div class="nm">BrakNicku</div><div class="track"><i style="width:91%"></i></div></div><span class="v">3 990</span></li>
+     <li><span class="pos p3">3</span><div class="grow"><div class="nm">fafniro</div><div class="track"><i style="width:60%"></i></div></div><span class="v">2 620</span></li></ul>
+     <div class="end">Koniec: 30.11 (za 16 d)</div></div>
+    <div class="racebox w"><h4>Wyścig · Listopad, tydzień 3</h4><ul class="race">
+     <li><span class="pos p1">1</span><div class="grow"><div class="nm">BrakNicku</div><div class="track"><i style="width:100%"></i></div></div><span class="v">1 205</span></li>
+     <li><span class="pos p2">2</span><div class="grow"><div class="nm">Kryste_Panie</div><div class="track"><i style="width:94%"></i></div></div><span class="v">1 130</span></li>
+     <li><span class="pos p3">3</span><div class="grow"><div class="nm">ripsi</div><div class="track"><i style="width:52%"></i></div></div><span class="v">627</span></li></ul>
+     <div class="end">Koniec: niedziela 21:00 (za 1 d 6 h)</div></div>
+   </div>
+   <div class="me">Ty (zalogowany w Lotniku): <b>7. w tygodniu</b>, 312 pkt do 3. miejsca · <b>12. w miesiącu</b></div>
+  </div>
+
+  <div class="gone">Tu był wykres „Posty co godzinę” (usunięty albo wyłączony).</div>
+
+  <div class="card"><h3>Ranking</h3>
+   <table><tr><th>#</th><th>Użytkownik</th><th class="n">Posty</th><th class="n">Tematy</th></tr>
+   <tr><td>1</td><td>BrakNicku</td><td class="n">160</td><td class="n">43</td></tr>
+   <tr><td>2</td><td>Kryste_Panie</td><td class="n">133</td><td class="n">28</td></tr>
+   <tr><td>3</td><td>ripsi</td><td class="n">62</td><td class="n">24</td></tr></table></div>
+ </div>
+ <div class="side">
+  <div class="big" style="background:linear-gradient(160deg,#1f4a55,#1e1e1c)">Mistrz roku (posty)</div>
+  <div class="big" style="background:linear-gradient(160deg,#3d2a5c,#1e1e1c)">Mistrz miesiąca (posty)</div>
+  <div class="card">Wyścig · Listopad (posty)</div>
+  <div class="big" style="background:linear-gradient(160deg,#4d3d15,#1e1e1c)">Mistrz tygodnia (posty)</div>
+  <div class="card">Galeria sław: przy nicku puchary za posty i za skoki (znaczek narty)</div>
+ </div>
+</div></div>
+</body>
+</html>
