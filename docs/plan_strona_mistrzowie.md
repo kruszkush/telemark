@@ -52,5 +52,14 @@ Pierwszy pokaz po kroku 4 (całość naraz, bo karta bez danych z serwera nie ma
 - Kolejność: strona (krok 4) przed grą (krok 3); ekran gracza bez wzoru, przy pokazie „wymyślony, do oceny”.
 - Odrzucone: nic (koszt odczytu roku: zgoda krytyka, bez zmian; zapytanie bez indeksu złożonego: sprawdzi krok 2).
 
-## Rozliczenie
-(po wykonaniu)
+## Rozliczenie (14.11)
+| próg / obietnica | wynik | kto zdecydował o zmianie |
+|---|---|---|
+| karta jak makieta C (arkusz 2560×1440) | zgodna; dodane awatary i ▶ przy każdym nicku (wymaganie zadania, makieta ich nie ma) | zasady (awatary, ▶) |
+| ▶ odtwarza skok | na ekranie gracza sprawdzone (Playwright, skok z `&test`); na stronie ▶ dzisiejszych wyszarzone, wczorajszych na teście jeszcze nie ma | — |
+| klik w nick → „Skoki gracza” | działa na prawdziwych danych, „Wróć do skoków gracza” wraca na ten sam dzień | — |
+| wykres godzinowy | w 24 h ukryty, w 7 dniach „Posty dziennie” zostaje | — |
+| smoke z nowymi trasami | 13/13 na lotnik-test | — |
+| zwycięzca okresu na prawdziwych danych | niesprawdzone: na teście nie ma jeszcze zamkniętego tygodnia (pierwszy w nocy 15/16.11), tylko podgląd `?tmdemo` | — |
+
+Uwagi krytyka (runda 1): rok z map dni — sprawdziła się (test łączenia miesięcy); reguła karty — sprawdziła się (bez niej rok pokazałby pusty 2025); uid zamiast nicka — sprawdziła się (prostsze wyszukiwanie, bez dwuznaczności); koniec z serwera — sprawdziła się (północ, nie 21:00 jak przy postach); awatary — przyjęte; kolejność kroków — przyjęta. Przegląd: drobne poprawki (odstęp ▶ od punktów, ukośnik w adresie awatara, stare zapisy), bez błędów liczenia.
