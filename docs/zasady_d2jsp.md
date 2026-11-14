@@ -1,6 +1,6 @@
 # Telemark na stronie licznika d2jsp: ustalenia z Mateuszem
 
-Jedyne miejsce tych ustaleń (14.11.2026). Plan wykonania: `docs/plan_d2jsp.md` (do napisania). Stan: `STAN.md`.
+Jedyne miejsce tych ustaleń (14.11.2026). Plan wykonania: `docs/plan_d2jsp.md`. Stan: `STAN.md`.
 
 ## Strona i gra
 - Przycisk „Telemark” na stronie licznika (https://kruszkush.github.io/d2jsp-licznik/). Gra otwiera się w tej samej karcie, jako duże okno na wierzchu strony (jak okno nagrań Lotnika), krzyżyk wraca na stronę. Bez osobnego okna przeglądarki.
@@ -17,7 +17,7 @@ Jedyne miejsce tych ustaleń (14.11.2026). Plan wykonania: `docs/plan_d2jsp.md` 
 - Punkty skoku jak liczy gra (jak w prawdziwych skokach: 60 za skok na K, od K145 120, metry za K razy przelicznik, noty sędziów). Mamuty dają więcej punktów (ok. 1,5 raza) i tak zostaje (decyzja Mateusza; odrzucone: punkty Pucharu za miejsca, procent najlepszego wyniku, stałe przeliczniki).
 - Na skoczni liczą się 2 najlepsze skoki z 10, dodane (jak dwie serie). Wynik dnia = suma z 3 skoczni.
 - Tydzień: suma 5 najlepszych dni gracza. Miesiąc: suma 20 najlepszych dni. Obie tabele rosną na bieżąco (po 3 dniach są zliczone 3 dni).
-- Na stronie: bieżący tydzień, bieżący miesiąc, poprzedni tydzień i poprzedni miesiąc ze zwycięzcą. Zwycięzca tygodnia i miesiąca dostaje puchar (pokazać tak, jak Lotnik pokazuje swoje; jeszcze nie sprawdzone jak). Osobnej tabeli dnia na stronie nie ma.
+- Na stronie: bieżący tydzień, bieżący miesiąc, poprzedni tydzień i poprzedni miesiąc ze zwycięzcą. Zwycięzca tygodnia i miesiąca dostaje puchar (pokazać tak, jak Lotnik pokazuje swoje; sprawdzone 14.11: Lotnik pucharów nie pokazuje, więc użyte puchary strony licznika, plan pkt 8, do oceny Mateusza). Osobnej tabeli dnia na stronie nie ma.
 - W grze po każdym skoku: dzisiejsze miejsce na tej skoczni.
 
 ## Oglądanie skoków i zabezpieczenie

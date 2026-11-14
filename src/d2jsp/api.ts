@@ -4,7 +4,9 @@
  * prod z przedrostkiem „p.”). Skok wysłany w chwili lądowania czeka w kolejce, dopóki serwer go nie przyjmie.
  */
 
-const PROD_PAGE = location.hostname === "kruszkush.github.io" && !location.pathname.includes("/test/");
+import { D2_TEXT } from "../text/d2jsp-text";
+
+const PROD_PAGE =location.hostname === "kruszkush.github.io" && !location.pathname.includes("/test/");
 export const SERVER_TEST = !PROD_PAGE;
 const API = "https://us-east1-rich-chimera-344319.cloudfunctions.net/" + (SERVER_TEST ? "lotnik-test" : "lotnik");
 const PREFIX = SERVER_TEST ? "" : "p.";
@@ -129,14 +131,14 @@ export async function post<T>(path: string, body: object, ms = 10_000): Promise<
   } catch {
     // Bez odpowiedzi jest tylko błąd; kto pyta, patrzy najpierw na ok.
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-    return { ok: false, status: 0, j: { error: "Brak połączenia z serwerem." } as Reply<T>["j"] };
+    return { ok: false, status: 0, j: { error: D2_TEXT.noConnection } as Reply<T>["j"] };
   }
 }
 
 /** Logowanie kontem Lotnika; zapisuje sesję tak jak Lotnik (wspólna dla obu gier). */
 export async function login(nick: string, password: string): Promise<string | null> {
   const r = await post<{ token: string; konto: Konto }>("/login", { nick, password });
-  if (!r.ok) return r.j.error ?? "Nie udało się zalogować.";
+  if (!r.ok) return r.j.error ?? D2_TEXT.loginFailed;
   write(ACCOUNT_KEY, JSON.stringify({ token: r.j.token, konto: r.j.konto }));
   return null;
 }
@@ -187,13 +189,13 @@ async function sendOne(gid: string, p: Pending, attempt = 0): Promise<void> {
   const r = await post<SavedJump>("/tm/end", { bilet: p.bilet, inputs: p.inputs, wynik: p.wynik, dev: p.dev }, 15_000);
   if (r.ok || (r.status >= 400 && r.status < 500 && r.status !== 403 && r.status !== 429)) {
     pendingSet(gid, null);
-    saved.set(gid, r.ok ? r.j : { error: r.j.error ?? "Serwer nie przyjął skoku." });
+    saved.set(gid, r.ok ? r.j : { error: r.j.error ?? D2_TEXT.jumpRefused });
     listeners.forEach((fn) => fn());
     return;
   }
   if (Date.now() > p.until) {
     pendingSet(gid, null);
-    saved.set(gid, { error: "Skok nie dotarł do serwera w 10 minut i przepadł." });
+    saved.set(gid, { error: D2_TEXT.jumpLost });
     listeners.forEach((fn) => fn());
     return;
   }

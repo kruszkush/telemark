@@ -10,7 +10,15 @@ const SRC = fileURLToPath(new URL("..", import.meta.url));
  * Where Polish letters with diacritics may stay outside the text module. The simulation, the reading of the
  * original's files and the glyphs of the pixel font are left out as a whole; tests are left out too.
  */
-const SKIPPED = [/^text\//, /^sim\//, /^original\//, /^render\/pixel-font\.ts$/, /\.test\.tsx?$/];
+const SKIPPED = [
+  /^text\//,
+  /^sim\//,
+  /^original\//,
+  /^render\/pixel-font\.ts$/,
+  /\.test\.tsx?$/,
+  // The d2jsp mode of the fork (kruszkush): comments in Polish; its texts for the player are in text/d2jsp-text.ts.
+  /^d2jsp\//,
+];
 
 const ALLOWED = {
   // The names of hills are data: the original's Polish hills, as v2.10P names them, and the game's own hills.

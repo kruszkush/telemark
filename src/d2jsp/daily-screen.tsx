@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { UI_TEXT } from "../text/ui-text";
 import { useEntryFocus } from "../ui/use-entry-focus";
 import { SERVER_TEST, setTesterPassword, type DayState } from "./api";
-import { D2_TEXT as T } from "./text";
+import { D2_TEXT as T } from "../text/d2jsp-text";
 
 /** Co widać pod nagłówkiem po ostatnim skoku albo przy błędzie. */
 export interface DayNote {

@@ -26,7 +26,7 @@ import {
 import { DailyScreen, type DayNote } from "./daily-screen";
 import { ownHill } from "./jump-check";
 import { jumperNick } from "./nick";
-import { D2_TEXT as T } from "./text";
+import { D2_TEXT as T } from "../text/d2jsp-text";
 
 type Screen =
   | { kind: "day" }
