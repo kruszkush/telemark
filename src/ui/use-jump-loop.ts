@@ -69,6 +69,8 @@ function drawFrame(picture: JumpPicture, hill: HillChoice, live: LiveProps, v: F
     titleInsetPx: v.title.insetPx,
     ...(v.title.topPx === null ? {} : { titleTopPx: v.title.topPx }),
     hints: live.settings.hillHints,
+    // The page where the jumper waits on the gate tells everything there, while there is time to read.
+    ...(live.holdAtGate ? { hintsBeforeStart: true } : {}),
     frame: v.clock,
     over: v.over,
     newRecord: v.newRecord,

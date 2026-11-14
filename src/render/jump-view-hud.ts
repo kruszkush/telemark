@@ -241,6 +241,9 @@ export function prompt(m: JumpViewModel, nextJumpAllowed: boolean): readonly str
   // The next jump can start as soon as the notes are up; the jumper may still be sliding out. Once the jumper
   // stands still the jump can be watched again and kept (keys P and S, or the menu).
   if (nextJumpAllowed) return m.over ? [text.nextJump, text.replayReady] : [text.nextJump];
+  if (m.hintsBeforeStart === true) {
+    return phase === PHASE.gate ? [text.start, text.takeoff, text.lean, text.telemark, text.width, text.twoFeet] : [];
+  }
   if (phase === PHASE.gate) return [text.start];
   if (phase === PHASE.inrun || phase === PHASE.crouch) return [text.takeoff];
   // The original starts the landing (telemark) on a press of either button; about 0.4 s before touchdown scores

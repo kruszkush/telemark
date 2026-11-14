@@ -31,6 +31,11 @@ export interface JumpViewModel {
   hillName: string;
   /** Whether the picture tells what to press and when; it does unless this is false. */
   hints?: boolean;
+  /**
+   * Whether every hint of the jump is told on the gate, before the start, and none after it (the d2jsp page,
+   * Mateusz 14.11: from the takeoff on there is no time to read).
+   */
+  hintsBeforeStart?: boolean;
   /** Game pixels the name of the hill starts from the left, when a control of the page lies over that corner. */
   titleInsetPx?: number;
   /** Row the name of the hill's capitals start at, when a control of the page beside it sets it. */
