@@ -9,7 +9,10 @@ import { decodeInputs } from "../storage/input-codec";
  * ustala (jump-round.ts: touchdown); serwer sprawdza nim skok wysłany z gry.
  */
 
-/** Dłużej żaden skok nie trwa (belka czeka 16 s, skok jest skończony przed 6000 klatkami). */
+/**
+ * Dłużej żaden skok nie trwa (skok jest skończony przed 6000 klatkami). Czekanie na belce w skoku dnia nie jest
+ * zapisywane (jump-round.ts: holdAtGate), więc ruchy zaczynają się od chwili, w której wolno ruszyć.
+ */
 export const MAX_JUMP_FRAMES = 6000;
 /** Klatek symulacji na sekundę (training-session.ts FRAME_S). */
 export const FRAMES_PER_S = 70;

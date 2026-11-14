@@ -161,6 +161,8 @@ function DailyJump({
     hud: null,
     holder: name,
     exit: { label: ticket ? T.exit : T.exitTrial, go: back },
+    // Mateusz 14.11: na belce wiatr stoi i można czekać bez końca, bez dyskwalifikacji (też w skoku na próbę).
+    waitOnGate: true,
     ...(ticket ? { seed: ticket.seed } : {}),
     onTouchdown: (jump, inputs) => {
       const L = jump.state.logic;

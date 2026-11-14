@@ -230,12 +230,11 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): void {
   const notesShown = notesShownBy(s.logic, m.frame);
   const lines = prompt(m, nextJumpAllowed(s.logic, m.frame));
   {
-    // At the bottom of the picture, above the bar: the jumper is always in its upper part, and three lines in
-    // the middle of the sky covered him.
+    // In the bottom left corner, above the bar, lined up with the hill's name (Mateusz 14.11): the jumper is always
+    // in the upper part of the picture, and lines in the middle of the sky covered him.
     const firstLineY = groundBottom - PROMPT_BOTTOM_GAP_PX - lines.length * PROMPT_LINE_PX;
     lines.forEach((line, i) => {
-      const x = Math.round((fb.width - textWidth(line)) / 2);
-      drawText(fb, x, firstLineY + i * PROMPT_LINE_PX, line, color("white"), color("black"));
+      drawText(fb, TITLE_AT_PX.x, firstLineY + i * PROMPT_LINE_PX, line, color("white"), color("black"));
     });
   }
   // A disqualified jump (no takeoff) is never scored, so there are no notes to show.

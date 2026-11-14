@@ -84,6 +84,8 @@ export interface ContestJump {
   seed?: number;
   /** Hears the touchdown of the player's jump with its inputs (a daily jump sends them there). */
   onTouchdown?: LiveProps["onTouchdown"];
+  /** The jumper waits on the gate as long as the player likes, with the wind standing still (the d2jsp page). */
+  waitOnGate?: boolean;
   /** A plain way out in place of the question about the competition (a daily jump has nothing to keep). */
   exit?: { label: string; go: () => void };
 }
@@ -152,6 +154,7 @@ function useContestJump(props: Props) {
   const menuProps = {
     onExit: props.onExit,
     contest: contest !== undefined,
+    waitWithoutLimit: contest?.waitOnGate === true,
     abandon: !contest ? null : contest.exit ? (
       <button type="button" className="pixel-button" onClick={contest.exit.go}>
         {contest.exit.label}
@@ -167,6 +170,7 @@ function useContestJump(props: Props) {
     contestHud: contest?.hud ?? null,
     contestLeader: contest?.leader ?? false,
     ...(contest?.seed === undefined ? {} : { fixedSeed: contest.seed }),
+    holdAtGate: contest?.waitOnGate === true,
     ...(contest?.onTouchdown === undefined ? {} : { onTouchdown: contest.onTouchdown }),
   };
   return { settings, contestNext, cpu, menuProps, live };

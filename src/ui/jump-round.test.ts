@@ -84,6 +84,36 @@ describe("jump steps", () => {
     expect(unbeaten.touchdowns).toEqual([false]);
   });
 
+  it("hold a daily jump on the gate: the same jump however long the player waits, never disqualified", () => {
+    /** The jump with the start pressed after `waitTicks` picture ticks; the landing follows the jump's own frames. */
+    const waitingFor = (waitTicks: number) => {
+      let jump = start();
+      let tick = 0;
+      const taken: FrameInput[] = [];
+      for (let f = 0; f < MAX_FRAMES + waitTicks && !isJumpOver(jump); f++) {
+        tick++;
+        const stepped = stepJump(jump, { steps: 1, leftHeld: false, record: undefined, holdAtGate: true }, (logic) => {
+          const landing = logic.frame + 1 > 500 - 70 + 66 && logic.frame + 1 < 520 - 70 + 66;
+          return { left: tick === waitTicks || landing, right: landing, dy: 0 };
+        });
+        jump = stepped.jump;
+        taken.push(...stepped.taken);
+      }
+      return { jump, taken };
+    };
+    const quick = waitingFor(70);
+    // 3000 ticks are 43 seconds, far past the 16 seconds the original gives for the start.
+    const patient = waitingFor(3000);
+    expect(quick.jump.state.logic.distanceM).toBeGreaterThan(0);
+    expect(patient.jump.state).toEqual(quick.jump.state);
+    expect(patient.taken).toEqual(quick.taken);
+    // The recording holds no waiting: played frame by frame from the gate it makes the same jump.
+    let replay = start();
+    for (const input of patient.taken) replay = stepTrainingJump(replay, input);
+    expect(replay.state.logic.distanceM).toBe(patient.jump.state.logic.distanceM);
+    expect(replay.state.logic.points).toBe(patient.jump.state.logic.points);
+  });
+
   it("report the moments of the jump in order, starting with the push from the gate", () => {
     const { cues } = inChunks(2);
     expect(cues[0]).toEqual({ kind: "feedback", event: "start" });

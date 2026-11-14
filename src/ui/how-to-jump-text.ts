@@ -9,7 +9,10 @@ interface Step {
 }
 
 /** How to play a jump, step by step, in the words of one way of steering. */
-export function howToJump(steering: Steering): readonly Step[] {
+export function howToJump(steering: Steering, waitWithoutLimit = false): readonly Step[] {
   const texts = UI_TEXT.howTo.steps[steering];
-  return UI_TEXT.howTo.stepTitles.map((title, index) => ({ title, text: texts[index] ?? "" }));
+  return UI_TEXT.howTo.stepTitles.map((title, index) => ({
+    title,
+    text: index === 0 && waitWithoutLimit ? UI_TEXT.howTo.startWithoutLimit[steering] : (texts[index] ?? ""),
+  }));
 }

@@ -45,7 +45,8 @@ export const JUDGE_COUNT = 5;
 export const START_COUNTDOWN_SECONDS = 16;
 const FRAMES_PER_SECOND = 70;
 const COUNTDOWN_TICK_FRAME = 35;
-const START_MIN_FRAME = 65;
+/** The first frame in which a press of the left button starts the jumper from the gate. */
+export const START_MIN_FRAME = 65;
 const CROUCH_AFTER_FRAMES = 20;
 const TAKEOFF_FORCE_PER_BUTTON = 1275;
 const KNEE_EXTENSION_LIMIT_M = 1.07;

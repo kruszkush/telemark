@@ -43,6 +43,8 @@ interface Props {
   onExit: () => void;
   /** A competition jump: no new jump and no other hill from the menu. */
   contest: boolean;
+  /** A daily jump of the d2jsp page: the jumper waits on the gate as long as the player likes. */
+  waitWithoutLimit: boolean;
   /** In a competition, the way out with its question before leaving, in place of the exit button. */
   abandon: ReactNode;
   /** How the replay is being watched; null while jumping. */
@@ -205,7 +207,7 @@ export function JumpMenu({ headingRef, resumeRef, ...p }: Props) {
           {p.panel === "help" ? UI_TEXT.howTo.title : UI_TEXT.hills.title}
         </h2>
         {p.panel === "help" ? (
-          <HowToJump steering={p.controls} />
+          <HowToJump steering={p.controls} waitWithoutLimit={p.waitWithoutLimit} />
         ) : (
           <div className="menu-hills">
             <HillLists hills={p.hills} records={p.records} onPick={p.onPickHill} />

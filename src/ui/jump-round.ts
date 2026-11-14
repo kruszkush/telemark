@@ -1,6 +1,12 @@
 import { soundEvents, type SoundEvent } from "../audio/sound-mix";
 import { feedbackEvents, type FeedbackEvent } from "../game/haptics";
-import { isJumpOver, stepTrainingJump, type TrainingJump } from "../game/training-session";
+import {
+  holdTrainingJump,
+  isJumpOver,
+  stepTrainingJump,
+  waitsOnGate,
+  type TrainingJump,
+} from "../game/training-session";
 import type { FrameInput, JumpLogicState } from "../sim/jump-logic";
 import { beatsRecord, type HillRecord } from "../storage/save-data";
 
@@ -33,6 +39,8 @@ interface StepRequest {
   leftHeld: boolean;
   /** The hill record from before this jump. */
   record: HillRecord | undefined;
+  /** Whether the jumper waits on the gate with the simulation stopped (training-session.ts: waitsOnGate). */
+  holdAtGate?: boolean;
 }
 
 /**
@@ -41,7 +49,7 @@ interface StepRequest {
  */
 export function stepJump(
   start: TrainingJump,
-  { steps, leftHeld, record }: StepRequest,
+  { steps, leftHeld, record, holdAtGate = false }: StepRequest,
   takeFrame: (logic: JumpLogicState) => FrameInput,
 ): JumpSteps {
   let jump = start;
@@ -53,6 +61,11 @@ export function stepJump(
     const prev = jump.state;
     const input = takeFrame(prev.logic);
     leftDown ||= input.left;
+    // A frame of waiting is not a frame of the jump: it takes no input, so the recording starts the jumper at once.
+    if (holdAtGate && waitsOnGate(jump, input)) {
+      jump = holdTrainingJump(jump);
+      continue;
+    }
     // Once the jumper stands still the simulation takes no more input.
     if (!isJumpOver(jump)) taken.push(input);
     jump = stepTrainingJump(jump, input);

@@ -5,10 +5,10 @@ import { useEntryFocus } from "./use-entry-focus";
 import { TOUCH_QUERY, useMediaQuery } from "./use-media-query";
 
 /** The steps of a jump in the words of one way of steering. */
-export function HowToJump({ steering }: { steering: Steering }) {
+export function HowToJump({ steering, waitWithoutLimit = false }: { steering: Steering; waitWithoutLimit?: boolean }) {
   return (
     <dl className="how-to">
-      {howToJump(steering).map((step) => (
+      {howToJump(steering, waitWithoutLimit).map((step) => (
         <div key={step.title} className="how-to-step">
           <dt>{step.title}</dt>
           <dd>{step.text}</dd>

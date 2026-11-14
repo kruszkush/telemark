@@ -1,6 +1,6 @@
 import { BorlandRandom } from "../sim/borland-random";
 import { ORIGINAL_POSES } from "../sim/data/pose-table";
-import { notesShownBy, type FrameInput, type JumpLogicState } from "../sim/jump-logic";
+import { notesShownBy, PHASE, START_MIN_FRAME, type FrameInput, type JumpLogicState } from "../sim/jump-logic";
 import { createJump, jumpRunning, stepFrame, type JumpSetup, type JumpSimState } from "../sim/jump-sim";
 import { createStartWind } from "../sim/training-wind";
 import type { WindState } from "../sim/wind";
@@ -68,6 +68,22 @@ export function stepTrainingJump(jump: TrainingJump, input: FrameInput): Trainin
     return { ...jump, windDriftM, framesAfterEnd: jump.framesAfterEnd + 1 };
   }
   return { ...jump, windDriftM, state: stepFrame(jump.state, jump.setup, () => input) };
+}
+
+/**
+ * Whether the jumper waits on the gate with the simulation stopped (a daily jump of the d2jsp page, Mateusz 14.11):
+ * from the first frame a start is allowed in, the jump stands still until the left button starts it, so the wind
+ * and everything else are the same however long the player waits, and the start time never runs out.
+ */
+export function waitsOnGate(jump: TrainingJump, input: FrameInput): boolean {
+  const L = jump.state.logic;
+  return L.phase === PHASE.gate && L.frame >= START_MIN_FRAME && !input.left;
+}
+
+/** The session one picture frame later while it waits on the gate: only the falling snow moves. */
+export function holdTrainingJump(jump: TrainingJump): TrainingJump {
+  const wind = displayedWindMPerS(jump.state.wind);
+  return { ...jump, windDriftM: { x: jump.windDriftM.x + wind.x * FRAME_S, y: jump.windDriftM.y + wind.y * FRAME_S } };
 }
 
 /** Clock for presentation, in simulation frames; it keeps counting after the jump is over. */

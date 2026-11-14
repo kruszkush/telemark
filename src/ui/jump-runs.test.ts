@@ -120,6 +120,7 @@ function setUp({ bot = false }: { bot?: boolean } = {}) {
       contestCpu: false,
       contestHud: null,
       contestLeader: false,
+      holdAtGate: false,
     },
     inputRef: {
       current: bot ? scriptedInput(makeBot(hill.profile, BOT, () => runs.current().now().jump.state)) : scriptedInput(),

@@ -59,6 +59,8 @@ export interface LiveProps {
   contestLeader: boolean;
   /** The wind of the jump, given from outside (a daily jump of the d2jsp page); absent for a new one each jump. */
   fixedSeed?: number;
+  /** Whether the jumper waits on the gate with the simulation stopped (the d2jsp page; jump-round.ts). */
+  holdAtGate: boolean;
   /** Hears the touchdown of the player's jump, where its result is settled, with the inputs that led to it. */
   onTouchdown?: (jump: TrainingJump, inputs: readonly FrameInput[]) => void;
 }
@@ -222,7 +224,8 @@ function createTrainingRun(
 
   return {
     step(steps) {
-      const stepped = stepJump(jump, { steps, leftHeld: input.left, record: c().live.record }, takeFrame);
+      const { record, holdAtGate } = c().live;
+      const stepped = stepJump(jump, { steps, leftHeld: input.left, record, holdAtGate }, takeFrame);
       jump = stepped.jump;
       ghosts.follow(jump);
       leftDown = stepped.leftDown;

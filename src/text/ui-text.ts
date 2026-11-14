@@ -532,6 +532,13 @@ export const UI_TEXT = {
         "Przycisk pauzy w rogu ekranu otwiera menu z ustawieniami i tą instrukcją; gra wtedy stoi.",
       ],
     },
+    /** The start step of a daily jump of the d2jsp page: the wind stands still and the gate waits as long as needed. */
+    startWithoutLimit: {
+      mouse:
+        "Kliknij lewym przyciskiem myszy (albo naciśnij Z). Wiatr na belce się nie zmienia, więc możesz czekać, ile chcesz.",
+      touch: "Dotknij pola L. Wiatr na belce się nie zmienia, więc możesz czekać, ile chcesz.",
+      tilt: "Dotknij ekranu. Wiatr na belce się nie zmienia, więc możesz czekać, ile chcesz.",
+    },
     /** The rules of competitions, under the steps of a jump. */
     competitionTitle: "Zawody",
     competition: [
