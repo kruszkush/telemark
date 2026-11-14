@@ -298,6 +298,39 @@ export interface Watched {
   day: string;
   n: number;
 }
+/** Dzień okresu na ekranie „Skoki gracza”: wynik dnia i czy wchodzi do sumy okresu (n najlepszych dni). */
+export interface PlayerDayRow {
+  day: string;
+  wynik: number;
+  liczony: boolean;
+}
+/** Dni gracza w okresie (lotnik/serwer/telemark.js: gracz z `okres`). */
+export interface PlayerPeriod {
+  nick: string;
+  uid: string;
+  dzis: string;
+  okres: string;
+  n: number;
+  suma: number;
+  dni: PlayerDayRow[];
+}
+/** Skok na liście dnia: zapisany (z wynikiem) albo bilet bez końca. */
+export type PlayerJump =
+  | { n: number; gid: string; m: number; p: number; fell: boolean; liczony: boolean; niedokonczony?: undefined }
+  | { n: number; niedokonczony: true };
+/** Wszystkie skoki gracza jednego dnia, po skoczniach (gracz z `day`). */
+export interface PlayerDay {
+  nick: string;
+  dzis: string;
+  day: string;
+  hills: HillInfo[];
+  sumy: number[];
+  wynik: number;
+  skoki: PlayerJump[][];
+}
+export const playerPeriod = (uid: string, okres: string) => post<PlayerPeriod>("/tm/gracz", { uid, okres });
+export const playerDay = (uid: string, day: string) => post<PlayerDay>("/tm/gracz", { uid, day });
+
 /** Na serwerze testowym `&test` w adresie pozwala obejrzeć dzisiejszy skok od razu (sprawdzenie ▶ bez czekania). */
 const WATCH_TODAY = SERVER_TEST && new URLSearchParams(location.search).has("test");
 export const watchJump = (gid: string) => post<Watched>("/tm/skok", { gid, ...(WATCH_TODAY ? { test: true } : {}) });

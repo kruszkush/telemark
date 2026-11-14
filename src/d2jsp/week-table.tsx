@@ -23,7 +23,7 @@ interface Who {
   uid: string | null;
 }
 
-function Avatar({ row }: { row: Who }) {
+export function Avatar({ row }: { row: Who }) {
   const url = avatarOf(row.uid);
   return url === null ? (
     <span className="d2-av" aria-hidden="true">

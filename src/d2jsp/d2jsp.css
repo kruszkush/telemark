@@ -293,3 +293,58 @@
   display: block;
   margin: 0.25rem auto;
 }
+
+/* Ekran „Skoki gracza” (player-screen.tsx): przyciski dni (liczone z żółtą ramką jak skocznia z kolejki), skoki z ▶. */
+.d2-pwho {
+  margin-left: 0.6em;
+  color: var(--accent);
+}
+.d2-pdays {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.d2-pday {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 5.2em;
+  padding: 4px 8px;
+  border: 2px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: clamp(11px, 2.6vw, 13px);
+  cursor: pointer;
+}
+.d2-pday b {
+  color: var(--tone-white);
+}
+.d2-pday.d2-pcount {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.d2-pday[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.d2-pjumps li {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.d2-play {
+  border: 0;
+  background: none;
+  padding: 0 0.2em;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+.d2-play:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.d2-counted {
+  font-size: 0.8em;
+  color: var(--accent);
+}

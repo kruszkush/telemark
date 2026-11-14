@@ -27,6 +27,7 @@ import {
   type Ticket,
 } from "./api";
 import { DailyScreen, type DayNote } from "./daily-screen";
+import { PlayerScreen } from "./player-screen";
 import { ownHill } from "./jump-check";
 import { jumperNick } from "./nick";
 import { D2_TEXT as T } from "../text/d2jsp-text";
@@ -36,8 +37,16 @@ type Screen =
   | { kind: "settings" | "howto" | "about" }
   /** Skok dnia (z biletem) albo na próbę (bez). */
   | { kind: "jump"; hill: HillChoice; ticket: Ticket | null; key: number }
-  /** Obejrzenie skoku z tabeli (?ogladaj=gid). */
-  | { kind: "watch"; hill: HillChoice; source: ReplaySource; nick: string; key: number };
+  /** Skoki gracza (?gracz=uid&okres=klucz, klik w nick na stronie licznika). */
+  | PlayerView
+  /** Obejrzenie skoku z tabeli (?ogladaj=gid) albo z ekranu gracza (`from`: tam wraca). */
+  | { kind: "watch"; hill: HillChoice; source: ReplaySource; nick: string; key: number; from: PlayerView | null };
+interface PlayerView {
+  kind: "player";
+  uid: string;
+  okres: string;
+  day: string | null;
+}
 type JumpLike = Extract<Screen, { kind: "jump" | "watch" }>;
 
 const GAME_VERSION = import.meta.env.GAME_VERSION;
@@ -100,26 +109,52 @@ function watchedGid(): string | null {
   return gid !== null && /^[0-9a-f]{16}$/.test(gid) ? gid : null;
 }
 
-/** Przy otwarciu z ?ogladaj=gid: skok z serwera, odtwarzany tak jak skok komputera w zawodach. */
-function useWatchOnOpen(show: (s: Screen) => void, nextKey: () => number, onError: (text: string) => void) {
+/** Ekran gracza, gdy adres strony go podaje (klik w nick na stronie licznika). */
+function playerFromUrl(): PlayerView | null {
+  const q = new URLSearchParams(location.search);
+  const uid = q.get("gracz"),
+    okres = q.get("okres");
+  return uid !== null && okres !== null && /^[\w-]{1,24}$/.test(uid) && /^(w\d{4}-\d{2}|m\d{4}-\d{2}|y\d{4})$/.test(okres)
+    ? { kind: "player", uid, okres, day: null }
+    : null;
+}
+
+/** Skok z serwera, odtwarzany tak jak skok komputera w zawodach; `from` = ekran gracza, na który wraca. */
+function watch(
+  gid: string,
+  from: PlayerView | null,
+  show: (s: Screen) => void,
+  nextKey: () => number,
+  onError: (text: string) => void,
+) {
+  void watchJump(gid).then((r) => {
+    const hill = r.ok ? ownHill(r.j.hill.id) : undefined;
+    const inputs = r.ok ? decodeInputs(r.j.inputs) : null;
+    if (!r.ok || !hill || !inputs) {
+      onError(r.j.error ?? T.watchError);
+      return;
+    }
+    const source = {
+      ...recordingSource({ seed: r.j.seed, inputs, newRecord: false }),
+      jumperName: jumperNick(r.j.nick),
+    };
+    show({ kind: "watch", hill, source, nick: r.j.nick, key: nextKey(), from });
+  });
+}
+
+/** Przy otwarciu z ?ogladaj=gid od razu oglądany skok, z ?gracz= ekran gracza. */
+function useOpenFromUrl(show: (s: Screen) => void, nextKey: () => number, onError: (text: string) => void) {
   const once = useRef(false);
   useEffect(() => {
-    const gid = watchedGid();
-    if (gid === null || once.current) return;
+    if (once.current) return;
     once.current = true;
-    void watchJump(gid).then((r) => {
-      const hill = r.ok ? ownHill(r.j.hill.id) : undefined;
-      const inputs = r.ok ? decodeInputs(r.j.inputs) : null;
-      if (!r.ok || !hill || !inputs) {
-        onError(r.j.error ?? T.watchError);
-        return;
-      }
-      const source = {
-        ...recordingSource({ seed: r.j.seed, inputs, newRecord: false }),
-        jumperName: jumperNick(r.j.nick),
-      };
-      show({ kind: "watch", hill, source, nick: r.j.nick, key: nextKey() });
-    });
+    const player = playerFromUrl();
+    if (player) {
+      show(player);
+      return;
+    }
+    const gid = watchedGid();
+    if (gid !== null) watch(gid, null, show, nextKey, onError);
   }, [show, nextKey, onError]);
 }
 
@@ -163,7 +198,7 @@ function DailyJump({
     onEnd: back,
     hud: null,
     holder: name,
-    exit: { label: ticket ? T.exit : T.exitTrial, go: back },
+    exit: { label: ticket ? T.exit : screen.kind === "watch" && screen.from ? T.backToPlayer : T.exitTrial, go: back },
     // Mateusz 14.11: na belce wiatr stoi i można czekać bez końca, bez dyskwalifikacji (też w skoku na próbę).
     waitOnGate: true,
     ...(ticket ? { seed: ticket.seed } : {}),
@@ -251,7 +286,7 @@ export function D2jspApp() {
   const { notes, setNotes, expect } = useSavedNotes(day.setDay);
   const showError = useCallback((text: string) => setNotes([{ text, warn: true }]), [setNotes]);
   const start = useStartJump(show, nextKey, day, setNotes);
-  useWatchOnOpen(show, nextKey, showError);
+  useOpenFromUrl(show, nextKey, showError);
   useEffect(() => resendPending(), []);
   useLayoutEffect(() => {
     document.title = screen.kind === "jump" || screen.kind === "watch" ? `${T.title}: ${screen.hill.name}` : T.title;
@@ -261,14 +296,29 @@ export function D2jspApp() {
   const back = () => show({ kind: "day" });
   const d = day.day;
   const nick = jumperNick(d?.gosc === undefined ? (d?.konto?.nick ?? "") : "") || undefined;
+  if (screen.kind === "player") {
+    return (
+      <PlayerScreen
+        key={`${screen.uid}|${screen.okres}`}
+        uid={screen.uid}
+        okres={screen.okres}
+        day={screen.day}
+        onDay={(dd) => setScreen({ ...screen, day: dd })}
+        onWatch={(gid, onError) => watch(gid, screen, show, nextKey, onError)}
+        onBack={back}
+        focusOnEntry={navigated}
+      />
+    );
+  }
   if (screen.kind === "jump" || screen.kind === "watch") {
+    const from = screen.kind === "watch" ? screen.from : null;
     return (
       <DailyJump
         screen={screen}
         save={stored}
         nick={nick}
         onSettings={onSettings}
-        back={back}
+        back={from ? () => show(from) : back}
         focusOnEntry={navigated}
         onSent={expect}
         onTrialResult={(m, p) => setNotes([{ text: T.trialResult(m, p) }])}

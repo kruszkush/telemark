@@ -2,6 +2,20 @@
 
 const pts = (p: number) => p.toFixed(1).replace(".", ",");
 const meters = (m: number) => m.toFixed(1).replace(".", ",");
+/**
+ * Tydzień ISO "wRRRR-TT" jak na stronie licznika (d2jsp/strona.js weekName): „Listopad · tydzień 3”, miesiąc czwartku,
+ * tydzień 1 = ten z 1. dniem miesiąca.
+ */
+function weekName(key: string, months: readonly string[]): string {
+  const DAY = 864e5;
+  const mondayOf = (t: number) => t - ((new Date(t).getUTCDay() + 6) % 7) * DAY;
+  const year = Number(key.slice(1, 5)),
+    week = Number(key.slice(6));
+  const mon = mondayOf(Date.UTC(year, 0, 4)) + 7 * (week - 1) * DAY;
+  const thu = new Date(mon + 3 * DAY);
+  const first = mondayOf(Date.UTC(thu.getUTCFullYear(), thu.getUTCMonth(), 1));
+  return `${months[thu.getUTCMonth()] ?? ""} · tydzień ${Math.round((mon - first) / (7 * DAY)) + 1}`;
+}
 
 export const D2_TEXT = {
   title: "Skocznie dnia",
@@ -121,6 +135,34 @@ export const D2_TEXT = {
   ],
   watchTitle: (nick: string, day: string) => `Skok: ${nick}, ${day}`,
   watchError: "Nie udało się wczytać skoku.",
+  // Ekran „Skoki gracza” (player-screen.tsx, Mateusz 14.11: sprawdzić oszusta na wielu skokach).
+  playerTitle: "Skoki gracza",
+  playerLoading: "Wczytywanie skoków…",
+  playerError: "Nie udało się wczytać skoków gracza.",
+  playerPeriod: (key: string, sum: number, n: number) => {
+    const MONTHS = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+    const name = key.startsWith("y")
+      ? `Rok ${key.slice(1)}`
+      : key.startsWith("m")
+        ? `${MONTHS[Number(key.slice(6, 8)) - 1] ?? ""} ${key.slice(1, 5)}`
+        : weekName(key, MONTHS);
+    return `${name}: ${pts(sum)} pkt (liczy się ${n} najlepszych dni).`;
+  },
+  playerDays: "Dni",
+  playerNoDays: "W tym okresie bez skoków.",
+  playerDay: (day: string) => `${Number(day.slice(8, 10))}.${day.slice(5, 7)}`,
+  playerDayTitle: (day: string, p: number) => `${Number(day.slice(8, 10))}.${day.slice(5, 7)}.${day.slice(0, 4)}: wynik dnia ${pts(p)} pkt`,
+  playerCountedDay: "liczony do okresu",
+  playerCounted: "liczony",
+  playerUnfinished: "nie dokończony (bez wyniku)",
+  playerNoHillJumps: "Bez skoków.",
+  playerToday: "Dzisiejsze skoki można obejrzeć od jutra (dziś każdy ma ten sam wiatr).",
+  playerWatch: (n: number) => `Obejrzyj skok ${n}.`,
+  playIcon: "▶",
+  playerJump: (n: number, m: number, p: number, fell: boolean) =>
+    `${n}. ${meters(m)} m, ${pts(p)} pkt${fell ? ", upadek" : ""}`,
+  back: "Wróć",
+  backToPlayer: "Wróć do skoków gracza",
   watchBack: "Zamknij",
   points: pts,
   meters,
