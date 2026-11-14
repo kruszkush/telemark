@@ -133,4 +133,18 @@ pierwszy pomiar wysokości już w kroku 4. Odrzucone: nic. Krytyk: „model serw
 przekombinowany”. Bez 2. rundy: poprawki nie zmieniają sposobu (ten sam agregat przy zapisie), tylko go zawężają.
 
 ## Rozliczenie
-(na koniec wykonania)
+14.11, kroki 1–6 wykonane, tylko test (strona 20.5-test, `lotnik-test`; lotnik 4267d86).
+- Serwer: `top5`, `firstVisible` z testami (`node lotnik/test-telemark.mjs`: 14 ok), zapis w `end`, `records` w
+  `tabele`; `tm-smoke` wszystko OK, `/tm/tabele` oddaje rekord skoku z `tm-smoke` (72,5 m na małej).
+- Gra: pobranie tabel w `DailyScreen` (zwykły `useEffect`), `WeekTable` z danymi z zewnątrz, `hill-card.tsx` z
+  testem (`hill-card.test.ts`: rekord, „jeszcze nikt”, rekord innej skoczni pominięty, upadek, gość); typy, oxlint
+  `src/d2jsp`, vitest 21/21, `d2jsp-sim-node` 184/184, Playwright d2jsp 1/1.
+- Pomiar (`node scripts/d2jsp-ekran-dnia.mjs <folder> [adres] [bez-skoku]`, okienko 894 px): zalogowany przed skokiem
+  824 px (zapas 70), po skoku z wiadomością 869 (zapas 25), gość 866 (zapas 28). Arkusz:
+  `proto/uklad-dnia/zrzuty-gra/arkusz.png`. Skok próbny z upadkiem (113,5 m) nie został rekordem mamuciej.
+- Poza planem, potrzebne do „mieści się”: mniejsze odstępy ekranu dnia, wiadomość po skoku w jednym wierszu, formularz
+  logowania gościa w jednym rzędzie na szerokim oknie (pionowy miał 510 px, gość wystawał o 500 px). Skrypt
+  `d2jsp-trening.mjs` czyta skoki z kwadracików (stara lista zniknęła).
+- Nie sprawdzone: dwóch graczy bijących rekord tej samej skoczni naraz (ryzyko z planu); ban posiadacza rekordu na
+  żywo (sprawdza tylko test `firstVisible`).
+- Do potwierdzenia z Mateuszem: skok z upadkiem nie jest rekordem.

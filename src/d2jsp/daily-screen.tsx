@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UI_TEXT } from "../text/ui-text";
 import { useEntryFocus } from "../ui/use-entry-focus";
-import { SERVER_TEST, setTesterPassword, type DayState, type Konto } from "./api";
+import { SERVER_TEST, setTesterPassword, tables, type DayRecords, type DayState, type Konto, type Tables } from "./api";
+import { HillCard } from "./hill-card";
 import { VerifiedOnce, VerifyBox } from "./verify-box";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import { nextHill } from "./next-hill";
@@ -159,51 +160,35 @@ function TesterPassword({ onSaved }: { onSaved: () => void }) {
   );
 }
 
-function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJump" | "onTrial"> & { day: DayState }) {
-  const guest = day.gosc !== undefined;
+/** Nagłówek „Skocznie dnia” i trzy karty skoczni (hill-card.tsx) z rekordami z tabel. */
+function Hills({
+  day,
+  records,
+  starting,
+  onJump,
+  onTrial,
+}: Pick<Props, "starting" | "onJump" | "onTrial"> & { day: DayState; records: DayRecords | null }) {
   // Zalogowany skacze tylko na skoczni z kolejki (2-2-2, next-hill.ts); gość wybiera skocznię do skoku na próbę.
-  const next = guest ? null : nextHill(day.uzyte ?? [], day.hills.length, day.limit);
+  const next = day.gosc !== undefined ? null : nextHill(day.uzyte ?? [], day.hills.length, day.limit);
   return (
-    <div className="d2-hills">
-      {day.hills.map((hill, g) => {
-        const used = day.uzyte?.[g] ?? 0;
-        const best = day.najlepsze?.[g] ?? [];
-        return (
-          <section
+    <>
+      <h2 className="hill-section-title d2-sec">{T.title}</h2>
+      <div className="d2-hills">
+        {day.hills.map((hill, g) => (
+          <HillCard
             key={hill.id}
-            className={g === next ? "d2-hill d2-next" : "d2-hill"}
-            aria-labelledby={`d2-hill-${g}`}
-          >
-            <h2 className="hill-section-title" id={`d2-hill-${g}`}>
-              {`${T.groups[g] ?? ""}: ${UI_TEXT.hillLabel(hill.name, hill.kPointM)}`}
-            </h2>
-            {!guest && (
-              <ul className="d2-lines">
-                <li>{T.used(used, day.limit)}</li>
-                {best.length === 0 && <li>{T.noJumpYet}</li>}
-                {best.map((j) => (
-                  <li key={j.gid} className="d2-best">
-                    {T.bestJump(j)}
-                  </li>
-                ))}
-                {best.length > 0 && <li>{T.hillSum(day.sumy?.[g] ?? 0)}</li>}
-              </ul>
-            )}
-            {guest ? (
-              <button type="button" className="pixel-button" disabled={starting} onClick={() => onTrial(hill.id)}>
-                {T.trial}
-              </button>
-            ) : g === next ? (
-              <button type="button" className="pixel-button" disabled={starting} onClick={() => onJump(g)}>
-                {T.jump(used + 1, day.limit)}
-              </button>
-            ) : used >= day.limit ? (
-              <p className="note">{T.allUsed}</p>
-            ) : null}
-          </section>
-        );
-      })}
-    </div>
+            hill={hill}
+            g={g}
+            day={day}
+            records={records}
+            next={next}
+            starting={starting}
+            onJump={onJump}
+            onTrial={onTrial}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -290,11 +275,27 @@ export function DailyScreen(props: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEntryFocus(headingRef, props.focusOnEntry);
   const guest = day?.gosc !== undefined;
+  // Tabele i rekordy jednym pobraniem: przy wejściu na ekran i po każdym skoku zapisanym przez serwer (zmienia się
+  // liczba skoków; zapis skoku czyści pamięć tabel serwera). Cudze skoki dochodzą przy następnym pobraniu.
+  const version = (day?.uzyte ?? []).join();
+  const [data, setData] = useState<Tables | null>(null);
+  useEffect(() => {
+    let live = true;
+    void tables().then((r) => {
+      if (live && r.ok) setData(r.j);
+    });
+    return () => {
+      live = false;
+    };
+    // `version` nie wchodzi do zapytania: tylko mówi, kiedy pobrać tabele jeszcze raz.
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
+  }, [version]);
   return (
     <main className="screen d2-day">
       <header className="d2-head">
         <h1 className="screen-title" tabIndex={-1} ref={headingRef}>
-          {T.title}
+          {T.gameTitle}
+          {day && <span className="d2-date">{T.dateLine(day.day)}</span>}
         </h1>
         {day?.konto && !guest && (
           <p className="note d2-account">
@@ -306,8 +307,8 @@ export function DailyScreen(props: Props) {
         )}
       </header>
       <WeekTable
+        data={data}
         me={guest ? null : (day?.konto?.nick ?? null)}
-        version={(day?.uzyte ?? []).join()}
         jumps={(day?.limit ?? 10) * (day?.hills.length ?? 3)}
       />
       {props.needsTesterPassword && SERVER_TEST && <TesterPassword onSaved={props.onReload} />}
@@ -331,6 +332,7 @@ export function DailyScreen(props: Props) {
           <AccountPart {...props} day={day} />
           <Hills
             day={day}
+            records={data?.rekordy ?? null}
             starting={props.starting || props.versionMismatch}
             onJump={props.onJump}
             onTrial={props.onTrial}

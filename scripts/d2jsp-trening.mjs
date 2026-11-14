@@ -39,7 +39,8 @@ async function open(name, viewport, mobile) {
 }
 
 /** Skoki dnia z ekranu: „Skoki: n z 10” przy każdej skoczni. */
-const usedLines = (page) => page.locator(".d2-hills .d2-lines li:first-child").allTextContents();
+const usedLines = (page) =>
+  page.locator(".d2-hills .d2-dots").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label")));
 const fits = (page) =>
   page.evaluate(() => ({ scroll: document.scrollingElement.scrollHeight, window: window.innerHeight }));
 

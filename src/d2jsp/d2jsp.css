@@ -77,9 +77,47 @@
  */
 .screen.d2-day {
   max-width: 1200px;
-  padding-top: calc(clamp(12px, 3vw, 28px) + var(--safe-top));
-  padding-bottom: calc(clamp(12px, 3vw, 28px) + var(--safe-bottom));
-  gap: clamp(10px, 2vw, 18px);
+  padding-top: calc(clamp(12px, 2vw, 18px) + var(--safe-top));
+  padding-bottom: calc(clamp(12px, 2vw, 18px) + var(--safe-bottom));
+  gap: clamp(8px, 1.2vw, 12px);
+}
+/* Wiadomość po skoku i ostrzeżenia w jednym wierszu na szerokim ekranie (nie 60 znaków jak opisy autora). */
+.screen.d2-day > .note {
+  max-width: none;
+}
+/*
+ * Gość na szerokim oknie: formularz logowania w jednym rzędzie (nick, hasło, przyciski), żeby ekran dnia z kartami
+ * skoczni mieścił się w okienku gry na stronie (plan_ekran_dnia, okno 1920×950).
+ */
+@media (min-width: 900px) {
+  .screen.d2-day .d2-login {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 6px 1rem;
+    max-width: none;
+    margin: 0;
+  }
+  .screen.d2-day .d2-login > .hill-section-title,
+  .screen.d2-day .d2-login > .note {
+    flex: 1 0 100%;
+    max-width: none;
+  }
+  .screen.d2-day .d2-login > .hill-section-title {
+    font-size: clamp(14px, 3.6vw, 18px);
+    margin: 0;
+  }
+  .screen.d2-day .d2-login label {
+    flex: 0 1 12rem;
+    min-width: 0;
+  }
+  .screen.d2-day .d2-login input {
+    width: 100%;
+    min-width: 0;
+  }
+  .screen.d2-day .d2-login .d2-link {
+    align-self: flex-end;
+  }
 }
 .d2-head {
   display: flex;
@@ -117,6 +155,7 @@
   font-size: clamp(13px, 3.4vw, 16px);
   color: var(--tone-white);
 }
+/* Lista skoków na ekranie „Skoki gracza” (player-screen.tsx). */
 .d2-lines {
   list-style: none;
   margin: 0;
@@ -126,6 +165,127 @@
   color: var(--muted);
 }
 .d2-best {
+  color: var(--tone-white);
+}
+/*
+ * Karta skoczni wg makiety proto/uklad-dnia (Mateusz 14.11, wygląd wymyślony): rekordy pod nazwą oddzielone kreską,
+ * „Twoje 2 najlepsze skoki” z kwadracikami zużytych skoków, metry po lewej, punkty szarym po prawej, „Razem” pod kreską.
+ */
+.screen.d2-day .d2-sec {
+  margin: 0;
+  font-size: clamp(14px, 3.6vw, 18px);
+  color: var(--accent);
+}
+.d2-date {
+  margin-left: 0.8em;
+  font-size: 0.42em;
+  color: var(--muted);
+  text-shadow: none;
+}
+.d2-recs {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 2px 0 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(12px, 3vw, 13px);
+}
+.d2-rec {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+.d2-rec-label {
+  flex: none;
+  width: 10.5em;
+  font-size: 0.8em;
+  white-space: nowrap;
+  color: var(--muted);
+}
+/* Długi nick skraca się kropkami; metry i data zostają całe. */
+.d2-rec-who {
+  display: flex;
+  align-items: baseline;
+  gap: 0 0.5em;
+  min-width: 0;
+  white-space: nowrap;
+}
+.d2-rec-who .d2-av {
+  flex: none;
+  margin-right: 0;
+  align-self: center;
+}
+.d2-rec-nick {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.d2-rec-who b {
+  flex: none;
+  font-weight: inherit;
+  color: var(--accent);
+}
+.d2-rec-who small {
+  flex: none;
+}
+.d2-rec-who small,
+.d2-rec-none {
+  font-size: 0.85em;
+  color: var(--muted);
+}
+.d2-legend {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(10px, 2.6vw, 12px);
+  color: var(--muted);
+}
+.d2-dots {
+  display: inline-flex;
+  gap: 3px;
+}
+.d2-dots i {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--muted);
+}
+.d2-dots .d2-dot-used {
+  background: var(--muted);
+}
+.d2-jump {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: clamp(13px, 3.4vw, 15px);
+}
+.d2-jump-p {
+  font-size: 0.85em;
+  color: var(--muted);
+}
+.d2-fell {
+  font-size: 0.75em;
+  color: #ff8a7a;
+}
+.d2-empty {
+  margin: 0;
+}
+.d2-sum {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: var(--muted);
+}
+.d2-sum b {
+  font-weight: inherit;
+  font-size: 1.1em;
   color: var(--tone-white);
 }
 .d2-hill .pixel-button,

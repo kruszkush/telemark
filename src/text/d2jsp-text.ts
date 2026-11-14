@@ -74,9 +74,23 @@ export const D2_TEXT = {
   guestNote: "Bez konta skaczesz na losowym wietrze, a skoki nie trafiają do tabel.",
   used: (n: number, limit: number) => `Skoki: ${n} z ${limit}`,
   noJumpYet: "Jeszcze bez skoku.",
-  bestJump: (j: { m: number; p: number; fell?: boolean }) =>
-    `${meters(j.m)} m, ${pts(j.p)} pkt${j.fell === true ? ", upadek" : ""}`,
-  hillSum: (p: number) => `Razem na skoczni: ${pts(p)} pkt`,
+  // Ekran dnia wg makiety proto/uklad-dnia (Mateusz 14.11): nazwa gry z datą, karty skoczni z rekordami.
+  gameTitle: "Telemark",
+  dateLine: (day: string) => {
+    const DAYS = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+    const [y, m, d] = day.split("-").map(Number);
+    const dow = new Date(Date.UTC(y ?? 2026, (m ?? 1) - 1, d ?? 1)).getUTCDay();
+    return `${DAYS[dow] ?? ""} ${d ?? ""}.${String(m ?? "").padStart(2, "0")}`;
+  },
+  recordDay: "Rekord dnia",
+  recordHill: "Rekord skoczni",
+  recordNone: "jeszcze nikt",
+  shortDate: (day: string) => `${Number(day.slice(8, 10))}.${day.slice(5, 7)}`,
+  yourBest: "Twoje 2 najlepsze skoki",
+  fell: "upadek",
+  hillSumLabel: "Razem (2 najlepsze)",
+  metersUnit: (m: number) => `${meters(m)} m`,
+  pointsUnit: (p: number) => `${pts(p)} pkt`,
   jump: (n: number, limit: number) => `Skacz (skok ${n} z ${limit})`,
   allUsed: "Komplet skoków na tej skoczni.",
   trial: "Skacz na próbę",

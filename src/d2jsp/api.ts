@@ -283,8 +283,28 @@ export interface TodayRow {
   wynik: number;
   place: number;
 }
-/** Tabele tygodnia i miesiąca (te same co na stronie licznika, d2jsp/strona.js) i dzisiejsza (tylko w grze). */
-export const tables = () => post<{ day: string; okresy: TablePeriod[]; dzis?: TodayRow[] }>("/tm/tabele", {});
+/** Rekord dnia albo skoczni (najdłuższy ustany skok, lotnik/serwer/telemark.js records): skocznia, gracz, metry, dzień. */
+export interface HillRecord {
+  hill: string;
+  nick: string;
+  uid: string | null;
+  m: number;
+  day: string;
+}
+/** Rekordy trzech skoczni dnia (po kolei jak `hills`): dzisiejsze i ze wszystkich dni; null bez rekordu. */
+export interface DayRecords {
+  dzis: (HillRecord | null)[];
+  skocznia: (HillRecord | null)[];
+}
+export interface Tables {
+  day: string;
+  okresy: TablePeriod[];
+  dzis?: TodayRow[];
+  /** Brak u starszego serwera. */
+  rekordy?: DayRecords;
+}
+/** Tabele tygodnia i miesiąca (te same co na stronie licznika, d2jsp/strona.js), dzisiejsza i rekordy (tylko w grze). */
+export const tables = () => post<Tables>("/tm/tabele", {});
 
 export interface Watched {
   gid: string;

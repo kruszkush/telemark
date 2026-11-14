@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { D2_TEXT as T } from "../text/d2jsp-text";
-import { tables, type TablePeriod, type TodayRow } from "./api";
+import type { TablePeriod, Tables, TodayRow } from "./api";
 
 /**
  * Awatary z forum, które trzyma strona licznika (d2jsp/strona.js wystawia `tmAvatars` na oknie strony); gra poza
@@ -151,25 +151,13 @@ function Today({ rows, me, jumps }: { rows: readonly TodayRow[]; me: string | nu
 
 /**
  * Mała tabela na górze ekranu dnia, w stylu tabel zawodów autora (contest-table): domyślnie „Dzisiaj”, przełącznik
- * na bieżący tydzień; miesiąc i poprzednie okresy są na stronie. Pobierana przy wejściu na ekran dnia i po każdym
- * skoku zapisanym przez serwer (zmienia się `version`; zapis skoku czyści pamięć tabel serwera).
+ * na bieżący tydzień; miesiąc i poprzednie okresy są na stronie. Dane pobiera ekran dnia (daily-screen.tsx), wspólnie
+ * z rekordami kart skoczni.
  */
-export function WeekTable({ me, version, jumps }: { me: string | null; version: string; jumps: number }) {
-  const [data, setData] = useState<{ okresy: TablePeriod[]; dzis: TodayRow[] } | null>(null);
+export function WeekTable({ data, me, jumps }: { data: Tables | null; me: string | null; jumps: number }) {
   const [tab, setTab] = useState<"d" | "w">("d");
-  useEffect(() => {
-    let live = true;
-    void tables().then((r) => {
-      if (live && r.ok) setData({ okresy: r.j.okresy, dzis: r.j.dzis ?? [] });
-    });
-    return () => {
-      live = false;
-    };
-    // `version` (liczby skoków gracza) nie wchodzi do zapytania: tylko mówi, kiedy pobrać tabelę jeszcze raz.
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
-  }, [version]);
   if (data === null) return null;
-  const week = data.okresy.find((p) => p.k === "w");
+  const week = data.okresy.find((p: TablePeriod) => p.k === "w");
   return (
     <section className="d2-tables" aria-label={T.tablesLabel}>
       <div className="d2-tabs">
@@ -182,7 +170,7 @@ export function WeekTable({ me, version, jumps }: { me: string | null; version: 
           </button>
         )}
       </div>
-      {tab === "d" || !week ? <Today rows={data.dzis} me={me} jumps={jumps} /> : <Week period={week} me={me} />}
+      {tab === "d" || !week ? <Today rows={data.dzis ?? []} me={me} jumps={jumps} /> : <Week period={week} me={me} />}
     </section>
   );
 }
