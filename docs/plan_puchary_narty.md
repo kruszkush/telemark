@@ -37,5 +37,12 @@ Furtki: nie (wygląd jednej rzeczy). Krytyk: nie (2 pliki kodu, bez fundamentu).
 
 Pierwszy pokaz po kroku 4: Mateusz ocenia narty na stronie testowej; jeszcze zepsute: nic znanego.
 
-## Rozliczenie
-(na koniec)
+## Rozliczenie (14.11)
+| próg | wynik | kto zdecydował o zmianie |
+|---|---|---|
+| korona siedzi na nartach | próby 0/A/B/C, wybrana B (obręcz na nartach) | ja, do oceny Mateusza |
+| płomień jak przy kielichu | próby P1, P2 (płomień nad dziobami) wiszą oddzielnie; zostaje płomień z kielicha bez zmian | ja, do oceny Mateusza |
+| narty przy nicku, płonące z iskrami | 30 ikon, 4 płonące w `?tmdemo&demo`, iskry w klatkach co ok. 0,06 s | — |
+| telefon bez przewijania w bok | szerokość 390 px | — |
+| bez błędów strony | brak, lokalnie i na żywo (21.1-test) | — |
+Krytyk i furtki: nie uruchamiane (plan bez nich). Agent sposob: znany dobry; jego ryzyko (płomień nad nartami) sprawdzone na arkuszu.
