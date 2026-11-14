@@ -5,6 +5,7 @@ Jedyne miejsce tych ustaleń (14.11.2026). Plan wykonania: `docs/plan_d2jsp.md`.
 ## Strona i gra
 - Przycisk „Telemark” na stronie licznika (https://kruszkush.github.io/d2jsp-licznik/). Gra otwiera się w tej samej karcie, jako duże okno na wierzchu strony (jak okno nagrań Lotnika), krzyżyk wraca na stronę. Bez osobnego okna przeglądarki.
 - W menu tylko „Skocznie dnia” i ustawienia. Trening, powtórki, zawody z komputerem i instalacja jako aplikacja schowane (kod może zostać).
+- Strona licznika (Mateusz 14.11, makieta `proto/strona-mistrzowie/makieta-c.html`): kolumna Telemarka po lewej pod przyciskiem gry (mistrzowie roku, miesiąca, tygodnia z pucharami strony i czołówką 5, wyścigi trwających okresów, miejsce zalogowanego); wykres „Posty co godzinę” usunięty; galeria sław wspólna, tytuły Telemarka ze znaczkiem.
 - Rejestracja i weryfikacja w grze (Mateusz 14.11), przeniesione z Lotnika: „Załóż konto” obok „Zaloguj”, ramka z kodem LOT-xxxx i „Zweryfikuj” (kopiuje kod, otwiera temat licznika), potem „Weryfikacja w toku”, po weryfikacji raz zielone potwierdzenie. „Mam kod od admina” (Mateusz 14.11): nick, kod i nowe hasło, hasło zmienia się na koncie Lotnika (to samo konto), gracz od razu zalogowany.
 - Logowanie kontem Lotnika (nick + hasło, to samo konto). Zalogowany w Lotniku na tej stronie jest od razu zalogowany w Telemarku. Nick gracza widać jako nazwisko skoczka przy skoku i w wynikach.
 
