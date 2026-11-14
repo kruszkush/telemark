@@ -3,6 +3,7 @@ import { UI_TEXT } from "../text/ui-text";
 import { useEntryFocus } from "../ui/use-entry-focus";
 import { SERVER_TEST, setTesterPassword, type DayState } from "./api";
 import { D2_TEXT as T } from "../text/d2jsp-text";
+import { nextHill } from "./next-hill";
 import { WeekTable } from "./week-table";
 
 /** Co widać pod nagłówkiem po ostatnim skoku albo przy błędzie. */
@@ -101,13 +102,19 @@ function TesterPassword({ onSaved }: { onSaved: () => void }) {
 
 function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJump" | "onTrial"> & { day: DayState }) {
   const guest = day.gosc !== undefined;
+  // Zalogowany skacze tylko na skoczni z kolejki (2-2-2, next-hill.ts); gość wybiera skocznię do skoku na próbę.
+  const next = guest ? null : nextHill(day.uzyte ?? [], day.hills.length, day.limit);
   return (
     <div className="d2-hills">
       {day.hills.map((hill, g) => {
         const used = day.uzyte?.[g] ?? 0;
         const best = day.najlepsze?.[g] ?? [];
         return (
-          <section key={hill.id} className="d2-hill" aria-labelledby={`d2-hill-${g}`}>
+          <section
+            key={hill.id}
+            className={g === next ? "d2-hill d2-next" : "d2-hill"}
+            aria-labelledby={`d2-hill-${g}`}
+          >
             <h2 className="hill-section-title" id={`d2-hill-${g}`}>
               {`${T.groups[g] ?? ""}: ${UI_TEXT.hillLabel(hill.name, hill.kPointM)}`}
             </h2>
@@ -127,13 +134,13 @@ function Hills({ day, starting, onJump, onTrial }: Pick<Props, "starting" | "onJ
               <button type="button" className="pixel-button" disabled={starting} onClick={() => onTrial(g)}>
                 {T.trial}
               </button>
-            ) : used < day.limit ? (
+            ) : g === next ? (
               <button type="button" className="pixel-button" disabled={starting} onClick={() => onJump(g)}>
                 {T.jump(used + 1, day.limit)}
               </button>
-            ) : (
+            ) : used >= day.limit ? (
               <p className="note">{T.allUsed}</p>
-            )}
+            ) : null}
           </section>
         );
       })}
@@ -162,7 +169,11 @@ export function DailyScreen(props: Props) {
           </p>
         )}
       </header>
-      <WeekTable me={guest ? null : (day?.konto?.nick ?? null)} version={(day?.uzyte ?? []).join()} />
+      <WeekTable
+        me={guest ? null : (day?.konto?.nick ?? null)}
+        version={(day?.uzyte ?? []).join()}
+        jumps={(day?.limit ?? 10) * (day?.hills.length ?? 3)}
+      />
       {props.needsTesterPassword && SERVER_TEST && <TesterPassword onSaved={props.onReload} />}
       {props.notes.map((n) => (
         <p key={n.text} className={n.warn === true ? "note d2-warn" : "note d2-result"} role="status">

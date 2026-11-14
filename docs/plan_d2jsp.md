@@ -112,3 +112,9 @@ Uwagi krytyków przyjęte do planu:
 - skocznia z biletu: sprawdziła się;
 - klucze localStorage jak Lotnik: sprawdziła się (ten sam klucz `lotnik.konto`, `lotnik/konto.js:83`);
 - wyrejestrowanie service workera: nie do oceny (pod tym adresem nigdy go nie było).
+
+## Dopisek 14.11: automatyczna kolejność skoczni (decyzja Mateusza, zasady_d2jsp.md „Skocznie i skoki”)
+- Gra wybiera skocznię: ta, na której gracz ma najmniej pełnych par skoków (liczba skoków / 2 w dół), przy remisie pierwsza z kolei; skocznie z 10 skokami odpadają. Daje 2-2-2 od zera i wyrównuje dni zaczęte jeszcze wolnym wyborem. Logika w `src/d2jsp/next-hill.ts` (test obok).
+- Ekran: przycisk „Skacz” tylko w karcie skoczni z kolejki, ta karta wyróżniona żółtą ramką (wzór: ramka podświetlenia `--accent` w grze autora); pozostałe karty pokazują tylko wyniki. Gość dalej wybiera skocznię do skoku na próbę (trening bez zapisu).
+- Serwer kolejności nie pilnuje: skok spoza kolejki wysłany z pominięciem gry nic nie daje (te same skoki, ten sam wiatr, liczą się 2 najlepsze), więc pilnowanie byłoby kosztem bez zysku.
+- Sprawdzenie: test jednostkowy kolejki; skoki robotem na stronie testowej i zrzut po każdym, czy ramka przeszła dalej.

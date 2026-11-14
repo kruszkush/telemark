@@ -233,8 +233,17 @@ export interface TablePeriod {
   key: string;
   rows: TableRow[];
 }
-/** Tabele tygodnia i miesiąca (te same co na stronie licznika, d2jsp/strona.js). */
-export const tables = () => post<{ day: string; okresy: TablePeriod[] }>("/tm/tabele", {});
+/** Wiersz tabeli „Dzisiaj”: punkty z każdej skoczni (2 najlepsze skoki), liczba skoków, wynik dnia. */
+export interface TodayRow {
+  nick: string;
+  uid: string | null;
+  sumy: number[];
+  skoki: number;
+  wynik: number;
+  place: number;
+}
+/** Tabele tygodnia i miesiąca (te same co na stronie licznika, d2jsp/strona.js) i dzisiejsza (tylko w grze). */
+export const tables = () => post<{ day: string; okresy: TablePeriod[]; dzis?: TodayRow[] }>("/tm/tabele", {});
 
 export interface Watched {
   gid: string;

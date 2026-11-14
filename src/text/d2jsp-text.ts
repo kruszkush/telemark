@@ -33,7 +33,7 @@ export const D2_TEXT = {
     `${meters(j.m)} m, ${pts(j.p)} pkt${j.fell === true ? ", upadek" : ""}`,
   hillSum: (p: number) => `Razem na skoczni: ${pts(p)} pkt`,
   jump: (n: number, limit: number) => `Skacz (skok ${n} z ${limit})`,
-  allUsed: "Wszystkie skoki na dziś wykorzystane.",
+  allUsed: "Komplet skoków na tej skoczni.",
   trial: "Skacz na próbę",
   dayTotal: (p: number) => `Wynik dnia: ${pts(p)} pkt`,
   starting: "Wychodzisz na belkę…",
@@ -74,6 +74,12 @@ export const D2_TEXT = {
   tableName: "Gracz",
   tablePoints: "Punkty",
   tableEmpty: "Jeszcze nikt nie skakał.",
+  tablesLabel: "Tabele",
+  tabToday: "Dzisiaj",
+  tableDays: "Dni",
+  tableJumps: "Skoki",
+  tableDay: "Dzień",
+  jumpsOf: (n: number, all: number) => `${n}/${all}`,
   aboutFork: [
     {
       title: "Skocznie dnia",
