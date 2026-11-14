@@ -57,6 +57,10 @@ export interface LiveProps {
   contestHud: ContestJumpHud | null;
   /** The jumper leads the World Cup (the original's yellow torso); false in training. */
   contestLeader: boolean;
+  /** The wind of the jump, given from outside (a daily jump of the d2jsp page); absent for a new one each jump. */
+  fixedSeed?: number;
+  /** Hears the touchdown of the player's jump, where its result is settled, with the inputs that led to it. */
+  onTouchdown?: (jump: TrainingJump, inputs: readonly FrameInput[]) => void;
 }
 
 /** What the runs need from the screen. */
@@ -167,7 +171,8 @@ function createTrainingRun(
   releaseMouse: () => void,
 ): TrainingRun {
   const input = c().inputRef.current;
-  let jump: TrainingJump = startTrainingJump(hill, newSeed());
+  const seed = () => c().live.fixedSeed ?? newSeed();
+  let jump: TrainingJump = startTrainingJump(hill, seed());
   let inputs: FrameInput[] = [];
   let recording: JumpRecording | null = null;
   let last: FinishedJump | null = null;
@@ -179,7 +184,7 @@ function createTrainingRun(
   const ghosts = createGhostTrack(hill, () => c().live.ghost);
 
   const restart = () => {
-    jump = startTrainingJump(hill, newSeed());
+    jump = startTrainingJump(hill, seed());
     ghosts.restart();
     inputs = [];
     c().resetHands();
@@ -228,6 +233,7 @@ function createTrainingRun(
         newRecord = stepped.touchdown.newRecord;
         previousRecordM = newRecord ? (c().live.record?.distanceM ?? null) : null;
         c().announce(touchdownAnnouncement(jump.state.logic, newRecord));
+        c().live.onTouchdown?.(jump, inputs);
       }
     },
     settle() {

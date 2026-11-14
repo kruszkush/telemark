@@ -163,7 +163,7 @@ function useGameFiles() {
  * another window stored meanwhile (see mergedSave), and what it stored comes back into this window; what other
  * windows store comes in too (see saveSync).
  */
-function useStoredSave() {
+export function useStoredSave() {
   const [save, setSave] = useState<SaveData>(emptySave);
   const [backend] = useState<StorageBackend>(detectBackend);
   const [saveFailed, setSaveFailed] = useState(false);

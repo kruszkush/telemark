@@ -13,7 +13,7 @@ import { AbandonChoice } from "./abandon-question";
 import { JumpMenu } from "./jump-menu";
 import { ReplayBar } from "./replay-bar";
 import { nextReplaySpeed, type JumpRecording, type ReplaySource, type ReplayView } from "./jump-replay";
-import type { FinishedJump, JumpLoopControls } from "./jump-runs";
+import type { FinishedJump, JumpLoopControls, LiveProps } from "./jump-runs";
 import type { KeepOutcome } from "./use-replay-shelf";
 import type { JumpResult } from "./jump-round";
 import { useNowPlaying } from "./now-playing";
@@ -73,10 +73,19 @@ export interface ContestJump {
   onLeave: () => void;
   /** Ends the competition, after the player chose so. */
   onEnd: () => void;
-  /** What the picture shows of the competition: the points needed to lead, the total and the place after it. */
-  hud: ContestJumpHud;
+  /**
+   * What the picture shows of the competition: the points needed to lead, the total and the place after it; null
+   * for none (a daily jump of the d2jsp page).
+   */
+  hud: ContestJumpHud | null;
   /** The jumper's name as a hill record keeps it. */
   holder: string;
+  /** The wind of the jump, when it is given (a daily jump); absent for a new one. */
+  seed?: number;
+  /** Hears the touchdown of the player's jump with its inputs (a daily jump sends them there). */
+  onTouchdown?: LiveProps["onTouchdown"];
+  /** A plain way out in place of the question about the competition (a daily jump has nothing to keep). */
+  exit?: { label: string; go: () => void };
 }
 
 /** The competition's way on, which acts once however many presses or keys ask for it. */
@@ -143,7 +152,13 @@ function useContestJump(props: Props) {
   const menuProps = {
     onExit: props.onExit,
     contest: contest !== undefined,
-    abandon: contest ? <AbandonChoice label={JUMP_TEXT.exit} onLeave={contest.onLeave} onEnd={contest.onEnd} /> : null,
+    abandon: !contest ? null : contest.exit ? (
+      <button type="button" className="pixel-button" onClick={contest.exit.go}>
+        {contest.exit.label}
+      </button>
+    ) : (
+      <AbandonChoice label={JUMP_TEXT.exit} onLeave={contest.onLeave} onEnd={contest.onEnd} />
+    ),
   };
   const live = {
     contestNext,
@@ -151,6 +166,8 @@ function useContestJump(props: Props) {
     contestCpu: cpu !== null,
     contestHud: contest?.hud ?? null,
     contestLeader: contest?.leader ?? false,
+    ...(contest?.seed === undefined ? {} : { fixedSeed: contest.seed }),
+    ...(contest?.onTouchdown === undefined ? {} : { onTouchdown: contest.onTouchdown }),
   };
   return { settings, contestNext, cpu, menuProps, live };
 }

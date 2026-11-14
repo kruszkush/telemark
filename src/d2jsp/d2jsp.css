@@ -1,0 +1,42 @@
+/* Ekran „Skocznie dnia” (daily-screen.tsx); reszta wyglądu z app.css gry. */
+.d2-hill {
+  margin: 0.5rem 0 1rem;
+}
+.d2-warn {
+  color: #ffb000;
+}
+.d2-result {
+  color: #7fff7f;
+}
+.d2-total {
+  font-size: 1.25rem;
+  margin: 1rem 0 0.25rem;
+}
+.d2-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 22rem;
+  margin: 0.5rem 0 1rem;
+}
+.d2-login label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.d2-login input {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  background: #000;
+  color: inherit;
+  border: 2px solid currentColor;
+}
+.d2-small {
+  margin-left: 0.5rem;
+}
+.d2-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
