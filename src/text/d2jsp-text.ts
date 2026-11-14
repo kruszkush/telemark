@@ -62,6 +62,12 @@ export const D2_TEXT = {
   tableName: "Gracz",
   tablePoints: "Punkty",
   tableEmpty: "Jeszcze nikt nie skakał.",
+  aboutFork: [
+    {
+      title: "Skocznie dnia",
+      text: "Przeróbka Telemarka do skoczni dnia na stronie licznika d2jsp: kruszkush. Kod przeróbki, też na licencji GPL-3.0-or-later: github.com/kruszkush/telemark.",
+    },
+  ],
   watchTitle:(nick: string, day: string) => `Skok: ${nick}, ${day}`,
   watchError: "Nie udało się wczytać skoku.",
   watchBack: "Zamknij",

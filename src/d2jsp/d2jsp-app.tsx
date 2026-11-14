@@ -262,7 +262,7 @@ export function D2jspApp() {
   if (screen.kind === "settings") {
     return <SettingsScreen settings={settings} onSettings={onSettings} onBack={back} focusOnEntry={navigated} />;
   }
-  if (screen.kind === "about") return <AboutScreen onBack={back} focusOnEntry={navigated} />;
+  if (screen.kind === "about") return <AboutScreen onBack={back} focusOnEntry={navigated} extra={T.aboutFork} />;
   if (screen.kind === "howto") {
     return <HowToScreen tilt={settings.leanControl === "tilt" && tiltSupported()} onBack={back} focusOnEntry={navigated} />;
   }

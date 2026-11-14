@@ -7,10 +7,14 @@ interface Props {
   onBack: () => void;
   /** Whether the heading takes the keyboard focus when the screen appears. */
   focusOnEntry: boolean;
+  /** Sections after the game's own, from a fork's mode (d2jsp: whose fork and where its source is). */
+  extra?: readonly { title: string; text: string }[];
 }
 
+const NO_EXTRA: Props["extra"] = [];
+
 /** What the game is, whose game it follows and who made both, opened from the main menu. */
-export function AboutScreen({ onBack, focusOnEntry }: Props) {
+export function AboutScreen({ onBack, focusOnEntry, extra = NO_EXTRA }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEntryFocus(headingRef, focusOnEntry);
   return (
@@ -19,7 +23,7 @@ export function AboutScreen({ onBack, focusOnEntry }: Props) {
         {UI_TEXT.about.title}
       </h1>
       <dl className="how-to">
-        {UI_TEXT.about.sections.map((section) => (
+        {[...UI_TEXT.about.sections, ...(extra ?? [])].map((section) => (
           <div key={section.title} className="how-to-step">
             <dt>{section.title}</dt>
             <dd>{typeset(section.text)}</dd>
