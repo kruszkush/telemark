@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szkic: puchary Telemarka</title>
+<!-- Szkic (Mateusz 14.11): puchary Telemarka mają różnić się od pucharów za posty kształtem, kolory te same.
+     Wzór: obecne puchary strony (d2jsp-licznik/docs/test/index.html, symbole cup, cupM, cupY, przepisane bez zmian).
+     Kształty Telemarka wymyślone, bez obrazka z zewnątrz. Gra i strona tego nie importują. -->
+<style>
+  :root { --bg:#141413; --card:#1f1f1d; --ink:#ecebe6; --mute:#9a9892; --line:#34332f; --gold:#c9961a; --gold2:#f3d46b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui, Segoe UI, Arial, sans-serif; }
+  main { width:1500px; margin:0 auto; padding:24px 0 40px; }
+  h1 { font-size:24px; margin:0 0 4px; }
+  .lead { color:var(--mute); margin:0 0 20px; font-size:15px; }
+  .row { display:grid; grid-template-columns:260px 1fr 460px; gap:24px; align-items:center; background:var(--card);
+         border:1px solid var(--line); border-radius:12px; padding:16px 22px; margin-bottom:14px; }
+  .row h2 { margin:0; font-size:20px; }
+  .row h2 small { display:block; font-size:13px; color:var(--mute); font-weight:400; margin-top:4px; line-height:1.4; }
+  .big { display:flex; gap:26px; align-items:flex-end; }
+  .big figure { margin:0; text-align:center; font-size:12px; color:var(--mute); }
+  .big svg.l { width:84px; height:84px; display:block; margin:0 auto 4px; }
+  .big svg.m { width:44px; height:44px; display:block; margin:0 auto 4px; }
+  .small { font-size:15px; line-height:2; }
+  .small .who { display:flex; align-items:center; gap:4px; }
+  .small svg { width:16px; height:16px; }
+  .small .tag { color:var(--mute); font-size:12px; margin-right:6px; width:120px; display:inline-block; }
+  .sep { width:1px; height:60px; background:var(--line); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- Obecne puchary strony: przepisane 1:1. -->
+    <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gold2)"/><stop offset="1" stop-color="var(--gold)"/></linearGradient>
+    <linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9b8ff"/><stop offset="1" stop-color="#7b3fd1"/></linearGradient>
+    <linearGradient id="gy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6fbff"/><stop offset=".5" stop-color="#7fd9f0"/><stop offset="1" stop-color="#2a8fb8"/></linearGradient>
+    <symbol id="cup" viewBox="0 0 64 64">
+      <path d="M18 8h28v14c0 9-6 16-14 16S18 31 18 22z" fill="url(#gg)"/>
+      <path d="M18 12H9c0 10 5 15 11 16M46 12h9c0 10-5 15-11 16" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 37h8l2 10H26z" fill="var(--gold)"/>
+      <rect x="20" y="47" width="24" height="8" rx="2" fill="url(#gg)"/>
+      <path d="M25 13c0 6 1 11 4 15" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="cupM" viewBox="0 0 64 64">
+      <path d="M17 6h30v15c0 10-7 17-15 17S17 31 17 21z" fill="url(#gm)"/>
+      <path d="M17 10H8c0 11 5 16 11 17M47 10h9c0 11-5 16-11 17" fill="none" stroke="#7b3fd1" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 37h8l2 9H26z" fill="#7b3fd1"/>
+      <path d="M18 46h28l3 10H15z" fill="url(#gm)"/>
+      <path d="M32 13l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z" fill="#fff" fill-opacity=".9"/>
+    </symbol>
+    <symbol id="cupY" viewBox="0 0 64 64">
+      <path d="M20 2l4 6 8-6 8 6 4-6 2 9H18z" fill="#f3c93a"/>
+      <path d="M16 11h32v12c0 10-7 16-16 16S16 33 16 23z" fill="url(#gy)"/>
+      <path d="M16 14H7c0 11 5 16 11 17M48 14h9c0 11-5 16-11 17" fill="none" stroke="#2a8fb8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 38h8l2 8H26z" fill="#2a8fb8"/>
+      <path d="M17 46h30l3 11H14z" fill="url(#gy)"/>
+      <path d="M32 16l6 7-6 9-6-9z" fill="#fff" fill-opacity=".85"/>
+    </symbol>
+
+    <!-- A: kryształowa kula na nóżce (jak Kryształowa Kula Pucharu Świata). Znaki jak na pucharach strony:
+         tydzień bez znaku, miesiąc gwiazda, rok korona. -->
+    <radialGradient id="kg" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff6cf"/><stop offset=".45" stop-color="var(--gold2)"/><stop offset="1" stop-color="var(--gold)"/></radialGradient>
+    <radialGradient id="km" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f3e8ff"/><stop offset=".45" stop-color="#d9b8ff"/><stop offset="1" stop-color="#7b3fd1"/></radialGradient>
+    <radialGradient id="ky" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#7fd9f0"/><stop offset="1" stop-color="#2a8fb8"/></radialGradient>
+    <g id="globeLines" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.4">
+      <ellipse cx="32" cy="26" rx="8" ry="18"/><path d="M14 26h36M17 17h30M17 35h30"/>
+    </g>
+    <symbol id="kulaW" viewBox="0 0 64 64">
+      <circle cx="32" cy="26" r="18" fill="url(#kg)"/><use href="#globeLines"/>
+      <path d="M22 16c-3 4-4 9-3 13" stroke="#fff" stroke-opacity=".8" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M28 43h8l2 5H26z" fill="var(--gold)"/><rect x="20" y="48" width="24" height="8" rx="2" fill="url(#gg)"/>
+    </symbol>
+    <symbol id="kulaM" viewBox="0 0 64 64">
+      <circle cx="32" cy="26" r="18" fill="url(#km)"/><use href="#globeLines"/>
+      <path d="M32 18l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z" fill="#fff" fill-opacity=".95"/>
+      <path d="M28 43h8l2 5H26z" fill="#7b3fd1"/><path d="M18 48h28l3 8H15z" fill="url(#gm)"/>
+    </symbol>
+    <symbol id="kulaY" viewBox="0 0 64 64">
+      <circle cx="32" cy="28" r="17" fill="url(#ky)"/>
+      <g transform="translate(0 2)"><use href="#globeLines" transform="translate(32 26) scale(.94) translate(-32 -26)"/></g>
+      <path d="M22 3l4 6 6-5 6 5 4-6 1 9H21z" fill="#f3c93a"/>
+      <path d="M32 21l5 6-5 8-5-8z" fill="#fff" fill-opacity=".9"/>
+      <path d="M28 44h8l2 4H26z" fill="#2a8fb8"/><path d="M17 48h30l3 9H14z" fill="url(#gy)"/>
+    </symbol>
+
+    <!-- B: dwie skrzyżowane narty na podstawie. -->
+    <g id="skis">
+      <g transform="rotate(-24 32 30)"><rect x="28.5" y="4" width="7" height="46" rx="3.5"/><path d="M28.5 8c0-5 3-7 7-7v7z"/></g>
+      <g transform="rotate(24 32 30)"><rect x="28.5" y="4" width="7" height="46" rx="3.5"/><path d="M35.5 8c0-5-3-7-7-7v7z"/></g>
+    </g>
+    <symbol id="nartyW" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gg)" stroke="var(--gold)" stroke-width="1.5"/>
+      <rect x="18" y="49" width="28" height="8" rx="2" fill="url(#gg)"/>
+    </symbol>
+    <symbol id="nartyM" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gm)" stroke="#7b3fd1" stroke-width="1.5"/>
+      <circle cx="32" cy="29" r="7.5" fill="#7b3fd1"/>
+      <path d="M32 23.5l1.7 3.4 3.8.6-2.8 2.7.7 3.8-3.4-1.8-3.4 1.8.7-3.8-2.8-2.7 3.8-.6z" fill="#fff"/>
+      <path d="M16 49h32l3 8H13z" fill="url(#gm)"/>
+    </symbol>
+    <symbol id="nartyY" viewBox="0 0 64 64">
+      <use href="#skis" fill="url(#gy)" stroke="#2a8fb8" stroke-width="1.5" transform="translate(0 3)"/>
+      <path d="M23 1l3 5 6-4 6 4 3-5 1 8H22z" fill="#f3c93a"/>
+      <circle cx="32" cy="32" r="7" fill="#2a8fb8"/><path d="M32 27l4 5-4 6-4-6z" fill="#fff"/>
+      <path d="M15 50h34l3 8H12z" fill="url(#gy)"/>
+    </symbol>
+
+    <!-- C: medal na wstążce. -->
+    <symbol id="medalW" viewBox="0 0 64 64">
+      <path d="M18 2h10l8 22h-10zM46 2H36l-8 22h10z" fill="#a8761a"/><path d="M22 2h4l7 19h-4z" fill="#f3d46b" opacity=".6"/>
+      <circle cx="32" cy="40" r="19" fill="url(#gg)"/><circle cx="32" cy="40" r="14" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+      <path d="M24 35c2-4 5-6 8-6" stroke="#fff" stroke-opacity=".7" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="medalM" viewBox="0 0 64 64">
+      <path d="M18 2h10l8 22h-10zM46 2H36l-8 22h10z" fill="#5a2ea0"/><path d="M22 2h4l7 19h-4z" fill="#d9b8ff" opacity=".6"/>
+      <circle cx="32" cy="40" r="19" fill="url(#gm)"/><circle cx="32" cy="40" r="14" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+      <path d="M32 31l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="#fff" fill-opacity=".95"/>
+    </symbol>
+    <symbol id="medalY" viewBox="0 0 64 64">
+      <path d="M18 2h10l8 22h-10zM46 2H36l-8 22h10z" fill="#1f6f90"/><path d="M22 2h4l7 19h-4z" fill="#e6fbff" opacity=".6"/>
+      <circle cx="32" cy="40" r="19" fill="url(#gy)"/><circle cx="32" cy="40" r="14" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+      <path d="M24 34l3 4 5-4 5 4 3-4 1 8H23z" fill="#f3c93a"/><path d="M32 43l3 3-3 4-3-4z" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+<h1>Puchary Telemarka: trzy kształty obok obecnych pucharów za posty</h1>
+<p class="lead">Kolory te same co na stronie: tydzień złoty, miesiąc fioletowy z gwiazdą, rok niebieski z koroną. Duży rozmiar jak w kartach mistrzów, mały jak przy nicku w rankingu i w galerii sław. Kształty wymyślone, bez wzoru z zewnątrz.</p>
+<div id="rows"></div>
+</main>
+<script>
+const SETS = [
+  ["Obecne: puchar za posty", "Kielich z uszami. Zostaje bez zmian.", ["cup", "cupM", "cupY"]],
+  ["A: kryształowa kula", "Kula na nóżce, jak Kryształowa Kula Pucharu Świata w skokach.", ["kulaW", "kulaM", "kulaY"]],
+  ["B: narty", "Dwie skrzyżowane narty na podstawie; od razu skoki.", ["nartyW", "nartyM", "nartyY"]],
+  ["C: medal", "Medal na wstążce; inny obrys niż kielich.", ["medalW", "medalM", "medalY"]],
+];
+const NAMES = ["tydzień", "miesiąc", "rok"];
+const icon = (id, cls) => `<svg class="${cls}"><use href="#${id}"/></svg>`;
+document.getElementById("rows").innerHTML = SETS.map(([t, d, ids]) => `
+  <section class="row">
+    <h2>${t}<small>${d}</small></h2>
+    <div class="big">
+      ${ids.map((id, i) => `<figure>${icon(id, "l")}${NAMES[i]}</figure>`).join("")}
+      <span class="sep"></span>
+      ${ids.map((id, i) => `<figure>${icon(id, "m")}${NAMES[i]}</figure>`).join("")}
+    </div>
+    <div class="small">
+      <div class="who"><span class="tag">tylko ten kształt</span>Kryste_Panie ${ids.map((id) => icon(id, "")).join("")}</div>
+      <div class="who"><span class="tag">obok pucharów za posty</span>BrakNicku ${icon("cup", "")}${icon("cupM", "")} ${ids.map((id) => icon(id, "")).join("")}</div>
+    </div>
+  </section>`).join("");
+</script>
+</body>
+</html>
