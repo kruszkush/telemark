@@ -42,16 +42,16 @@
   .dots { display:inline-flex; gap:4px; }
   .dots i { width:9px; height:9px; border:2px solid var(--muted); display:inline-block; }
   .dots i.u { background:var(--muted); }
-  .jump { display:grid; grid-template-columns:118px 1fr 74px; align-items:center; gap:10px; font-size:13px; }
+  .jump { display:grid; grid-template-columns:150px 1fr 74px; align-items:center; gap:10px; font-size:13px; }
   .jump .m { font-size:15px; }
   .jump .p { text-align:right; color:var(--muted); font-size:12px; }
-  .jump.fell .m::after { content:" ✕"; color:var(--warn); font-size:12px; }
+  .jump.fell .m::after { content:" upadek"; color:var(--warn); font-size:10px; }
+  .legend { font-size:10px; color:var(--muted); display:flex; align-items:center; gap:6px; margin-top:-2px; }
+  .legend i { width:2px; height:12px; background:var(--accent); display:inline-block; }
   .bar { position:relative; height:10px; background:#10183a; border:1px solid var(--line); }
   .bar .f { position:absolute; left:0; top:0; bottom:0; background:var(--cyan); }
   .jump.fell .bar .f { background:#4a7f99; }
   .bar .k { position:absolute; top:-5px; bottom:-5px; width:2px; background:var(--accent); }
-  .jump:not(:nth-of-type(1)) .bar .k::after { content:none; }
-  .bar .k::after { content:"K"; position:absolute; top:-13px; left:-3px; font-size:9px; color:var(--accent); }
   .sum { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); border-top:1px solid var(--line); padding-top:6px; }
   .sum b { color:var(--white); font-weight:400; font-size:14px; }
   .go { color:var(--accent); font-size:21px; text-shadow:2px 2px 0 #6a3c00; margin-top:2px; }
@@ -82,7 +82,7 @@
 </head>
 <body>
 
-<div class="label">A: tabela na górze, pod nią „Skocznie dnia” <small>okno 1650×800, przerywana linia to brzeg okna</small></div>
+<div class="label">A1: tabela na górze, pod nią „Skocznie dnia”, kreska to punkt K <small>okno 1650×800, przerywana linia to brzeg okna</small></div>
 <div class="win A"><div class="scr">
   <div class="head">
     <h1>Telemark<span class="date">sobota 14.11</span></h1>
@@ -96,20 +96,16 @@
   <div class="btns"><span>Ustawienia</span><span>Jak skakać</span><span>O grze i autorze</span></div>
 </div></div>
 
-<div class="label">B: skocznie po lewej, tabela po prawej <small>okno 1650×800</small></div>
-<div class="win B"><div class="scr">
+<div class="label">A2: to samo, kreska to najlepszy dzisiejszy skok na skoczni <small>najlepsze skoki dnia zmyślone, na przykład</small></div>
+<div class="win A A2"><div class="scr">
   <div class="head">
     <h1>Telemark<span class="date">sobota 14.11</span></h1>
     <span class="acc">Skaczesz jako Skoczekbcf7.<b>Wyloguj</b></span>
   </div>
-  <div class="cols">
-    <div class="left">
-      <h2 class="sec">Skocznie dnia</h2>
-      <div data-cards style="display:flex;flex-direction:column;gap:10px"></div>
-      <div class="foot" data-foot style="margin-top:6px"></div>
-    </div>
-    <div class="tbl" data-table></div>
-  </div>
+  <div class="tbl" data-table></div>
+  <h2 class="sec">Skocznie dnia</h2>
+  <div class="cards" data-cards></div>
+  <div class="foot" data-foot></div>
   <p class="fine">Codziennie 3 nowe skocznie. Na każdej 10 skoków, każdy na innym wietrze, ale tym samym dla wszystkich. Gra sama wybiera skocznię: po 2 skoki na każdej, po kolei. Liczą się 2 najlepsze skoki ze skoczni, wynik dnia to suma z trzech skoczni. Skok liczy się od wyjścia na belkę: wyjście z gry albo zamknięcie strony w trakcie zużywa go.</p>
   <div class="btns"><span>Ustawienia</span><span>Jak skakać</span><span>O grze i autorze</span></div>
 </div></div>
@@ -128,18 +124,25 @@ const ROWS = [
   [2, "TMsmokee80096", "120,5", "–", "–", "3/30", "120,5"],
   [7, "Skoczekbcf7", "23,5", "0,0", "0,0", "10/30", "23,5", true],
 ];
+// Najlepszy dzisiejszy skok na skoczni (do A2): zmyślony przykład, w grze przyszedłby z serwera.
+const BEST = [{ m: 68.5, who: "Kupcia" }, { m: 131.0, who: "Kupcia" }, { m: 236.5, who: "Kupcia" }];
 const f = (x) => x.toFixed(1).replace(".", ",");
-const SCALE = 1.25; // pasek do 1,25 × K, kreska na K
-const jump = (h, j) => `<div class="jump${j.fell ? " fell" : ""}"><span class="m">${f(j.m)} m</span>
-  <span class="bar"><span class="f" style="width:${Math.min(100, (j.m / (h.k * SCALE)) * 100)}%"></span>
+const SCALE = 1.25; // pasek do 1,25 × kreski
+// Kreska: A1 punkt K skoczni, A2 najlepszy dzisiejszy skok na skoczni.
+const mark = (h, g, best) => (best ? BEST[g].m : h.k);
+const jump = (h, g, j, best) => `<div class="jump${j.fell ? " fell" : ""}"><span class="m">${f(j.m)} m</span>
+  <span class="bar"><span class="f" style="width:${Math.min(100, (j.m / (mark(h, g, best) * SCALE)) * 100)}%"></span>
   <span class="k" style="left:${100 / SCALE}%"></span></span><span class="p">${f(j.p)} pkt</span></div>`;
+const legend = (h, g, best) =>
+  `<div class="legend"><i></i>${best ? `najlepszy dziś: ${f(BEST[g].m)} m, ${BEST[g].who}` : `punkt K skoczni: ${h.k} m`}</div>`;
 const dots = (n) => `<span class="dots" title="${n} z 10 skoków">${Array.from({ length: 10 }, (_, i) => `<i class="${i < n ? "u" : ""}"></i>`).join("")}</span>`;
-function card(h, wide) {
+function card(h, g, best) {
   const title = `<h3><span>${h.g}: ${h.name} K${h.k}</span>${dots(h.used)}</h3>`;
-  const js = h.jumps.length ? h.jumps.map((j) => jump(h, j)).join("") : `<span class="empty">Jeszcze bez skoku.</span>`;
+  const js = h.jumps.length
+    ? h.jumps.map((j) => jump(h, g, j, best)).join("") + legend(h, g, best)
+    : `<span class="empty">Jeszcze bez skoku.</span>`;
   const sum = `<div class="sum"><span>Razem (2 najlepsze)</span><b>${f(h.sum)} pkt</b></div>`;
   const go = h.next ? `<span class="go">Skacz (skok ${h.used + 1} z 10)</span>` : "";
-  if (wide) return `<section class="card${h.next ? " next" : ""}"><div class="side">${title}${go}</div><div class="jumps">${js}${sum}</div></section>`;
   return `<section class="card${h.next ? " next" : ""}">${title}${js}${sum}${go}</section>`;
 }
 function table(cols) {
@@ -149,11 +152,11 @@ function table(cols) {
   <table><thead><tr><th>#</th><th>Gracz</th>${head}<th class="n">Skoki</th><th class="n">Dzień</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 const foot = `<span class="total">Wynik dnia: 23,5 pkt</span><span class="train">Trening: Jodłowa K135 <span class="note">bez limitu i bez zapisu</span><span class="go">Skacz</span></span>`;
-document.querySelector(".A [data-table]").innerHTML = table(true);
-document.querySelector(".A [data-cards]").innerHTML = HILLS.map((h) => card(h, false)).join("");
-// W B obok skoczni mieści się tylko wąska tabela (jak dziś przy niskim, szerokim oknie): bez kolumn skoczni.
-document.querySelector(".B [data-table]").innerHTML = table(false);
-document.querySelector(".B [data-cards]").innerHTML = HILLS.map((h) => card(h, true)).join("");
+document.querySelectorAll(".A").forEach((w) => {
+  const best = w.classList.contains("A2");
+  w.querySelector("[data-table]").innerHTML = table(true);
+  w.querySelector("[data-cards]").innerHTML = HILLS.map((h, g) => card(h, g, best)).join("");
+});
 document.querySelectorAll("[data-foot]").forEach((e) => (e.innerHTML = foot));
 </script>
 </body>
