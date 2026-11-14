@@ -224,4 +224,6 @@ export interface Watched {
   day: string;
   n: number;
 }
-export const watchJump = (gid: string) => post<Watched>("/tm/skok", { gid });
+/** Na serwerze testowym `&test` w adresie pozwala obejrzeć dzisiejszy skok od razu (sprawdzenie ▶ bez czekania). */
+const WATCH_TODAY = SERVER_TEST && new URLSearchParams(location.search).has("test");
+export const watchJump = (gid: string) => post<Watched>("/tm/skok", { gid, ...(WATCH_TODAY ? { test: true } : {}) });
