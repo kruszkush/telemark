@@ -46,8 +46,9 @@
   .jump .m { font-size:15px; }
   .jump .p { text-align:right; color:var(--muted); font-size:12px; }
   .jump.fell .m::after { content:" upadek"; color:var(--warn); font-size:10px; }
-  .legend { font-size:10px; color:var(--muted); display:flex; align-items:center; gap:6px; margin-top:-2px; }
-  .legend i { width:2px; height:12px; background:var(--accent); display:inline-block; }
+  /* Wiersz nad skokami: po lewej czyje skoki, nad kreską (kolumna paska, 80% jego szerokości) lider dnia. */
+  .legend { font-size:10px; color:var(--muted); margin-bottom:8px; }
+  .bar .lead { position:absolute; bottom:calc(100% + 6px); transform:translateX(-50%); font-size:10px; color:var(--accent); white-space:nowrap; }
   .bar { position:relative; height:10px; background:#10183a; border:1px solid var(--line); }
   .bar .f { position:absolute; left:0; top:0; bottom:0; background:var(--cyan); }
   .jump.fell .bar .f { background:#4a7f99; }
@@ -82,21 +83,7 @@
 </head>
 <body>
 
-<div class="label">A1: tabela na górze, pod nią „Skocznie dnia”, kreska to punkt K <small>okno 1650×800, przerywana linia to brzeg okna</small></div>
-<div class="win A"><div class="scr">
-  <div class="head">
-    <h1>Telemark<span class="date">sobota 14.11</span></h1>
-    <span class="acc">Skaczesz jako Skoczekbcf7.<b>Wyloguj</b></span>
-  </div>
-  <div class="tbl" data-table></div>
-  <h2 class="sec">Skocznie dnia</h2>
-  <div class="cards" data-cards></div>
-  <div class="foot" data-foot></div>
-  <p class="fine">Codziennie 3 nowe skocznie. Na każdej 10 skoków, każdy na innym wietrze, ale tym samym dla wszystkich. Gra sama wybiera skocznię: po 2 skoki na każdej, po kolei. Liczą się 2 najlepsze skoki ze skoczni, wynik dnia to suma z trzech skoczni. Skok liczy się od wyjścia na belkę: wyjście z gry albo zamknięcie strony w trakcie zużywa go.</p>
-  <div class="btns"><span>Ustawienia</span><span>Jak skakać</span><span>O grze i autorze</span></div>
-</div></div>
-
-<div class="label">A2: to samo, kreska to najlepszy dzisiejszy skok na skoczni <small>najlepsze skoki dnia zmyślone, na przykład</small></div>
+<div class="label">A2: kreska to najlepszy dzisiejszy skok na skoczni <small>okno 1650×800; najlepsze skoki dnia zmyślone, na przykład</small></div>
 <div class="win A A2"><div class="scr">
   <div class="head">
     <h1>Telemark<span class="date">sobota 14.11</span></h1>
@@ -132,14 +119,15 @@ const SCALE = 1.25; // pasek do 1,25 × kreski
 const mark = (h, g, best) => (best ? BEST[g].m : h.k);
 const jump = (h, g, j, best) => `<div class="jump${j.fell ? " fell" : ""}"><span class="m">${f(j.m)} m</span>
   <span class="bar"><span class="f" style="width:${Math.min(100, (j.m / (mark(h, g, best) * SCALE)) * 100)}%"></span>
-  <span class="k" style="left:${100 / SCALE}%"></span></span><span class="p">${f(j.p)} pkt</span></div>`;
-const legend = (h, g, best) =>
-  `<div class="legend"><i></i>${best ? `najlepszy dziś: ${f(BEST[g].m)} m, ${BEST[g].who}` : `punkt K skoczni: ${h.k} m`}</div>`;
+  <span class="k" style="left:${100 / SCALE}%"></span>${j === h.jumps[0] ? lead(g) : ""}</span><span class="p">${f(j.p)} pkt</span></div>`;
+// Nad skokami: czyje to skoki, a nad kreską pierwszego paska: kto skoczył najdalej dziś i ile.
+const legend = () => `<div class="legend">Twoje 2 najlepsze skoki</div>`;
+const lead = (g) => `<span class="lead" style="left:${100 / SCALE}%">${BEST[g].who} ${f(BEST[g].m)} m</span>`;
 const dots = (n) => `<span class="dots" title="${n} z 10 skoków">${Array.from({ length: 10 }, (_, i) => `<i class="${i < n ? "u" : ""}"></i>`).join("")}</span>`;
 function card(h, g, best) {
   const title = `<h3><span>${h.g}: ${h.name} K${h.k}</span>${dots(h.used)}</h3>`;
   const js = h.jumps.length
-    ? h.jumps.map((j) => jump(h, g, j, best)).join("") + legend(h, g, best)
+    ? legend() + h.jumps.map((j) => jump(h, g, j, best)).join("")
     : `<span class="empty">Jeszcze bez skoku.</span>`;
   const sum = `<div class="sum"><span>Razem (2 najlepsze)</span><b>${f(h.sum)} pkt</b></div>`;
   const go = h.next ? `<span class="go">Skacz (skok ${h.used + 1} z 10)</span>` : "";
