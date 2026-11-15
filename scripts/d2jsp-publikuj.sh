@@ -1,18 +1,24 @@
 #!/bin/sh
-# Publikacja Telemarku na stronie testowej licznika (repo d2jsp-licznik, GitHub Pages; push = publikacja).
-# Użycie (z katalogu telemark): sh scripts/d2jsp-publikuj.sh test
+# Publikacja Telemarku na stronie licznika (repo d2jsp-licznik, GitHub Pages; push = publikacja).
+# Użycie (z katalogu telemark): sh scripts/d2jsp-publikuj.sh test|prod
 #   test → https://kruszkush.github.io/d2jsp-licznik/test/ (serwer lotnik-test, hasło testerów), wersja X.Y-test +0.1
-# Strona główna (prod) dopiero na słowa Mateusza „daj na official”: wtedy dopisać tryb prod (docs/, serwer lotnik
-# z TELEMARK=1 w deploy.sh prod). Wzór: lotnik/scripts/publikuj.sh.
+#   prod → https://kruszkush.github.io/d2jsp-licznik/ (serwer lotnik), wersja X.Y +0.1 („daj na official”, Mateusz 15.11).
+#          Najpierw serwer: w lotniku `sh serwer/deploy.sh prod` (trasy /tm/* włączone), potem ta strona.
+# Pierwsza publikacja prod (strona główna bez miejsca na Telemark) przenosi stronę testową na główną bez części testowych
+# (pasek WERSJA TESTOWA, ../data.json), z Lotnikiem i wersją strony głównej. Później tylko nowe ?v= i wersja; inne zmiany
+# w samej stronie testowej (wygląd poza kartą Telemarku) trzeba przenieść ręcznie.
+# SUCHO=1: wszystko bez commita i pusha (sprawdzenie zmian w licznik: git diff; cofnięcie: git checkout docs && git clean -fd docs).
+# Gra sama wybiera serwer po adresie strony (src/d2jsp/api.ts, d2jsp/strona.js). Wycofanie: `git revert <commit>` w licznik + push.
 set -e
 TRYB="$1"
-[ "$TRYB" = test ] || { echo "użycie: sh scripts/d2jsp-publikuj.sh test   (prod tylko po decyzji Mateusza)"; exit 1; }
+case "$TRYB" in test|prod) ;; *) echo "użycie: sh scripts/d2jsp-publikuj.sh test|prod"; exit 1 ;; esac
 SRC="$(cd "$(dirname "$0")/.." && pwd)"
 LICZ="${LICZNIK:-/e/Vibe coding/d2jsp-licznik}"
 NODE26="/e/Vibe coding/narzedzia/node26/node-v26.13.0-win-x64"
-HTML="$LICZ/docs/test/index.html"
-DST="$LICZ/docs/test/telemark"
-SUF=-test
+if [ "$TRYB" = test ]; then DIR=docs/test; SUF=-test; URL=https://kruszkush.github.io/d2jsp-licznik/test/
+else DIR=docs; SUF=; URL=https://kruszkush.github.io/d2jsp-licznik/; fi
+HTML="$LICZ/$DIR/index.html"
+DST="$LICZ/$DIR/telemark"
 
 cd "$SRC"
 PATH="$NODE26:$PATH" node node_modules/vite/bin/vite.js build -c vite.d2jsp.config.ts --logLevel warn
@@ -25,7 +31,25 @@ wypchnij() {
   echo "push nieudany, ponawiam po pull --rebase"
   timeout 60 git pull --rebase --quiet && timeout 60 git push --quiet
 }
-timeout 60 git pull --rebase --quiet
+[ -n "$SUCHO" ] || timeout 60 git pull --rebase --quiet
+
+# Pierwsza publikacja prod: strona testowa → główna (bez części testowych), Lotnik i wersja z obecnej strony głównej.
+if [ "$TRYB" = prod ] && ! grep -q '<div id="telemark"></div>' "$HTML"; then
+  LV=$(sed -n 's#.*lotnik/nakladka\.js?v=\([0-9]*\).*#\1#p' "$HTML" | head -1)
+  PV=$(sed -n 's#.*<span class="ver">\([0-9]*\.[0-9]*\)</span>.*#\1#p' "$HTML" | head -1)
+  [ -n "$LV" ] && [ -n "$PV" ] || { echo "strona główna: brak Lotnika ?v= albo wersji X.Y"; exit 1; }
+  sed -e '/>WERSJA TESTOWA</d' \
+      -e "s#fetch('\.\./data\.json#fetch('data.json#" \
+      -e 's#nieg na /test/:#nieg:#' \
+      -e "s#lotnik/nakladka\.js?v=[0-9]*#lotnik/nakladka.js?v=$LV#" \
+      -e "s#<span class=\"ver\">[0-9]*\.[0-9]*-test</span>#<span class=\"ver\">$PV</span>#" \
+      -e "s#d2jsp [0-9]*\.[0-9]*-test</title>#d2jsp $PV</title>#" \
+      "$LICZ/docs/test/index.html" > "$HTML"
+  ! grep -q 'WERSJA TESTOWA\|\.\./\|-test<' "$HTML" || { echo "strona główna: zostały części testowe"; exit 1; }
+  grep -q "lotnik/nakladka.js?v=$LV\"" "$HTML" && grep -q ">$PV<" "$HTML" || { echo "strona główna: nie przeniesiono Lotnika albo wersji"; exit 1; }
+  echo "strona główna: przeniesiona ze strony testowej (Lotnik ?v=$LV, wersja $PV)"
+fi
+
 rm -rf "$DST"
 mkdir -p "$DST"
 cp -r "$SRC/dist-d2jsp/." "$DST/"
@@ -42,14 +66,16 @@ else
 fi
 grep -q "telemark/strona.js?v=$V" "$HTML" || { echo "nie wstawiono skryptu Telemarku"; exit 1; }
 
-git add docs/test
+git add "$DIR"
 if git diff --cached --quiet; then echo "bez zmian"; exit 0; fi
 OLD=$(sed -n "s#.*<span class=\"ver\">\([0-9]*\.[0-9]*\)$SUF</span>.*#\1#p" "$HTML" | head -1)
 [ -n "$OLD" ] || { echo "brak wersji X.Y$SUF w $HTML"; exit 1; }
 NEW=$(echo "$OLD" | awk -F. '{ if ($2 >= 9) printf "%d.0", $1 + 1; else printf "%d.%d", $1, $2 + 1 }')
-sed -i "s#>$OLD$SUF<#>$NEW$SUF<#g" "$HTML"
+sed -i "s#>$OLD$SUF<#>$NEW$SUF<#g; s#d2jsp [0-9]*\.[0-9]*$SUF</title>#d2jsp $NEW$SUF</title>#" "$HTML"
 grep -q ">$NEW$SUF<" "$HTML" || { echo "nie podbito wersji"; exit 1; }
-git add docs/test
-git commit --quiet -m "Strona testowa: Telemark $V (wersja $NEW-test)"
+git add "$DIR"
+if [ -n "$SUCHO" ]; then git reset --quiet; echo "SUCHO: wersja $NEW$SUF, Telemark $V, bez commita (licznik: git diff)"; exit 0; fi
+if [ "$TRYB" = test ]; then MSG="Strona testowa: Telemark $V (wersja $NEW-test)"; else MSG="Live: Telemark $V na stronie glownej (wersja $NEW)"; fi
+git commit --quiet -m "$MSG"
 wypchnij
-echo "opublikowano: wersja $NEW$SUF, Telemark $V → https://kruszkush.github.io/d2jsp-licznik/test/"
+echo "opublikowano: wersja $NEW$SUF, Telemark $V → $URL"
