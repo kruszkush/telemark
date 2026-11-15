@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { button, jumpCanvas, openJumpFromStart, storedSave, TEXT } from "./support/app";
+import { button, jumpCanvas, openJumpFromStart, SAVE_KEY, storedSave, TEXT } from "./support/app";
 import { expect, test } from "./support/fixtures";
 import { boxOf, LAYOUT_SLACK_PX, receivesPointer } from "./support/geometry";
 import { startAnnouncedAt } from "./support/jump";
@@ -28,6 +28,16 @@ async function switchSteering(page: Page, from: string): Promise<void> {
   await expect(button(page, TEXT.resume)).toBeHidden();
 }
 
+/** A player who chose tilting on an earlier visit: the save says so before the game opens (once, so a reload keeps
+ * what the game itself wrote). */
+async function plantTiltChoice(page: Page): Promise<void> {
+  await page.addInitScript((key) => {
+    if (sessionStorage.getItem("tilt-planted") !== null) return;
+    sessionStorage.setItem("tilt-planted", "1");
+    localStorage.setItem(key, JSON.stringify({ schemaVersion: 2, records: {}, settings: { leanControl: "tilt" } }));
+  }, SAVE_KEY);
+}
+
 /** Waits until the saved settings lean with the finger. */
 async function expectFingerSaved(page: Page): Promise<void> {
   await expect.poll(() => storedSave(page)).toMatchObject({ settings: { leanControl: "drag" } });
@@ -36,13 +46,17 @@ async function expectFingerSaved(page: Page): Promise<void> {
 test.describe("with a motion sensor", () => {
   test.use({ motionSensor: "steady" });
 
-  test("tilt steering is the default: the zones are gone and the two halves of the screen are the buttons", async ({
+  test("the finger is the default; tilting chosen in the menu hides the zones and makes the halves the buttons", async ({
     page,
     traits,
     viewport,
   }) => {
     await openJumpFromStart(page, traits);
     const screen = viewport ?? { width: 0, height: 0 };
+    // The zones are on the screen from the start, even where the sensor needs no asking.
+    await expect(button(page, TEXT.leftPad)).toBeVisible();
+    const pictureWithZones = await boxOf(jumpCanvas(page));
+    await switchSteering(page, TILT_OFF);
     await expect(button(page, TEXT.leftPad)).toHaveCount(0);
     await expect(button(page, LEFT_HALF)).toBeVisible();
     const left = await boxOf(button(page, LEFT_HALF));
@@ -55,13 +69,13 @@ test.describe("with a motion sensor", () => {
     expect(right.width).toBeCloseTo(screen.width / 2, 0);
     expect(right.height).toBeCloseTo(screen.height, 0);
 
-    // The picture has the room the zones take: wider beside them, never smaller.
+    // The picture has the room the zones took: wider without them, never smaller.
     const picture = await boxOf(jumpCanvas(page));
-    await switchSteering(page, TILT_ON);
-    await expect(button(page, TEXT.leftPad)).toBeVisible();
-    const pictureWithZones = await boxOf(jumpCanvas(page));
     expect(picture.width).toBeGreaterThanOrEqual(pictureWithZones.width - LAYOUT_SLACK_PX);
     if (traits.landscape) expect(picture.width).toBeGreaterThan(pictureWithZones.width);
+    await expect.poll(() => storedSave(page)).toMatchObject({ settings: { leanControl: "tilt" } });
+    await switchSteering(page, TILT_ON);
+    await expect(button(page, TEXT.leftPad)).toBeVisible();
     await expectFingerSaved(page);
     await switchSteering(page, TILT_OFF);
     await expect(button(page, TEXT.leftPad)).toHaveCount(0);
@@ -88,6 +102,7 @@ test.describe("with a sensor that gives no readings", () => {
     page,
     traits,
   }) => {
+    await plantTiltChoice(page);
     await openJumpFromStart(page, traits);
     await expect(page.getByRole("status").filter({ hasText: NO_READINGS })).toBeVisible();
     await expect(button(page, TEXT.leftPad)).toBeVisible();
@@ -97,6 +112,8 @@ test.describe("with a sensor that gives no readings", () => {
 
 test.describe("with a browser that asks first", () => {
   test.use({ motionSensor: "asks-grant" });
+  // The question is for a player who chose tilting before; a new player has the finger and is not asked.
+  test.beforeEach(async ({ page }) => plantTiltChoice(page));
 
   test("the jump waits for the answer, and yes switches tilting on", async ({ page, traits }) => {
     await openJumpFromStart(page, traits);
@@ -121,6 +138,7 @@ test.describe("with a browser that asks first", () => {
 
 test.describe("with a browser that asks and is refused", () => {
   test.use({ motionSensor: "asks-deny" });
+  test.beforeEach(async ({ page }) => plantTiltChoice(page));
 
   test("a refusal keeps the finger and says so", async ({ page, traits }) => {
     await openJumpFromStart(page, traits);

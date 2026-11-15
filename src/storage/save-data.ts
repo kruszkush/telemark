@@ -73,7 +73,9 @@ export const REPLAY_SETTING_RANGES = {
 const DEFAULT_REPLAY_SETTINGS: ReplaySettings = { recentCount: 5, maxAgeDays: null, maxSizeKb: null, slider: true };
 
 export const DEFAULT_SETTINGS: Settings = {
-  leanControl: "tilt",
+  // The finger by default, with the zones L and P on the screen; tilting is chosen in the menu (Mateusz 15.11:
+  // the hidden halves of the screen were not found on a phone).
+  leanControl: "drag",
   vibration: true,
   scenery: "varied",
   weather: "varied",
