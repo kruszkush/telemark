@@ -323,7 +323,7 @@
   margin-left: 0;
 }
 .d2-key {
-  color: #f87171; /* zdanie o tym, co się liczy (Mateusz 15.11); ten sam czerwony co błędy gry */
+  color: #ff3b3b; /* zdanie o tym, co się liczy: jaskrawy czerwony (Mateusz 15.11, próba 2 z proto/czerwien-zasady) */
 }
 .d2-fine {
   max-width: none;

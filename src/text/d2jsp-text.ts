@@ -21,7 +21,7 @@ export const D2_TEXT = {
   title: "Skocznie dnia",
   // Opis zasad w trzech częściach: środkowa (co się liczy) na czerwono (Mateusz 15.11, .d2-key).
   rulesStart: "Codziennie o północy losowane są 3 nowe skocznie: mała, średnia i mamucia. Na każdej możesz oddać 10 skoków.",
-  rulesKey: "Do punktacji liczą się 2 najlepsze skoki z każdej skoczni",
+  rulesKey: "Do punktacji liczą się dwa najlepsze skoki z każdej skoczni", // „dwa” słowem: 2 w czcionce gry wygląda jak Z
   rules:
     ", a wynik dnia to suma tych sześciu skoków. Gra sama wybiera skocznię: 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa, więc pełny wynik dnia masz już po 6 skokach. Każdy z 10 skoków ma inny wiatr, ale te same wiatry dostają wszyscy gracze.",
   groups: ["Mała", "Średnia", "Mamucia"] as const,
