@@ -345,6 +345,7 @@ export function DailyScreen(props: Props) {
         </>
       )}
       <p className="note d2-fine">
+        {T.rulesStart} <span className="d2-key">{T.rulesKey}</span>
         {T.rules} {!guest && T.usedNote}
       </p>
       <div className="d2-buttons">

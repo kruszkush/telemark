@@ -322,6 +322,9 @@
 .d2-train .d2-small {
   margin-left: 0;
 }
+.d2-key {
+  color: #f87171; /* zdanie o tym, co się liczy (Mateusz 15.11); ten sam czerwony co błędy gry */
+}
 .d2-fine {
   max-width: none;
   font-size: clamp(11px, 3vw, 13px);

@@ -19,8 +19,11 @@ function weekName(key: string, months: readonly string[]): string {
 
 export const D2_TEXT = {
   title: "Skocznie dnia",
+  // Opis zasad w trzech częściach: środkowa (co się liczy) na czerwono (Mateusz 15.11, .d2-key).
+  rulesStart: "Codziennie o północy losowane są 3 nowe skocznie: mała, średnia i mamucia. Na każdej możesz oddać 10 skoków.",
+  rulesKey: "Do punktacji liczą się 2 najlepsze skoki z każdej skoczni",
   rules:
-    "Codziennie o północy losowane są 3 nowe skocznie: mała, średnia i mamucia. Na każdej możesz oddać 10 skoków. Do punktacji liczą się 2 najlepsze skoki z każdej skoczni, a wynik dnia to suma tych sześciu skoków. Gra sama wybiera skocznię: 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa, więc pełny wynik dnia masz już po 6 skokach. Każdy z 10 skoków ma inny wiatr, ale te same wiatry dostają wszyscy gracze.",
+    ", a wynik dnia to suma tych sześciu skoków. Gra sama wybiera skocznię: 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa, więc pełny wynik dnia masz już po 6 skokach. Każdy z 10 skoków ma inny wiatr, ale te same wiatry dostają wszyscy gracze.",
   groups: ["Mała", "Średnia", "Mamucia"] as const,
   loading: "Wczytywanie skoczni dnia…",
   offline: "Brak połączenia z serwerem. Spróbuj za chwilę.",
