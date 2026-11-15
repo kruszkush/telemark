@@ -20,7 +20,7 @@ function weekName(key: string, months: readonly string[]): string {
 export const D2_TEXT = {
   title: "Skocznie dnia",
   rules:
-    "Codziennie 3 nowe skocznie. Na każdej 10 skoków, każdy na innym wietrze, ale tym samym dla wszystkich. Gra sama wybiera skocznię: po 2 skoki na każdej, po kolei. Liczą się 2 najlepsze skoki ze skoczni, wynik dnia to suma z trzech skoczni.",
+    "Codziennie o północy losowane są 3 nowe skocznie: mała, średnia i mamucia. Na każdej możesz oddać 10 skoków. Do punktacji liczą się 2 najlepsze skoki z każdej skoczni, a wynik dnia to suma tych sześciu skoków. Gra sama wybiera skocznię: 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa, więc pełny wynik dnia masz już po 6 skokach. Każdy z 10 skoków ma inny wiatr, ale te same wiatry dostają wszyscy gracze.",
   groups: ["Mała", "Średnia", "Mamucia"] as const,
   loading: "Wczytywanie skoczni dnia…",
   offline: "Brak połączenia z serwerem. Spróbuj za chwilę.",
@@ -96,7 +96,8 @@ export const D2_TEXT = {
   trial: "Skacz na próbę",
   dayTotal: (p: number) => `Wynik dnia: ${pts(p)} pkt`,
   starting: "Wychodzisz na belkę…",
-  usedNote: "Skok liczy się od wyjścia na belkę: wyjście z gry albo zamknięcie strony w trakcie zużywa go.",
+  usedNote:
+    "Skok liczy się od wyjścia na belkę: wyjście z gry albo zamknięcie strony w trakcie go zużywa. Na skoczni treningowej możesz skakać do woli, żeby nauczyć się gry; te skoki nie trafiają do tabel.",
   settings: "Ustawienia",
   howTo: "Jak skakać",
   about: "O grze i autorze",
