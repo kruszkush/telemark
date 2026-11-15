@@ -49,7 +49,7 @@ Ustalenia z Mateuszem (zatwierdzone, nie planuję ich od nowa): `docs/zasady_d2j
 - Widoczność (tylko zweryfikowani, bez bana) liczona przy odczycie z kont Lotnika (pamięć instancji 60 s). Powód odejścia od wzoru Lotnika (pole tylko u widocznych + `syncAcc`): gracze nie przechodzą z niezweryfikowanych, bo niezweryfikowani nic nie zapisują, więc filtr dotyczy tylko banów i usuniętych kont; kilkadziesiąt dokumentów na tabelę.
 
 ## Rozstrzygnięte bez Mateusza (do raportu)
-1. Serwer: trasy Telemarku w serwerze Lotnika (`lotnik-test`), leniwy import, włączone zmienną tylko na teście (późniejsze wdrożenie Lotnika na prod ich nie włączy).
+1. Serwer: trasy Telemarku w serwerze Lotnika (`lotnik-test`), leniwy import, włączone zmienną tylko na teście (późniejsze wdrożenie Lotnika na prod ich nie włączy; zastąpione 15.11: `deploy.sh prod` włącza je też na prod, Telemark na stronie głównej).
 2. Wiatr skoku n: ziarno = HMAC(sekret, `tm1|std|dzień|grupa|n`), to samo dla wszystkich, nieznane przed wydaniem biletu.
 3. Skok zużyty w chwili wydania biletu (przerwany przepada).
 4. Konto niezweryfikowane skacze jak gość (losowy wiatr, bez zapisu): inaczej darmowe drugie konto pozwalałoby poznać dzisiejsze wiatry przed skokiem.

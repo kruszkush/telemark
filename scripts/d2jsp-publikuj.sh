@@ -66,14 +66,14 @@ else
 fi
 grep -q "telemark/strona.js?v=$V" "$HTML" || { echo "nie wstawiono skryptu Telemarku"; exit 1; }
 
-git add "$DIR"
+git add "$HTML" "$DST"   # tylko strona i Telemark: inne niezapisane pliki w docs/ (data.json, lotnik/) nie wchodzą do commita
 if git diff --cached --quiet; then echo "bez zmian"; exit 0; fi
 OLD=$(sed -n "s#.*<span class=\"ver\">\([0-9]*\.[0-9]*\)$SUF</span>.*#\1#p" "$HTML" | head -1)
 [ -n "$OLD" ] || { echo "brak wersji X.Y$SUF w $HTML"; exit 1; }
 NEW=$(echo "$OLD" | awk -F. '{ if ($2 >= 9) printf "%d.0", $1 + 1; else printf "%d.%d", $1, $2 + 1 }')
 sed -i "s#>$OLD$SUF<#>$NEW$SUF<#g; s#d2jsp [0-9]*\.[0-9]*$SUF</title>#d2jsp $NEW$SUF</title>#" "$HTML"
 grep -q ">$NEW$SUF<" "$HTML" || { echo "nie podbito wersji"; exit 1; }
-git add "$DIR"
+git add "$HTML"
 if [ -n "$SUCHO" ]; then git reset --quiet; echo "SUCHO: wersja $NEW$SUF, Telemark $V, bez commita (licznik: git diff)"; exit 0; fi
 if [ "$TRYB" = test ]; then MSG="Strona testowa: Telemark $V (wersja $NEW-test)"; else MSG="Live: Telemark $V na stronie glownej (wersja $NEW)"; fi
 git commit --quiet -m "$MSG"
