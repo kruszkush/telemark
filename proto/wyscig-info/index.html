@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szkic: co widać w wyścigu</title>
+<!-- Szkic (Mateusz 16.11): czy gracz oddał już dziś skoki i ile dni mu się liczy. Zrzuty prawdziwej strony głównej
+     z prawdziwymi danymi (zrzuty.mjs), w wersjach A i B przerobione tylko wiersze wyścigów, 5 osób zamiast 3. -->
+<style>
+  body { margin:0; background:#111; color:#eee; font-family:Arial, sans-serif; }
+  main { display:grid; gap:34px; padding:24px 36px; max-width:1500px; }
+  figure { margin:0; }
+  figcaption { font-size:24px; margin-bottom:8px; }
+  figcaption small { display:block; font-size:16px; color:#aaa; margin-top:4px; }
+  img { width:100%; height:auto; display:block; border-radius:10px; image-rendering:auto; }
+  p.note { margin:0 36px; padding-top:20px; color:#aaa; font-size:16px; max-width:1430px; }
+</style>
+</head>
+<body>
+<p class="note">Prawdziwe wyniki z dziś. Dziś wszyscy skończyli skoki, więc trzecie miejsce w tygodniu (Pozdrawiam) ma na próbę stan „12 z 30 skoków”, żeby było widać, jak wygląda ktoś, kto jeszcze skacze. Szare kółko z chomikiem to spadający awatar z mini-gry strony, nie część wersji.</p>
+<main>
+  <figure><figcaption>Obecnie<small>3 osoby, tylko punkty.</small></figcaption><img src="zrzuty/0.png" alt="Obecnie"></figure>
+  <figure><figcaption>A: szara linijka pod nickiem<small>Ile dni gracz już ma i ile skoków oddał dziś. 5 osób, pod wyścigiem zdanie o kliknięciu w nick.</small></figcaption><img src="zrzuty/A.png" alt="Wersja A"></figure>
+  <figure><figcaption>B: kropki i znaczek w jednej linii<small>W tygodniu kropka na każdy dzień (pełna = już się liczy), w miesiącu i roku „2 d”. Zielony ✓ = dziś skończył, puste kółko = dziś nie skakał, „12/30” = jeszcze skacze. Pod tygodniem objaśnienie znaków.</small></figcaption><img src="zrzuty/B.png" alt="Wersja B"></figure>
+</main>
+</body>
+</html>

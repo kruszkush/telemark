@@ -1,0 +1,166 @@
+{
+  "name": "projects/rich-chimera-344319/databases/(default)/documents/tm_puchary/std_w2026-46",
+  "fields": {
+    "podium": {
+      "arrayValue": {
+        "values": [
+          {
+            "mapValue": {
+              "fields": {
+                "acc": {
+                  "stringValue": "74ef6e8e4c161781f4fd"
+                },
+                "nick": {
+                  "stringValue": "Kryste_Panie"
+                },
+                "uid": {
+                  "stringValue": "1483967"
+                },
+                "suma": {
+                  "integerValue": "9101"
+                },
+                "dni": {
+                  "integerValue": "1"
+                },
+                "best": {
+                  "mapValue": {
+                    "fields": {
+                      "p": {
+                        "integerValue": "1760"
+                      },
+                      "gid": {
+                        "stringValue": "072b634761592d67"
+                      },
+                      "m": {
+                        "integerValue": "215"
+                      },
+                      "hill": {
+                        "stringValue": "own-30"
+                      },
+                      "day": {
+                        "stringValue": "2026-11-15"
+                      }
+                    }
+                  }
+                },
+                "place": {
+                  "integerValue": "1"
+                }
+              }
+            }
+          },
+          {
+            "mapValue": {
+              "fields": {
+                "acc": {
+                  "stringValue": "e284649e6f00143b6d2a"
+                },
+                "nick": {
+                  "stringValue": "Kupcia"
+                },
+                "uid": {
+                  "stringValue": "1202225"
+                },
+                "suma": {
+                  "integerValue": "8922"
+                },
+                "dni": {
+                  "integerValue": "1"
+                },
+                "best": {
+                  "mapValue": {
+                    "fields": {
+                      "p": {
+                        "integerValue": "1873"
+                      },
+                      "gid": {
+                        "stringValue": "f8b97f1cda903fc5"
+                      },
+                      "m": {
+                        "doubleValue": 224.5
+                      },
+                      "hill": {
+                        "stringValue": "own-30"
+                      },
+                      "day": {
+                        "stringValue": "2026-11-15"
+                      }
+                    }
+                  }
+                },
+                "place": {
+                  "integerValue": "2"
+                }
+              }
+            }
+          },
+          {
+            "mapValue": {
+              "fields": {
+                "acc": {
+                  "stringValue": "c3d7e7963d0495c353b7"
+                },
+                "nick": {
+                  "stringValue": "Stefania_Forester"
+                },
+                "uid": {
+                  "stringValue": "670077"
+                },
+                "suma": {
+                  "integerValue": "8405"
+                },
+                "dni": {
+                  "integerValue": "1"
+                },
+                "best": {
+                  "mapValue": {
+                    "fields": {
+                      "p": {
+                        "integerValue": "1723"
+                      },
+                      "gid": {
+                        "stringValue": "8098e8365cdf0cf4"
+                      },
+                      "m": {
+                        "doubleValue": 211.5
+                      },
+                      "hill": {
+                        "stringValue": "own-30"
+                      },
+                      "day": {
+                        "stringValue": "2026-11-15"
+                      }
+                    }
+                  }
+                },
+                "place": {
+                  "integerValue": "3"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "key": {
+      "stringValue": "w2026-46"
+    },
+    "zwyciezcy": {
+      "arrayValue": {
+        "values": [
+          {
+            "stringValue": "74ef6e8e4c161781f4fd"
+          }
+        ]
+      }
+    },
+    "t": {
+      "doubleValue": 1794791355.071
+    },
+    "zamkniety": {
+      "booleanValue": true
+    }
+  },
+  "createTime": "2026-11-16T01:09:15.106092Z",
+  "updateTime": "2026-11-16T01:09:15.106092Z"
+}
