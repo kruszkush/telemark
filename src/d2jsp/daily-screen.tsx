@@ -10,6 +10,9 @@ import { TRAINING_HILL_ID } from "./daily";
 import { ownHill } from "./jump-check";
 import { WeekTable } from "./week-table";
 
+/** Co ile gra sama pobiera tabele, gdy ekran dnia stoi (jak strona licznika, d2jsp/strona.js ODSWIEZ_MS). */
+const TABLES_REFRESH_MS = 60_000;
+
 /** Co widać pod nagłówkiem po ostatnim skoku albo przy błędzie. */
 export interface DayNote {
   text: string;
@@ -275,17 +278,23 @@ export function DailyScreen(props: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEntryFocus(headingRef, props.focusOnEntry);
   const guest = day?.gosc !== undefined;
-  // Tabele i rekordy jednym pobraniem: przy wejściu na ekran i po każdym skoku zapisanym przez serwer (zmienia się
-  // liczba skoków; zapis skoku czyści pamięć tabel serwera). Cudze skoki dochodzą przy następnym pobraniu.
+  // Tabele i rekordy jednym pobraniem: przy wejściu na ekran, po każdym skoku zapisanym przez serwer (zmienia się
+  // liczba skoków; zapis skoku czyści pamięć tabel serwera) i co minutę, gdy ekran stoi (cudze skoki; Mateusz 16.11,
+  // jak strona licznika; serwer i tak trzyma tabelę minutę).
   const version = (day?.uzyte ?? []).join();
   const [data, setData] = useState<Tables | null>(null);
   useEffect(() => {
     let live = true;
-    void tables().then((r) => {
-      if (live && r.ok) setData(r.j);
-    });
+    const load = (): void => {
+      void tables().then((r) => {
+        if (live && r.ok) setData(r.j);
+      });
+    };
+    load();
+    const timer = setInterval(load, TABLES_REFRESH_MS);
     return () => {
       live = false;
+      clearInterval(timer);
     };
     // `version` nie wchodzi do zapytania: tylko mówi, kiedy pobrać tabele jeszcze raz.
     // oxlint-disable-next-line react/exhaustive-effect-dependencies
