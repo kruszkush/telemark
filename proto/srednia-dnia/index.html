@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szkic: średnia na dzień</title>
+<!-- Szkic (Mateusz 18.11): średnia punktów na dzień obok sumy w wyścigach. Zrzuty prawdziwej strony głównej
+     z prawdziwymi danymi (zrzuty.mjs), w wersjach A i C przerobione tylko wiersze wyścigów. -->
+<style>
+  body { margin:0; background:#111; color:#eee; font-family:Arial, sans-serif; }
+  main { display:grid; gap:34px; padding:24px 36px; max-width:1500px; }
+  figure { margin:0; }
+  figcaption { font-size:24px; margin-bottom:8px; }
+  figcaption small { display:block; font-size:16px; color:#aaa; margin-top:4px; }
+  img { width:100%; height:auto; display:block; border-radius:10px; }
+  p.note { margin:0 36px; padding-top:20px; color:#aaa; font-size:16px; max-width:1430px; }
+</style>
+</head>
+<body>
+<p class="note">Prawdziwe wyniki z dziś. Średnia to punkty podzielone przez dni, które się liczą (gdy ktoś ma więcej dni, niż liczy wyścig, dzielę tylko przez liczone). Białe kropki to płatki z dekoracji strony, nie część wersji.</p>
+<main>
+  <figure><figcaption>Obecnie<small>Tylko suma punktów.</small></figcaption><img src="zrzuty/0.png" alt="Obecnie"></figure>
+  <figure><figcaption>A: średnia pod sumą<small>Małym szarym drukiem pod liczbą punktów, na przykład „936/dzień”. Wiersze tej samej wysokości co dziś.</small></figcaption><img src="zrzuty/A.png" alt="Wersja A"></figure>
+  <figure><figcaption>C: średnia w drugiej szarej linijce pod nickiem<small>Pełne zdanie „średnio 936 pkt na dzień”. Wiersze są wyższe, wyścig rośnie o około 70 px.</small></figcaption><img src="zrzuty/C.png" alt="Wersja C"></figure>
+</main>
+</body>
+</html>
