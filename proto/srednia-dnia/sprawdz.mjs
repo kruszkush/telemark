@@ -11,16 +11,18 @@ mkdirSync(resolve("proto/srednia-dnia/zywo"), { recursive: true });
 const browser = await chromium.launch({ channel: "msedge" });
 const ctx = await browser.newContext({ viewport: { width: 2560, height: 1440 }, colorScheme: "dark" });
 const page = await ctx.newPage();
-let ok = false;
-for (let i = 0; i < 20 && !ok; i++) {
-  await page.goto(base + "?t=" + Date.now(), { waitUntil: "domcontentloaded" });
-  try {
-    await page.locator("#telemark .tm-races .tmr ul").first().waitFor({ timeout: 30000 });
-    await page.waitForTimeout(1500);
-    ok = (await page.locator("#telemark .tmr .v.avg").count()) > 0 || (await page.locator("#telemark .tmr li.empty").count()) === 3;
-  } catch {}
-  if (!ok) { console.log("jeszcze stara strona, czekam 20 s"); await new Promise((r) => setTimeout(r, 20000)); }
+// Najpierw samo pobranie skryptu (kilka sekund), dopiero gdy ma nowy kod, jeden zrzut (18.11: pętla zrzutów stała 6 min).
+for (let i = 0; ; i++) {
+  const js = await (await fetch(base + "telemark/strona.js?t=" + Date.now())).text();
+  if (js.includes("small.top")) break;
+  if (i >= 30) { console.log("FAIL: strona nie ma nowego kodu po 5 min"); process.exit(1); }
+  await new Promise((r) => setTimeout(r, 10000));
 }
+await page.goto(base + "?t=" + Date.now(), { waitUntil: "domcontentloaded" });
+await page.locator("#telemark .tm-races .tmr").first().waitFor({ timeout: 30000 });
+await page.waitForTimeout(3000);
+const ok = (await page.locator("#telemark .tmr .v.avg").count()) > 0;
+console.log("średnich:", await page.locator("#telemark .tmr .v.avg").count(), "wyróżnionych:", await page.locator("#telemark .tmr small.top").count());
 console.log("wersja:", await page.locator(".ver").first().textContent().catch(() => "?"));
 for (const box of await page.locator("#telemark .tmr").all()) {
   console.log((await box.locator("h4").textContent()) + " | " + (await box.locator(".rule").textContent()));
