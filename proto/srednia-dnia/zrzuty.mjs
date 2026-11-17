@@ -25,6 +25,8 @@ async function variant(v, API) {
     const box = races[ci];
     const lead = (o.rows[0] && o.rows[0].suma) || 1;
     const old = [...box.querySelectorAll("li")];
+    const avgOf = (r) => { const d = Math.min(r.dni || 0, n); return d ? r.suma / d : 0; };
+    const best = Math.max(...o.rows.slice(0, 5).map(avgOf));
     const html = o.rows.slice(0, 5).map((r, i) => {
       const sk = today.get(r.uid) || 0;
       const days = Math.min(r.dni || 0, n);
@@ -32,7 +34,11 @@ async function variant(v, API) {
       const dzis = sk ? `dziś ${sk}/30` : "dziś nie skakał";
       const subTxt = `${r.dni || 0} z ${n} dni, ${dzis}` + (v === "C" ? `</div><div class="tm-sub">średnio ${avg} pkt na dzień` : "");
       let val;
-      if (v === "A") val = `<span class="v" style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.15">${whole(r.suma)}<small style="font-size:10px;opacity:.85">${avg}/dzień</small></span>`;
+      if (v === "W") {
+        const top = Math.round(avgOf(r)) === Math.round(best);
+        const st = top ? "font-size:10px;color:var(--c);font-weight:700;opacity:1" : "font-size:10px;opacity:.85";
+        val = `<span class="v" style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.15">${whole(r.suma)}<small style="${st}">${avg}/dzień</small></span>`;
+      } else if (v === "A") val = `<span class="v" style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.15">${whole(r.suma)}<small style="font-size:10px;opacity:.85">${avg}/dzień</small></span>`;
       else val = `<span class="v">${whole(r.suma)}</span>`;
       const nm = old[i] ? old[i].querySelector(".nm").outerHTML : `<div class="nm">${r.nick}</div>`;
       const play = old[i] && old[i].lastElementChild && !old[i].lastElementChild.classList.contains("v") ? old[i].lastElementChild.outerHTML : "";
@@ -46,7 +52,7 @@ async function variant(v, API) {
 const browser = await chromium.launch({ channel: "msedge" });
 const ctx = await browser.newContext({ viewport: { width: 2560, height: 1440 }, deviceScaleFactor: 1, colorScheme: "dark" });
 const page = await ctx.newPage();
-for (const v of ["0", "A", "C"]) {
+for (const v of process.argv.slice(2).length ? process.argv.slice(2) : ["0", "A", "C", "W"]) {
   await page.goto(URL0, { waitUntil: "domcontentloaded" });
   await page.locator("#telemark .tm-races .tmr ul").first().waitFor({ timeout: 30000 });
   await page.waitForTimeout(1500);
