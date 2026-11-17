@@ -14,8 +14,12 @@ for (const w of [2560, 1920, 1366]) {
   const rows = await page.$$eval("#telemark .tmr li", (lis) => lis.map((li) => {
     const s = li.querySelector(".tm-sub"), n = li.querySelector(".nk");
     return { t: s ? s.textContent : "", brak: s ? s.scrollWidth - s.clientWidth : 0, nick: n ? n.scrollWidth - n.clientWidth : 0,
-      avg: (li.querySelector(".tm-avg, .v small") || {}).textContent || "" };
+      avg: (li.querySelector(".tm-avg, .v small") || {}).textContent || "",
+      tor: Math.round((li.querySelector(".track") || li).getBoundingClientRect().width) };
   }));
+  // Paski w jednym wyścigu muszą mieć tę samą długość, inaczej źle pokazują stratę do lidera.
+  const tory = await page.$$eval("#telemark .tmr", (bs) => bs.map((b) => [...b.querySelectorAll(".track")].map((t) => Math.round(t.getBoundingClientRect().width))));
+  for (const t of tory) if (t.length && Math.max(...t) - Math.min(...t) > 0) { fail++; console.log(`${w}px: paski różnej długości ${t.join(", ")} px`); }
   for (const r of rows) if (r.brak > 0 || r.nick > 0) { fail++; console.log(`${w}px: brakuje ${r.brak} px w „${r.t}” (średnia ${r.avg}), nick ${r.nick} px`); }
   console.log(`${w}px: wierszy ${rows.length}, najwięcej brakuje ${Math.max(0, ...rows.map((r) => r.brak))} px`);
   // Najdłuższy możliwy napis (koniec roku liczącego 200 dni) w każdym wierszu: ile by brakowało.
