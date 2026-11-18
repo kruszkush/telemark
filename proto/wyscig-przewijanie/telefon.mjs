@@ -12,7 +12,8 @@ const local = readFileSync("d2jsp/strona.js", "utf8");
 const browser = await chromium.launch({ channel: "msedge" });
 const ctx = await browser.newContext({ viewport: { width: 393, height: 873 }, deviceScaleFactor: 2.75, isMobile: true, hasTouch: true });
 const page = await ctx.newPage();
-await page.route(/telemark\/strona\.js/, (r) => r.fulfill({ body: local, contentType: "text/javascript" }));
+// ZYWO=1: opublikowana strona bez podmiany pliku (sprawdzenie po publikacji).
+if (!process.env.ZYWO) await page.route(/telemark\/strona\.js/, (r) => r.fulfill({ body: local, contentType: "text/javascript" }));
 await page.goto("https://kruszkush.github.io/d2jsp-licznik/?t=" + Date.now(), { waitUntil: "domcontentloaded", timeout: 60000 });
 await page.locator("#telemark .tmr li").first().waitFor({ timeout: 60000 });
 await page.waitForTimeout(1500);

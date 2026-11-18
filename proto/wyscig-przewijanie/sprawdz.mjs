@@ -11,7 +11,8 @@ mkdirSync(out, { recursive: true });
 const local = readFileSync(process.env.PLIK || "d2jsp/strona.js", "utf8"); // PLIK=stara wersja do porównania
 const browser = await chromium.launch({ channel: "msedge", ignoreDefaultArgs: ["--hide-scrollbars"] });
 const page = await browser.newPage({ viewport: { width: 2560, height: 1440 } });
-await page.route(/telemark\/strona\.js/, (r) => r.fulfill({ body: local, contentType: "text/javascript" }));
+// ZYWO=1: opublikowana strona bez podmiany pliku (sprawdzenie po publikacji).
+if (!process.env.ZYWO) await page.route(/telemark\/strona\.js/, (r) => r.fulfill({ body: local, contentType: "text/javascript" }));
 let api = null;
 page.on("response", async (r) => { if (r.url().endsWith("/tm/tabele")) api = await r.json().catch(() => null); });
 await page.goto(url + "?t=" + Date.now(), { waitUntil: "domcontentloaded", timeout: 60000 });
