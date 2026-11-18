@@ -66,13 +66,17 @@
 #telemark .tmr{border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:0}
 #telemark .tmr h4{margin:0 0 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:700}
 /* Bez overscroll-behavior: na końcu listy palec przewija dalej stronę (na telefonie listy zajmują pół ekranu). */
-#telemark .tmr ul{margin:0;padding:0;overflow-y:auto}
-/* Pasek przewijania 5 px, szary w obu motywach, zaokrąglony (Mateusz 18.11: domyślny za szeroki; próba A z
+/* Odstęp 9 px między ▶ a paskiem (Mateusz 18.11: pasek „bardzo blisko tych strzałek”; runda 2 prób). Miejsce na
+   odstęp i pasek: lista wchodzi 8 px w prawy margines karty, a pole ▶ w wyścigach jest o 4 px węższe (puste miejsce
+   przed strzałką), więc szara linijka pod nickiem dalej mieści „30 z 30 dni, dziś nie skakał” (sprawdz.mjs). */
+#telemark .tmr ul{margin:0 -8px 0 0;padding:0 9px 0 0;overflow-y:auto}
+#telemark .tmr .pl,#telemark .tmr .pl-e{width:1.4em}
+/* Pasek przewijania 3 px, szary w obu motywach, zaokrąglony (Mateusz 18.11: domyślny za szeroki, potem „węższy”;
    proto/wyscig-przewijanie/proby.mjs). W kolorze wyścigu wyglądał jak kolejny pasek punktów. Firefox nie zna
    ::-webkit-scrollbar: dostaje swój cienki pasek w tym samym kolorze. */
-#telemark .tmr ul::-webkit-scrollbar{width:5px}
+#telemark .tmr ul::-webkit-scrollbar{width:3px}
 #telemark .tmr ul::-webkit-scrollbar-track{background:transparent}
-#telemark .tmr ul::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--mute) 45%,transparent);border-radius:5px}
+#telemark .tmr ul::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--mute) 45%,transparent);border-radius:3px}
 #telemark .tmr ul::-webkit-scrollbar-thumb:hover{background:var(--mute)}
 @supports not selector(::-webkit-scrollbar){#telemark .tmr ul{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--mute) 45%,transparent) transparent}}
 #telemark .tmr li{list-style:none;display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line);font-size:13px}

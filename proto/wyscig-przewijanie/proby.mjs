@@ -12,11 +12,14 @@ const U = "#telemark .tmr ul";
 const WK = (w, thumb, track, hover) =>
   `${U}{scrollbar-width:auto}${U}::-webkit-scrollbar{width:${w}px}${U}::-webkit-scrollbar-track{background:${track};border-radius:${w}px}` +
   `${U}::-webkit-scrollbar-thumb{background:${thumb};border-radius:${w}px}${U}::-webkit-scrollbar-thumb:hover{background:${hover}}`;
+// Runda 2 (Mateusz 18.11: „bardzo blisko tych strzałek”, węższy): odstęp między ▶ a paskiem.
+const GREY = "color-mix(in srgb,var(--mute) 45%,transparent)";
+const GAP = (px) => `${U}{padding-right:${px}px}`;
 const PROBY = {
-  "0 obecny": "",
-  "A szary 5 px": WK(5, "color-mix(in srgb,var(--mute) 45%,transparent)", "transparent", "var(--mute)"),
-  "B kolor wyscigu 5 px": WK(5, "color-mix(in srgb,var(--c) 70%,transparent)", "color-mix(in srgb,var(--line) 60%,transparent)", "var(--c)"),
-  "C kolor wyscigu 4 px bez toru": WK(4, "var(--c)", "transparent", "var(--c)"),
+  "0 obecny 5 px bez odstepu": "",
+  "A 3 px, odstep 8 px": WK(3, GREY, "transparent", "var(--mute)") + GAP(8),
+  "B 3 px, odstep 12 px": WK(3, GREY, "transparent", "var(--mute)") + GAP(12),
+  "C 2 px, odstep 12 px, ciemniejszy": WK(2, "color-mix(in srgb,var(--mute) 70%,transparent)", "transparent", "var(--mute)") + GAP(12),
 };
 const browser = await chromium.launch({ channel: "msedge", ignoreDefaultArgs: ["--hide-scrollbars"] });
 for (const scheme of ["light", "dark"]) {

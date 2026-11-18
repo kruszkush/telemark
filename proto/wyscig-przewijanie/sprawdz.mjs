@@ -9,7 +9,7 @@ const out = process.argv[2] || "proto/wyscig-przewijanie/zrzuty";
 const url = process.argv[3] || "https://kruszkush.github.io/d2jsp-licznik/";
 mkdirSync(out, { recursive: true });
 const local = readFileSync(process.env.PLIK || "d2jsp/strona.js", "utf8"); // PLIK=stara wersja do porównania
-const browser = await chromium.launch({ channel: "msedge" });
+const browser = await chromium.launch({ channel: "msedge", ignoreDefaultArgs: ["--hide-scrollbars"] });
 const page = await browser.newPage({ viewport: { width: 2560, height: 1440 } });
 await page.route(/telemark\/strona\.js/, (r) => r.fulfill({ body: local, contentType: "text/javascript" }));
 let api = null;
@@ -45,5 +45,18 @@ for (let i = 0; i < n; i++) {
   console.log(`${s.k}: osób na serwerze ${want}, wierszy ${s.rows}, widać naraz ${s.vis} (${s.h} px), ostatnia osoba po przewinięciu ${lastVisible ? "widoczna" : "NIE"} ${ok ? "OK" : "FAIL"}`);
 }
 await page.locator("#telemark .tm-races").screenshot({ path: `${out}/po.png` });
+// Odstęp przed paskiem zabiera wierszom 12 px: czy szara linijka i nick mieszczą się bez „…” (też najdłuższy napis).
+for (const w of [2560, 1920, 1366]) {
+  await page.setViewportSize({ width: w, height: 1200 });
+  await page.waitForTimeout(400);
+  const r = await page.$$eval("#telemark .tmr li", (lis) => {
+    const cut = (e) => (e ? e.scrollWidth - e.clientWidth : 0);
+    const now = Math.max(0, ...lis.map((l) => Math.max(cut(l.querySelector(".tm-sub")), cut(l.querySelector(".nk")))));
+    const longest = Math.max(0, ...lis.map((l) => { const s = l.querySelector(".tm-sub"); if (!s) return 0; const t = s.textContent; s.textContent = "30 z 30 dni, dziś nie skakał"; const c = cut(s); s.textContent = t; return c; }));
+    return { now, longest };
+  });
+  if (r.now > 0 || r.longest > 0) fail++;
+  console.log(`${w}px: brakuje miejsca teraz ${r.now} px, przy „30 z 30 dni, dziś nie skakał” ${r.longest} px ${r.now > 0 || r.longest > 0 ? "FAIL" : "OK"}`);
+}
 await browser.close();
 console.log(fail ? "FAIL" : "OK");
