@@ -12,10 +12,18 @@ export const HILL_GROUPS: readonly { name: string; ids: readonly string[] }[] = 
 ];
 
 /**
- * Skocznia treningowa zalogowanego (Mateusz 14.11): stała, ze środka średnich (Jodłowa K135, środek K100–K170),
- * bez limitu i bez zapisu, losowy wiatr jak skok na próbę gościa.
+ * Skocznia treningowa zalogowanego: losowa ze wszystkich grup przy każdym wejściu na ekran dnia, czyli po każdym skoku
+ * treningowym inna niż poprzednia (Mateusz 22.11, zastąpiło stałą Jodłową K135 z 14.11); nigdy dzisiejsza skocznia
+ * dnia (próba na skoczniach dnia odrzucona 14.11); bez limitu i bez zapisu, losowy wiatr jak skok na próbę gościa.
  */
-export const TRAINING_HILL_ID = "own-24";
+export function randomTrainingHillId(
+  previous: string | null,
+  today: readonly string[],
+  random: () => number = Math.random,
+): string {
+  const ids = HILL_GROUPS.flatMap((g) => g.ids).filter((id) => id !== previous && !today.includes(id));
+  return ids[Math.floor(random() * ids.length)] ?? ids[0] ?? "";
+}
 
 const WARSAW = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Warsaw",

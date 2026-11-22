@@ -6,7 +6,7 @@ import { HillCard } from "./hill-card";
 import { VerifiedOnce, VerifyBox } from "./verify-box";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import { nextHill } from "./next-hill";
-import { TRAINING_HILL_ID } from "./daily";
+import { randomTrainingHillId } from "./daily";
 import { ownHill } from "./jump-check";
 import { WeekTable } from "./week-table";
 
@@ -195,12 +195,17 @@ function Hills({
   );
 }
 
+/** Ostatnia wylosowana skocznia treningowa: następna jest inna. */
+let lastTrainingHill: string | null = null;
+
 /**
- * Skocznia treningowa zalogowanego (Mateusz 14.11): jedna stała, bez limitu i bez zapisu. W wierszu wyniku dnia, bo
- * osobny wiersz wypychał ekran dnia poza okno (mysz 1650×800).
+ * Skocznia treningowa zalogowanego (Mateusz 22.11): losowana przy każdym wejściu na ekran dnia, więc po każdym skoku
+ * treningowym inna; bez limitu i bez zapisu. W wierszu wyniku dnia, bo osobny wiersz wypychał ekran dnia poza okno
+ * (mysz 1650×800).
  */
-function Training({ starting, onTrial }: Pick<Props, "starting" | "onTrial">) {
-  const hill = ownHill(TRAINING_HILL_ID);
+function Training({ starting, onTrial, today }: Pick<Props, "starting" | "onTrial"> & { today: readonly string[] }) {
+  const [hillId] = useState(() => (lastTrainingHill = randomTrainingHillId(lastTrainingHill, today)));
+  const hill = ownHill(hillId);
   if (!hill) return null;
   return (
     <section className="d2-train" aria-labelledby="d2-train">
@@ -348,7 +353,11 @@ export function DailyScreen(props: Props) {
           />
           {!guest && (
             <DayFooter day={day}>
-              <Training starting={props.starting || props.versionMismatch} onTrial={props.onTrial} />
+              <Training
+                starting={props.starting || props.versionMismatch}
+                onTrial={props.onTrial}
+                today={day.hills.map((h) => h.id)}
+              />
             </DayFooter>
           )}
         </>

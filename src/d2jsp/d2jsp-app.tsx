@@ -29,7 +29,6 @@ import {
 import { DailyScreen, type DayNote } from "./daily-screen";
 import { PlayerScreen } from "./player-screen";
 import { ownHill } from "./jump-check";
-import { TRAINING_HILL_ID } from "./daily";
 import { jumperNick } from "./nick";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 
@@ -323,7 +322,8 @@ export function D2jspApp() {
         focusOnEntry={navigated}
         onSent={expect}
         onTrialResult={(m, p) =>
-          setNotes([{ text: (screen.hill.id === TRAINING_HILL_ID ? T.trainingResult : T.trialResult)(m, p) }])
+          // Gość skacze na próbę na skoczniach dnia, zalogowany bez zapisu tylko na treningu.
+          setNotes([{ text: (d?.gosc === undefined ? T.trainingResult : T.trialResult)(m, p) }])
         }
       />
     );

@@ -45,6 +45,7 @@ const fits = (page) =>
   page.evaluate(() => ({ scroll: document.scrollingElement.scrollHeight, window: window.innerHeight }));
 
 async function trainingJump(page, n) {
+  console.log(`skok ${n} na:`, await page.locator("#d2-train").textContent(), "| mieści się:", await fits(page));
   await page.getByRole("button", { name: "Skacz na treningu" }).click();
   const canvas = page.locator("canvas");
   await canvas.waitFor();
@@ -86,6 +87,7 @@ const before = await usedLines(mysz.page);
 console.log("skoki dnia przed:", before);
 await trainingJump(mysz.page, 1);
 await trainingJump(mysz.page, 2);
+console.log("następny trening:", await mysz.page.locator("#d2-train").textContent());
 await mysz.page.screenshot({ path: join(OUT, "mysz-3-po-treningu.png") });
 // Świeży dzień z serwera: odświeżona strona (sesja zostaje na urządzeniu).
 await mysz.page.reload();
