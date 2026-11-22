@@ -87,6 +87,7 @@ const before = await usedLines(mysz.page);
 console.log("skoki dnia przed:", before);
 await trainingJump(mysz.page, 1);
 await trainingJump(mysz.page, 2);
+await trainingJump(mysz.page, 3);
 console.log("następny trening:", await mysz.page.locator("#d2-train").textContent());
 await mysz.page.screenshot({ path: join(OUT, "mysz-3-po-treningu.png") });
 // Świeży dzień z serwera: odświeżona strona (sesja zostaje na urządzeniu).

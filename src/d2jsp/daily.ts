@@ -12,10 +12,29 @@ export const HILL_GROUPS: readonly { name: string; ids: readonly string[] }[] = 
 ];
 
 /**
- * Skocznia treningowa zalogowanego: losowa ze wszystkich grup przy każdym wejściu na ekran dnia, czyli po każdym skoku
- * treningowym inna niż poprzednia (Mateusz 22.11, zastąpiło stałą Jodłową K135 z 14.11); nigdy dzisiejsza skocznia
- * dnia (próba na skoczniach dnia odrzucona 14.11); bez limitu i bez zapisu, losowy wiatr jak skok na próbę gościa.
+ * Skocznia treningowa zalogowanego: losowa ze wszystkich grup, inna niż poprzednia, na dwa skoki treningowe (Mateusz
+ * 22.11, zastąpiło stałą Jodłową K135 z 14.11); nigdy dzisiejsza skocznia dnia (próba na skoczniach dnia odrzucona
+ * 14.11); bez limitu i bez zapisu, losowy wiatr jak skok na próbę gościa.
  */
+export const TRAINING_JUMPS_PER_HILL = 2;
+
+/** Skocznia treningowa i ile skoków na niej oddano (do odświeżenia strony). */
+export interface TrainingHill {
+  id: string;
+  jumps: number;
+}
+
+/** Skocznia na następny skok treningowy: ta sama, dopóki nie oddano na niej dwóch skoków i nie jest dziś skocznią dnia. */
+export function nextTrainingHill(
+  current: TrainingHill | null,
+  today: readonly string[],
+  random: () => number = Math.random,
+): TrainingHill {
+  if (current && current.jumps < TRAINING_JUMPS_PER_HILL && !today.includes(current.id)) return current;
+  return { id: randomTrainingHillId(current?.id ?? null, today, random), jumps: 0 };
+}
+
+/** Losowa skocznia treningowa poza poprzednią i dzisiejszymi skoczniami dnia. */
 export function randomTrainingHillId(
   previous: string | null,
   today: readonly string[],

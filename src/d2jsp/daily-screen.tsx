@@ -6,7 +6,7 @@ import { HillCard } from "./hill-card";
 import { VerifiedOnce, VerifyBox } from "./verify-box";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import { nextHill } from "./next-hill";
-import { randomTrainingHillId } from "./daily";
+import { nextTrainingHill, type TrainingHill } from "./daily";
 import { ownHill } from "./jump-check";
 import { WeekTable } from "./week-table";
 
@@ -195,17 +195,16 @@ function Hills({
   );
 }
 
-/** Ostatnia wylosowana skocznia treningowa: następna jest inna. */
-let lastTrainingHill: string | null = null;
+/** Obecna skocznia treningowa i skoki na niej (do odświeżenia strony). */
+let trainingHill: TrainingHill | null = null;
 
 /**
- * Skocznia treningowa zalogowanego (Mateusz 22.11): losowana przy każdym wejściu na ekran dnia, więc po każdym skoku
- * treningowym inna; bez limitu i bez zapisu. W wierszu wyniku dnia, bo osobny wiersz wypychał ekran dnia poza okno
- * (mysz 1650×800).
+ * Skocznia treningowa zalogowanego (Mateusz 22.11): losowa, nowa po każdych dwóch skokach treningowych; bez limitu i
+ * bez zapisu. W wierszu wyniku dnia, bo osobny wiersz wypychał ekran dnia poza okno (mysz 1650×800).
  */
 function Training({ starting, onTrial, today }: Pick<Props, "starting" | "onTrial"> & { today: readonly string[] }) {
-  const [hillId] = useState(() => (lastTrainingHill = randomTrainingHillId(lastTrainingHill, today)));
-  const hill = ownHill(hillId);
+  const [current] = useState(() => (trainingHill = nextTrainingHill(trainingHill, today)));
+  const hill = ownHill(current.id);
   if (!hill) return null;
   return (
     <section className="d2-train" aria-labelledby="d2-train">
@@ -217,7 +216,10 @@ function Training({ starting, onTrial, today }: Pick<Props, "starting" | "onTria
         type="button"
         className="pixel-button d2-small"
         disabled={starting}
-        onClick={() => onTrial(hill.id)}
+        onClick={() => {
+          trainingHill = { id: current.id, jumps: current.jumps + 1 };
+          onTrial(hill.id);
+        }}
         aria-label={T.training}
       >
         {T.trainingShort}
