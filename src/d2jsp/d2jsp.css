@@ -70,6 +70,50 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/*
+ * Wszyscy gracze w okienku z własnym przewijaniem (Mateusz 25.11); wzór: okienko wyścigów na stronie (d2jsp/strona.js
+ * .tmr ul, 18.11): pasek 3 px szary, odsunięty od liczb. Nagłówek kolumn stoi na górze, na tle ekranu.
+ */
+.d2-table-box {
+  max-height: var(--d2-table-h, 12.5em);
+  overflow-y: auto;
+  margin-right: -12px;
+  padding-right: 9px;
+}
+/* Okienko na nagłówek i 6 wierszy; gość ma nad kartami pole logowania, więc 4 wiersze (pomiar 25.11 w 1920×950,
+   scripts/d2jsp-tabela-wszyscy.mjs). */
+.d2-table-box.d2-guest {
+  max-height: 8.9em;
+}
+.d2-table-box thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--bg);
+  /* Ramka komórki w tabeli „collapse” zostaje w miejscu przy przewijaniu: kreska pod nagłówkiem jako cień jedzie z nim. */
+  border-bottom: 0;
+  box-shadow: inset 0 -2px 0 var(--line);
+}
+.d2-table-box::-webkit-scrollbar {
+  width: 3px;
+}
+.d2-table-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+.d2-table-box::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 45%, transparent);
+  border-radius: 3px;
+}
+.d2-table-box::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+@supports not selector(::-webkit-scrollbar) {
+  .d2-table-box {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--muted) 45%, transparent)
+      transparent;
+  }
+}
 
 /*
  * Całość ekranu dnia ma się mieścić w oknie gry na stronie bez przewijania (Mateusz 14.11: „zajmuje za dużo

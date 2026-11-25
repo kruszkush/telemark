@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 import type { TablePeriod, Tables, TodayRow } from "./api";
 
@@ -10,8 +10,10 @@ function avatarOf(uid: string | null): string | null {
   if (uid === null) return null;
   try {
     const all: unknown = Reflect.get(window.parent, "tmAvatars");
-    const map: unknown = typeof all === "function" ? Reflect.apply(all, undefined, []) : null;
-    const url: unknown = typeof map === "object" && map !== null ? Reflect.get(map, uid) : null;
+    const map: unknown =
+      typeof all === "function" ? Reflect.apply(all, undefined, []) : null;
+    const url: unknown =
+      typeof map === "object" && map !== null ? Reflect.get(map, uid) : null;
     return typeof url === "string" && url !== "" ? url : null;
   } catch {
     return null;
@@ -30,19 +32,58 @@ export function Avatar({ row }: { row: Who }) {
       {row.nick.charAt(0).toUpperCase()}
     </span>
   ) : (
-    <span className="d2-av" aria-hidden="true" style={{ backgroundImage: `url("${url.replace(/["\\]/g, "")}")` }} />
+    <span
+      className="d2-av"
+      aria-hidden="true"
+      style={{ backgroundImage: `url("${url.replace(/["\\]/g, "")}")` }}
+    />
   );
 }
 
-/** Tyle wierszy pokazuje mała tabela na ekranie dnia; gracz spoza nich dochodzi pod spodem. */
-const TOP = 5;
-
-/** Pierwsze `top` wierszy i wiersz gracza pod nimi, jeśli jest dalej. */
-function topAndMe<R extends Who>(rows: readonly R[], me: string | null, top: number) {
-  const shown = rows.slice(0, top);
+/**
+ * Wszyscy gracze z tabeli (Mateusz 25.11: „niech pokazuje wszystkich”, z przewijaniem); wiersz gracza wyróżniony.
+ * Wcześniej 5 najlepszych i gracz pod spodem.
+ */
+function allAndMe<R extends Who>(rows: readonly R[], me: string | null) {
   const mine = me === null ? undefined : rows.find((r) => r.nick === me);
-  if (mine && !shown.includes(mine)) shown.push(mine);
-  return { shown, mine };
+  return { shown: rows, mine };
+}
+
+/**
+ * Okienko tabeli z własnym przewijaniem (wzór: okienko wyścigów na stronie, d2jsp/strona.js `.tmr ul`, 18.11):
+ * nagłówek kolumn stoi, wiersze się przewijają; po otwarciu i zmianie zakładki wiersz gracza jest widoczny.
+ */
+function ScrollBox({
+  children,
+  mineKey,
+  guest,
+}: {
+  children: ReactNode;
+  mineKey: string;
+  guest: boolean;
+}) {
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = box.current;
+    const row = el?.querySelector<HTMLElement>(".contest-player");
+    if (!el || !row) return;
+    const head = el.querySelector("thead")?.getBoundingClientRect().height ?? 0;
+    const r = row.getBoundingClientRect(),
+      b = el.getBoundingClientRect();
+    if (r.top >= b.top + head && r.bottom <= b.bottom) return;
+    // Przewija tylko okienko, nie stronę: wiersz gracza mniej więcej na środek, a pierwszy widoczny wiersz cały,
+    // tuż pod nagłówkiem (bez uciętego paska wiersza pod kreską).
+    const rows = [...el.querySelectorAll<HTMLElement>("tbody tr")];
+    const fit = Math.max(1, Math.floor((el.clientHeight - head) / r.height));
+    const first =
+      rows[Math.max(0, rows.indexOf(row) - Math.floor((fit - 1) / 2))] ?? row;
+    el.scrollTop += first.getBoundingClientRect().top - b.top - head;
+  }, [mineKey]);
+  return (
+    <div ref={box} className={guest ? "d2-table-box d2-guest" : "d2-table-box"}>
+      {children}
+    </div>
+  );
 }
 
 function Name({ row }: { row: Who }) {
@@ -67,85 +108,111 @@ function PlaceHead() {
 }
 
 function Week({ period, me }: { period: TablePeriod; me: string | null }) {
-  const { shown, mine } = topAndMe(period.rows, me, TOP);
+  const { shown, mine } = allAndMe(period.rows, me);
   return (
-    <table className="contest-table d2-table">
-      <caption className="sr-only">{T.tableCaption(period.k, period.key)}</caption>
-      <thead>
-        <tr>
-          <PlaceHead />
-          <th scope="col">{T.tableName}</th>
-          <th scope="col" className="contest-total">
-            {T.tableDays}
-          </th>
-          <th scope="col" className="contest-total">
-            {T.tablePoints}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {shown.length === 0 && (
-          <tr className="contest-row">
-            <td colSpan={4}>{T.tableEmpty}</td>
+    <ScrollBox mineKey={`w${mine?.place ?? ""}`} guest={me === null}>
+      <table className="contest-table d2-table">
+        <caption className="sr-only">
+          {T.tableCaption(period.k, period.key)}
+        </caption>
+        <thead>
+          <tr>
+            <PlaceHead />
+            <th scope="col">{T.tableName}</th>
+            <th scope="col" className="contest-total">
+              {T.tableDays}
+            </th>
+            <th scope="col" className="contest-total">
+              {T.tablePoints}
+            </th>
           </tr>
-        )}
-        {shown.map((r) => (
-          <tr key={r.nick} className={r === mine ? "contest-row contest-player" : "contest-row"}>
-            <td className="contest-place">{`${r.place}.`}</td>
-            <Name row={r} />
-            <td className="contest-total">{r.dni}</td>
-            <td className="contest-total">{T.points(r.suma)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {shown.length === 0 && (
+            <tr className="contest-row">
+              <td colSpan={4}>{T.tableEmpty}</td>
+            </tr>
+          )}
+          {shown.map((r) => (
+            <tr
+              key={r.nick}
+              className={
+                r === mine ? "contest-row contest-player" : "contest-row"
+              }
+            >
+              <td className="contest-place">{`${r.place}.`}</td>
+              <Name row={r} />
+              <td className="contest-total">{r.dni}</td>
+              <td className="contest-total">{T.points(r.suma)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </ScrollBox>
   );
 }
 
 /** Dzisiaj: punkty z 2 najlepszych skoków na każdej skoczni, skoki i wynik dnia (Mateusz 14.11, proto/tabela-dnia). */
-function Today({ rows, me, jumps }: { rows: readonly TodayRow[]; me: string | null; jumps: number }) {
-  const { shown, mine } = topAndMe(rows, me, TOP);
+function Today({
+  rows,
+  me,
+  jumps,
+}: {
+  rows: readonly TodayRow[];
+  me: string | null;
+  jumps: number;
+}) {
+  const { shown, mine } = allAndMe(rows, me);
   return (
-    <table className="contest-table d2-table">
-      <caption className="sr-only">{T.tabToday}</caption>
-      <thead>
-        <tr>
-          <PlaceHead />
-          <th scope="col">{T.tableName}</th>
-          {T.groups.map((g) => (
-            <th key={g} scope="col" className="contest-total d2-hcol">
-              {g}
-            </th>
-          ))}
-          <th scope="col" className="contest-total">
-            {T.tableJumps}
-          </th>
-          <th scope="col" className="contest-total">
-            {T.tableDay}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {shown.length === 0 && (
-          <tr className="contest-row">
-            <td colSpan={7}>{T.tableEmpty}</td>
-          </tr>
-        )}
-        {shown.map((r) => (
-          <tr key={r.nick} className={r === mine ? "contest-row contest-player" : "contest-row"}>
-            <td className="contest-place">{`${r.place}.`}</td>
-            <Name row={r} />
-            {T.groups.map((g, i) => (
-              <td key={g} className="contest-total d2-hcol">
-                {(r.uzyte?.[i] ?? 1) === 0 ? T.noJumps : T.points(r.sumy[i] ?? 0)}
-              </td>
+    <ScrollBox mineKey={`d${mine?.place ?? ""}`} guest={me === null}>
+      <table className="contest-table d2-table">
+        <caption className="sr-only">{T.tabToday}</caption>
+        <thead>
+          <tr>
+            <PlaceHead />
+            <th scope="col">{T.tableName}</th>
+            {T.groups.map((g) => (
+              <th key={g} scope="col" className="contest-total d2-hcol">
+                {g}
+              </th>
             ))}
-            <td className="contest-total">{T.jumpsOf(r.skoki, jumps)}</td>
-            <td className="contest-total">{T.points(r.wynik)}</td>
+            <th scope="col" className="contest-total">
+              {T.tableJumps}
+            </th>
+            <th scope="col" className="contest-total">
+              {T.tableDay}
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {shown.length === 0 && (
+            <tr className="contest-row">
+              <td colSpan={7}>{T.tableEmpty}</td>
+            </tr>
+          )}
+          {shown.map((r) => (
+            <tr
+              key={r.nick}
+              className={
+                r === mine ? "contest-row contest-player" : "contest-row"
+              }
+            >
+              <td className="contest-place">{`${r.place}.`}</td>
+              <Name row={r} />
+              {T.groups.map((g, i) => (
+                <td key={g} className="contest-total d2-hcol">
+                  {(r.uzyte?.[i] ?? 1) === 0
+                    ? T.noJumps
+                    : T.points(r.sumy[i] ?? 0)}
+                </td>
+              ))}
+              <td className="contest-total">{T.jumpsOf(r.skoki, jumps)}</td>
+              <td className="contest-total">{T.points(r.wynik)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </ScrollBox>
   );
 }
 
@@ -154,23 +221,45 @@ function Today({ rows, me, jumps }: { rows: readonly TodayRow[]; me: string | nu
  * na bieżący tydzień; miesiąc i poprzednie okresy są na stronie. Dane pobiera ekran dnia (daily-screen.tsx), wspólnie
  * z rekordami kart skoczni.
  */
-export function WeekTable({ data, me, jumps }: { data: Tables | null; me: string | null; jumps: number }) {
+export function WeekTable({
+  data,
+  me,
+  jumps,
+}: {
+  data: Tables | null;
+  me: string | null;
+  jumps: number;
+}) {
   const [tab, setTab] = useState<"d" | "w">("d");
   if (data === null) return null;
   const week = data.okresy.find((p: TablePeriod) => p.k === "w");
   return (
     <section className="d2-tables" aria-label={T.tablesLabel}>
       <div className="d2-tabs">
-        <button type="button" className="d2-tab" aria-pressed={tab === "d"} onClick={() => setTab("d")}>
+        <button
+          type="button"
+          className="d2-tab"
+          aria-pressed={tab === "d"}
+          onClick={() => setTab("d")}
+        >
           {T.tabToday}
         </button>
         {week && (
-          <button type="button" className="d2-tab" aria-pressed={tab === "w"} onClick={() => setTab("w")}>
+          <button
+            type="button"
+            className="d2-tab"
+            aria-pressed={tab === "w"}
+            onClick={() => setTab("w")}
+          >
             {T.tableCaption(week.k, week.key)}
           </button>
         )}
       </div>
-      {tab === "d" || !week ? <Today rows={data.dzis ?? []} me={me} jumps={jumps} /> : <Week period={week} me={me} />}
+      {tab === "d" || !week ? (
+        <Today rows={data.dzis ?? []} me={me} jumps={jumps} />
+      ) : (
+        <Week period={week} me={me} />
+      )}
     </section>
   );
 }
