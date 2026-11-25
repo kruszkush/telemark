@@ -23,7 +23,7 @@ export const D2_TEXT = {
   rulesStart: "Codziennie o północy losowane są 3 nowe skocznie: mała, średnia i mamucia. Na każdej możesz oddać 10 skoków.",
   rulesKey: "Do punktacji liczą się dwa najlepsze skoki z każdej skoczni", // „dwa” słowem: 2 w czcionce gry wygląda jak Z
   rules:
-    ", a wynik dnia to suma tych sześciu skoków. Gra sama wybiera skocznię: 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa, więc pełny wynik dnia masz już po 6 skokach. Każdy z 10 skoków ma inny wiatr, ale te same wiatry dostają wszyscy gracze.",
+    ", a wynik dnia to suma tych sześciu skoków. Gra sama wybiera skocznię: 2 skoki na małej, 2 na średniej, 2 na mamuciej i od nowa, więc pełny wynik dnia masz już po 6 skokach. Każdy z 10 skoków ma inny wiatr, ale te same wiatry dostają wszyscy gracze. Za wiatr w plecy gra dodaje punkty, a za wiatr pod narty odejmuje, tyle, ile metrów ten wiatr zabrał albo dodał na tej skoczni.",
   groups: ["Mała", "Średnia", "Mamucia"] as const,
   loading: "Wczytywanie skoczni dnia…",
   offline: "Brak połączenia z serwerem. Spróbuj za chwilę.",
