@@ -174,7 +174,7 @@ const NOTES_SETTLE_FRAMES = 45;
  * Judges' notes in a column under the wind box, each from its own frame; once all are shown and a moment has
  * passed, the three that count light up and the two discarded ones stay dim.
  */
-export function drawNotes(fb: FrameBuffer, s: JumpSimState, frame: number): void {
+export function drawNotes(fb: FrameBuffer, s: JumpSimState, frame: number, windPoints?: number): void {
   const x = fb.width - WIND_BOX.right - NOTE_BOX.width;
   let y = NOTES_TOP_PX;
   const lastShown = Math.max(...s.logic.judges.map((j) => j.showFrame));
@@ -188,6 +188,14 @@ export function drawNotes(fb: FrameBuffer, s: JumpSimState, frame: number): void
       ramp: settled && judge.counted ? INK.note : INK.noteDim,
     });
     y += NOTES_STEP_PX;
+  }
+  // A daily jump of the d2jsp page: the points for the wind under the notes, once the counted ones light up.
+  if (windPoints !== undefined && settled) {
+    const label = UI_TEXT.hud.windPoints(`${windPoints > 0 ? "+" : ""}${formatDecimal(windPoints, 1)}`);
+    const width = NOTE_BOX.inset * 2 + textWidth(label);
+    const right = x + NOTE_BOX.width;
+    hudBox(fb, right - width, y, width, NOTE_BOX.height);
+    drawText(fb, right - width + NOTE_BOX.inset, y + NOTE_BOX.inset, label, { ramp: INK.note });
   }
 }
 
@@ -300,7 +308,7 @@ export function drawBar(fb: FrameBuffer, m: JumpViewModel, top: number, notesSho
   }
   if (L.finished) {
     // In a competition the right field holds the total and the place after this jump, as the original's does.
-    const right = notesShown ? barRightText(m, L.points) : "";
+    const right = notesShown ? barRightText(m, m.wind?.pointsWithWind ?? L.points) : "";
     // The original writes it from column 248 of its 320; here it ends at the right edge where the speed did,
     // so on a wider picture it does not hang in the middle of the bar.
     const rightAt = fb.width - BAR_TEXT_SIDE_PX - textWidth(right);

@@ -28,7 +28,9 @@ import {
 } from "./api";
 import { DailyScreen, type DayNote } from "./daily-screen";
 import { PlayerScreen } from "./player-screen";
-import { ownHill } from "./jump-check";
+import { dayOf } from "./daily";
+import { ownHill, scoreDailyInputs } from "./jump-check";
+import { windCounts, type WindScore } from "./wind-points";
 import { jumperNick } from "./nick";
 import { D2_TEXT as T } from "../text/d2jsp-text";
 
@@ -40,7 +42,16 @@ type Screen =
   /** Skoki gracza (?gracz=uid&okres=klucz, klik w nick na stronie licznika). */
   | PlayerView
   /** Obejrzenie skoku z tabeli (?ogladaj=gid) albo z ekranu gracza (`from`: tam wraca). */
-  | { kind: "watch"; hill: HillChoice; source: ReplaySource; nick: string; key: number; from: PlayerView | null };
+  | {
+      kind: "watch";
+      hill: HillChoice;
+      source: ReplaySource;
+      nick: string;
+      key: number;
+      from: PlayerView | null;
+      /** Punkty za wiatr tego skoku (dzień skoku z serwera); null przed 26.11. */
+      wind: WindScore | null;
+    };
 interface PlayerView {
   kind: "player";
   uid: string;
@@ -138,7 +149,8 @@ function watch(
       ...recordingSource({ seed: r.j.seed, inputs, newRecord: false }),
       jumperName: jumperNick(r.j.nick),
     };
-    show({ kind: "watch", hill, source, nick: r.j.nick, key: nextKey(), from });
+    const wind = windCounts(r.j.day) ? scoreDailyInputs(hill, r.j.seed, inputs, r.j.day) : null;
+    show({ kind: "watch", hill, source, nick: r.j.nick, key: nextKey(), from, wind });
   });
 }
 
@@ -185,6 +197,8 @@ function DailyJump({
   const { hill } = screen;
   const ticket = screen.kind === "jump" ? screen.ticket : null;
   const name = nick ?? UI_TEXT.hud.playerName;
+  // Punkty za wiatr: tym samym kodem co serwer, z dnia biletu (skok na próbę: dzisiejszy dzień).
+  const [wind, setWind] = useState<WindScore | null>(null);
   const contest: ContestJump = {
     hudName: screen.kind === "watch" ? jumperNick(screen.nick) : name,
     outfit: save.settings.outfit,
@@ -197,6 +211,7 @@ function DailyJump({
     onLeave: back,
     onEnd: back,
     hud: null,
+    wind: screen.kind === "watch" ? screen.wind : wind,
     holder: name,
     exit: { label: ticket ? T.exit : screen.kind === "watch" && screen.from ? T.backToPlayer : T.exitTrial, go: back },
     // Mateusz 14.11: na belce wiatr stoi i można czekać bez końca, bez dyskwalifikacji (też w skoku na próbę).
@@ -204,10 +219,14 @@ function DailyJump({
     ...(ticket ? { seed: ticket.seed } : {}),
     onTouchdown: (jump, inputs) => {
       const L = jump.state.logic;
+      const day = ticket ? ticket.day : dayOf(Date.now());
+      const scored = windCounts(day) ? scoreDailyInputs(hill, ticket ? ticket.seed : jump.seed, inputs, day) : null;
+      setWind(scored);
+      const p = scored ? scored.pointsWithWind : L.points;
       if (ticket) {
-        onSent(ticket.gid, L.points, ticket.grupa);
-        sendJump(ticket, encodeInputs(inputs), { p: L.points, m: L.distanceM });
-      } else if (screen.kind === "jump") onTrialResult(L.distanceHalfM, Math.max(0, L.points));
+        onSent(ticket.gid, p, ticket.grupa);
+        sendJump(ticket, encodeInputs(inputs), { p, m: L.distanceM });
+      } else if (screen.kind === "jump") onTrialResult(L.distanceHalfM, Math.max(0, p));
     },
   };
   return (

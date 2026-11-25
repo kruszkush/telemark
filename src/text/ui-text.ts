@@ -737,6 +737,8 @@ export const UI_TEXT = {
     speed: (speed: string) => `${speed}\u2009ｋｍ／ｈ`,
     /** Points after a jump, named so the number in the bar is not taken for another distance. */
     points: (points: string) => `${points}\u2009ｐｋｔ`,
+    /** Points for the wind of a daily jump of the d2jsp page, under the judges' notes, with their sign. */
+    windPoints: (points: string) => `WIATR ${points}`,
     /** A replay, with its tempo (1, 1/2, 1/4); the second while it is paused. */
     replay: (speed: string) => `POWTÓRKA ${speed}`,
     replayPaused: (speed: string) => `POWTÓRKA ${speed}: PAUZA`,

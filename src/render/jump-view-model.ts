@@ -78,4 +78,15 @@ export interface JumpViewModel {
    * line, and what the bar needs for the total and the place after the jump.
    */
   contest?: ContestJumpHud;
+  /**
+   * Points for the wind of a daily jump of the d2jsp page (src/d2jsp/wind-points.ts): shown in a box under the
+   * notes, and the bar's points are the ones with the wind. Absent where the wind gives no points.
+   */
+  wind?: WindPointsView;
+}
+
+/** Points for the wind and the jump's points with them. */
+export interface WindPointsView {
+  windPoints: number;
+  pointsWithWind: number;
 }

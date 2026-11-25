@@ -260,7 +260,7 @@ function drawScene(fb: FrameBuffer, m: JumpViewModel, scenery: Scenery): readonl
     });
   }
   // A disqualified jump (no takeoff) is never scored, so there are no notes to show.
-  if (finished && s.logic.distanceM > 0) drawNotes(fb, s, m.frame);
+  if (finished && s.logic.distanceM > 0) drawNotes(fb, s, m.frame, m.wind?.windPoints);
   if (m.newRecord === true && finished) drawNewRecord(fb, m, s.logic.distanceM, m.frame - s.logic.landedFrame);
   drawBar(fb, m, groundBottom, notesShown);
   return pageGroups;

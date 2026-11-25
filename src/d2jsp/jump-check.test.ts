@@ -38,7 +38,13 @@ describe("skok liczony bez rysowania (serwer d2jsp)", () => {
   });
 
   it("checkJump z samych ruchów (tekst gry) daje wynik z lądowania", () => {
-    expect(set.map((j) => checkJump(j.hillId, j.seed, j.inputs))).toEqual(set.map((j) => j.atTouchdown));
+    // Punkty za wiatr (wind-points.test.ts) są obok: wynik gry zostaje ten sam.
+    const game = (r: ReturnType<typeof checkJump>) => {
+      if ("error" in r) return r;
+      const { windMPerS: _w, windPoints: _p, pointsWithWind: _t, ...jump } = r;
+      return jump;
+    };
+    expect(set.map((j) => game(checkJump(j.hillId, j.seed, j.inputs)))).toEqual(set.map((j) => j.atTouchdown));
   });
 
   it("odrzuca złe dane", () => {

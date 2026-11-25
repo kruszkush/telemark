@@ -7,6 +7,7 @@ import type { OfflineState } from "../pwa/offline-state";
 import type { Outfit } from "../game/outfit";
 import type { HillRecord, Settings } from "../storage/save-data";
 import type { RecordSave } from "../render/jump-view";
+import type { WindPointsView } from "../render/jump-view-model";
 import { UI_TEXT } from "../text/ui-text";
 import { typeset } from "./typeset";
 import { AbandonChoice } from "./abandon-question";
@@ -78,6 +79,8 @@ export interface ContestJump {
    * for none (a daily jump of the d2jsp page).
    */
   hud: ContestJumpHud | null;
+  /** Points for the wind of a daily jump of the d2jsp page, once known; absent or null elsewhere. */
+  wind?: WindPointsView | null;
   /** The jumper's name as a hill record keeps it. */
   holder: string;
   /** The wind of the jump, when it is given (a daily jump); absent for a new one. */
@@ -169,6 +172,7 @@ function useContestJump(props: Props) {
     contestCpu: cpu !== null,
     contestHud: contest?.hud ?? null,
     contestLeader: contest?.leader ?? false,
+    contestWind: contest?.wind ?? null,
     ...(contest?.seed === undefined ? {} : { fixedSeed: contest.seed }),
     holdAtGate: contest?.waitOnGate === true,
     ...(contest?.onTouchdown === undefined ? {} : { onTouchdown: contest.onTouchdown }),

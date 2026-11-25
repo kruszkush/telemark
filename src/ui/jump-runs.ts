@@ -13,6 +13,7 @@ import {
   type TrainingJump,
 } from "../game/training-session";
 import type { ControlScheme, RecordSave, Scenery } from "../render/jump-view";
+import type { WindPointsView } from "../render/jump-view-model";
 import { PHASE, type FrameInput, type JumpLogicState } from "../sim/jump-logic";
 import type { JumpSimState } from "../sim/jump-sim";
 import { beatsRecord, type HillRecord, type Settings } from "../storage/save-data";
@@ -57,6 +58,8 @@ export interface LiveProps {
   contestHud: ContestJumpHud | null;
   /** The jumper leads the World Cup (the original's yellow torso); false in training. */
   contestLeader: boolean;
+  /** Points for the wind of a daily jump of the d2jsp page, once known; null elsewhere. */
+  contestWind: WindPointsView | null;
   /** The wind of the jump, given from outside (a daily jump of the d2jsp page); absent for a new one each jump. */
   fixedSeed?: number;
   /** Whether the jumper waits on the gate with the simulation stopped (the d2jsp page; jump-round.ts). */

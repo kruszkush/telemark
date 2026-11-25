@@ -87,6 +87,8 @@ function drawFrame(picture: JumpPicture, hill: HillChoice, live: LiveProps, v: F
     ...(v.ghost === null ? {} : { ghost: v.ghost }),
     // The competition's values belong to the jump being made, not to a replay of it.
     ...(live.contestHud === null || (v.replay !== null && !live.contestCpu) ? {} : { contest: live.contestHud }),
+    // Points for the wind of a daily jump (d2jsp), known from the touchdown on; a watched one has them from the start.
+    ...(live.contestWind === null || (v.replay !== null && !live.contestCpu) ? {} : { wind: live.contestWind }),
     // A computer jumper's competition jump plays as a replay, but the picture shows it as a jump.
     ...(v.replay === null || live.contestCpu
       ? {}

@@ -120,6 +120,7 @@ function setUp({ bot = false }: { bot?: boolean } = {}) {
       contestCpu: false,
       contestHud: null,
       contestLeader: false,
+      contestWind: null,
       holdAtGate: false,
     },
     inputRef: {
