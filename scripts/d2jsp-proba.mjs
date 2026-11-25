@@ -68,11 +68,12 @@ const shot = (name) => page.screenshot({ path: join(OUT, name + ".png") });
 const log = (...a) => console.log(...a);
 
 await page.goto("http://localhost:8801/");
-await page.getByRole("heading", { name: "Skocznie dnia" }).waitFor();
+// Nagłówek „Skocznie dnia” stoi nad kartami skoczni, a te pokazują się dopiero po haśle testerów.
 await page.getByText("Hasło testerów").first().waitFor({ timeout: 15000 });
 await shot("01-haslo-testerow");
 await page.getByLabel("Hasło testerów (strona testowa)").fill(HASLO);
 await page.getByRole("button", { name: "Zapisz hasło testerów" }).click();
+await page.getByRole("heading", { name: "Skocznie dnia" }).waitFor({ timeout: 15000 });
 await page.getByRole("button", { name: "Zaloguj" }).waitFor({ timeout: 15000 });
 await page.getByRole("button", { name: "Skacz na próbę" }).first().waitFor();
 await shot("02-gosc");
@@ -142,6 +143,7 @@ await page.waitForFunction(
 log("ogłoszenie:", await page.locator("p[aria-live]").textContent());
 await page.waitForTimeout(3000);
 await shot("06-po-ladowaniu");
+log("wynik:", await page.locator("p[aria-live]").textContent());
 log("od startu", ((Date.now() - t0) / 1000).toFixed(1), "s");
 // Dalej: lewy przycisk po notach wraca do skoczni dnia.
 for (let i = 0; i < 30 && (await page.locator("canvas").count()) > 0; i++) {

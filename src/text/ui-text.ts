@@ -708,6 +708,8 @@ export const UI_TEXT = {
     fall: (distance: string) => `Upadek: ${distance}`,
     notes: (notes: string) => `Noty: ${notes}.`,
     points: (points: string) => `Wynik: ${points} punktu.`,
+    /** Points for the wind of a daily jump of the d2jsp page, with their sign, before the result. */
+    wind: (points: string) => `Za wiatr: ${points} punktu.`,
   },
 
   /** Drawn in the picture of the jump with the pixel font. */

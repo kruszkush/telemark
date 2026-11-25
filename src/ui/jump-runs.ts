@@ -214,7 +214,8 @@ function createTrainingRun(
     c().live.onFinished(result, recording);
     c().onReplayAvailable(true);
     const contest = c().live.contestNext !== null;
-    c().announce(resultAnnouncement(jump.state.logic, { newRecord, controls: c().live.controls, contest }));
+    const wind = c().live.contestWind;
+    c().announce(resultAnnouncement(jump.state.logic, { newRecord, controls: c().live.controls, contest, wind }));
   };
   /** The input of the next simulation frame; the rules of the touch zones belong to finger steering. */
   const takeFrame = (logic: JumpLogicState) => {
@@ -330,7 +331,9 @@ function createReplayRun(hill: HillChoice, source: ReplaySource, c: () => RunCon
       if (!toldOver && ended()) {
         toldOver = true;
         const origin = c().live.contestNext === null ? source.origin : "contest";
-        c().announce(replayOverAnnouncement(jump.state.logic, newRecord, origin));
+        // As the picture: points for the wind in a watched daily jump, not in a replay of one's own jump.
+        const wind = c().live.contestCpu ? c().live.contestWind : null;
+        c().announce(replayOverAnnouncement(jump.state.logic, newRecord, origin, wind));
       }
       return { over: isJumpOver(jump), clock: presentationFrame(jump) };
     },
