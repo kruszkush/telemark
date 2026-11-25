@@ -147,6 +147,7 @@ async function open(name, viewport, mobile, withAccount, n, tab) {
           ? "widoczny"
           : "ukryty"
         : "brak",
+      wBok: document.scrollingElement.scrollWidth - window.innerWidth,
       wysokoscWiersza: Math.round(
         box.querySelector("tbody tr")?.getBoundingClientRect().height ?? 0,
       ),
@@ -155,9 +156,11 @@ async function open(name, viewport, mobile, withAccount, n, tab) {
   // Gość nie ma swojego wiersza (konto próbne jest w danych, ale gra go nie wyróżnia ani nie szuka).
   if (!withAccount) m.wierszGracza = "nie dotyczy";
   await page.screenshot({ path: join(OUT, name + ".png") });
-  const ok = mobile || m.tresc <= m.okienko;
+  // Ekran ma się mieścić bez przewijania tylko w oknie gry na komputerze 1920×950; w bok nigdzie.
+  const ok =
+    (mobile || viewport.width < 1800 || m.tresc <= m.okienko) && m.wBok <= 0;
   console.log(
-    `${name}: ${m.wiersze} wierszy, okienko tabeli ${m.okienkoTabeli} px (wiersz ${m.wysokoscWiersza} px), ${m.przewija ? "przewija się" : "bez przewijania"}, gracz ${m.wierszGracza}; ekran ${m.tresc}/${m.okienko} px ${mobile ? "(telefon, przewijanie dozwolone)" : ok ? "MIEŚCI SIĘ" : "NIE MIEŚCI SIĘ"}`,
+    `${name}: ${m.wiersze} wierszy, okienko tabeli ${m.okienkoTabeli} px (wiersz ${m.wysokoscWiersza} px), ${m.przewija ? "przewija się" : "bez przewijania"}, gracz ${m.wierszGracza}; ekran ${m.tresc}/${m.okienko} px ${mobile || viewport.width < 1800 ? "(przewijanie strony dozwolone)" : m.tresc <= m.okienko ? "MIEŚCI SIĘ" : "NIE MIEŚCI SIĘ"}, w bok ${m.wBok > 0 ? m.wBok + " px ZA SZEROKO" : "nic"}`,
   );
   await ctx.close();
   return ok && m.wierszGracza !== "ukryty";
@@ -180,6 +183,14 @@ all =
     30,
     "d",
   )) && all;
+// Telefon poziomo (tabela obok kart, po prawej) i średnie okna.
+for (const [name, vp, mobile] of [
+  ["telefon-poziomo-30", { width: 851, height: 393 }, true],
+  ["okno-800x600-30", { width: 800, height: 600 }, false],
+  ["okno-1280x720-30", { width: 1280, height: 720 }, false],
+  ["okno-600x900-30", { width: 600, height: 900 }, false],
+])
+  all = (await open(name, vp, mobile, true, 30, "d")) && all;
 console.log("błędy strony:", errors.length ? errors : "brak");
 console.log(all ? "WYNIK: mieści się, gracz widoczny" : "WYNIK: FAIL");
 await browser.close();
