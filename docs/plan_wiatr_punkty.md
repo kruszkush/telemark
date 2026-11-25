@@ -65,4 +65,8 @@ Pierwszy pokaz po kroku 3: Mateusz ocenia napis na pasku i liczby po skoku na st
 Krytyk: tak (5 plików kodu, zapis wyników).
 
 ## Rozliczenie
-(na koniec)
+- 25.11 na teście (próbna symulacja 0.25.17, wiatr od 25.11): skok dnia na Wieczornej K95, okienko „WIATR -2,4” pod notami, pasek 9,2 pkt, serwer zapisał p 9,2 i pw -2,4; ▶ z `&test` pokazuje to samo na komputerze (1920×950) i telefonie (poziomo i pionowo). Zrzuty `../d2jsp-wiatr-2511/`.
+- Poprawione przy oglądaniu: zdanie dla czytnika ekranu po skoku mówiło wynik bez wiatru (11,6); teraz „Za wiatr: -2,4 punktu. Wynik: 9,2 punktu.” (sprawdzone w ▶; po własnym skoku nie sprawdzone na żywo, bo dziś na teście wiatr już nie liczy).
+- 0.25.18 (start 26.11) na lotnik-test i stronie 23.2-test: skok z 25.11 daje pw 0, bez okienka (`../d2jsp-wiatr-2511d/`). Plik `telemark-sim-0.25.18.mjs` ma `od: "2026-11-26"`, 184/184 zgodnych w Node 22. Zdanie w opisie zasad, ekran dnia mieści się w 1920×950 (zapas 145 px).
+- Wcześniejsze, nie od wiatru: w ▶ przycisk „POMIŃ” zasłania czwartą notę.
+- Prod: patrz STAN.md.
