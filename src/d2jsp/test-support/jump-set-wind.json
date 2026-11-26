@@ -1,158 +1,158 @@
 [
  {
   "windMPerS": -3.689592414903471,
-  "windPoints": -12.1,
-  "pointsWithWind": 91.9
+  "windPoints": -13.9,
+  "pointsWithWind": 90.1
  },
  {
   "windMPerS": -3.7119714414607214,
-  "windPoints": -12.2,
+  "windPoints": -14,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.9005489787634682,
-  "windPoints": -3,
-  "pointsWithWind": 102.5
+  "windPoints": -3.4,
+  "pointsWithWind": 102.1
  },
  {
   "windMPerS": -0.8329935947423259,
-  "windPoints": -2.7,
+  "windPoints": -3.1,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.215103086278829,
-  "windPoints": -10.5,
-  "pointsWithWind": 109.5
+  "windPoints": -12.2,
+  "pointsWithWind": 107.8
  },
  {
   "windMPerS": -3.068454884681381,
-  "windPoints": -10.1,
-  "pointsWithWind": 18.9
+  "windPoints": -11.6,
+  "pointsWithWind": 17.4
  },
  {
   "windMPerS": 2.2940531727196514,
-  "windPoints": 7,
-  "pointsWithWind": 118.5
+  "windPoints": 8,
+  "pointsWithWind": 119.5
  },
  {
   "windMPerS": 2.4767254462264514,
-  "windPoints": 7.5,
-  "pointsWithWind": 24
+  "windPoints": 8.7,
+  "pointsWithWind": 25.2
  },
  {
   "windMPerS": 1.5087386529837081,
-  "windPoints": 2.6,
-  "pointsWithWind": 90.1
+  "windPoints": 3,
+  "pointsWithWind": 90.5
  },
  {
   "windMPerS": 1.4686650535953578,
-  "windPoints": 2.5,
-  "pointsWithWind": 78
+  "windPoints": 2.9,
+  "pointsWithWind": 78.4
  },
  {
   "windMPerS": -1.6920728164216492,
-  "windPoints": -1.5,
-  "pointsWithWind": 107
+  "windPoints": -1.7,
+  "pointsWithWind": 106.8
  },
  {
   "windMPerS": -2.055932402610779,
-  "windPoints": -1.8,
+  "windPoints": -2,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.8507888583760512,
-  "windPoints": -0.7,
-  "pointsWithWind": 125.3
+  "windPoints": -0.8,
+  "pointsWithWind": 125.2
  },
  {
   "windMPerS": -0.5987024666315102,
-  "windPoints": -0.5,
-  "pointsWithWind": 4.5
+  "windPoints": -0.6,
+  "pointsWithWind": 4.4
  },
  {
   "windMPerS": 1.3615437757510405,
-  "windPoints": 2.3,
-  "pointsWithWind": 133.8
+  "windPoints": 2.7,
+  "pointsWithWind": 134.2
  },
  {
   "windMPerS": 1.4995887641156658,
-  "windPoints": 2.5,
-  "pointsWithWind": 62.5
+  "windPoints": 2.9,
+  "pointsWithWind": 62.9
  },
  {
   "windMPerS": -0.5334061109617855,
-  "windPoints": -1.3,
-  "pointsWithWind": 99.7
+  "windPoints": -1.5,
+  "pointsWithWind": 99.5
  },
  {
   "windMPerS": -0.7376458048820496,
-  "windPoints": -1.8,
+  "windPoints": -2.1,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 3.6819068099675554,
-  "windPoints": 7.6,
-  "pointsWithWind": 102.6
+  "windPoints": 8.7,
+  "pointsWithWind": 103.7
  },
  {
   "windMPerS": 3.553445823444343,
-  "windPoints": 7.3,
-  "pointsWithWind": 49.8
+  "windPoints": 8.4,
+  "pointsWithWind": 50.9
  },
  {
   "windMPerS": -3.50443014383316,
-  "windPoints": -8.8,
-  "pointsWithWind": 106.7
+  "windPoints": -10.1,
+  "pointsWithWind": 105.4
  },
  {
   "windMPerS": -3.5221818814958845,
-  "windPoints": -8.8,
-  "pointsWithWind": 31.2
+  "windPoints": -10.1,
+  "pointsWithWind": 29.9
  },
  {
   "windMPerS": 2.0336543427835596,
-  "windPoints": 4.2,
-  "pointsWithWind": 117.2
+  "windPoints": 4.8,
+  "pointsWithWind": 117.8
  },
  {
   "windMPerS": 1.8580692885578542,
-  "windPoints": 3.8,
+  "windPoints": 4.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 2.7067408760388694,
-  "windPoints": 5.9,
-  "pointsWithWind": 93.4
+  "windPoints": 6.8,
+  "pointsWithWind": 94.3
  },
  {
   "windMPerS": 2.6266557289206465,
-  "windPoints": 5.7,
+  "windPoints": 6.6,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -2.6408443226004548,
-  "windPoints": -6.2,
-  "pointsWithWind": 97.8
+  "windPoints": -7.1,
+  "pointsWithWind": 96.9
  },
  {
   "windMPerS": -2.888765335083008,
-  "windPoints": -6.8,
+  "windPoints": -7.8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.737578837811446,
-  "windPoints": 3.8,
-  "pointsWithWind": 125.3
+  "windPoints": 4.3,
+  "pointsWithWind": 125.8
  },
  {
   "windMPerS": 1.7472587333006018,
-  "windPoints": 3.8,
+  "windPoints": 4.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.6114762707235424,
-  "windPoints": -8.5,
-  "pointsWithWind": 106.5
+  "windPoints": -9.8,
+  "pointsWithWind": 105.2
  },
  {
   "windMPerS": 0,
@@ -161,438 +161,438 @@
  },
  {
   "windMPerS": 0.5515958256316635,
-  "windPoints": 1.4,
-  "pointsWithWind": 102.9
+  "windPoints": 1.6,
+  "pointsWithWind": 103.1
  },
  {
   "windMPerS": 0.3381193816115003,
-  "windPoints": 0.8,
+  "windPoints": 1,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.2416513336281623,
-  "windPoints": 3.1,
-  "pointsWithWind": 124.1
+  "windPoints": 3.5,
+  "pointsWithWind": 124.5
  },
  {
   "windMPerS": 0.6589680635012113,
-  "windPoints": 1.6,
-  "pointsWithWind": 0
- },
- {
-  "windMPerS": -2.188598240371299,
-  "windPoints": -4.2,
-  "pointsWithWind": 108.8
- },
- {
-  "windMPerS": -2.183548469096422,
-  "windPoints": -4.2,
-  "pointsWithWind": 0
- },
- {
-  "windMPerS": -2.9217742338947867,
-  "windPoints": -5.6,
-  "pointsWithWind": 129.4
- },
- {
-  "windMPerS": -3.0587012237972684,
-  "windPoints": -5.9,
-  "pointsWithWind": 0
- },
- {
-  "windMPerS": 1.2817113683337258,
-  "windPoints": 3.1,
-  "pointsWithWind": 101.1
- },
- {
-  "windMPerS": 1.2571023374363997,
-  "windPoints": 3,
-  "pointsWithWind": 14.5
- },
- {
-  "windMPerS": -1.067940358131651,
-  "windPoints": -3.2,
-  "pointsWithWind": 101.3
- },
- {
-  "windMPerS": -0.9832997520764669,
-  "windPoints": -2.9,
-  "pointsWithWind": 11.1
- },
- {
-  "windMPerS": 3.2373592557833177,
-  "windPoints": 7.7,
-  "pointsWithWind": 118.2
- },
- {
-  "windMPerS": 3.2486481751714433,
-  "windPoints": 7.7,
-  "pointsWithWind": 0
- },
- {
-  "windMPerS": 0.921290151422674,
-  "windPoints": 2.2,
-  "pointsWithWind": 125.2
- },
- {
-  "windMPerS": 0.8140669014002826,
   "windPoints": 1.9,
   "pointsWithWind": 0
  },
  {
+  "windMPerS": -2.188598240371299,
+  "windPoints": -4.8,
+  "pointsWithWind": 108.2
+ },
+ {
+  "windMPerS": -2.183548469096422,
+  "windPoints": -4.8,
+  "pointsWithWind": 0
+ },
+ {
+  "windMPerS": -2.9217742338947867,
+  "windPoints": -6.4,
+  "pointsWithWind": 128.6
+ },
+ {
+  "windMPerS": -3.0587012237972684,
+  "windPoints": -6.7,
+  "pointsWithWind": 0
+ },
+ {
+  "windMPerS": 1.2817113683337258,
+  "windPoints": 3.5,
+  "pointsWithWind": 101.5
+ },
+ {
+  "windMPerS": 1.2571023374363997,
+  "windPoints": 3.4,
+  "pointsWithWind": 14.9
+ },
+ {
+  "windMPerS": -1.067940358131651,
+  "windPoints": -3.6,
+  "pointsWithWind": 100.9
+ },
+ {
+  "windMPerS": -0.9832997520764669,
+  "windPoints": -3.3,
+  "pointsWithWind": 10.7
+ },
+ {
+  "windMPerS": 3.2373592557833177,
+  "windPoints": 8.9,
+  "pointsWithWind": 119.4
+ },
+ {
+  "windMPerS": 3.2486481751714433,
+  "windPoints": 8.9,
+  "pointsWithWind": 0
+ },
+ {
+  "windMPerS": 0.921290151422674,
+  "windPoints": 2.5,
+  "pointsWithWind": 125.5
+ },
+ {
+  "windMPerS": 0.8140669014002826,
+  "windPoints": 2.2,
+  "pointsWithWind": 0
+ },
+ {
   "windMPerS": -1.61583154967853,
-  "windPoints": -5.5,
-  "pointsWithWind": 78
+  "windPoints": -6.3,
+  "pointsWithWind": 77.2
  },
  {
   "windMPerS": -1.5929384008746281,
-  "windPoints": -5.4,
-  "pointsWithWind": 12.8
+  "windPoints": -6.2,
+  "pointsWithWind": 12
  },
  {
   "windMPerS": 0.30177378243413466,
-  "windPoints": 0.9,
-  "pointsWithWind": 108.9
+  "windPoints": 1.1,
+  "pointsWithWind": 109.1
  },
  {
   "windMPerS": 0.44244972572607155,
-  "windPoints": 1.4,
+  "windPoints": 1.6,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.7878701613243833,
-  "windPoints": -2.7,
-  "pointsWithWind": 100.7
+  "windPoints": -3.1,
+  "pointsWithWind": 100.3
  },
  {
   "windMPerS": -0.8636208339532216,
-  "windPoints": -2.9,
+  "windPoints": -3.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.4414677225100765,
-  "windPoints": -11.6,
-  "pointsWithWind": 122.5
+  "windPoints": -13.4,
+  "pointsWithWind": 120.7
  },
  {
   "windMPerS": -3.3604917113597574,
-  "windPoints": -11.4,
-  "pointsWithWind": 41.6
+  "windPoints": -13.1,
+  "pointsWithWind": 39.9
  },
  {
   "windMPerS": 0.922123516733582,
-  "windPoints": 3.5,
-  "pointsWithWind": 77.9
+  "windPoints": 5,
+  "pointsWithWind": 79.4
  },
  {
   "windMPerS": 0.8113416596403662,
-  "windPoints": 3,
+  "windPoints": 4.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 3.65534873224383,
-  "windPoints": 13.7,
-  "pointsWithWind": 66.2
+  "windPoints": 19.9,
+  "pointsWithWind": 72.4
  },
  {
   "windMPerS": 3.81431734424898,
-  "windPoints": 14.3,
-  "pointsWithWind": 12.1
+  "windPoints": 20.7,
+  "pointsWithWind": 18.5
  },
  {
   "windMPerS": -3.366868443787098,
-  "windPoints": -13.2,
-  "pointsWithWind": 110.9
+  "windPoints": -19.2,
+  "pointsWithWind": 104.9
  },
  {
   "windMPerS": -3.3520774061645944,
-  "windPoints": -13.2,
+  "windPoints": -19.1,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.7492681865890821,
-  "windPoints": -2.9,
-  "pointsWithWind": 126.4
+  "windPoints": -4.3,
+  "pointsWithWind": 125
  },
  {
   "windMPerS": -0.7209000082119651,
-  "windPoints": -2.8,
-  "pointsWithWind": 13.9
+  "windPoints": -4.1,
+  "pointsWithWind": 12.6
  },
  {
   "windMPerS": -2.7870687571438877,
-  "windPoints": -8.6,
-  "pointsWithWind": 87.9
+  "windPoints": -12.5,
+  "pointsWithWind": 84
  },
  {
   "windMPerS": -2.5738035548817026,
-  "windPoints": -8,
+  "windPoints": -11.5,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.0900519786342497,
-  "windPoints": -3.4,
-  "pointsWithWind": 102.1
+  "windPoints": -4.9,
+  "pointsWithWind": 100.6
  },
  {
   "windMPerS": -1.0872221326828002,
-  "windPoints": -3.4,
+  "windPoints": -4.9,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.4382748621125375,
-  "windPoints": -1.4,
-  "pointsWithWind": 114.2
+  "windPoints": -2,
+  "pointsWithWind": 113.6
  },
  {
   "windMPerS": -0.41869666135829425,
-  "windPoints": -1.3,
+  "windPoints": -1.9,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.1635618057361867,
-  "windPoints": -9.8,
-  "pointsWithWind": 120.3
+  "windPoints": -14.2,
+  "pointsWithWind": 115.9
  },
  {
   "windMPerS": -3.1163650390713715,
-  "windPoints": -9.6,
-  "pointsWithWind": 6.9
+  "windPoints": -14,
+  "pointsWithWind": 2.5
  },
  {
   "windMPerS": -0.7050855626230654,
-  "windPoints": -3.7,
-  "pointsWithWind": 55.3
+  "windPoints": -5.4,
+  "pointsWithWind": 53.6
  },
  {
   "windMPerS": -0.5801518254392729,
-  "windPoints": -3,
+  "windPoints": -4.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.406796684971562,
-  "windPoints": -17.9,
-  "pointsWithWind": 94.6
+  "windPoints": -25.9,
+  "pointsWithWind": 86.6
  },
  {
   "windMPerS": -3.2740717271588884,
-  "windPoints": -17.2,
+  "windPoints": -24.9,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.0360265318836486,
-  "windPoints": 5,
-  "pointsWithWind": 101
+  "windPoints": 7.2,
+  "pointsWithWind": 103.2
  },
  {
   "windMPerS": 0.768604781026038,
-  "windPoints": 3.7,
+  "windPoints": 5.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 0.9835725231125527,
-  "windPoints": 4.7,
-  "pointsWithWind": 120.5
+  "windPoints": 6.8,
+  "pointsWithWind": 122.6
  },
  {
   "windMPerS": 0.7472752527853029,
-  "windPoints": 3.6,
-  "pointsWithWind": 1.8
+  "windPoints": 5.2,
+  "pointsWithWind": 3.4
  },
  {
   "windMPerS": 1.773351075278746,
-  "windPoints": 7.4,
-  "pointsWithWind": 101.9
+  "windPoints": 10.8,
+  "pointsWithWind": 105.3
  },
  {
   "windMPerS": 1.9119055369940912,
-  "windPoints": 8,
+  "windPoints": 11.6,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 0.32386982998439484,
-  "windPoints": 1.4,
-  "pointsWithWind": 90.8
+  "windPoints": 2,
+  "pointsWithWind": 91.4
  },
  {
   "windMPerS": 0.17740607815394305,
-  "windPoints": 0.7,
+  "windPoints": 1.1,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.734328679202758,
-  "windPoints": -16.7,
-  "pointsWithWind": 121.6
+  "windPoints": -24.3,
+  "pointsWithWind": 114
  },
  {
   "windMPerS": -3.8205216206037083,
-  "windPoints": -17.1,
+  "windPoints": -24.8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.2058696964229132,
-  "windPoints": 5.1,
-  "pointsWithWind": 116.2
+  "windPoints": 7.3,
+  "pointsWithWind": 118.4
  },
  {
   "windMPerS": 1.4485677420338499,
-  "windPoints": 6.1,
+  "windPoints": 8.8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.8720570642095773,
-  "windPoints": -8.2,
-  "pointsWithWind": 103.9
+  "windPoints": -11.9,
+  "pointsWithWind": 100.2
  },
  {
   "windMPerS": -1.9764794437179851,
-  "windPoints": -8.6,
+  "windPoints": -12.5,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.6556952276623061,
-  "windPoints": -2.9,
-  "pointsWithWind": 120.6
+  "windPoints": -4.2,
+  "pointsWithWind": 119.3
  },
  {
   "windMPerS": -0.6772577396610326,
-  "windPoints": -3,
+  "windPoints": -4.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.5797564042549508,
-  "windPoints": -6.9,
-  "pointsWithWind": 131.2
+  "windPoints": -10,
+  "pointsWithWind": 128.1
  },
  {
   "windMPerS": -1.8450822830200195,
-  "windPoints": -8.1,
+  "windPoints": -11.7,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 2.478583767475226,
-  "windPoints": 11.6,
-  "pointsWithWind": 145.9
+  "windPoints": 16.8,
+  "pointsWithWind": 151.1
  },
  {
   "windMPerS": 3.1463468220769144,
-  "windPoints": 14.7,
+  "windPoints": 21.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.8400676904292648,
-  "windPoints": -9.1,
-  "pointsWithWind": 89.4
+  "windPoints": -13.1,
+  "pointsWithWind": 85.4
  },
  {
   "windMPerS": -1.568801319755321,
-  "windPoints": -7.7,
+  "windPoints": -11.2,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.110363808838097,
-  "windPoints": 6.8,
-  "pointsWithWind": 117.8
+  "windPoints": 9.9,
+  "pointsWithWind": 120.9
  },
  {
   "windMPerS": 1.2737168823850566,
-  "windPoints": 7.8,
+  "windPoints": 11.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 3.5569715894848466,
-  "windPoints": 21.8,
-  "pointsWithWind": 108.6
+  "windPoints": 31.6,
+  "pointsWithWind": 118.4
  },
  {
   "windMPerS": 3.361646798826893,
-  "windPoints": 20.6,
+  "windPoints": 29.9,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.40173259447269805,
-  "windPoints": -2,
-  "pointsWithWind": 127.1
+  "windPoints": -2.9,
+  "pointsWithWind": 126.2
  },
  {
   "windMPerS": -0.5603939046256275,
-  "windPoints": -2.8,
+  "windPoints": -4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.767725553165297,
-  "windPoints": 7.4,
-  "pointsWithWind": 154.7
+  "windPoints": 10.7,
+  "pointsWithWind": 158
  },
  {
   "windMPerS": 1.465403464286839,
-  "windPoints": 6.1,
-  "pointsWithWind": 34.8
+  "windPoints": 8.8,
+  "pointsWithWind": 37.5
  },
  {
   "windMPerS": 2.9206522279961646,
-  "windPoints": 12.2,
-  "pointsWithWind": 166.3
+  "windPoints": 17.6,
+  "pointsWithWind": 171.7
  },
  {
   "windMPerS": 2.66059969359362,
-  "windPoints": 11.1,
-  "pointsWithWind": 48.6
+  "windPoints": 16.1,
+  "pointsWithWind": 53.6
  },
  {
   "windMPerS": 3.85541771099813,
-  "windPoints": 16.1,
-  "pointsWithWind": 143.7
+  "windPoints": 23.3,
+  "pointsWithWind": 150.9
  },
  {
   "windMPerS": 3.899518510390972,
-  "windPoints": 16.2,
-  "pointsWithWind": 53.9
+  "windPoints": 23.5,
+  "pointsWithWind": 61.2
  },
  {
   "windMPerS": -1.809601603116531,
-  "windPoints": -6.4,
-  "pointsWithWind": 187.7
+  "windPoints": -9.3,
+  "pointsWithWind": 184.8
  },
  {
   "windMPerS": -1.524264355500539,
-  "windPoints": -5.4,
-  "pointsWithWind": 4.7
+  "windPoints": -7.8,
+  "pointsWithWind": 2.3
  },
  {
   "windMPerS": 0.021678410047694805,
-  "windPoints": 0.1,
-  "pointsWithWind": 119.5
+  "windPoints": 0.2,
+  "pointsWithWind": 119.6
  },
  {
   "windMPerS": 0.13515213131904602,
-  "windPoints": 0.7,
+  "windPoints": 1,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.769097468372067,
-  "windPoints": -13.5,
-  "pointsWithWind": 164.1
+  "windPoints": -19.5,
+  "pointsWithWind": 158.1
  },
  {
   "windMPerS": -3.788919489173328,
-  "windPoints": -13.5,
-  "pointsWithWind": 13.7
+  "windPoints": -19.6,
+  "pointsWithWind": 7.6
  },
  {
   "windMPerS": -2.9401917055310536,
-  "windPoints": -10.5,
-  "pointsWithWind": 171.1
+  "windPoints": -15.2,
+  "pointsWithWind": 166.4
  },
  {
   "windMPerS": -3.2509197023578156,
-  "windPoints": -11.6,
-  "pointsWithWind": 14.4
+  "windPoints": -16.9,
+  "pointsWithWind": 9.1
  },
  {
   "windMPerS": -3.6471492384755333,
-  "windPoints": -13,
-  "pointsWithWind": 181.1
+  "windPoints": -18.9,
+  "pointsWithWind": 175.2
  },
  {
   "windMPerS": 0,
@@ -601,118 +601,118 @@
  },
  {
   "windMPerS": 2.070603696104327,
-  "windPoints": 8.4,
-  "pointsWithWind": 131.3
+  "windPoints": 14.3,
+  "pointsWithWind": 137.2
  },
  {
   "windMPerS": 2.0741429328918457,
-  "windPoints": 8.4,
+  "windPoints": 14.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.7440685008161811,
-  "windPoints": 7.1,
-  "pointsWithWind": 135.7
+  "windPoints": 12,
+  "pointsWithWind": 140.6
  },
  {
   "windMPerS": 1.5870936039543937,
-  "windPoints": 6.4,
-  "pointsWithWind": 12.5
+  "windPoints": 11,
+  "pointsWithWind": 17.1
  },
  {
   "windMPerS": 3.5813735479467055,
-  "windPoints": 14.5,
-  "pointsWithWind": 175.5
+  "windPoints": 24.7,
+  "pointsWithWind": 185.7
  },
  {
   "windMPerS": 3.5844020474524725,
-  "windPoints": 14.5,
-  "pointsWithWind": 0
+  "windPoints": 24.7,
+  "pointsWithWind": 6.5
  },
  {
   "windMPerS": 2.560100804775133,
-  "windPoints": 10.4,
-  "pointsWithWind": 173.5
+  "windPoints": 17.7,
+  "pointsWithWind": 180.8
  },
  {
   "windMPerS": 1.942168598646646,
-  "windPoints": 7.9,
+  "windPoints": 13.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 3.450080515605261,
-  "windPoints": 16.6,
-  "pointsWithWind": 129
+  "windPoints": 28.2,
+  "pointsWithWind": 140.6
  },
  {
   "windMPerS": 3.603277232911852,
-  "windPoints": 17.3,
+  "windPoints": 29.5,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.15918566960335515,
-  "windPoints": -0.8,
-  "pointsWithWind": 161.2
+  "windPoints": -1.4,
+  "pointsWithWind": 160.6
  },
  {
   "windMPerS": 0.09845088343871267,
-  "windPoints": 0.5,
+  "windPoints": 0.8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.8570107017942876,
-  "windPoints": 8.9,
-  "pointsWithWind": 154.2
+  "windPoints": 15.2,
+  "pointsWithWind": 160.5
  },
  {
   "windMPerS": 1.7164308768446728,
-  "windPoints": 8.3,
+  "windPoints": 14,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.2232812538979545,
-  "windPoints": 5.9,
-  "pointsWithWind": 185.4
+  "windPoints": 10,
+  "pointsWithWind": 189.5
  },
  {
   "windMPerS": 1.4479315813743707,
-  "windPoints": 7,
-  "pointsWithWind": 8.5
+  "windPoints": 11.8,
+  "pointsWithWind": 13.3
  },
  {
   "windMPerS": -0.8303866050881706,
-  "windPoints": -3.6,
-  "pointsWithWind": 118.3
+  "windPoints": -6.1,
+  "pointsWithWind": 115.8
  },
  {
   "windMPerS": -0.8790781899638798,
-  "windPoints": -3.8,
+  "windPoints": -6.5,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.1069906179169964,
-  "windPoints": -4.8,
-  "pointsWithWind": 100.7
+  "windPoints": -8.2,
+  "pointsWithWind": 97.3
  },
  {
   "windMPerS": -0.9476939505739175,
-  "windPoints": -4.1,
+  "windPoints": -7,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -2.5475120526405726,
-  "windPoints": -11.1,
-  "pointsWithWind": 152.2
+  "windPoints": -18.8,
+  "pointsWithWind": 144.5
  },
  {
   "windMPerS": -2.4359647769194384,
-  "windPoints": -10.6,
+  "windPoints": -18,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -2.458778449965686,
-  "windPoints": -10.7,
-  "pointsWithWind": 190.1
+  "windPoints": -18.1,
+  "pointsWithWind": 182.7
  },
  {
   "windMPerS": 0,
@@ -721,28 +721,28 @@
  },
  {
   "windMPerS": -3.6120474483481995,
-  "windPoints": -18.6,
-  "pointsWithWind": 106.9
+  "windPoints": -31.7,
+  "pointsWithWind": 93.8
  },
  {
   "windMPerS": -3.6697627782821653,
-  "windPoints": -18.9,
+  "windPoints": -32.2,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.2956269970121939,
-  "windPoints": 6.2,
-  "pointsWithWind": 125.6
+  "windPoints": 10.5,
+  "pointsWithWind": 129.9
  },
  {
   "windMPerS": 0.9875170391712462,
-  "windPoints": 4.7,
+  "windPoints": 8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 0.2520490426413871,
-  "windPoints": 1.2,
-  "pointsWithWind": 178.3
+  "windPoints": 2.1,
+  "pointsWithWind": 179.2
  },
  {
   "windMPerS": 0,
@@ -751,28 +751,28 @@
  },
  {
   "windMPerS": -3.157352176507314,
-  "windPoints": -16.3,
-  "pointsWithWind": 132.8
+  "windPoints": -27.7,
+  "pointsWithWind": 121.4
  },
  {
   "windMPerS": -3.1656128137884005,
-  "windPoints": -16.3,
+  "windPoints": -27.8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.45075436194303475,
-  "windPoints": -2.2,
-  "pointsWithWind": 142.9
+  "windPoints": -3.8,
+  "pointsWithWind": 141.3
  },
  {
   "windMPerS": -0.23585873923730105,
-  "windPoints": -1.2,
+  "windPoints": -2,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -0.6587575582276404,
-  "windPoints": -3.2,
-  "pointsWithWind": 144.3
+  "windPoints": -5.5,
+  "pointsWithWind": 142
  },
  {
   "windMPerS": 0,
@@ -781,78 +781,78 @@
  },
  {
   "windMPerS": 0.10815499313375963,
-  "windPoints": 0.7,
-  "pointsWithWind": 140.8
+  "windPoints": 1.2,
+  "pointsWithWind": 141.3
  },
  {
   "windMPerS": -0.08514349523016601,
-  "windPoints": -0.4,
+  "windPoints": -0.7,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.0835622655458688,
-  "windPoints": 7.2,
-  "pointsWithWind": 178.7
+  "windPoints": 12.2,
+  "pointsWithWind": 183.7
  },
  {
   "windMPerS": 1.1788610758604827,
-  "windPoints": 7.8,
+  "windPoints": 13.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -2.9678771500606613,
-  "windPoints": -14.5,
-  "pointsWithWind": 92
+  "windPoints": -24.6,
+  "pointsWithWind": 81.9
  },
  {
   "windMPerS": -3.1674360998538362,
-  "windPoints": -15.4,
+  "windPoints": -26.2,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 3.9187473070053827,
-  "windPoints": 29.2,
-  "pointsWithWind": 49.4
+  "windPoints": 49.6,
+  "pointsWithWind": 69.8
  },
  {
   "windMPerS": 3.8581899286995474,
-  "windPoints": 28.7,
+  "windPoints": 48.8,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.1071464643129876,
-  "windPoints": -5.4,
-  "pointsWithWind": 146.4
+  "windPoints": -9.2,
+  "pointsWithWind": 142.6
  },
  {
   "windMPerS": -1.1313877450792413,
-  "windPoints": -5.5,
+  "windPoints": -9.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.816033235372208,
-  "windPoints": -18.6,
-  "pointsWithWind": 196.7
+  "windPoints": -31.6,
+  "pointsWithWind": 183.7
  },
  {
   "windMPerS": -3.8313420003290335,
-  "windPoints": -18.7,
+  "windPoints": -31.7,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 2.7655730762145594,
-  "windPoints": 17.3,
-  "pointsWithWind": 79.2
+  "windPoints": 29.4,
+  "pointsWithWind": 91.3
  },
  {
   "windMPerS": 2.2000716146564883,
-  "windPoints": 13.8,
+  "windPoints": 23.4,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -2.53665953467481,
-  "windPoints": -12.3,
-  "pointsWithWind": 104
+  "windPoints": -20.9,
+  "pointsWithWind": 95.4
  },
  {
   "windMPerS": 0,
@@ -861,62 +861,62 @@
  },
  {
   "windMPerS": 3.486252687213657,
-  "windPoints": 21.8,
-  "pointsWithWind": 143.3
+  "windPoints": 37.1,
+  "pointsWithWind": 158.6
  },
  {
   "windMPerS": 3.4312914609909058,
-  "windPoints": 21.5,
+  "windPoints": 36.5,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -2.5508571238131137,
-  "windPoints": -12.4,
-  "pointsWithWind": 168.7
+  "windPoints": -21,
+  "pointsWithWind": 160.1
  },
  {
   "windMPerS": -2.101475985102923,
-  "windPoints": -10.2,
+  "windPoints": -17.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.154186138248078,
-  "windPoints": -17.4,
+  "windPoints": -29.5,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.6634936504535847,
-  "windPoints": -20.2,
+  "windPoints": -34.3,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.0479137101228633,
-  "windPoints": 8,
+  "windPoints": 13.7,
   "pointsWithWind": 0
  },
  {
   "windMPerS": 1.1175978481769562,
-  "windPoints": 8.6,
+  "windPoints": 14.6,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -1.4834897380534227,
-  "windPoints": -8.2,
-  "pointsWithWind": 120.1
+  "windPoints": -13.9,
+  "pointsWithWind": 114.4
  },
  {
   "windMPerS": -0.8748177061607312,
-  "windPoints": -4.8,
+  "windPoints": -8.2,
   "pointsWithWind": 0
  },
  {
   "windMPerS": -3.012569825387193,
-  "windPoints": -16.6,
-  "pointsWithWind": 151.7
+  "windPoints": -28.2,
+  "pointsWithWind": 140.1
  },
  {
   "windMPerS": -2.8661737904619815,
-  "windPoints": -15.8,
+  "windPoints": -26.8,
   "pointsWithWind": 0
  }
 ]

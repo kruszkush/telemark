@@ -4,6 +4,7 @@
  * metr. Za wiatr w plecy gra dodaje, za wiatr pod narty odejmuje; bez premii (Mateusz 25.11). Jedyne miejsce, gdzie
  * liczy się punkty za wiatr i sumę z nimi: ten sam kod w grze i na serwerze (plik symulacji).
  */
+import { HILL_GROUPS } from "./daily";
 
 /** Metry na 1 m/s średniego wiatru z lotu: pod narty (wiatr < 0, skok dłuższy) i w plecy (wiatr > 0, krótszy). */
 interface WindMetres {
@@ -47,8 +48,29 @@ const MEASURED_2511: Readonly<Record<string, WindMetres>> = {
   "own-35": { head: 4.59, tail: 6.4 },
 };
 
-/** Start: skoki dnia od 26.11.2026 (Mateusz 25.11: „gdy jest nowy dzień, gdy są nowe skocznie”). */
-export const WIND_PERIODS: readonly WindPeriod[] = [{ od: "2026-11-26", metres: MEASURED_2511 }];
+/**
+ * Prawdziwi gracze (skoki dnia z prod 21–25.11, 876 skoków, docs/plan_wiatr_punkty.md „Rozliczenie” 26.11) tracą i
+ * zyskują od wiatru więcej metrów niż komputer: mała 1,15 raza, średnia 1,45, mamucia 1,7. Jedna liczba na grupę, bo na
+ * pojedynczą skocznię skoków za mało (Mateusz 26.11: „żeby było poprawnie od jutra”).
+ */
+const PLAYERS_2611: readonly number[] = [1.15, 1.45, 1.7];
+
+const scaledByGroup = (m: Readonly<Record<string, WindMetres>>, factors: readonly number[]): Record<string, WindMetres> =>
+  Object.fromEntries(
+    HILL_GROUPS.flatMap((g, i) =>
+      g.ids.map((id) => {
+        const f = factors[i] ?? 1;
+        const x = m[id] ?? { head: 0, tail: 0 };
+        return [id, { head: Math.round(x.head * f * 100) / 100, tail: Math.round(x.tail * f * 100) / 100 }];
+      }),
+    ),
+  );
+
+/** Start: skoki dnia od 26.11.2026 (Mateusz 25.11: „gdy jest nowy dzień, gdy są nowe skocznie”); od 27.11 wg graczy. */
+export const WIND_PERIODS: readonly WindPeriod[] = [
+  { od: "2026-11-26", metres: MEASURED_2511 },
+  { od: "2026-11-27", metres: scaledByGroup(MEASURED_2511, PLAYERS_2611) },
+];
 
 /** Punkty za metr jak w punktach gry (src/sim/jump-logic.ts distancePoints). */
 export function pointsPerMetre(kPointM: number): number {

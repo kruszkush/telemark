@@ -22,8 +22,17 @@ describe("punkty za wiatr (skoki dnia od 26.11.2026)", () => {
     expect(windScore("2026-11-26", "own-35", 300, 120, -2).windPoints).toBe(-11);
     expect(windScore("2026-11-26", "own-35", 300, 120, -2).pointsWithWind).toBe(109);
     // Zajęcza K50: 2 pkt za metr.
-    expect(windScore("2026-11-27", "own-14", 50, 60, 1).windPoints).toBe(1.7);
+    expect(windScore("2026-11-26", "own-14", 50, 60, 1).windPoints).toBe(1.7);
     expect(windScore("2026-11-26", "own-14", 50, 60, 0).windPoints).toBe(0);
+  });
+
+  it("od 27.11 przeliczniki wg prawdziwych graczy: mała 1,15 raza, mamucia 1,7 raza więcej; 26.11 bez zmian", () => {
+    // Zajęcza K50: w plecy 0,85 × 1,15 = 0,98 m na 1 m/s, 2 pkt za metr.
+    expect(windScore("2026-11-27", "own-14", 50, 60, 1).windPoints).toBe(2);
+    // Olbrzym K300: w plecy 6,4 × 1,7 = 10,88 m, pod narty 4,59 × 1,7 = 7,8 m; 1,2 pkt za metr.
+    expect(windScore("2026-11-27", "own-35", 300, 120, 2).windPoints).toBe(26.1);
+    expect(windScore("2026-11-27", "own-35", 300, 120, -2).windPoints).toBe(-18.7);
+    expect(windScore("2026-11-26", "own-35", 300, 120, 2).windPoints).toBe(15.4);
   });
 
   it("suma nie spada poniżej zera (upadek z wiatrem pod narty)", () => {
