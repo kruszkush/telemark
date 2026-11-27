@@ -35,6 +35,13 @@ describe("punkty za wiatr (skoki dnia od 26.11.2026)", () => {
     expect(windScore("2026-11-26", "own-35", 300, 120, 2).windPoints).toBe(15.4);
   });
 
+  it("od 28.11 znów przeliczniki z pomiaru komputerem; 27.11 bez zmian", () => {
+    expect(windScore("2026-11-28", "own-35", 300, 120, 2).windPoints).toBe(15.4);
+    expect(windScore("2026-11-28", "own-35", 300, 120, -2).windPoints).toBe(-11);
+    expect(windScore("2026-11-28", "own-14", 50, 60, 1).windPoints).toBe(1.7);
+    expect(windScore("2026-11-27", "own-35", 300, 120, 2).windPoints).toBe(26.1);
+  });
+
   it("suma nie spada poniżej zera (upadek z wiatrem pod narty)", () => {
     expect(windScore("2026-11-26", "own-35", 300, 3, -3).pointsWithWind).toBe(0);
   });

@@ -66,10 +66,15 @@ const scaledByGroup = (m: Readonly<Record<string, WindMetres>>, factors: readonl
     ),
   );
 
-/** Start: skoki dnia od 26.11.2026 (Mateusz 25.11: „gdy jest nowy dzień, gdy są nowe skocznie”); od 27.11 wg graczy. */
+/**
+ * Start: skoki dnia od 26.11.2026 (Mateusz 25.11: „gdy jest nowy dzień, gdy są nowe skocznie”); 27.11 wg graczy (za
+ * mocno, skargi graczy 27.11); od 28.11 znów pomiar komputerem (Mateusz 27.11: „Tak, wracamy”; odtworzenie skoków
+ * graczy z innym wiatrem dało mniej metrów niż komputer, docs/plan_wiatr_punkty.md „Rozliczenie” 27.11).
+ */
 export const WIND_PERIODS: readonly WindPeriod[] = [
   { od: "2026-11-26", metres: MEASURED_2511 },
   { od: "2026-11-27", metres: scaledByGroup(MEASURED_2511, PLAYERS_2611) },
+  { od: "2026-11-28", metres: MEASURED_2511 },
 ];
 
 /** Punkty za metr jak w punktach gry (src/sim/jump-logic.ts distancePoints). */
